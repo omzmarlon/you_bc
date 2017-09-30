@@ -1,0 +1,8 @@
+{
+  "name": "poke-cabin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Marlon; Tom",
+  "license": "MIT",
+  "private": true
+}
