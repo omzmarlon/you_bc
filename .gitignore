@@ -13,9 +13,9 @@ npm-debug.log
 /build
 /src/main/resources/public
 
+# extra
 *.ipr
 *.iws
-*.jar
 *.sw?
 *~
 .#*
