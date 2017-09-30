@@ -1,5 +1,18 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
-*.iml
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+node_modules
+npm-debug.log
+/.gradle
+/build
+/src/main/resources/public
+
 *.ipr
 *.iws
 *.jar
@@ -10,20 +23,15 @@
 .DS_Store
 .classpath
 .factorypath
-.gradle
-.idea
 .metadata
 .project
 .recommenders
 .settings
 .springBeans
-/build
 /code
-MANIFEST.MF
 _site/
 activemq-data
 bin
-build
 build.log
 dependency-reduced-pom.xml
 dump.rdb
@@ -32,5 +40,4 @@ lib/
 manifest.yml
 overridedb.*
 settings.xml
-target
 transaction-logs
