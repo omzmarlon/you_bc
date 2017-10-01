@@ -8,7 +8,8 @@
   "scripts": {
     "build-dev": "webpack --config config/webpack.config.js",
     "start-dev": "webpack-dev-server --config config/webpack.config.js",
-    "build-dev:watch": "webpack --config config/webpack.config.js --watch --bail --progress"
+    "build-dev:watch": "webpack --config config/webpack.config.js --watch --bail --progress",
+    "lint": "./node_modules/.bin/eslint src/**/*.{js,jsx}"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
