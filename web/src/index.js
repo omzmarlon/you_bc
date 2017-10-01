@@ -1,2 +1,2 @@
-var a = 1
-var cb = 1
+const a = 1;
+const c = 1;
