@@ -16,9 +16,19 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['env','react']
+                }
+            }
         ]
     },
-    plugins: [HtmlWebpackPluginConfig]
-}
+    plugins: [HtmlWebpackPluginConfig],
+    devServer: {
+        port: 8081,
+        compress: true
+    }
+};

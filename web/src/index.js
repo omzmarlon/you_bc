@@ -1,2 +1,7 @@
-const a = 1;
-const bc = 1;
+'use strict';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
+
+ReactDOM.render(<App />, document.getElementById('root'));
