@@ -41,3 +41,4 @@ manifest.yml
 overridedb.*
 settings.xml
 transaction-logs
+*.iml
