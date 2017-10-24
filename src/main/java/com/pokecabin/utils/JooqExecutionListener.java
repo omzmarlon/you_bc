@@ -10,7 +10,7 @@ public class JooqExecutionListener extends DefaultExecuteListener {
     /*
     * Other things to override during jooq execution
     * */
-
+    @Override
     public void exception(ExecuteContext context) {
         //We SHOULD HAVE this translator because SpringFramework has more detailed/meaningful exceptions
         SQLDialect dialect = context.configuration().dialect();
