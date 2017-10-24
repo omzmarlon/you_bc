@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 
 @EnableWebSecurity
-@Configuration
 public class PokeCabinSecurity extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authBuilder) throws Exception {
