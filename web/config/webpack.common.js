@@ -7,19 +7,12 @@ const webpack = require('webpack');
 const dist = '../../src/main/resources/public';
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
     entry: [
         './src/index.js'
     ],
     output: {
         path: helpers.root('..', 'src', 'main', 'resources', 'public'),
         filename: 'bundle.js'
-    },
-    devServer: {
-        contentBase: dist,
-        port: 8081,
-        compress: true,
-        hot: true
     },
     module: {
         rules: [
@@ -57,8 +50,7 @@ module.exports = {
             template: './src/index.html',
             filename: 'index.html',
             inject: 'body'
-        }),
-        new webpack.HotModuleReplacementPlugin()
+        })
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
