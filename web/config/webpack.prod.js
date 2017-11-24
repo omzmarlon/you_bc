@@ -2,24 +2,18 @@ const path = require('path');
 const helpers = require('./helpers');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 const dist = '../../src/main/resources/public';
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
     entry: [
         './src/index.js'
     ],
     output: {
         path: helpers.root('..', 'src', 'main', 'resources', 'public'),
         filename: 'bundle.js'
-    },
-    devServer: {
-        contentBase: dist,
-        port: 8081,
-        compress: true,
-        hot: true
     },
     module: {
         rules: [
@@ -58,7 +52,7 @@ module.exports = {
             filename: 'index.html',
             inject: 'body'
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new UglifyJsPlugin()
     ],
     resolve: {
         extensions: ['.js', '.jsx'],

@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const dist = '../../src/main/resources/public';
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
+    devtool: 'eval-source-map',
     entry: [
         './src/index.js'
     ],
@@ -54,6 +54,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin([dist]),
         new HtmlWebpackPlugin({
+            title: 'Development',
             template: './src/index.html',
             filename: 'index.html',
             inject: 'body'
