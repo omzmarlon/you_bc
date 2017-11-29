@@ -1,18 +1,26 @@
 'use strict';
+// libs
+import React, {Component} from 'react'
+import { Route, Switch} from 'react-router-dom'
+// components
+import NotFound from '../components/NotFound'
+import IndexPage from './IndexPage'
+import Classmate from './Classmate'
+import Roommate from './Roommate'
+import Friend from './Friend'
 
-import React, {Component} from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Dummy from '../components/Dummy';
-import * as actionCreators from '../actions';
+class App extends Component {
+    render() {
+        return (
+            <Switch>
+                <Route exact path='/' component={IndexPage}/>
+                <Route path='/classmates' component={Classmate}/>
+                <Route path='/friends' component={Friend}/>
+                <Route path='/roommates' component={Roommate}/>
+                <Route component={NotFound}/>
+            </Switch>
+        );
+    }
+}
 
-const mapStateToProps = (state, ownProps) => ({
-    counter: state.example.counter,
-    name: (process.env.NODE_ENV !== 'production') ? "dev app" : "prod app"
-});
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(actionCreators, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dummy);
+export default App;
