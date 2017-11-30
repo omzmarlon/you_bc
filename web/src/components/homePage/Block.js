@@ -8,12 +8,13 @@ import React, {Component} from 'react'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 //styles
-import '../../styles/homePage.less';
+import '../../styles/homePageContainer.less';
 
 const Block = (props) => {
+    let blockClass = 'index-page__block --' + props.type;
     return (
         <Link to={props.path}>
-            <div className={props.className}>
+            <div className={blockClass}>
                 {props.displayName}
             </div>
         </Link>
@@ -21,7 +22,7 @@ const Block = (props) => {
 };
 
 Block.propTypes = {
-    className: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['classmates', 'friends', 'roommates']).isRequired,
     path: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
 };

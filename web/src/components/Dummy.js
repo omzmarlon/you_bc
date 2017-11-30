@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import reactIcon from "../../public/react_icon.png";
-import '../styles/app.less';
+import '../styles/dummy.less';
 
 const Dummy = (props) => {
     return (

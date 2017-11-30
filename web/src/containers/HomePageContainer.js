@@ -2,7 +2,7 @@
 // libs
 import React, {Component} from 'react'
 // styles
-import '../styles/homePage.less';
+import '../styles/homePageContainer.less';
 // components
 import Block from "../components/homePage/Block";
 // constants
@@ -12,9 +12,9 @@ class HomePageContainer extends Component {
     render() {
         return(
             <div className="index-page-main">
-                <Block path={CLASSMATES} displayName="找课友" className="index-page-block__classmates"/>
-                <Block path={FRIENDS} displayName="找——友" className="index-page-block__friends"/>
-                <Block path={ROOMMATES} displayName="找室友" className="index-page-block__roommates"/>
+                <Block path={CLASSMATES} displayName="找课友" type="classmates"/>
+                <Block path={FRIENDS} displayName="找——友" type="friends"/>
+                <Block path={ROOMMATES} displayName="找室友" type="roommates"/>
             </div>
         )
     }
