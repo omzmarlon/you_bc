@@ -1,6 +1,6 @@
 import React from 'react';
 import warningIcon from "../../public/warning.png";
-import '../styles/notfound.less';
+import '../styles/notFound.less';
 
 const NotFound = () => {
     return (

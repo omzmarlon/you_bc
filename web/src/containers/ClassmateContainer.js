@@ -2,7 +2,7 @@
 // libs
 import React, {Component} from 'react'
 
-class Friend extends Component {
+class ClassmateContainer extends Component {
     render() {
         return(
             <h1>Nothing yet</h1>
@@ -10,4 +10,4 @@ class Friend extends Component {
     }
 }
 
-export default Friend;
+export default ClassmateContainer;

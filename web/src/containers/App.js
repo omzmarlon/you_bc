@@ -4,20 +4,22 @@ import React, {Component} from 'react'
 import { Route, Switch} from 'react-router-dom'
 // components
 import NotFound from '../components/NotFound'
-import IndexPage from './IndexPage'
-import Classmate from './Classmate'
-import Roommate from './Roommate'
-import Friend from './Friend'
+import HomePageContainer from './HomePageContainer'
+import ClassmateContainer from './ClassmateContainer'
+import RoommateContainer from './RoommateContainer'
+import FriendContainer from './FriendContainer'
 import Demo from '../components/demo/index';
+// constants
+import {CLASSMATES, FRIENDS, ROOMMATES} from "../constants/api";
 
 class App extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' component={IndexPage}/>
-                <Route path='/classmates' component={Classmate}/>
-                <Route path='/friends' component={Friend}/>
-                <Route path='/roommates' component={Roommate}/>
+                <Route exact path='/' component={HomePageContainer}/>
+                <Route path={CLASSMATES} component={ClassmateContainer}/>
+                <Route path={FRIENDS} component={FriendContainer}/>
+                <Route path={ROOMMATES} component={RoommateContainer}/>
                 <Route path='/demo' component={Demo}/>
                 <Route component={NotFound}/>
             </Switch>
