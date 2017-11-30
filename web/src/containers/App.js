@@ -8,6 +8,7 @@ import IndexPage from './IndexPage'
 import Classmate from './Classmate'
 import Roommate from './Roommate'
 import Friend from './Friend'
+import Demo from '../components/demo/index';
 
 class App extends Component {
     render() {
@@ -17,6 +18,7 @@ class App extends Component {
                 <Route path='/classmates' component={Classmate}/>
                 <Route path='/friends' component={Friend}/>
                 <Route path='/roommates' component={Roommate}/>
+                <Route path='/demo' component={Demo}/>
                 <Route component={NotFound}/>
             </Switch>
         );
