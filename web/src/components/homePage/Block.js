@@ -8,10 +8,10 @@ import React, {Component} from 'react'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 //styles
-import '../../styles/homePageContainer.less';
+import '../../styles/homePage/block.less';
 
 const Block = (props) => {
-    let blockClass = 'index-page__block --' + props.type;
+    let blockClass = 'index-page-block --' + props.type;
     return (
         <Link to={props.path}>
             <div className={blockClass}>
