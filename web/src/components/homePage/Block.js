@@ -8,7 +8,7 @@ import React, {Component} from 'react'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 //styles
-import '../../styles/homePage/block.less';
+import './Block.less';
 
 const Block = (props) => {
     let blockClass = 'index-page-block --' + props.type;

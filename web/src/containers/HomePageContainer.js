@@ -2,7 +2,7 @@
 // libs
 import React, {Component} from 'react'
 // styles
-import '../styles/homePageContainer.less';
+import './HomePageContainer.less';
 // components
 import Block from "../components/homePage/Block";
 // constants
