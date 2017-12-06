@@ -1,3 +1,0 @@
-/**
- * Maybe Material-UI AppBar?
- */
