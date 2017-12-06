@@ -18,6 +18,11 @@ class Demo extends Component {
                     color={PRIMARY_BLUE}
                     actionRight={<button>abc</button>}
                 />
+                <Header
+                    title={"曾今的人"}
+                    actionLeft={<button>abc</button>}
+                    color={PRIMARY_BLUE}
+                />
             </div>
         );
     }
