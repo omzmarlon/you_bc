@@ -3,7 +3,7 @@
 // libs
 import React, {Component} from 'react'
 import Header from "../common/Header";
-import {PRIMARY_BLUE} from "../../constants/color";
+import {PRIMARY_BLUE} from "../../styles/constants/colors";
 // components
 
 // styles
