@@ -24,7 +24,7 @@ class Demo extends Component {
                     actionLeft={<button>abc</button>}
                     color={PRIMARY_BLUE}
                 />
-                <Tag text={"计算机"} color={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
+                <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
             </div>
         );
     }

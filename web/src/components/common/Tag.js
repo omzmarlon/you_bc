@@ -8,7 +8,7 @@ import './Tag.less';
 const Tag = (props) => {
     return (
         <Chip
-            backgroundColor={props.color}
+            backgroundColor={props.bkgColor}
             className={'common-tag'}
         >
             <span style={{color: props.textColor}}>{props.text}</span>
@@ -18,7 +18,7 @@ const Tag = (props) => {
 
 Tag.propTypes = {
     text: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
+    bkgColor: PropTypes.string.isRequired,
     textColor: PropTypes.string.isRequired
 };
 
