@@ -3,7 +3,8 @@
 // libs
 import React, {Component} from 'react'
 import Header from "../common/Header";
-import {PRIMARY_BLUE} from "../../styles/constants/colors";
+import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
+import Tag from "../common/Tag";
 // components
 
 // styles
@@ -23,6 +24,7 @@ class Demo extends Component {
                     actionLeft={<button>abc</button>}
                     color={PRIMARY_BLUE}
                 />
+                <Tag text={"计算机"} color={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
             </div>
         );
     }
