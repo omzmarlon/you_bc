@@ -19,7 +19,6 @@ class NavHeader extends React.Component {
     render() {
         return (
             <AppBar
-                className='nav-header'
                 style={{
                     backgroundColor: this.props.color,
                     position: 'fixed',
