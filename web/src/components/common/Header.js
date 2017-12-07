@@ -3,8 +3,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
-// styles
-import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_GREEN, PRIMARY_YELLOW} from "../../styles/constants/colors";
 
 const Header = (props) => {
     return (
@@ -24,6 +22,6 @@ Header.propTypes = {
     title: PropTypes.string.isRequired,
     actionLeft: PropTypes.element.isRequired,
     actionRight: PropTypes.element,
-    color: PropTypes.oneOf([PRIMARY_BLUE, PRIMARY_RED, PRIMARY_GREEN, PRIMARY_YELLOW]).isRequired
+    color: PropTypes.string.isRequired
 };
 export default Header;
