@@ -2,27 +2,28 @@
 
 // libs
 import React, {Component} from 'react'
-import Header from "../common/Header";
-import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
-import Tag from "../common/Tag";
+import IconButton from 'material-ui/IconButton';
 // components
-
-// styles
+import NavHeader from "../common/NavHeader";
+import Icon from "../common/Icon";
+import Tag from "../common/Tag";
+// svg
+import DemoAndroidIcon from '../../../public/svg/DemoAndroidIcon.svg';
+// constants
+import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
 
 class Demo extends Component {
     render() {
         return (
             <div>
-                <Header
+                <div>this string should be covered by header</div>
+                <NavHeader
                     title={"曾今的人"}
-                    actionLeft={<button>abc</button>}
                     color={PRIMARY_BLUE}
-                    actionRight={<button>abc</button>}
-                />
-                <Header
-                    title={"曾今的人"}
-                    actionLeft={<button>abc</button>}
-                    color={PRIMARY_BLUE}
+                    // NOTE:
+                    // A demo on how to use actionRight
+                    // we should keep our svg files in public/svg folder
+                    actionRight={<IconButton><Icon src={DemoAndroidIcon}/></IconButton>}
                 />
                 <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
             </div>

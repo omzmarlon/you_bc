@@ -23,8 +23,8 @@ const Block = (props) => {
 };
 
 Block.propTypes = {
-    type: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]).isRequired,
-    path: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    path: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]).isRequired,
     displayName: PropTypes.string.isRequired,
 };
 
