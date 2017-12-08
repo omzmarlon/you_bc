@@ -8,7 +8,7 @@ import HomePageContainer from './HomePageContainer'
 import ClassmateContainer from './ClassmateContainer'
 import RoommateContainer from './RoommateContainer'
 import FriendContainer from './FriendContainer'
-import Demo from '../components/demo/index';
+import Demo from '../components/demo/Demo';
 // constants
 import {CLASSMATES, FRIENDS, ROOMMATES} from "../constants/api";
 

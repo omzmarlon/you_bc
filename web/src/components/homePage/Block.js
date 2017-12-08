@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 //styles
 import './Block.less';
+import {CLASSMATES, FRIENDS, ROOMMATES} from "../../constants/api";
 
 const Block = (props) => {
     let blockClass = 'index-page-block --' + props.type;
@@ -22,7 +23,7 @@ const Block = (props) => {
 };
 
 Block.propTypes = {
-    type: PropTypes.oneOf(['classmates', 'friends', 'roommates']).isRequired,
+    type: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]).isRequired,
     path: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
 };
