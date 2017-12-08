@@ -2,12 +2,15 @@
 
 // libs
 import React, {Component} from 'react'
-import NavHeader from "../common/NavHeader";
-import {PRIMARY_BLUE, PRIMARY_YELLOW} from "../../styles/constants/colors";
 import IconButton from 'material-ui/IconButton';
+// components
+import NavHeader from "../common/NavHeader";
 import Icon from "../common/Icon";
-
+import Tag from "../common/Tag";
+// svg
 import DemoAndroidIcon from '../../../public/svg/DemoAndroidIcon.svg';
+// constants
+import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
 
 class Demo extends Component {
     render() {
@@ -22,6 +25,7 @@ class Demo extends Component {
                     // we should keep our svg files in public/svg folder
                     actionRight={<IconButton><Icon src={DemoAndroidIcon}/></IconButton>}
                 />
+                <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
             </div>
         );
     }
