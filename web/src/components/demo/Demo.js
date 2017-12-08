@@ -25,7 +25,13 @@ class Demo extends Component {
                     // we should keep our svg files in public/svg folder
                     actionRight={<IconButton><Icon src={DemoAndroidIcon}/></IconButton>}
                 />
-                <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
+                <br/>
+                <br/>
+                <br/>
+                <hr/>
+                <div style={{margin:28}}>
+                    <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
+                </div>
             </div>
         );
     }
