@@ -11,6 +11,7 @@ import Tag from "../common/Tag";
 import DemoAndroidIcon from '../../../public/svg/DemoAndroidIcon.svg';
 // constants
 import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
+import InfoBar from "../common/InfoBar";
 
 class Demo extends Component {
     render() {
@@ -32,6 +33,8 @@ class Demo extends Component {
                 <div style={{margin:28}}>
                     <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
                 </div>
+                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={true}/>
+                <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
             </div>
         );
     }
