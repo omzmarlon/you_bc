@@ -1,0 +1,25 @@
+.info-bar {
+  //position center of info-bar at center of window
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  //container
+  background: rgba(0, 0, 0, 0.7); // TODO: adjust later according to design
+  border-radius: 10px;
+  max-width: 200px;
+  //center child text in container
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 15px 15px 15px;
+
+  .info-bar-msg {
+    color: #FFFFFF;
+    font-family: Arial, sans-serif; // TODO: adjust later according to design
+
+    word-wrap: break-word;
+    text-align: center;
+  }
+}
