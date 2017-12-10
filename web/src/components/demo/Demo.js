@@ -59,7 +59,7 @@ class Demo extends Component {
                 <div>Card Demo</div>
 
 
-                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={false}/>
+                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={true}/>
                 <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
             </div>
         );
