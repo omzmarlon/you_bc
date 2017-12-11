@@ -10,6 +10,8 @@ import PokeAvatar from '../common/PokeAvatar';
 import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
 import RaisedButton from 'material-ui/RaisedButton';
+import ProfileCard from '../common/card/ProfileCard';
+import TruncateText from '../common/TruncateText';
 
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
@@ -106,8 +108,11 @@ class Demo extends Component {
                         ]}
                     />
                 </div>
-                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={true}/>
-
+                <br/>
+                <br/>
+                <br/>
+                <hr/>
+                <div>Modal Demo</div>
                 <button onClick={this.toggleOpenModal}>
                     show modal
                 </button>
@@ -117,6 +122,7 @@ class Demo extends Component {
                     <RaisedButton onClick={this.toggleOpenModal} label="确认" fullWidth={true} backgroundColor={PRIMARY_GREEN} />
                 </Modal>
 
+                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={false}/>
                 <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
             </div>
         );
