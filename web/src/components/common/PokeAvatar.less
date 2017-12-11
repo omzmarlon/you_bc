@@ -1,0 +1,35 @@
+@import "../../styles/constants/colors";
+@import "../../styles/constants/fonts";
+
+.poke-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px;
+  font-family: @generalFontFamily;
+
+  .poke-avatar-name {
+    padding-top: 6px;
+    color: @generalText;
+    font-size: larger;
+  }
+
+  .poke-avatar-info {
+    display: flex;
+    align-items: center;
+    line-height: 100%;
+    color: @generalText;
+    font-size: x-small;
+
+    .poke-avatar-gender-icon {
+      padding: 3px;
+    }
+
+    .poke-avatar-age {
+    }
+
+    .poke-avatar-constellation {
+      padding-left: 6px;
+    }
+  }
+}
