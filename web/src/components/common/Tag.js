@@ -2,14 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Chip from 'material-ui/Chip';
-//styles
-import './Tag.less';
 
 const Tag = (props) => {
     return (
         <Chip
             backgroundColor={props.bkgColor}
-            className={'common-tag'}
+            style={{borderRadius: 5}}
         >
             <span style={{color: props.textColor}}>{props.text}</span>
         </Chip>
