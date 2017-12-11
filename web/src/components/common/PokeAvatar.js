@@ -23,7 +23,7 @@ const PokeAvatar = (props) => {
                             <MaleIcon viewBox="0 0 1000 1000" style={{height: 12, width: 12}} color={PRIMARY_BLUE}/>
                     }
                 </span>
-                <span className='poke-avatar-age'>{props.info.age}</span>
+                <span>{props.info.age}</span>
                 <span className='poke-avatar-constellation'>{props.info.constellation}</span>
             </div>}
         </div>
