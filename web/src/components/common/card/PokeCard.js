@@ -3,34 +3,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
 import "./PokeCard.less";
 
 const PokeCard = (props) => {
     return (
         <Paper>
             <div className="poke-card-head">
-                {props.leftIcon && <div className="poke-card-head-left-icon">{props.leftIcon}</div>}
-                {props.rightIcon && <IconButton className="poke-card-head-right-icon">{props.rightIcon}</IconButton>}
+                {props.leftCorner && <div className="poke-card-head-left-icon">{props.leftCorner}</div>}
+                {props.rightCorner && <div className="poke-card-head-right-icon">{props.rightCorner}</div>}
             </div>
-            <div className="poke-card-body">
-                {props.avatarElement}
-                {props.listElement}
-            </div>
+            {props.children}
         </Paper>
     );
 };
 
 PokeCard.propTypes = {
-    expandable: PropTypes.bool,
-    leftIcon: PropTypes.element,
-    rightIcon: PropTypes.element,
-    avatarElement: PropTypes.element,
-    listElement: PropTypes.element.isRequired
-};
-
-PokeCard.defaultProps = {
-    expandable: false
+    leftCorner: PropTypes.element,
+    rightCorner: PropTypes.element,
+    children: PropTypes.node.isRequired
 };
 
 export default PokeCard;

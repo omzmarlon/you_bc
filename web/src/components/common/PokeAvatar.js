@@ -11,9 +11,11 @@ import './PokeAvatar.less';
 import {PRIMARY_RED, PRIMARY_BLUE} from "../../styles/constants/colors";
 
 const PokeAvatar = (props) => {
+    let rootClassName = (props.className) ? 'poke-avatar ' + props.className : 'poke-avatar';
+
     return (
-        <div className='poke-avatar'>
-            <Avatar src={props.img}/>
+        <div className={rootClassName}>
+            <Avatar style={{height: 72, width: 72}} src={props.img}/>
             {props.name && <div className='poke-avatar-name'>{props.name}</div>}
             {props.info && <div className='poke-avatar-info'>
                 <span className='poke-avatar-gender-icon'>
@@ -31,6 +33,7 @@ const PokeAvatar = (props) => {
 };
 
 PokeAvatar.propTypes = {
+    className: PropTypes.string,
     img: PropTypes.string.isRequired,
     name: PropTypes.string,
     info: PropTypes.shape({
