@@ -26,7 +26,7 @@ class Slidable extends React.Component {
 
     swipedHandler(e, deltaX) {
         if (Math.abs(deltaX) > this.props.threshold) {
-            this.setState({swipeDelta: `100%`, animate: true});
+            this.setState({swipeDelta: `${-Math.sign(deltaX)*100}%`, animate: true});
             this.props.onFullSwipe();
         } else {
             // re-position child element if swipe is not large enough
@@ -58,7 +58,7 @@ Slidable.propTypes = {
 };
 
 Slidable.defaultProps = {
-    threshold: 200,
+    threshold: 300,
     onFullSwipe: () => {}
 };
 
