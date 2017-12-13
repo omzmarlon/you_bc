@@ -9,8 +9,8 @@ const PokeCard = (props) => {
     return (
         <Paper>
             <div className="poke-card-head">
-                {props.leftCorner && <div className="poke-card-head-left-icon">{props.leftCorner}</div>}
-                {props.rightCorner && <div className="poke-card-head-right-icon">{props.rightCorner}</div>}
+                {props.leftCorner}
+                {props.rightCorner && <span className="poke-card-head-right-icon">{props.rightCorner}</span>}
             </div>
             {props.children}
         </Paper>

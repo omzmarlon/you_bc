@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 //styles
 import './Block.less';
-import {CLASSMATES, FRIENDS, ROOMMATES} from "../../constants/api";
+import {TO_CLASSMATES, TO_FRIENDS, TO_ROOMMATES} from "../../constants/api";
 
 const Block = (props) => {
     let blockClass = 'index-page-block --' + props.type;
@@ -24,7 +24,7 @@ const Block = (props) => {
 
 Block.propTypes = {
     type: PropTypes.string.isRequired,
-    path: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]).isRequired,
+    path: PropTypes.oneOf([TO_CLASSMATES, TO_FRIENDS, TO_ROOMMATES]).isRequired,
     displayName: PropTypes.string.isRequired,
 };
 

@@ -1,0 +1,29 @@
+@import "../../../styles/constants/colors";
+@import "../../../styles/constants/fonts";
+
+.search-result-card-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+
+  .search-result-card-avatar {
+    flex-grow: 1;
+  }
+
+  .search-result-card-list {
+    flex-grow: 4;
+
+    .search-result-card-list-item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      font-family: @generalFontFamily;
+      font-size: x-large;
+      color: @generalText;
+      line-height: 100%;
+      margin: 25px 5px;
+    }
+  }
+}

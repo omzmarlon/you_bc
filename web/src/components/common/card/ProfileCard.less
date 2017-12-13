@@ -1,29 +1,22 @@
 @import "../../../styles/constants/colors";
-@import "../../../styles/constants/fonts";
 
-.profile-card-body {
+.profile-card-left-corner {
+  height: 56px;
+  width: 64px;
+  border-radius: 5px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
+}
 
-  .profile-card-avatar {
-    flex-grow: 1;
-  }
+.profile-card-left-corner.--classmates {
+  background-color: @primaryRed;
+}
 
-  .profile-card-list {
-    flex-grow: 4;
+.profile-card-left-corner.--friends {
+  background-color: @primaryYellow;
+}
 
-    .profile-card-list-item {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-
-      font-family: @generalFontFamily;
-      font-size: x-large;
-      color: @generalText;
-      line-height: 100%;
-      margin: 25px 5px;
-    }
-  }
+.profile-card-left-corner.--roommates {
+  background-color: @primaryBlue;
 }

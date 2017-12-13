@@ -6,15 +6,15 @@ import './HomePageContainer.less';
 // components
 import Block from "../components/homePage/Block";
 // constants
-import {CLASSMATES, FRIENDS, ROOMMATES} from "../constants/api";
+import {TO_CLASSMATES, TO_FRIENDS, TO_ROOMMATES, CLASSMATES, FRIENDS, ROOMMATES} from "../constants/api";
 
 class HomePageContainer extends Component {
     render() {
         return(
             <div className="index-page-main">
-                <Block path={CLASSMATES} displayName="找课友" type="classmates"/>
-                <Block path={FRIENDS} displayName="找——友" type="friends"/>
-                <Block path={ROOMMATES} displayName="找室友" type="roommates"/>
+                <Block path={TO_CLASSMATES} displayName="找课友" type={CLASSMATES}/>
+                <Block path={TO_FRIENDS} displayName="找——友" type={FRIENDS}/>
+                <Block path={TO_ROOMMATES} displayName="找室友" type={ROOMMATES}/>
             </div>
         )
     }

@@ -10,8 +10,10 @@ import PokeAvatar from '../common/PokeAvatar';
 import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
 import RaisedButton from 'material-ui/RaisedButton';
+import SearchResultCard from '../common/card/SearchResultCard';
 import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
+import InfoBar from "../common/InfoBar";
 
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
@@ -24,6 +26,7 @@ import MailIcon from 'material-ui/svg-icons/content/mail';
 import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN, PRIMARY_YELLOW} from "../../styles/constants/colors";
 import InfoBar from "../common/InfoBar";
 import Modal from "../common/Modal";
+import {CLASSMATES, ROOMMATES, FRIENDS} from '../../constants/api';
 
 class Demo extends Component {
     constructor(props) {
@@ -82,12 +85,35 @@ class Demo extends Component {
                 <hr/>
                 <div>Card Demo</div>
                 <div style={{margin:28}}>
-                    <ProfileCard
+                    <SearchResultCard
                         avatar={placeholder}
                         name="小傻瓜"
                         gender='male'
                         age={8}
                         constellation='电插座'
+                        contentList={[
+                            {
+                                leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,
+                                rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />
+                            },
+                            {
+                                leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,
+                                rightElement: <span style={{paddingLeft: 16}}>好好学习</span>
+                            },
+                            {
+                                leftElement: <MailIcon color={PRIMARY_YELLOW}/>,
+                                rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>
+                            },
+                            {
+                                leftElement: <span>兴趣: </span>,
+                                rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
+                            }
+                        ]}
+                    />
+                </div>
+                <div style={{margin:28}}>
+                    <ProfileCard
+                        type={CLASSMATES}
                         contentList={[
                             {
                                 leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,
