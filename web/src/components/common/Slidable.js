@@ -29,7 +29,7 @@ class Slidable extends React.Component {
             this.props.onFullSwipe();
         } else {
             // re-position child element if swipe is not large enough
-            setTimeout(()=> this.setState({swipeDelta: 0, animate: true}), 300);
+            setTimeout(()=> this.setState({swipeDelta: 0, animate: true}), 50);
         }
     }
 
