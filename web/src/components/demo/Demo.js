@@ -13,6 +13,7 @@ import avatar from "../../../public/panda_avatar.jpeg";
 // constants
 import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
 import InfoBar from "../common/InfoBar";
+import Slidable from "../common/Slidable";
 
 class Demo extends Component {
     render() {
@@ -57,7 +58,16 @@ class Demo extends Component {
                 <br/>
                 <hr/>
                 <div>Card Demo</div>
-
+                <br/>
+                <br/>
+                <br/>
+                <hr/>
+                <div>Slidable demo</div>
+                <Slidable element={
+                    <div style={{width: '100%', height: '300px', backgroundColor: 'red'}}>
+                        abcdefgh
+                    </div>
+                }/>
 
                 <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={true}/>
                 <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
