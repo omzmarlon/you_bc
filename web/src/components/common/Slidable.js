@@ -10,7 +10,7 @@ class Slidable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            swipeDelta: 0,
+            swipeDelta: '0',
             animate: false
         };
         this.swipingHandler = this.swipingHandler.bind(this);
@@ -19,13 +19,14 @@ class Slidable extends React.Component {
 
     swipingHandler(e, deltaX) {
         this.setState({
-            swipeDelta: -deltaX,
+            swipeDelta: `${-deltaX}px`,
             animate: false
         });
     }
 
     swipedHandler(e, deltaX) {
         if (Math.abs(deltaX) > this.props.threshold) {
+            this.setState({swipeDelta: `100%`, animate: true});
             this.props.onFullSwipe();
         } else {
             // re-position child element if swipe is not large enough
@@ -39,7 +40,7 @@ class Slidable extends React.Component {
                 onSwiping={this.swipingHandler}
                 onSwiped={this.swipedHandler}
             >
-                <div style={{transform: `translateX(${this.state.swipeDelta}px)`}}
+                <div style={{transform: `translateX(${this.state.swipeDelta})`}}
                      className={classNames({'slidable-container': this.state.animate})}
                 >
                     {this.props.element}
