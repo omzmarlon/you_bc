@@ -24,6 +24,12 @@ import MailIcon from 'material-ui/svg-icons/content/mail';
 // constants
 import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN, PRIMARY_YELLOW, PRIMARY_RED, SECONDARY_RED} from "../../styles/constants/colors";
 import {CLASSMATES, ROOMMATES, FRIENDS} from '../../constants/api';
+import InfoBar from "../common/InfoBar";
+import Slidable from "../common/Slidable";
+//styles
+import "../../styles/constants/fonts.less";
+import "./Demo.less"
+import "../../styles/constants/icon.less";
 
 class Demo extends Component {
     constructor(props) {
@@ -41,20 +47,12 @@ class Demo extends Component {
 
     render() {
         return (
-            <div>
-                <div>this string should be covered by header</div>
+            <div className={"demo"}>
                 <NavHeader
                     title={"曾今的人"}
                     color={PRIMARY_BLUE}
-                    // NOTE:
-                    // A demo on how to use actionRight
-                    // we should keep our svg files in public/svg folder
-                    actionRight={<IconButton><DemoAndroidIcon/></IconButton>}
+                    iconRight={<DemoAndroidIcon color={PRIMARY_WHITE} className={"common-icon"}/>}
                 />
-                <br/>
-                <br/>
-                <br/>
-                <hr/>
                 <div>Tag Demo</div>
                 <div style={{margin:28}}>
                     <Tag text={"计算机"} bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/>
@@ -145,6 +143,23 @@ class Demo extends Component {
                 <br/>
                 <hr/>
                 <div>Modal Demo</div>
+                <div>Slidable demo</div>
+                <Slidable element={
+                    <div style={{
+                        width: '100%',
+                        height: '300px',
+                        backgroundColor: 'red',
+                        display:'flex', justifyContent: 'center', alignItems: 'center'
+                    }}
+                    >
+                        <span className={'common-font'}>
+                            滑动样本，可以左滑右滑。
+                            如果滑动较小会自动复位，如果滑动超过threshold会自动滑出100%
+                        </span>
+                    </div>
+                }/>
+
+                <InfoBar msg={"展示如果很多字会不会换行这个是提示框样本"} show={true}/>
                 <button onClick={this.toggleOpenModal}>
                     show modal
                 </button>
@@ -154,7 +169,6 @@ class Demo extends Component {
                     <RaisedButton onClick={this.toggleOpenModal} label="确认" fullWidth={true} backgroundColor={PRIMARY_GREEN} />
                 </Modal>
 
-                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={true}/>
                 <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
             </div>
         );
