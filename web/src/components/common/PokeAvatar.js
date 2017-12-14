@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
+const classNames = require('classnames');
 // assets
 import MaleIcon from './svg/MaleIcon';
 import FemaleIcon from './svg/FemaleIcon';
@@ -11,9 +12,11 @@ import './PokeAvatar.less';
 import {PRIMARY_RED, PRIMARY_BLUE} from "../../styles/constants/colors";
 
 const PokeAvatar = (props) => {
+    let rootClassName = classNames('poke-avatar', {[props.className]: true});
+
     return (
-        <div className='poke-avatar'>
-            <Avatar src={props.img}/>
+        <div className={rootClassName}>
+            <Avatar style={{height: 72, width: 72}} src={props.img}/>
             {props.name && <div className='poke-avatar-name'>{props.name}</div>}
             {props.info && <div className='poke-avatar-info'>
                 <span className='poke-avatar-gender-icon'>
@@ -31,6 +34,7 @@ const PokeAvatar = (props) => {
 };
 
 PokeAvatar.propTypes = {
+    className: PropTypes.string,
     img: PropTypes.string.isRequired,
     name: PropTypes.string,
     info: PropTypes.shape({
@@ -38,6 +42,10 @@ PokeAvatar.propTypes = {
         age: PropTypes.number,
         constellation: PropTypes.string
     })
+};
+
+PokeAvatar.defaultProps = {
+    className: ''
 };
 
 export default PokeAvatar;

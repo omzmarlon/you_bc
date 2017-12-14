@@ -1,0 +1,36 @@
+@import "../../../styles/constants/fonts";
+@import "../../../styles/constants/colors";
+
+.matched-user-card-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+
+  .matched-user-card-avatar {
+    flex-grow: 1;
+  }
+
+  .matched-user-card-info {
+    flex-grow: 4;
+
+    .--name {
+      font-family: @generalFontFamily;
+      font-size: xx-large;
+      color: @generalText;
+    }
+
+    .--weChat {
+      padding-left: 25px;
+      font-family: @generalFontFamily;
+      font-size: x-large;
+      color: @generalText;
+      margin: 25px 5px;
+    }
+
+    .--tag {
+      display: inline-block;
+      padding-right: 18px;
+    }
+  }
+}

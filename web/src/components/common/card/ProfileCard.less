@@ -1,0 +1,37 @@
+@import "../../../styles/constants/colors";
+@import "../../../styles/constants/fonts";
+@import "./PokeCard";
+
+.profile-card-left-corner {
+  height: @poke-card-head-padding;
+  width: 64px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+
+.profile-card-left-corner.--classmates {
+  background-color: @primaryRed;
+}
+
+.profile-card-left-corner.--friends {
+  background-color: @primaryYellow;
+}
+
+.profile-card-left-corner.--roommates {
+  background-color: @primaryBlue;
+}
+
+.profile-card-body {
+  padding: 10px 36px;
+
+  .profile-card-list-item {
+    font-family: @generalFontFamily;
+    font-size: x-large;
+    color: @generalText;
+    margin: 25px 5px;
+  }
+}
+
