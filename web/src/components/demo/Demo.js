@@ -8,6 +8,7 @@ import NavHeader from "../common/NavHeader";
 import Tag from "../common/Tag";
 import PokeAvatar from '../common/PokeAvatar';
 import RaisedButton from 'material-ui/RaisedButton';
+import Modal from "../common/Modal";
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
 import avatar from "../../../public/panda_avatar.jpeg";
