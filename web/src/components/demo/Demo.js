@@ -7,16 +7,13 @@ import IconButton from 'material-ui/IconButton';
 import NavHeader from "../common/NavHeader";
 import Tag from "../common/Tag";
 import PokeAvatar from '../common/PokeAvatar';
-import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchResultCard from '../common/card/SearchResultCard';
 import MatchedUserCard from '../common/card/MatchedUserCard';
 import ProfileCard from '../common/card/ProfileCard';
-import TruncateText from '../common/TruncateText';
 import InfoBar from "../common/InfoBar";
 import Modal from "../common/Modal";
-
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
 import avatar from "../../../public/panda_avatar.jpeg";
@@ -157,7 +154,7 @@ class Demo extends Component {
                     <RaisedButton onClick={this.toggleOpenModal} label="确认" fullWidth={true} backgroundColor={PRIMARY_GREEN} />
                 </Modal>
 
-                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={false}/>
+                <InfoBar msg={"展示如果很多字会不会换行展示如果很多字会不会换行展示如果很多字"} show={true}/>
                 <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
             </div>
         );

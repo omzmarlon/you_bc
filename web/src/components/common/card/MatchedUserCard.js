@@ -46,8 +46,8 @@ const MatchedUserCard = (props) => {
                     <span className="--weChat">微信号： {props.weChatId}</span>
                     <div style={{paddingTop: 25, paddingBottom: 25}}>
                         {props.tags.map((tag,index) => (
-                            <div className="--tag">
-                                <Tag key={index} text={tag} bkgColor={tagColor.bkg} textColor={tagColor.text}/>
+                            <div key={index} className="--tag">
+                                <Tag text={tag} bkgColor={tagColor.bkg} textColor={tagColor.text}/>
                             </div>
                         ))}
                     </div>
