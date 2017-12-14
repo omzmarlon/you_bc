@@ -10,6 +10,7 @@ import HomeIcon from 'material-ui/svg-icons/action/home';
 import SprayIcon from 'material-ui/svg-icons/action/favorite-border';
 // components
 import PokeCard from './PokeCard';
+import InfoRow from '../InfoRow';
 // constants
 import {CLASSMATES, FRIENDS, ROOMMATES} from '../../../constants/api';
 
@@ -40,22 +41,27 @@ const LeftCornerIcon = (props) => {
     );
 };
 
-const ProfileCard = (props) => (
-    <PokeCard
-        leftCorner={<LeftCornerIcon type={props.type}/>}
-        rightCorner={<EditIcon style={{color: 'grey', height: 36, width: 36}}/>}>
-        <div className="profile-card-body">
-            <List className="profile-card-list">
-                {props.contentList.map((content,index) => (
-                    <div key={index} className="profile-card-list-item">
-                        {content.leftElement}
-                        {content.rightElement}
-                    </div>
-                ))}
-            </List>
-        </div>
-    </PokeCard>
-);
+const ProfileCard = (props) => {
+    return (
+        <PokeCard
+            leftCorner={<LeftCornerIcon type={props.type}/>}
+            rightCorner={<EditIcon style={{color: 'grey', height: 36, width: 36}}/>}
+        >
+            <div className="profile-card-body">
+                <List className="profile-card-list">
+                    {props.contentList.map((content, index) => (
+                        <InfoRow
+                            key={index}
+                            className="profile-card-list-item"
+                            leftElement={content.leftElement}
+                            rightElement={content.rightElement}
+                        />
+                    ))}
+                </List>
+            </div>
+        </PokeCard>
+    );
+};
 
 ProfileCard.propTypes = {
     type: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]),

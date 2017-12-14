@@ -14,6 +14,7 @@ import SearchResultCard from '../common/card/SearchResultCard';
 import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
 import InfoBar from "../common/InfoBar";
+import Modal from "../common/Modal";
 
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
@@ -23,9 +24,7 @@ import SchoolIcon from 'material-ui/svg-icons/social/school';
 import DraftIcon from 'material-ui/svg-icons/content/drafts';
 import MailIcon from 'material-ui/svg-icons/content/mail';
 // constants
-import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN, PRIMARY_YELLOW} from "../../styles/constants/colors";
-import InfoBar from "../common/InfoBar";
-import Modal from "../common/Modal";
+import {PRIMARY_BLUE, PRIMARY_GREEN, SECONDARY_GREEN, PRIMARY_YELLOW, PRIMARY_RED, SECONDARY_RED} from "../../styles/constants/colors";
 import {CLASSMATES, ROOMMATES, FRIENDS} from '../../constants/api';
 
 class Demo extends Component {
@@ -116,15 +115,15 @@ class Demo extends Component {
                         type={CLASSMATES}
                         contentList={[
                             {
-                                leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,
+                                leftElement: <span>专业</span>,
                                 rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />
                             },
                             {
-                                leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,
-                                rightElement: <span style={{paddingLeft: 16}}>好好学习</span>
+                                leftElement: <span>课程</span>,
+                                rightElement: <div style={{paddingLeft: 16}}><Tag text='CPSC 310' bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/></div>
                             },
                             {
-                                leftElement: <MailIcon color={PRIMARY_YELLOW}/>,
+                                leftElement: <span>能力</span>,
                                 rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>
                             },
                             {

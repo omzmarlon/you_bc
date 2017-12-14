@@ -7,6 +7,7 @@ import List from 'material-ui/List/List';
 // components
 import PokeCard from './PokeCard';
 import PokeAvatar from '../PokeAvatar';
+import InfoRow from '../InfoRow';
 import './SearchResultCard.less';
 
 const SearchResultCard = (props) => (
@@ -24,10 +25,12 @@ const SearchResultCard = (props) => (
             />
             <List className="search-result-card-list">
                 {props.contentList.map((content,index) => (
-                    <div key={index} className="search-result-card-list-item">
-                        {content.leftElement}
-                        {content.rightElement}
-                    </div>
+                    <InfoRow
+                        key={index}
+                        className="search-result-card-list-item"
+                        leftElement={content.leftElement}
+                        rightElement={content.rightElement}
+                    />
                 ))}
             </List>
         </div>
