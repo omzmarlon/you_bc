@@ -11,6 +11,7 @@ import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchResultCard from '../common/card/SearchResultCard';
+import MatchedUserCard from '../common/card/MatchedUserCard';
 import ProfileCard from '../common/card/ProfileCard';
 import TruncateText from '../common/TruncateText';
 import InfoBar from "../common/InfoBar";
@@ -131,6 +132,15 @@ class Demo extends Component {
                                 rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
                             }
                         ]}
+                    />
+                </div>
+                <div style={{margin:28}}>
+                    <MatchedUserCard
+                        type={FRIENDS}
+                        avatar={avatar}
+                        name="冬瓜"
+                        weChatId="donggua"
+                        tags={['吃吃吃', '买买买', '啪啪啪']}
                     />
                 </div>
                 <br/>
