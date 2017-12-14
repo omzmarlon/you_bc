@@ -4,26 +4,30 @@
  */
 
 // libs
-import React, {Component} from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 //styles
 import './Block.less';
+import "../../styles/constants/fonts.less";
+import {PRIMARY_WHITE} from "../../styles/constants/colors";
+//constants
 import {CLASSMATES, FRIENDS, ROOMMATES} from "../../constants/api";
 
 const Block = (props) => {
-    let blockClass = 'index-page-block --' + props.type;
     return (
-        <Link to={props.path}>
-            <div className={blockClass}>
-                {props.displayName}
+        <Link to={props.path} className={'block-link'}>
+            <div className={"index-page-block"} style={{backgroundColor: props.color}}>
+                <span className={'common-font'} style={{color: PRIMARY_WHITE}}>
+                    {props.displayName}
+                </span>
             </div>
         </Link>
     );
 };
 
 Block.propTypes = {
-    type: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     path: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]).isRequired,
     displayName: PropTypes.string.isRequired,
 };
