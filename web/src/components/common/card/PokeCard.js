@@ -8,7 +8,7 @@ import "./PokeCard.less";
 const PokeCard = (props) => {
     return (
         <Paper>
-            {(props.leftCorner || props.rightCorner) && <div className="poke-card-head">
+            {props.leftCorner && <div className="poke-card-head">
                 {props.leftCorner}
                 {props.rightCorner && <span className="poke-card-head-right-icon">{props.rightCorner}</span>}
             </div>}
