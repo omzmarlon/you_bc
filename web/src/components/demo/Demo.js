@@ -7,6 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import NavHeader from "../common/NavHeader";
 import Tag from "../common/Tag";
 import PokeAvatar from '../common/PokeAvatar';
+import RaisedButton from 'material-ui/RaisedButton';
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
 import avatar from "../../../public/panda_avatar.jpeg";
@@ -20,6 +21,19 @@ import "./Demo.less"
 import "../../styles/constants/icon.less";
 
 class Demo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openModal: false
+        };
+        this.toggleOpenModal = this.toggleOpenModal.bind(this);
+    }
+
+    toggleOpenModal() {
+        // just for demo
+        this.setState({openModal: !this.state.openModal});
+    }
+
     render() {
         return (
             <div className={"demo"}>
@@ -75,6 +89,15 @@ class Demo extends Component {
                 }/>
 
                 <InfoBar msg={"展示如果很多字会不会换行这个是提示框样本"} show={true}/>
+                <button onClick={this.toggleOpenModal}>
+                    show modal
+                </button>
+
+                <Modal open={this.state.openModal}>
+                    <div>some text</div>
+                    <RaisedButton onClick={this.toggleOpenModal} label="确认" fullWidth={true} backgroundColor={PRIMARY_GREEN} />
+                </Modal>
+
                 <InfoBar msg={"这个看不到这个看不到这个看不到这个看不到这个看不到"} show={false}/>
             </div>
         );
