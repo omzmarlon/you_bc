@@ -53,50 +53,25 @@ class Demo extends Component {
                     iconRight={<DemoAndroidIcon color={PRIMARY_WHITE} className={"common-icon"}/>}
                 />
                 <div>Slidable demo</div>
-                <Slidable element={
-                    <div style={{margin:28}}>
-                        <SearchResultCard
-                            avatar={placeholder}
-                            name="小傻瓜"
-                            gender='male'
-                            age={8}
-                            constellation='电插座'
-                            contentList={[
-                                {
-                                    leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,
-                                    rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />
-                                },
-                                {
-                                    leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,
-                                    rightElement: <span style={{paddingLeft: 16}}>好好学习</span>
-                                },
-                                {
-                                    leftElement: <MailIcon color={PRIMARY_YELLOW}/>,
-                                    rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>
-                                },
-                                {
-                                    leftElement: <span>兴趣: </span>,
-                                    rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
-                                }
-                            ]}
-                        />
-                    </div>
-                }/>
                 {/*<Slidable element={*/}
                     {/*<div style={{margin:28}}>*/}
-                        {/*<ProfileCard*/}
-                            {/*type={CLASSMATES}*/}
+                        {/*<SearchResultCard*/}
+                            {/*avatar={placeholder}*/}
+                            {/*name="小傻瓜"*/}
+                            {/*gender='male'*/}
+                            {/*age={8}*/}
+                            {/*constellation='电插座'*/}
                             {/*contentList={[*/}
                                 {/*{*/}
-                                    {/*leftElement: <span>专业</span>,*/}
+                                    {/*leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,*/}
                                     {/*rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />*/}
                                 {/*},*/}
                                 {/*{*/}
-                                    {/*leftElement: <span>课程</span>,*/}
-                                    {/*rightElement: <div style={{paddingLeft: 16}}><Tag text='CPSC 310' bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/></div>*/}
+                                    {/*leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,*/}
+                                    {/*rightElement: <span style={{paddingLeft: 16}}>好好学习</span>*/}
                                 {/*},*/}
                                 {/*{*/}
-                                    {/*leftElement: <span>能力</span>,*/}
+                                    {/*leftElement: <MailIcon color={PRIMARY_YELLOW}/>,*/}
                                     {/*rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>*/}
                                 {/*},*/}
                                 {/*{*/}
@@ -107,17 +82,42 @@ class Demo extends Component {
                         {/*/>*/}
                     {/*</div>*/}
                 {/*}/>*/}
-                {/*<Slidable element={*/}
-                    {/*<div style={{margin:28}}>*/}
-                        {/*<MatchedUserCard*/}
-                            {/*type={FRIENDS}*/}
-                            {/*avatar={avatar}*/}
-                            {/*name="冬瓜"*/}
-                            {/*weChatId="donggua"*/}
-                            {/*tags={['吃吃吃', '买买买', '啪啪啪']}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-                {/*}/>*/}
+                <Slidable element={
+                    <div style={{margin:28}}>
+                        <ProfileCard
+                            type={CLASSMATES}
+                            contentList={[
+                                {
+                                    leftElement: <span>专业</span>,
+                                    rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />
+                                },
+                                {
+                                    leftElement: <span>课程</span>,
+                                    rightElement: <div style={{paddingLeft: 16}}><Tag text='CPSC 310' bkgColor={SECONDARY_GREEN} textColor={PRIMARY_GREEN}/></div>
+                                },
+                                {
+                                    leftElement: <span>能力</span>,
+                                    rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>
+                                },
+                                {
+                                    leftElement: <span>兴趣: </span>,
+                                    rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
+                                }
+                            ]}
+                        />
+                    </div>
+                }/>
+                <Slidable element={
+                    <div style={{margin:28}}>
+                        <MatchedUserCard
+                            type={FRIENDS}
+                            avatar={avatar}
+                            name="冬瓜"
+                            weChatId="donggua"
+                            tags={['吃吃吃', '买买买', '啪啪啪']}
+                        />
+                    </div>
+                }/>
                 <br/>
                 <br/>
                 <hr/>
