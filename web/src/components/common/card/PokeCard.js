@@ -9,10 +9,10 @@ const PokeCard = (props) => {
     let headerStyle = (props.leftCorner) ? "poke-card-head" : "poke-card-head--no-left-corner";
     return (
         <Paper>
-            <div className={headerStyle}>
+            {(props.leftCorner || props.rightCorner) && <div className={headerStyle}>
                 {props.leftCorner}
                 {props.rightCorner && <span className="poke-card-head-right-icon">{props.rightCorner}</span>}
-            </div>
+            </div>}
             {props.children}
         </Paper>
     );

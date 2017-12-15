@@ -53,35 +53,35 @@ class Demo extends Component {
                     iconRight={<DemoAndroidIcon color={PRIMARY_WHITE} className={"common-icon"}/>}
                 />
                 <div>Slidable demo</div>
-                {/*<Slidable element={*/}
-                    {/*<div style={{margin:28}}>*/}
-                        {/*<SearchResultCard*/}
-                            {/*avatar={placeholder}*/}
-                            {/*name="小傻瓜"*/}
-                            {/*gender='male'*/}
-                            {/*age={8}*/}
-                            {/*constellation='电插座'*/}
-                            {/*contentList={[*/}
-                                {/*{*/}
-                                    {/*leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,*/}
-                                    {/*rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />*/}
-                                {/*},*/}
-                                {/*{*/}
-                                    {/*leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,*/}
-                                    {/*rightElement: <span style={{paddingLeft: 16}}>好好学习</span>*/}
-                                {/*},*/}
-                                {/*{*/}
-                                    {/*leftElement: <MailIcon color={PRIMARY_YELLOW}/>,*/}
-                                    {/*rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>*/}
-                                {/*},*/}
-                                {/*{*/}
-                                    {/*leftElement: <span>兴趣: </span>,*/}
-                                    {/*rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>*/}
-                                {/*}*/}
-                            {/*]}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-                {/*}/>*/}
+                <Slidable element={
+                    <div style={{margin:28}}>
+                        <SearchResultCard
+                            avatar={placeholder}
+                            name="小傻瓜"
+                            gender='male'
+                            age={8}
+                            constellation='电插座'
+                            contentList={[
+                                {
+                                    leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,
+                                    rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />
+                                },
+                                {
+                                    leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,
+                                    rightElement: <span style={{paddingLeft: 16}}>好好学习</span>
+                                },
+                                {
+                                    leftElement: <MailIcon color={PRIMARY_YELLOW}/>,
+                                    rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>
+                                },
+                                {
+                                    leftElement: <span>兴趣: </span>,
+                                    rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
+                                }
+                            ]}
+                        />
+                    </div>
+                }/>
                 <Slidable element={
                     <div style={{margin:28}}>
                         <ProfileCard
