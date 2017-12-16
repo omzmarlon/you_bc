@@ -3,23 +3,23 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const classNames = require('classnames');
+import { CSSTransitionGroup } from 'react-transition-group';
 import './Rollable.less';
 
 class Rollable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rollingItems: this.props.rollingItems
+            currentIndex: 0
         };
     }
 
     rotateContent() {
-        let list = this.state.rollingItems;
-        let first = list.shift(); // get the first element and pop it out
-        list.push(first); // push the popped element to the last
-        this.setState({
-            rollingItems: list
-        });
+        if (this.state.currentIndex < this.props.rollingItems.length-1) {
+            this.setState({currentIndex: this.state.currentIndex+1});
+        } else {
+            this.setState({currentIndex: 0});
+        }
     }
 
     componentDidMount() {
@@ -37,7 +37,9 @@ class Rollable extends Component {
         let style = classNames('rollable-container', {[this.props.className]: true});
         return (
             <div className={style} style={{width: this.props.width, height: this.props.height}}>
-                {this.state.rollingItems.map((item, index) => <div key={index}>{item}</div>)}
+                <CSSTransitionGroup transitionName="roller" transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+                    <div key={this.state.currentIndex}>{this.props.rollingItems[this.state.currentIndex]}</div>
+                </CSSTransitionGroup>
             </div>
         );
     }

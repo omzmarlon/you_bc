@@ -127,7 +127,7 @@ class Demo extends Component {
                     <Rollable
                         width={150}
                         height={150}
-                        rollingInterval={1000}
+                        rollingInterval={2500}
                         rollingItems={
                             [
                                 <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/72/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,

@@ -1,7 +1,27 @@
 .rollable-container {
   overflow: hidden;
-  position: relative;
-  display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
+
+  .roller-enter {
+    opacity: 0.01;
+    height: 0;
+  }
+
+  .roller-enter.roller-enter-active {
+    opacity: 1;
+    height: 150px;
+    transition: all 800ms ease-in;
+  }
+
+  .roller-leave {
+    opacity: 1;
+    height: 150px;
+  }
+
+  .roller-leave.roller-leave-active {
+    opacity: 0.01;
+    height: 0;
+    transition: all 800ms ease-in;
+  }
 }
