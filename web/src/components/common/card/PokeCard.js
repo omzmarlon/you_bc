@@ -6,9 +6,10 @@ import Paper from 'material-ui/Paper';
 import "./PokeCard.less";
 
 const PokeCard = (props) => {
+    let headerStyle = (props.leftCorner) ? "poke-card-head" : "poke-card-head--no-left-corner";
     return (
         <Paper>
-            {(props.leftCorner || props.rightCorner) && <div className="poke-card-head">
+            {(props.leftCorner || props.rightCorner) && <div className={headerStyle}>
                 {props.leftCorner}
                 {props.rightCorner && <span className="poke-card-head-right-icon">{props.rightCorner}</span>}
             </div>}

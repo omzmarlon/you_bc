@@ -14,6 +14,7 @@ import ProfileCard from '../common/card/ProfileCard';
 import InfoBar from "../common/InfoBar";
 import Modal from "../common/Modal";
 import Slidable from "../common/Slidable";
+import Rollable from '../common/Rollable';
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
 import avatar from "../../../public/panda_avatar.jpeg";
@@ -47,7 +48,7 @@ class Demo extends Component {
         return (
             <div className={"demo"}>
                 <NavHeader
-                    title={"曾今的人"}
+                    title={"曾经的人"}
                     color={PRIMARY_BLUE}
                     iconRight={<DemoAndroidIcon color={PRIMARY_WHITE} className={"common-icon"}/>}
                 />
@@ -117,6 +118,30 @@ class Demo extends Component {
                         />
                     </div>
                 }/>
+                <br/>
+                <br/>
+                <hr/>
+                <div>Rolling Emoji Demo</div>
+                <div style={{padding: 25, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <span style={{fontWeight: 'blod', fontSize: 120, paddingRight: 20}}>找</span>
+                    <Rollable
+                        width={150}
+                        height={150}
+                        rollingInterval={2500}
+                        rollingItems={
+                            [
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/72/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/36/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/24/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/21/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/33/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/10/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>,
+                                <div style={{backgroundImage: `url('https://d3rnbxvnd0hlox.cloudfront.net/images/channels/1515512761/icons/large.png')`, minWidth: 150, minHeight: 150, backgroundSize: 'contain'}}> </div>
+                            ]
+                        }
+                    />
+                    <span style={{fontWeight: 'blod', fontSize: 120, paddingLeft: 20}}>友</span>
+                </div>
 
                 {/*<InfoBar msg={"展示如果很多字会不会换行这个是提示框样本"} show={true}/>*/}
                 <RaisedButton onClick={this.toggleOpenModal}>
