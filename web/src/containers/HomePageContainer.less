@@ -7,7 +7,38 @@
 
 .profile-button {
   position: fixed;
-  bottom: 5%;
+  bottom: 3%;
+  right: 5%;
+
+  // width/height appearing twice is necessary for resizing FloatingActionButton
+  // important is necessary for overriding original material-ui styles
+  width: @regular*3 !important;
+  height: @regular*3 !important;
+  button {
+    width: @regular*3 !important;
+    height: @regular*3 !important;
+  }
+
+  // nested div inside material FloatingActionButton
+  div {
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .to-profile-label {
+        font-size: 35px;
+      }
+      .to-profile-icon {
+        // add resizing for icons later
+      }
+    }
+  }
+}
+
+// TODO: remove when demo is no longer needed
+.demo-button {
+  position: fixed;
+  top: 5%;
   right: 10%;
   .common-icon-button;
 
