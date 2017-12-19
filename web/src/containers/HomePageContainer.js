@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // styles
 import './HomePageContainer.less';
 import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW} from "../styles/constants/colors";
+import {defaultIconSize} from '../styles/material/iconStyles';
 // components
 import Block from "../components/homePage/Block";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -26,7 +27,7 @@ class HomePageContainer extends Component {
                 </Link>
                 <Link to={TO_PROFILE}>
                     <FloatingActionButton className={'profile-button'}>
-                        <Profile className={'to-profile-icon'} />
+                        <Profile style={defaultIconSize} />
                         <span className={'to-profile-label'}>个人主页</span>
                     </FloatingActionButton>
                 </Link>

@@ -1,7 +1,6 @@
 @import "../../styles/constants/misc";
 @import "../../styles/constants/icon";
 @import "../../styles/constants/colors";
-@import "../../styles/constants/fonts";
 
 .tab-bar {
   position: fixed;
@@ -9,33 +8,11 @@
   height: @header-height;
   width: 100%;
   background-color: black;
+  display: flex;
 
-
-  .tab-bar-button {
-    // FlatButton
-    // important is necessary for overriding original material-ui styles
-    height: 100% !important;
-    width: 50% !important;
-
-    div {
-      // the div in FlatButton
-      // styles for FlatButton children have to be here
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .tab-bar-label {
-        color: @infoText;
-        font-size: @regular;
-        margin-left: 15px;
-      }
-
-      .tab-bar-icon {
-        // important is necessary for overriding original material-ui styles
-        color: @primaryGreen !important;
-        .common-icon();
-      }
-    }
-
+  .tab-bar-label {
+    color: @infoText;
+    font-size: @regular;
+    margin-left: 15px;
   }
 }
