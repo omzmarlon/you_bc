@@ -1,4 +1,5 @@
 import React from 'react';
+
 // components
 import ProfileTabBar from '../components/profile/ProfileTabBar';
 import NavHeader from '../components/common/NavHeader';
