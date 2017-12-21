@@ -43,7 +43,9 @@ const buttonStyle = {
 /**
  * Assumes 1. options are unique strings 2. values is a subset of options
  * */
-
+//TODO:
+// 1. DropDown Menu does not have label text. May use SelectField
+// 2. Modal menu should be able to display selected values not just as tags but also as plain texts
 class MenuInput extends React.Component {
     constructor(props) {
         super(props);
@@ -53,7 +55,6 @@ class MenuInput extends React.Component {
         };
 
         this.getMenuItems = this.getMenuItems.bind(this);
-        this.getValues = this.getValues.bind(this);
         this.dropDownMenu = this.dropDownMenu.bind(this);
         this.modalMenu = this.modalMenu.bind(this);
         this.onClickMenuButton = this.onClickMenuButton.bind(this);
@@ -67,15 +68,6 @@ class MenuInput extends React.Component {
         );
     }
 
-    getValues() {
-        if (this.props.config.multiple) {
-            return this.props.values;
-        } else {
-            // if array is empty, auto return undefined
-            return this.props.values[0];
-        }
-    }
-
     // handlers
     onClickMenuButton() {
         this.setState({showModal: !this.state.showModal});
@@ -85,8 +77,8 @@ class MenuInput extends React.Component {
     dropDownMenu() {
         return (
             <DropDownMenu
-                value={this.getValues()}
-                multiple={this.props.config.multiple}
+                value={this.props.values}
+                multiple={true}
                 onChange={this.props.onChange}
                 autoWidth={false}
                 maxHeight={900}
@@ -102,14 +94,20 @@ class MenuInput extends React.Component {
         return (
             <div className={'menu-container'}>
                 <div className={'menu-content'}>
-                    <div className={'menu-input-values'}>
-                        {this.getValues().map(
-                            v => <Tag classNames={'menu-input-value'}
-                                      fontSize={45} text={v} key={v}
-                                      bkgColor={PRIMARY_GREEN}
-                                      textColor={SECONDARY_GREEN}/>
-                        )}
-                    </div>
+                    {
+                        this.props.values.length === 0 ?
+                            <div className={'menu-label'}>
+                                {this.props.label}
+                            </div>:
+                            <div className={'menu-input-values'}>
+                                {this.props.values.map(
+                                    v => <Tag classNames={'menu-input-value'}
+                                              fontSize={45} text={v} key={v}
+                                              bkgColor={PRIMARY_GREEN}
+                                              textColor={SECONDARY_GREEN}/>
+                                )}
+                            </div>
+                    }
                     <IconButton
                         className={'menu-input-button'}
                         style={buttonStyle}
@@ -143,8 +141,8 @@ class MenuInput extends React.Component {
                 autoScrollBodyContent={true}
                 contentStyle={formSize}
             >
-                <Menu value={this.getValues()}
-                      multiple={this.props.config.multiple}
+                <Menu value={this.props.values}
+                      multiple={true}
                       onChange={this.props.onChange}
                 >
                     {this.getMenuItems()}
@@ -159,7 +157,7 @@ class MenuInput extends React.Component {
                 className={'menu-input-container'}
                 leftElement={this.props.inputIcon}
                 rightElement={
-                    this.props.config.modalMenu ? this.modalMenu() : this.dropDownMenu()
+                    this.props.modalMenu ? this.modalMenu() : this.dropDownMenu()
                 }
             />
         );
@@ -168,22 +166,17 @@ class MenuInput extends React.Component {
 
 MenuInput.propTypes = {
     inputIcon: PropTypes.element.isRequired,
+    label: PropTypes.string.isRequired,
     values: PropTypes.arrayOf(PropTypes.string).isRequired,
     onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     tagColor: PropTypes.string.isRequired,
     textColor: PropTypes.string.isRequired,
-    config: PropTypes.shape({
-        modalMenu: PropTypes.bool,
-        multiple: PropTypes.bool
-    })
+    modalMenu: PropTypes.bool
 };
 
 MenuInput.defaultProps = {
-    config: {
-        modalMenu: false,
-        multiple: false
-    }
+    modalMenu: false
 };
 
 export default MenuInput;
