@@ -8,7 +8,7 @@ import TextInput from "../components/common/form/TextInput";
 import './ProfileContainer.less';
 import {defaultIconSize} from '../styles/material/iconStyles';
 // colors
-import {PRIMARY_GREEN} from "../styles/constants/colors";
+import {PRIMARY_GREEN, SECONDARY_GREEN} from "../styles/constants/colors";
 // icons
 import SchoolIcon from 'material-ui/svg-icons/social/school';
 import MenuInput from "../components/common/form/MenuInput";
@@ -56,6 +56,8 @@ class ProfileContainer extends React.Component {
                         ]}
                         onChange={this.onMenuChange}
                         config={{multiple: true, modalMenu: true}}
+                        textColor={SECONDARY_GREEN}
+                        tagColor={PRIMARY_GREEN}
                     />
                 </div>
                 <ProfileTabBar onTabMain={()=>{}} onTabMatching={()=>{}} />

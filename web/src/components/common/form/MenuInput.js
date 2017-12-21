@@ -180,8 +180,6 @@ MenuInput.propTypes = {
 };
 
 MenuInput.defaultProps = {
-    tagColor: PRIMARY_GREEN,
-    textColor: SECONDARY_GREEN,
     config: {
         modalMenu: false,
         multiple: false
