@@ -16,7 +16,7 @@ const Tag = (props) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: `${padding}px ${padding}px ${padding}px ${padding}px`
+                padding: `${padding}px`
             }}
         >
             <span>{props.text}</span>
