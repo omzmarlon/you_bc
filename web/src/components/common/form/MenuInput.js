@@ -39,7 +39,6 @@ const buttonStyle = {
     padding: 30,
 };
 
-// 2. Modal menu should be able to display selected values not just as tags but also as plain texts
 class MenuInput extends React.Component {
     constructor(props) {
         super(props);
@@ -47,18 +46,8 @@ class MenuInput extends React.Component {
         this.state = {
             showModal: false
         };
-
-        this.getMenuItems = this.getMenuItems.bind(this);
-        this.modalMenu = this.modalMenu.bind(this);
         this.onClickMenuButton = this.onClickMenuButton.bind(this);
-        this.modalDialog = this.modalDialog.bind(this);
-    }
-
-    // getters
-    getMenuItems() {
-        return this.props.options.map(
-            (c, index) => <MenuItem style={menuItemStyle} key={index} value={c} primaryText={c} />
-        );
+        this.menuDialogHelper = this.menuDialogHelper.bind(this);
     }
 
     // handlers
@@ -66,8 +55,14 @@ class MenuInput extends React.Component {
         this.setState({showModal: !this.state.showModal});
     }
 
-    // component helpers
-    chosenValueDisplay(value, index, showTag) {
+    // static component helpers
+    static menuItems(options) {
+        return options.map(
+            (c, index) => <MenuItem style={menuItemStyle} key={index} value={c} primaryText={c} />
+        );
+    }
+
+    static chosenValueComponent(value, index, showTag) {
         if (showTag) {
             return (
                 <Tag classNames={'menu-input-value'}
@@ -84,40 +79,29 @@ class MenuInput extends React.Component {
         }
     }
 
-
-    modalMenu() {
+    static inputFieldContent(emptyValueChecker, label, values, tagDisplay) {
+        const flattenValues = [].concat.apply([], [values]); // in case props.values is a single string
         return (
-            <div className={'menu-container'}>
-                <div className={'menu-content'}>
-                    {/*diplay selected choices*/}
-                    {
-                        this.props.values.length === 0 ?
-                            <div className={'menu-label'}>
-                                {this.props.label}
-                            </div>:
-                            <div className={'menu-input-values'}>
-                                {this.props.values.map(
-                                    (v, index) => this.chosenValueDisplay(v, index, this.props.tagDisplay)
-                                )}
-                            </div>
-                    }
-                    {/*button to open modal menu*/}
-                    <IconButton
-                        className={'menu-input-button'}
-                        style={buttonStyle}
-                        iconStyle={iconStyle}
-                        onClick={this.onClickMenuButton}
-                    >
-                        <ArrowRightIcon/>
-                    </IconButton>
+            emptyValueChecker(values) ?
+                <div className={'menu-label'}>
+                    {label}
+                </div>:
+                <div className={'menu-input-values'}>
+                    {flattenValues.map((v, index) => MenuInput.chosenValueComponent(v, index, tagDisplay))}
                 </div>
-                <Divider/>
-                {this.modalDialog()}
-            </div>
         );
     }
 
-    modalDialog() {
+    static getEmptyValueChecker(isMultiple) {
+        return (
+            isMultiple ?
+                ((values) => values.length === 0 || values === undefined || values === null):
+                ((values) => values === '' || values === undefined || values === null)
+        );
+    }
+
+    // instance component helper
+    menuDialogHelper() {
         return (
             <Dialog
                 open={this.state.showModal}
@@ -139,7 +123,7 @@ class MenuInput extends React.Component {
                       multiple={true}
                       onChange={this.props.onChange}
                 >
-                    {this.getMenuItems()}
+                    {MenuInput.menuItems(this.props.options)}
                 </Menu>
             </Dialog>
         );
@@ -151,7 +135,30 @@ class MenuInput extends React.Component {
                 className={'menu-input-container'}
                 leftElement={this.props.inputIcon}
                 rightElement={
-                    this.modalMenu()
+                    <div className={'menu-container'}>
+                        <div className={'menu-content'}>
+                            {/*display selected choices*/}
+                            {
+                                MenuInput.inputFieldContent(
+                                    MenuInput.getEmptyValueChecker(this.props.multiple),
+                                    this.props.label,
+                                    this.props.values,
+                                    this.props.tagDisplay
+                                )
+                            }
+                            {/*button to open modal menu*/}
+                            <IconButton
+                                className={'menu-input-button'}
+                                style={buttonStyle}
+                                iconStyle={iconStyle}
+                                onClick={this.onClickMenuButton}
+                            >
+                                <ArrowRightIcon/>
+                            </IconButton>
+                        </div>
+                        <Divider/>
+                        {this.menuDialogHelper()}
+                    </div>
                 }
             />
         );
@@ -161,11 +168,15 @@ class MenuInput extends React.Component {
 MenuInput.propTypes = {
     inputIcon: PropTypes.element.isRequired,
     label: PropTypes.string.isRequired,
-    values: PropTypes.arrayOf(PropTypes.string).isRequired,
+    values: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.string),
+        PropTypes.string
+    ]).isRequired,
     onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     textColor: PropTypes.string.isRequired,
     tagDisplay: PropTypes.bool.isRequired,
+    multiple: PropTypes.bool.isRequired,
     tagColor: PropTypes.string
 };
 
