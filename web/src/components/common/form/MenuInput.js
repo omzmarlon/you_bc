@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 //components
 import InfoRow from "../InfoRow";
 import Divider from 'material-ui/Divider';
-import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Tag from "../Tag";
 import IconButton from 'material-ui/IconButton';
@@ -40,11 +39,6 @@ const buttonStyle = {
     padding: 30,
 };
 
-/**
- * Assumes 1. options are unique strings 2. values is a subset of options
- * */
-//TODO:
-// 1. DropDown Menu does not have label text. May use SelectField
 // 2. Modal menu should be able to display selected values not just as tags but also as plain texts
 class MenuInput extends React.Component {
     constructor(props) {
@@ -55,7 +49,6 @@ class MenuInput extends React.Component {
         };
 
         this.getMenuItems = this.getMenuItems.bind(this);
-        this.dropDownMenu = this.dropDownMenu.bind(this);
         this.modalMenu = this.modalMenu.bind(this);
         this.onClickMenuButton = this.onClickMenuButton.bind(this);
         this.modalDialog = this.modalDialog.bind(this);
@@ -64,7 +57,7 @@ class MenuInput extends React.Component {
     // getters
     getMenuItems() {
         return this.props.options.map(
-            c => <MenuItem style={menuItemStyle} key={c} value={c} primaryText={c} />
+            (c, index) => <MenuItem style={menuItemStyle} key={index} value={c} primaryText={c} />
         );
     }
 
@@ -74,26 +67,29 @@ class MenuInput extends React.Component {
     }
 
     // component helpers
-    dropDownMenu() {
-        return (
-            <DropDownMenu
-                value={this.props.values}
-                multiple={true}
-                onChange={this.props.onChange}
-                autoWidth={false}
-                maxHeight={900}
-                style={{width: '100%', fontSize: menuTextSize}}
-                underlineStyle={{position: 'relative'}}
-            >
-                {this.getMenuItems()}
-            </DropDownMenu>
-        );
+    chosenValueDisplay(value, index, showTag) {
+        if (showTag) {
+            return (
+                <Tag classNames={'menu-input-value'}
+                     fontSize={45} text={value} key={index}
+                     bkgColor={PRIMARY_GREEN}
+                     textColor={SECONDARY_GREEN}/>
+            )
+        } else {
+            return (
+                <span className={'menu-input-value'} key={index}>
+                    {value}
+                </span>
+            );
+        }
     }
+
 
     modalMenu() {
         return (
             <div className={'menu-container'}>
                 <div className={'menu-content'}>
+                    {/*diplay selected choices*/}
                     {
                         this.props.values.length === 0 ?
                             <div className={'menu-label'}>
@@ -101,13 +97,11 @@ class MenuInput extends React.Component {
                             </div>:
                             <div className={'menu-input-values'}>
                                 {this.props.values.map(
-                                    v => <Tag classNames={'menu-input-value'}
-                                              fontSize={45} text={v} key={v}
-                                              bkgColor={PRIMARY_GREEN}
-                                              textColor={SECONDARY_GREEN}/>
+                                    (v, index) => this.chosenValueDisplay(v, index, this.props.tagDisplay)
                                 )}
                             </div>
                     }
+                    {/*button to open modal menu*/}
                     <IconButton
                         className={'menu-input-button'}
                         style={buttonStyle}
@@ -157,7 +151,7 @@ class MenuInput extends React.Component {
                 className={'menu-input-container'}
                 leftElement={this.props.inputIcon}
                 rightElement={
-                    this.props.modalMenu ? this.modalMenu() : this.dropDownMenu()
+                    this.modalMenu()
                 }
             />
         );
@@ -170,13 +164,9 @@ MenuInput.propTypes = {
     values: PropTypes.arrayOf(PropTypes.string).isRequired,
     onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
-    tagColor: PropTypes.string.isRequired,
     textColor: PropTypes.string.isRequired,
-    modalMenu: PropTypes.bool
-};
-
-MenuInput.defaultProps = {
-    modalMenu: false
+    tagDisplay: PropTypes.bool.isRequired,
+    tagColor: PropTypes.string
 };
 
 export default MenuInput;

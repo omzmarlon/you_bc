@@ -46,8 +46,10 @@ class ProfileContainer extends React.Component {
                         value={this.state.text}
                     />
                     <MenuInput
+                        label={'一个东西'}
                         inputIcon={<SchoolIcon style={defaultIconSize}/>}
                         values={['温哥华', 'UBC']}
+                        //values={[]}
                         options={['温哥华', '本拿比', '加拿大',
                             'UBC', 'SFU', '北京大学',
                             '计算机', 'ReactJS', 'Angular2',
@@ -55,8 +57,8 @@ class ProfileContainer extends React.Component {
                             'PPAP', 'Mama', 'PAPA', 'Water', 'Water2', 'Water3'
                         ]}
                         onChange={this.onMenuChange}
-                        config={{multiple: true, modalMenu: true}}
                         textColor={SECONDARY_GREEN}
+                        tagDisplay={false}
                         tagColor={PRIMARY_GREEN}
                     />
                 </div>
