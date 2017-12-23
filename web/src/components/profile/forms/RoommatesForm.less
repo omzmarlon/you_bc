@@ -1,4 +1,5 @@
-@import "../../../styles/constants/misc";
+@import (reference) "../../../styles/constants/misc";
+@import (reference) "../../../styles/constants/fonts";
 
 .title {
   display: flex;
@@ -7,8 +8,8 @@
     display: flex;
     align-items: center;
     .title-text {
-      font-size: 65px;
-      margin-left: 20px;
+      font-size: @header;
+      margin-left: 15px;
     }
   }
 
@@ -16,6 +17,6 @@
 
 .roommates-form-input-field {
   .form-input-field();
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
