@@ -12,10 +12,7 @@ const TextInput = (props) => {
             rightElement={
                 <TextField
                     // 1.keep some space from left-icon. 2. input text font size
-                    style={{marginLeft: 25, fontSize: 55}}
-                    // The underline position has to be adjusted after font resize
-                    underlineStyle={{position: 'relative', top: 10}}
-                    underlineFocusStyle={{position: 'relative', top: 10}}
+                    style={{marginLeft: 15, fontSize: 14}}
                     hintText={props.label}
                     fullWidth={true}
                     errorText={props.errorText}

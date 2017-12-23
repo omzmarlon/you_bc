@@ -17,26 +17,20 @@ import {formSize} from '../../../styles/material/formStyles';
 //colors
 import {PRIMARY_GREEN, SECONDARY_GREEN} from "../../../styles/constants/colors";
 
-const menuTextSize = 55;
+const menuTextSize = 14;
 
 const menuItemStyle = {
     fontSize: menuTextSize,
     height: '1.5em',
-    marginTop: 25,
-    marginBottom: 25,
+    marginTop: 20,
+    marginBottom: 20,
     display: 'flex',
     alignItems: 'center'
 };
 
 const iconStyle = {
-    width: 60,
-    height: 60,
-};
-
-const buttonStyle = {
-    width: 120,
-    height: 120,
-    padding: 30,
+    width: 36,
+    height: 36,
 };
 
 class MenuInput extends React.Component {
@@ -66,7 +60,7 @@ class MenuInput extends React.Component {
         if (showTag) {
             return (
                 <Tag classNames={'menu-input-value'}
-                     fontSize={45} text={value} key={index}
+                     fontSize={14} text={value} key={index}
                      bkgColor={PRIMARY_GREEN}
                      textColor={SECONDARY_GREEN}/>
             )
@@ -108,8 +102,6 @@ class MenuInput extends React.Component {
                 actions={[
                     <RaisedButton
                         onClick={this.onClickMenuButton}
-                        style={{height: 70, fontSize: 45}}
-                        buttonStyle={{height: 70}}
                         backgroundColor={this.props.tagColor}
                         fullWidth={true}
                     >
@@ -149,7 +141,6 @@ class MenuInput extends React.Component {
                             {/*button to open modal menu*/}
                             <IconButton
                                 className={'menu-input-button'}
-                                style={buttonStyle}
                                 iconStyle={iconStyle}
                                 onClick={this.onClickMenuButton}
                             >

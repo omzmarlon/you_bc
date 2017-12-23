@@ -41,14 +41,14 @@ class ProfileContainer extends React.Component {
                 />
                 <div className={'profile-container'}>
                     <TextInput
-                        inputIcon={<SchoolIcon style={defaultIconSize} />}
+                        inputIcon={<SchoolIcon/>}
                         label={'微信号'}
                         onChange={this.onHandleText}
                         value={this.state.text}
                     />
                     <MenuInput
                         label={'提示 Label'}
-                        inputIcon={<SchoolIcon style={defaultIconSize}/>}
+                        inputIcon={<SchoolIcon/>}
                         values={['温哥华', 'UBC']}
                         //values={[]}
                         //values={'UBC'}
