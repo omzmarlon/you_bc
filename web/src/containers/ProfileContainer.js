@@ -12,6 +12,7 @@ import {PRIMARY_GREEN, SECONDARY_GREEN} from "../styles/constants/colors";
 // icons
 import SchoolIcon from 'material-ui/svg-icons/social/school';
 import MenuInput from "../components/common/form/MenuInput";
+import RoommatesForm from "../components/profile/forms/RoommatesForm";
 
 class ProfileContainer extends React.Component {
     constructor(props) {
@@ -65,6 +66,24 @@ class ProfileContainer extends React.Component {
                         tagColor={PRIMARY_GREEN}
                     />
                 </div>
+                <RoommatesForm showForm={true}
+                               location={''}
+                               hometown={''}
+                               motto={''}
+                               tags={[]}
+                               locationOptions={['a','b','cc']}
+                               hometownOptions={['a','b','cc']}
+                               tagsOptions={['a','b','cc']}
+                               onLocationChange={()=>{}}
+                               onHometownChange={()=>{}}
+                               onMottoChange={()=>{}}
+                               onTagChange={()=>{}}
+                               onDone={()=>{}}
+                               onCancel={()=>{}}
+                               showWeChatInput={true}
+                               weChatId={''}
+                               onWeChatIdChange={()=>{}}
+                />
                 <ProfileTabBar onTabMain={()=>{}} onTabMatching={()=>{}} />
             </div>
         );

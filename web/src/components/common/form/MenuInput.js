@@ -132,7 +132,7 @@ class MenuInput extends React.Component {
     render() {
         return (
             <InfoRow
-                className={'menu-input-container'}
+                className={`menu-input-container ${this.props.classNames}`}
                 leftElement={this.props.inputIcon}
                 rightElement={
                     <div className={'menu-container'}>
@@ -166,6 +166,7 @@ class MenuInput extends React.Component {
 }
 
 MenuInput.propTypes = {
+    classNames: PropTypes.string,
     inputIcon: PropTypes.element.isRequired,
     label: PropTypes.string.isRequired,
     values: PropTypes.oneOfType([
