@@ -1,24 +1,21 @@
-@import "../../../styles/constants/colors";
-@import "../../../styles/constants/fonts";
+@import (reference) "../../../styles/constants/colors";
+@import (reference) "../../../styles/constants/fonts";
 
 .search-result-card-body {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  padding: 10px;
+  align-items: flex-start;
+  padding: 12px;
 
   .search-result-card-avatar {
-    flex-grow: 1;
+    margin-right: 15px;
+    margin-top: 15px;
   }
 
-  .search-result-card-list {
-    flex-grow: 4;
-
-    .search-result-card-list-item {
-      font-family: @generalFontFamily;
-      font-size: x-large;
-      color: @generalText;
-      margin: 25px 5px;
-    }
+  .search-result-card-list-item {
+    font-family: @generalFontFamily;
+    font-size: @regular;
+    color: @generalText;
+    margin: 12px 5px;
   }
 }

@@ -46,7 +46,7 @@ TruncateText.propTypes = {
 };
 
 TruncateText.defaultProps = {
-    maxLength: 10,
+    maxLength: 11,
     style: {},
     textStyle: {}
 };

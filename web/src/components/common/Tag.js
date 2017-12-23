@@ -3,20 +3,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Tag = (props) => {
-    const padding = props.fontSize*0.20;
+    const verticalPadding = props.fontSize*0.60;
+    const horizontalPadding = props.fontSize*0.80;
     return (
         <div
             className={props.classNames}
             style={{
-                borderRadius: 10,
+                borderRadius: 5,
                 backgroundColor: props.bkgColor,
                 fontSize: props.fontSize,
                 color: props.textColor,
-                height: '1.5em',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: `${padding}px`
+                padding: `${verticalPadding}px ${horizontalPadding}px`
             }}
         >
             <span>{props.text}</span>
@@ -33,7 +33,7 @@ Tag.propTypes = {
 };
 
 Tag.defaultProps = {
-    fontSize: 45
+    fontSize: 12
 };
 
 export default Tag;

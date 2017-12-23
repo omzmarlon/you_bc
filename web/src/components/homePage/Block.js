@@ -17,7 +17,7 @@ const Block = (props) => {
     return (
         <Link to={props.path} className={'block-link'}>
             <div className={"index-page-block"} style={{backgroundColor: props.color}}>
-                <span className={'common-font'} style={{color: PRIMARY_WHITE}}>
+                <span className={'block-font'} style={{color: PRIMARY_WHITE}}>
                     {props.displayName}
                 </span>
             </div>

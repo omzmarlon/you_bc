@@ -17,12 +17,12 @@ class HomePageContainer extends Component {
     render() {
         return(
             <div className="home-page">
-                <Block path={TO_CLASSMATES} displayName="找课友" color={PRIMARY_BLUE}/>
+                <Block path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_BLUE}/>
                 <Block path={TO_FRIENDS} displayName="找——友" color={PRIMARY_YELLOW}/>
-                <Block path={TO_ROOMMATES} displayName="找室友" color={PRIMARY_RED}/>
+                <Block path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_RED}/>
                 <Link to={'/demo'}>
                     <FloatingActionButton className={'demo-button'}>
-                        <span style={{fontSize: 35}}>See demo</span>
+                        <span style={{fontSize: 14, lineHeight: '18px'}}>Demo</span>
                     </FloatingActionButton>
                 </Link>
                 <Link to={TO_PROFILE}>

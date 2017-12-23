@@ -7,7 +7,6 @@ import IconButton from 'material-ui/IconButton';
 import {PRIMARY_WHITE} from "../../styles/constants/colors";
 import "./NavHeader.less";
 import "../../styles/constants/fonts.less";
-import "../../styles/constants/icon.less";
 
 class NavHeader extends React.Component {
     constructor(props) {
@@ -23,17 +22,15 @@ class NavHeader extends React.Component {
         return (
             <div className={'nav-header'} style={{backgroundColor: this.props.color}}>
                 <span className={"left-action"}>
-                    <IconButton onClick={this.goBack}
-                                className={"common-icon-button"}
-                    >
-                        <BackArrow color={PRIMARY_WHITE} className={"common-icon"} />
+                    <IconButton onClick={this.goBack}>
+                        <BackArrow color={PRIMARY_WHITE}/>
                     </IconButton>
                 </span>
-                <span className={"common-font"} style={{color: PRIMARY_WHITE}}>
+                <span className={"header-font"} style={{color: PRIMARY_WHITE}}>
                     {this.props.title}
                 </span>
                 <span className={"right-action"}>
-                    <IconButton className={"common-icon-button"}>
+                    <IconButton>
                         {this.props.iconRight}
                     </IconButton>
                 </span>

@@ -1,17 +1,17 @@
-@import "../../styles/constants/colors";
-@import "../../styles/constants/fonts";
+@import (reference) "../../styles/constants/colors";
+@import (reference) "../../styles/constants/fonts";
 
 .poke-avatar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 18px;
+  padding: 10px;
   font-family: @generalFontFamily;
 
   .poke-avatar-name {
-    padding-top: 6px;
+    padding-top: 8px;
     color: @generalText;
-    font-size: larger;
+    font-size: @regular;
   }
 
   .poke-avatar-info {
@@ -19,10 +19,11 @@
     align-items: center;
     line-height: 100%;
     color: @generalText;
-    font-size: x-small;
+    font-size: @small;
+    padding-top: 8px;
 
     .poke-avatar-gender-icon {
-      padding: 3px;
+      padding-right: 3px;
     }
 
     .poke-avatar-constellation {
