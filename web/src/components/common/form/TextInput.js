@@ -7,7 +7,7 @@ import "./TextInput.less";
 const TextInput = (props) => {
     return (
         <InfoRow
-            className={'text-input'}
+            className={`text-input ${props.classNames}`}
             leftElement={props.inputIcon}
             rightElement={
                 <TextField
@@ -28,6 +28,7 @@ const TextInput = (props) => {
 };
 
 TextInput.propTypes = {
+    classNames: PropTypes.string,
     inputIcon: PropTypes.element.isRequired,
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
