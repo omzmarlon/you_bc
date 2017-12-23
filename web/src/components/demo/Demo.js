@@ -5,7 +5,6 @@ import React, {Component} from 'react'
 // components
 import NavHeader from "../common/NavHeader";
 import Tag from "../common/Tag";
-import PokeAvatar from '../common/PokeAvatar';
 import TruncateText from '../common/TruncateText';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchResultCard from '../common/card/SearchResultCard';
@@ -50,7 +49,7 @@ class Demo extends Component {
                 <NavHeader
                     title={"曾经的人"}
                     color={PRIMARY_BLUE}
-                    iconRight={<DemoAndroidIcon color={PRIMARY_WHITE} className={"common-icon"}/>}
+                    iconRight={<DemoAndroidIcon color={PRIMARY_WHITE}/>}
                 />
                 <div>Slidable demo</div>
                 <Slidable element={

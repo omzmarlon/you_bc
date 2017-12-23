@@ -22,8 +22,8 @@ class NavHeader extends React.Component {
         return (
             <div className={'nav-header'} style={{backgroundColor: this.props.color}}>
                 <span className={"left-action"}>
-                    <IconButton onClick={this.goBack}>
-                        <BackArrow color={PRIMARY_WHITE}/>
+                    <IconButton onClick={this.goBack} style={{padding: 6}} iconStyle={{width: 36, height: 36}}>
+                        <BackArrow color={PRIMARY_WHITE} />
                     </IconButton>
                 </span>
                 <span className={"header-font"} style={{color: PRIMARY_WHITE}}>
