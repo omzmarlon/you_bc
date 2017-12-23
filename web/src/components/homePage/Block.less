@@ -1,4 +1,5 @@
-@import '../../styles/constants/colors';
+@import (reference) '../../styles/constants/colors';
+@import (reference) '../../styles/constants/fonts';
 
 .block-link {
   text-decoration: none;
@@ -11,4 +12,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .block-font {
+    font-size: @large;
+    font-family: @generalFontFamily;
+  }
 }

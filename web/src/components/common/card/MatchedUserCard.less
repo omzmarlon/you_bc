@@ -4,33 +4,32 @@
 .matched-user-card-body {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   padding: 10px;
 
   .matched-user-card-avatar {
-    flex-grow: 1;
+
   }
 
   .matched-user-card-info {
-    flex-grow: 4;
-
+    margin-left: 15px;
     .--name {
       font-family: @generalFontFamily;
-      font-size: xx-large;
+      font-size: 18px;
       color: @generalText;
     }
 
     .--weChat {
-      padding-left: 25px;
-      font-family: @generalFontFamily;
-      font-size: x-large;
-      color: @generalText;
-      margin: 25px 5px;
+      .common-font;
+      padding-left: 15px;
+      color: @secondaryText;
     }
 
-    .--tag {
-      display: inline-block;
-      padding-right: 18px;
+    .matched-user-card-tags {
+      .--tag {
+        display: inline-block;
+        padding: 15px 6px;
+      }
     }
   }
 }

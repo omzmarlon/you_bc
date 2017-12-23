@@ -16,7 +16,7 @@ const PokeAvatar = (props) => {
 
     return (
         <div className={rootClassName}>
-            <Avatar style={{height: 72, width: 72}} src={props.img}/>
+            <Avatar style={{height: 64, width: 64}} src={props.img}/>
             {props.name && <div className='poke-avatar-name'>{props.name}</div>}
             {props.info && <div className='poke-avatar-info'>
                 <span className='poke-avatar-gender-icon'>

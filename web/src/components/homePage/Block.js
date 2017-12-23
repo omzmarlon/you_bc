@@ -17,7 +17,7 @@ const Block = (props) => {
     return (
         <Link to={props.path} className={'block-link'}>
             <div className={"index-page-block"} style={{backgroundColor: props.color}}>
-                <span className={'common-font'} style={{color: PRIMARY_WHITE}}>
+                <span className={'block-font'} style={{color: PRIMARY_WHITE}}>
                     {props.displayName}
                 </span>
             </div>
@@ -28,7 +28,7 @@ const Block = (props) => {
 Block.propTypes = {
     path: PropTypes.oneOf([TO_CLASSMATES, TO_FRIENDS, TO_ROOMMATES]).isRequired,
     color: PropTypes.string.isRequired,
-    displayName: PropTypes.string.isRequired,
+    displayName: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 };
 
 export default Block;

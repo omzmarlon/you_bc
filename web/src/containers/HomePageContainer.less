@@ -9,14 +9,12 @@
   position: fixed;
   bottom: 3%;
   right: 5%;
+  height: @regular * 5 !important;
+  width: @regular * 5 !important;
 
-  // width/height appearing twice is necessary for resizing FloatingActionButton
-  // important is necessary for overriding original material-ui styles
-  width: @regular*3 !important;
-  height: @regular*3 !important;
   button {
-    width: @regular*3 !important;
-    height: @regular*3 !important;
+    height: @regular * 5 !important;
+    width: @regular * 5 !important;
   }
 
   // nested div inside material FloatingActionButton
@@ -26,7 +24,9 @@
       flex-direction: column;
       align-items: center;
       .to-profile-label {
-        font-size: 35px;
+        font-size: @small;
+        height: 22px !important;
+        line-height: 16px !important;
       }
     }
   }
@@ -37,9 +37,10 @@
   position: fixed;
   top: 5%;
   right: 10%;
-  .common-icon-button;
+}
 
-  button {
-    .common-icon-button;
-  }
+.friend-display-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

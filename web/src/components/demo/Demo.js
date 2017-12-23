@@ -5,7 +5,6 @@ import React, {Component} from 'react'
 // components
 import NavHeader from "../common/NavHeader";
 import Tag from "../common/Tag";
-import PokeAvatar from '../common/PokeAvatar';
 import TruncateText from '../common/TruncateText';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchResultCard from '../common/card/SearchResultCard';
@@ -50,11 +49,11 @@ class Demo extends Component {
                 <NavHeader
                     title={"曾经的人"}
                     color={PRIMARY_BLUE}
-                    iconRight={<DemoAndroidIcon color={PRIMARY_WHITE} className={"common-icon"}/>}
+                    iconRight={<DemoAndroidIcon color={PRIMARY_WHITE}/>}
                 />
                 <div>Slidable demo</div>
                 <Slidable element={
-                    <div style={{margin:28}}>
+                    <div style={{margin:15}}>
                         <SearchResultCard
                             avatar={placeholder}
                             name="小傻瓜"
@@ -76,14 +75,14 @@ class Demo extends Component {
                                 },
                                 {
                                     leftElement: <span>兴趣: </span>,
-                                    rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
+                                    rightElement: <TruncateText style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
                                 }
                             ]}
                         />
                     </div>
                 }/>
                 <Slidable element={
-                    <div style={{margin:28}}>
+                    <div style={{margin:15}}>
                         <ProfileCard
                             type={CLASSMATES}
                             contentList={[
@@ -101,14 +100,14 @@ class Demo extends Component {
                                 },
                                 {
                                     leftElement: <span>兴趣: </span>,
-                                    rightElement: <TruncateText textStyle={{width: 300}} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
+                                    rightElement: <TruncateText maxLength={15} style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
                                 }
                             ]}
                         />
                     </div>
                 }/>
                 <Slidable element={
-                    <div style={{margin:28}}>
+                    <div style={{margin:15}}>
                         <MatchedUserCard
                             type={FRIENDS}
                             avatar={avatar}

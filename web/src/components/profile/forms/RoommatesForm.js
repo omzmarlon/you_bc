@@ -35,8 +35,6 @@ class RoommatesForm extends React.Component {
                 actions={[
                     <RaisedButton
                         onClick={this.props.onDone}
-                        style={{height: 70, fontSize: 45}}
-                        buttonStyle={{height: 70}}
                         backgroundColor={PRIMARY_BLUE}
                         fullWidth={true}
                     >
@@ -46,13 +44,10 @@ class RoommatesForm extends React.Component {
                 title={
                     <div className={'title'}>
                         <div className={'title-info'}>
-                            <AccountIcon style={defaultIconSize}/>
+                            <AccountIcon />
                             <span className={'title-text'}>找室友信息</span>
                         </div>
-                        <IconButton onClick={this.props.onCancel}
-                                    style={{width: 120, height: 120, padding: 30}}
-                                    iconStyle={defaultIconSize}
-                        >
+                        <IconButton onClick={this.props.onCancel}>
                             <CloseIcon/>
                         </IconButton>
                     </div>
@@ -61,14 +56,14 @@ class RoommatesForm extends React.Component {
                 {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'roommates-form-input-field'}
-                               inputIcon={<WeChatIcon style={defaultIconSize}/>}
+                               inputIcon={<WeChatIcon />}
                                label={'微信号'}
                                onChange={this.props.onWeChatIdChange}
                                value={this.props.weChatId}
                     />
                 }
                 <MenuInput classNames={'roommates-form-input-field'}
-                           inputIcon={<LocationIcon viewBox="0 0 24 32" style={defaultIconSize} color={SECONDARY_BLUE}/>}
+                           inputIcon={<LocationIcon viewBox="0 0 24 32" color={SECONDARY_BLUE}/>}
                            label={'地点'}
                            values={this.props.location}
                            onChange={this.props.onLocationChange}
@@ -78,7 +73,7 @@ class RoommatesForm extends React.Component {
                            multiple={false}
                 />
                 <MenuInput classNames={'roommates-form-input-field'}
-                           inputIcon={<HometownIcon viewBox="0 0 26 31.969" style={defaultIconSize} color={SECONDARY_BLUE}/>}
+                           inputIcon={<HometownIcon viewBox="0 0 26 31.969" color={SECONDARY_BLUE}/>}
                            label={'家乡'}
                            values={this.props.hometown}
                            onChange={this.props.onLocationChange}
@@ -88,13 +83,13 @@ class RoommatesForm extends React.Component {
                            multiple={false}
                 />
                 <TextInput classNames={'roommates-form-input-field'}
-                           inputIcon={<MottoIcon viewBox="0 0 32 30" style={defaultIconSize} color={SECONDARY_BLUE}/>}
+                           inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_BLUE}/>}
                            label={'一句话'}
                            onChange={this.props.onMottoChange}
                            value={this.props.motto}
                 />
                 <MenuInput classNames={'roommates-form-input-field'}
-                           inputIcon={<TagIcon viewBox="0 0 32 32" style={defaultIconSize} color={SECONDARY_BLUE}/>}
+                           inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_BLUE}/>}
                            label={'标签'}
                            values={this.props.tags}
                            onChange={this.props.onTagChange}

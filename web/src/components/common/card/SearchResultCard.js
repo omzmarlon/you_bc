@@ -23,7 +23,7 @@ const SearchResultCard = (props) => (
                     constellation: props.constellation
                 }}
             />
-            <List className="search-result-card-list">
+            <List>
                 {props.contentList.map((content,index) => (
                     <InfoRow
                         key={index}

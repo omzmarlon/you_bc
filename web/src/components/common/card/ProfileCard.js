@@ -19,7 +19,7 @@ import './ProfileCard.less';
 
 const LeftCornerIcon = (props) => {
     let icon = null;
-    let style = {color: 'white', width: 32, height: 32};
+    let style = {color: 'white', width: 18, height: 18};
     switch (props.type) {
         case CLASSMATES:
             icon = <ClassIcon style={style}/>;
@@ -45,9 +45,9 @@ const ProfileCard = (props) => {
     return (
         <PokeCard
             leftCorner={<LeftCornerIcon type={props.type}/>}
-            rightCorner={<EditIcon style={{color: 'grey', height: 36, width: 36}}/>}
+            rightCorner={<EditIcon style={{color: 'grey', height: 24, width: 24}}/>}
         >
-            <div className="profile-card-body">
+            <div className="profile-card-list-wrapper">
                 <List className="profile-card-list">
                     {props.contentList.map((content, index) => (
                         <InfoRow

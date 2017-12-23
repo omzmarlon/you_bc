@@ -34,7 +34,7 @@ const MatchedUserCard = (props) => {
 
     return (
         <PokeCard
-            rightCorner={<CopyIcon style={{color: 'grey', height: 36, width: 36}}/>}
+            rightCorner={<CopyIcon style={{color: 'grey', height: 24, width: 24}}/>}
         >
             <div className="matched-user-card-body">
                 <PokeAvatar
@@ -43,8 +43,8 @@ const MatchedUserCard = (props) => {
                 />
                 <div className="matched-user-card-info">
                     <span className="--name">{props.name}</span>
-                    <span className="--weChat">微信号： {props.weChatId}</span>
-                    <div style={{paddingTop: 25, paddingBottom: 25}}>
+                    <span className="--weChat">微信号：{props.weChatId}</span>
+                    <div className="matched-user-card-tags">
                         {props.tags.map((tag,index) => (
                             <div key={index} className="--tag">
                                 <Tag text={tag} bkgColor={tagColor.bkg} textColor={tagColor.text}/>
