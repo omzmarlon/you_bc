@@ -70,7 +70,7 @@ class ProfileContainer extends React.Component {
                                location={''}
                                hometown={''}
                                motto={''}
-                               tags={[]}
+                               tags={['a','b']}
                                locationOptions={['a','b','cc']}
                                hometownOptions={['a','b','cc']}
                                tagsOptions={['a','b','cc']}

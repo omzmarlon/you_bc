@@ -12,7 +12,7 @@ const TextInput = (props) => {
             rightElement={
                 <TextField
                     // 1.keep some space from left-icon. 2. input text font size
-                    style={{marginLeft: 15, fontSize: 14}}
+                    style={{marginLeft: 15}}
                     hintText={props.label}
                     fullWidth={true}
                     errorText={props.errorText}

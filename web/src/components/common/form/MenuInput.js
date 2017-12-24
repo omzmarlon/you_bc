@@ -17,20 +17,9 @@ import {formSize} from '../../../styles/material/formStyles';
 //colors
 import {PRIMARY_GREEN, SECONDARY_GREEN} from "../../../styles/constants/colors";
 
-const menuTextSize = 14;
-
 const menuItemStyle = {
-    fontSize: menuTextSize,
-    height: '1.5em',
-    marginTop: 20,
-    marginBottom: 20,
     display: 'flex',
     alignItems: 'center'
-};
-
-const iconStyle = {
-    width: 36,
-    height: 36,
 };
 
 class MenuInput extends React.Component {
@@ -56,13 +45,13 @@ class MenuInput extends React.Component {
         );
     }
 
-    static chosenValueComponent(value, index, showTag) {
+    static chosenValueComponent(value, index, showTag, bkgColor, textColor) {
         if (showTag) {
             return (
                 <Tag classNames={'menu-input-value'}
                      fontSize={14} text={value} key={index}
-                     bkgColor={PRIMARY_GREEN}
-                     textColor={SECONDARY_GREEN}/>
+                     bkgColor={bkgColor}
+                     textColor={textColor}/>
             )
         } else {
             return (
@@ -73,7 +62,7 @@ class MenuInput extends React.Component {
         }
     }
 
-    static inputFieldContent(emptyValueChecker, label, values, tagDisplay) {
+    static inputFieldContent(emptyValueChecker, label, values, tagDisplay, bkgColor, textColor) {
         const flattenValues = [].concat.apply([], [values]); // in case props.values is a single string
         return (
             emptyValueChecker(values) ?
@@ -81,7 +70,9 @@ class MenuInput extends React.Component {
                     {label}
                 </div>:
                 <div className={'menu-input-values'}>
-                    {flattenValues.map((v, index) => MenuInput.chosenValueComponent(v, index, tagDisplay))}
+                    {flattenValues.map(
+                        (v, index) => MenuInput.chosenValueComponent(v, index, tagDisplay, bkgColor, textColor)
+                    )}
                 </div>
         );
     }
@@ -135,13 +126,14 @@ class MenuInput extends React.Component {
                                     MenuInput.getEmptyValueChecker(this.props.multiple),
                                     this.props.label,
                                     this.props.values,
-                                    this.props.tagDisplay
+                                    this.props.tagDisplay,
+                                    this.props.tagColor,
+                                    this.props.textColor
                                 )
                             }
                             {/*button to open modal menu*/}
                             <IconButton
                                 className={'menu-input-button'}
-                                iconStyle={iconStyle}
                                 onClick={this.onClickMenuButton}
                             >
                                 <ArrowRightIcon/>
