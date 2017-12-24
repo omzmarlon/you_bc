@@ -70,6 +70,7 @@ class RoommatesForm extends React.Component {
                            options={this.props.locationOptions}
                            textColor={'white'}
                            tagDisplay={false}
+                           tagColor={PRIMARY_BLUE}
                            multiple={false}
                 />
                 <MenuInput classNames={'roommates-form-input-field'}
@@ -80,6 +81,7 @@ class RoommatesForm extends React.Component {
                            options={this.props.hometownOptions}
                            textColor={'white'}
                            tagDisplay={false}
+                           tagColor={PRIMARY_BLUE}
                            multiple={false}
                 />
                 <TextInput classNames={'roommates-form-input-field'}

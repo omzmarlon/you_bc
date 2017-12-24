@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {PRIMARY_GREEN, SECONDARY_GREEN} from "../../styles/constants/colors";
 
 const Tag = (props) => {
     const verticalPadding = props.fontSize*0.60;
@@ -26,14 +27,14 @@ const Tag = (props) => {
 
 Tag.propTypes = {
     text: PropTypes.string.isRequired,
-    bkgColor: PropTypes.string.isRequired,
-    textColor: PropTypes.string.isRequired,
     fontSize: PropTypes.number,
     classNames: PropTypes.string
 };
 
 Tag.defaultProps = {
-    fontSize: 12
+    fontSize: 12,
+    bkgColor: PRIMARY_GREEN,
+    textColor: SECONDARY_GREEN
 };
 
 export default Tag;
