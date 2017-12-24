@@ -2,109 +2,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //components
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import IconButton from 'material-ui/IconButton';
 import TextInput from "../../common/form/TextInput";
 import MenuInput from "../../common/form/MenuInput";
 //styles
-import {defaultIconSize} from "../../../styles/material/iconStyles";
 import "./RoommatesForm.less";
+import "../../../styles/constants/misc.less";
 //icons
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
-import CloseIcon from 'material-ui/svg-icons/navigation/close';
-import WeChatIcon from "../../common/img/WeChatIcon";
+import WeChatIcon from "../../common/svg/WeChatIcon";
 import HometownIcon from "../../common/svg/HometownIcon";
-//colors
-import {PRIMARY_BLUE, SECONDARY_BLUE} from "../../../styles/constants/colors";
 import LocationIcon from "../../common/svg/LocationIcon";
 import MottoIcon from "../../common/svg/MottoIcon";
 import TagIcon from "../../common/svg/TagIcon";
-import {formSize} from "../../../styles/material/formStyles";
+//colors
+import {PRIMARY_BLUE, SECONDARY_BLUE} from "../../../styles/constants/colors";
+import ModalForm from "../../common/form/ModalForm";
 
-class RoommatesForm extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <Dialog
-                contentStyle={formSize}
-                open={this.props.showForm}
-                actions={[
-                    <RaisedButton
-                        onClick={this.props.onDone}
-                        backgroundColor={PRIMARY_BLUE}
-                        fullWidth={true}
-                    >
-                        确定
-                    </RaisedButton>
-                ]}
-                title={
-                    <div className={'title'}>
-                        <div className={'title-info'}>
-                            <AccountIcon />
-                            <span className={'title-text'}>找室友信息</span>
-                        </div>
-                        <IconButton onClick={this.props.onCancel}>
-                            <CloseIcon/>
-                        </IconButton>
-                    </div>
-                }
-            >
-                {
-                    this.props.showWeChatInput &&
-                    <TextInput classNames={'roommates-form-input-field'}
-                               inputIcon={<WeChatIcon />}
-                               label={'微信号'}
-                               onChange={this.props.onWeChatIdChange}
-                               value={this.props.weChatId}
-                    />
-                }
-                <MenuInput classNames={'roommates-form-input-field'}
-                           inputIcon={<LocationIcon viewBox="0 0 24 32" color={SECONDARY_BLUE}/>}
-                           label={'地点'}
-                           values={this.props.location}
-                           onChange={this.props.onLocationChange}
-                           options={this.props.locationOptions}
-                           textColor={'white'}
-                           tagDisplay={false}
-                           tagColor={PRIMARY_BLUE}
-                           multiple={false}
-                />
-                <MenuInput classNames={'roommates-form-input-field'}
-                           inputIcon={<HometownIcon viewBox="0 0 26 31.969" color={SECONDARY_BLUE}/>}
-                           label={'家乡'}
-                           values={this.props.hometown}
-                           onChange={this.props.onLocationChange}
-                           options={this.props.hometownOptions}
-                           textColor={'white'}
-                           tagDisplay={false}
-                           tagColor={PRIMARY_BLUE}
-                           multiple={false}
-                />
-                <TextInput classNames={'roommates-form-input-field'}
-                           inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_BLUE}/>}
-                           label={'一句话'}
-                           onChange={this.props.onMottoChange}
-                           value={this.props.motto}
-                />
-                <MenuInput classNames={'roommates-form-input-field'}
-                           inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_BLUE}/>}
-                           label={'标签'}
-                           values={this.props.tags}
-                           onChange={this.props.onTagChange}
-                           options={this.props.tagsOptions}
-                           tagColor={PRIMARY_BLUE}
-                           textColor={'white'}
-                           tagDisplay={true}
-                           multiple={true}
-                />
-            </Dialog>
-        );
-    }
-}
+const RoommatesForm = (props) => (
+    <ModalForm
+        showForm={props.showForm}
+        confirmButtonColor={PRIMARY_BLUE}
+        onDone={props.onDone}
+        onCancel={props.onCancel}
+        titleIcon={<AccountIcon />}
+        titleText={'找室友信息'}
+    >
+        {
+            props.showWeChatInput &&
+            <TextInput classNames={'form-input-field'}
+                       inputIcon={<WeChatIcon />}
+                       label={'微信号'}
+                       onChange={props.onWeChatIdChange}
+                       value={props.weChatId}
+            />
+        }
+        <MenuInput classNames={'form-input-field'}
+                   inputIcon={<LocationIcon viewBox="0 0 24 32" color={SECONDARY_BLUE}/>}
+                   label={'地点'}
+                   values={props.location}
+                   onChange={props.onLocationChange}
+                   options={props.locationOptions}
+                   textColor={'white'}
+                   tagDisplay={false}
+                   tagColor={PRIMARY_BLUE}
+                   multiple={false}
+        />
+        <MenuInput classNames={'form-input-field'}
+                   inputIcon={<HometownIcon viewBox="0 0 26 31.969" color={SECONDARY_BLUE}/>}
+                   label={'家乡'}
+                   values={props.hometown}
+                   onChange={props.onLocationChange}
+                   options={props.hometownOptions}
+                   textColor={'white'}
+                   tagDisplay={false}
+                   tagColor={PRIMARY_BLUE}
+                   multiple={false}
+        />
+        <TextInput classNames={'form-input-field'}
+                   inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_BLUE}/>}
+                   label={'一句话'}
+                   onChange={props.onMottoChange}
+                   value={props.motto}
+        />
+        <MenuInput classNames={'form-input-field'}
+                   inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_BLUE}/>}
+                   label={'标签'}
+                   values={props.tags}
+                   onChange={props.onTagChange}
+                   options={props.tagsOptions}
+                   tagColor={PRIMARY_BLUE}
+                   textColor={'white'}
+                   tagDisplay={true}
+                   multiple={true}
+        />
+    </ModalForm>
+);
 
 RoommatesForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
