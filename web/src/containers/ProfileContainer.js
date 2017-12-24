@@ -13,6 +13,8 @@ import {PRIMARY_GREEN, SECONDARY_GREEN} from "../styles/constants/colors";
 import SchoolIcon from 'material-ui/svg-icons/social/school';
 import MenuInput from "../components/common/form/MenuInput";
 import RoommatesForm from "../components/profile/forms/RoommatesForm";
+import ClassmatesForm from "../components/profile/forms/ClassmatesForm";
+import FriendsForm from "../components/profile/forms/FriendsForm";
 
 class ProfileContainer extends React.Component {
     constructor(props) {
@@ -40,33 +42,9 @@ class ProfileContainer extends React.Component {
                     color={PRIMARY_GREEN}
                 />
                 <div className={'profile-container'}>
-                    <TextInput
-                        inputIcon={<SchoolIcon/>}
-                        label={'微信号'}
-                        onChange={this.onHandleText}
-                        value={this.state.text}
-                    />
-                    <MenuInput
-                        label={'提示 Label'}
-                        inputIcon={<SchoolIcon/>}
-                        values={['温哥华', 'UBC']}
-                        //values={[]}
-                        //values={'UBC'}
-                        //values={''}
-                        options={['温哥华', '本拿比', '加拿大',
-                            'UBC', 'SFU', '北京大学',
-                            '计算机', 'ReactJS', 'Angular2',
-                            'Economics',
-                            'PPAP', 'Mama', 'PAPA', 'Water', 'Water2', 'Water3'
-                        ]}
-                        onChange={this.onMenuChange}
-                        textColor={SECONDARY_GREEN}
-                        tagDisplay={true}
-                        multiple={true}
-                        tagColor={PRIMARY_GREEN}
-                    />
+
                 </div>
-                <RoommatesForm showForm={true}
+                <RoommatesForm showForm={false}
                                location={''}
                                hometown={''}
                                motto={''}
@@ -84,6 +62,39 @@ class ProfileContainer extends React.Component {
                                weChatId={''}
                                onWeChatIdChange={()=>{}}
                 />
+                <ClassmatesForm showForm={false}
+                                major={''} courses={[]}
+                                selfDescription={''}
+                                tags={[]}
+                                majorOptions={['cpsc','econ']}
+                                coursesOptions={['cpsc','econ']}
+                                tagsOptions={['cpsc','econ']}
+                                onMajorChange={()=>{}}
+                                onCoursesChange={()=>{}}
+                                onSelfDescriptionChange={()=>{}}
+                                onTagChange={()=>{}}
+                                onDone={()=>{}}
+                                onCancel={()=>{}}
+                                showWeChatInput={true}
+                                weChatId={''}
+                                onWeChatIdChange={()=>{}}
+                />
+                <FriendsForm showForm={true}
+                             faculty={''}
+                             relationship={''}
+                             motto={''} tags={[]}
+                             facultyOptions={['a', 'n']}
+                             relationshipOptions={['a', 'n']}
+                             tagsOptions={['a', 'n']}
+                             onFacultyChange={()=>{}}
+                             onRelationshipChange={()=>{}}
+                             onMottoChange={()=>{}}
+                             onTagChange={()=>{}}
+                             onDone={()=>{}}
+                             onCancel={()=>{}}
+                             showWeChatInput={true}
+                             weChatId={''}
+                             onWeChatIdChange={()=>{}}/>
                 <ProfileTabBar onTabMain={()=>{}} onTabMatching={()=>{}} />
             </div>
         );
