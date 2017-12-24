@@ -5,26 +5,23 @@ import PropTypes from 'prop-types';
 import ModalForm from "../../common/form/ModalForm";
 import TextInput from "../../common/form/TextInput";
 import MenuInput from "../../common/form/MenuInput";
-//styles
-import "../../../styles/constants/misc.less";
 //icons
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
 import WeChatIcon from "../../common/svg/WeChatIcon";
-import HometownIcon from "../../common/svg/HometownIcon";
-import LocationIcon from "../../common/svg/LocationIcon";
 import MottoIcon from "../../common/svg/MottoIcon";
 import TagIcon from "../../common/svg/TagIcon";
 //colors
-import {PRIMARY_BLUE, SECONDARY_BLUE} from "../../../styles/constants/colors";
+import {PRIMARY_YELLOW, SECONDARY_YELLOW} from "../../../styles/constants/colors";
+import FacultyIcon from "../../common/svg/FacultyIcon";
+import RelationshipIcon from "../../common/svg/RelationshipIcon";
 
-const RoommatesForm = (props) => (
-    <ModalForm
-        showForm={props.showForm}
-        confirmButtonColor={PRIMARY_BLUE}
-        onDone={props.onDone}
-        onCancel={props.onCancel}
-        titleIcon={<AccountIcon />}
-        titleText={'找室友信息'}
+const FriendsForm = (props) => (
+    <ModalForm showForm={props.showForm}
+               confirmButtonColor={PRIMARY_YELLOW}
+               onDone={props.onDone}
+               onCancel={props.onCancel}
+               titleIcon={<AccountIcon/>}
+               titleText={'找_友信息'}
     >
         {
             props.showWeChatInput &&
@@ -35,41 +32,39 @@ const RoommatesForm = (props) => (
                        value={props.weChatId}
             />
         }
-        <MenuInput classNames={'form-input-field'}
-                   inputIcon={<LocationIcon viewBox="0 0 24 32" color={SECONDARY_BLUE}/>}
-                   label={'地点'}
-                   values={props.location}
-                   onChange={props.onLocationChange}
-                   options={props.locationOptions}
+        <MenuInput inputIcon={<FacultyIcon/>}
+                   label={'学院'}
+                   values={props.faculty}
+                   onChange={props.onFacultyChange}
+                   options={props.facultyOptions}
+                   tagColor={PRIMARY_YELLOW}
                    textColor={'white'}
                    tagDisplay={false}
-                   tagColor={PRIMARY_BLUE}
                    multiple={false}
         />
-        <MenuInput classNames={'form-input-field'}
-                   inputIcon={<HometownIcon viewBox="0 0 26 31.969" color={SECONDARY_BLUE}/>}
-                   label={'家乡'}
-                   values={props.hometown}
-                   onChange={props.onLocationChange}
-                   options={props.hometownOptions}
+        <MenuInput inputIcon={<RelationshipIcon viewBox="0 0 20 19" color={SECONDARY_YELLOW} />}
+                   label={'情感状况'}
+                   values={props.relationship}
+                   onChange={props.onFacultyChange}
+                   options={props.relationshipOptions}
+                   tagColor={PRIMARY_YELLOW}
                    textColor={'white'}
                    tagDisplay={false}
-                   tagColor={PRIMARY_BLUE}
                    multiple={false}
         />
         <TextInput classNames={'form-input-field'}
-                   inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_BLUE}/>}
+                   inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_YELLOW}/>}
                    label={'一句话'}
                    onChange={props.onMottoChange}
                    value={props.motto}
         />
         <MenuInput classNames={'form-input-field'}
-                   inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_BLUE}/>}
+                   inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_YELLOW}/>}
                    label={'标签'}
                    values={props.tags}
                    onChange={props.onTagChange}
                    options={props.tagsOptions}
-                   tagColor={PRIMARY_BLUE}
+                   tagColor={PRIMARY_YELLOW}
                    textColor={'white'}
                    tagDisplay={true}
                    multiple={true}
@@ -77,20 +72,20 @@ const RoommatesForm = (props) => (
     </ModalForm>
 );
 
-RoommatesForm.propTypes = {
+FriendsForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
-    // form values:
-    location: PropTypes.string.isRequired,
-    hometown: PropTypes.string.isRequired,
+    //form values:
+    faculty: PropTypes.string.isRequired,
+    relationship: PropTypes.string.isRequired,
     motto: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    //options
-    locationOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    hometownOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // options
+    facultyOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    relationshipOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
     tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    // on form values change:
-    onLocationChange: PropTypes.func.isRequired,
-    onHometownChange: PropTypes.func.isRequired,
+    // on form value changes
+    onFacultyChange: PropTypes.func.isRequired,
+    onRelationshipChange: PropTypes.func.isRequired,
     onMottoChange: PropTypes.func.isRequired,
     onTagChange: PropTypes.func.isRequired,
     // on done/cancel
@@ -102,4 +97,4 @@ RoommatesForm.propTypes = {
     onWeChatIdChange: PropTypes.func
 };
 
-export default RoommatesForm;
+export default FriendsForm;
