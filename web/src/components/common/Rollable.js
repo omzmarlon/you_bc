@@ -54,8 +54,8 @@ Rollable.propTypes = {
 };
 
 Rollable.defaultProps = {
-    width: 150,
-    height: 150,
+    width: 36,
+    height: 36,
     className: ''
 };
 

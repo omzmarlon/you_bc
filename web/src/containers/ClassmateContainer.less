@@ -1,0 +1,22 @@
+@import (reference) "../styles/constants/misc";
+@import (reference) "../styles/constants/colors";
+
+.classmate-container {
+  margin-top: @header-height;
+
+  .classmate-card-list {
+    background-color: @pageBackground;
+    padding: 12px;
+    .classmate-card-list-item {
+      margin-bottom: 12px;
+
+      .card-list-item-tags {
+        display: flex;
+        padding-left: 3px;
+        .--tag {
+          padding-right: 3px;
+        }
+      }
+    }
+  }
+}

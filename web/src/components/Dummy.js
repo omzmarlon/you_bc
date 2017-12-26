@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import reactIcon from "../../public/react_icon.png";
+import reactIcon from "../../public/images/react_icon.png";
 import './Dummy.less';
 
 const Dummy = (props) => {
