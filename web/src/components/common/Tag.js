@@ -9,16 +9,19 @@ const Tag = (props) => {
     return (
         <div
             className={props.classNames}
-            style={{
-                borderRadius: 5,
-                backgroundColor: props.bkgColor,
-                fontSize: props.fontSize,
-                color: props.textColor,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: `${verticalPadding}px ${horizontalPadding}px`
-            }}
+            style={Object.assign({},
+                props.style,
+                {
+                    borderRadius: 5,
+                    backgroundColor: props.bkgColor,
+                    fontSize: props.fontSize,
+                    color: props.textColor,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: `${verticalPadding}px ${horizontalPadding}px`
+                }
+            )}
         >
             <span>{props.text}</span>
         </div>
@@ -28,7 +31,8 @@ const Tag = (props) => {
 Tag.propTypes = {
     text: PropTypes.string.isRequired,
     fontSize: PropTypes.number,
-    classNames: PropTypes.string
+    classNames: PropTypes.string,
+    style: PropTypes.object
 };
 
 Tag.defaultProps = {

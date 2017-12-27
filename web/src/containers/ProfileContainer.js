@@ -1,37 +1,33 @@
+'use strict';
 import React from 'react';
-
+import PropTypes from 'prop-types';
 // components
 import ProfileTabBar from '../components/profile/ProfileTabBar';
 import NavHeader from '../components/common/NavHeader';
 import TextInput from "../components/common/form/TextInput";
 //styles
 import './ProfileContainer.less';
-import {defaultIconSize} from '../styles/material/iconStyles';
 // colors
-import {PRIMARY_GREEN, SECONDARY_GREEN} from "../styles/constants/colors";
+import {PRIMARY_GREEN} from "../styles/constants/colors";
 // icons
-import SchoolIcon from 'material-ui/svg-icons/social/school';
-import MenuInput from "../components/common/form/MenuInput";
-import RoommatesForm from "../components/profile/forms/RoommatesForm";
-import ClassmatesForm from "../components/profile/forms/ClassmatesForm";
-import FriendsForm from "../components/profile/forms/FriendsForm";
+import ProfileMain from "../components/profile/contents/ProfileMain";
+import MatchingList from "../components/profile/contents/MatchingList";
+// redux
+import { connect }  from 'react-redux'
+import { bindActionCreators } from 'redux';
+import {showMatchingList, showProfileMain} from '../actions/profile/profileUIActions';
+import {
+    fetchClassmatesInfo, fetchFriendsInfo, fetchPersonalInfo,
+    fetchRoommatesInfo
+} from "../actions/profile/profileFetchActions";
 
 class ProfileContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: ''
-        };
-        this.onHandleText = this.onHandleText.bind(this);
-        this.onMenuChange = this.onMenuChange.bind(this);
-    }
-
-    onHandleText(e) {
-        this.setState({text: e.target.value});
-    }
-
-    onMenuChange(e) {
-        console.log(e);
+    componentDidMount() {
+        const { store } = this.context;
+        store.dispatch(fetchClassmatesInfo());
+        store.dispatch(fetchFriendsInfo());
+        store.dispatch(fetchRoommatesInfo());
+        store.dispatch(fetchPersonalInfo());
     }
 
     render() {
@@ -39,66 +35,38 @@ class ProfileContainer extends React.Component {
             <div>
                 <NavHeader
                     title={"个人主页"}
-                    color={PRIMARY_GREEN}
-                />
-                <div className={'profile-container'}>
-
+                    color={PRIMARY_GREEN}/>
+                <div className={'profile-container'} style={{overflow: 'scroll', height: '100%'}}>
+                    { this.props.panelIndex === 0 && <ProfileMain /> }
+                    { this.props.panelIndex === 1 && <MatchingList /> }
+                    <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.props.onTabMatching} />
                 </div>
-                <RoommatesForm showForm={false}
-                               location={''}
-                               hometown={''}
-                               motto={''}
-                               tags={['a','b']}
-                               locationOptions={['a','b','cc']}
-                               hometownOptions={['a','b','cc']}
-                               tagsOptions={['a','b','cc']}
-                               onLocationChange={()=>{}}
-                               onHometownChange={()=>{}}
-                               onMottoChange={()=>{}}
-                               onTagChange={()=>{}}
-                               onDone={()=>{}}
-                               onCancel={()=>{}}
-                               showWeChatInput={true}
-                               weChatId={''}
-                               onWeChatIdChange={()=>{}}
-                />
-                <ClassmatesForm showForm={false}
-                                major={''} courses={[]}
-                                selfDescription={''}
-                                tags={[]}
-                                majorOptions={['cpsc','econ']}
-                                coursesOptions={['cpsc','econ']}
-                                tagsOptions={['cpsc','econ']}
-                                onMajorChange={()=>{}}
-                                onCoursesChange={()=>{}}
-                                onSelfDescriptionChange={()=>{}}
-                                onTagChange={()=>{}}
-                                onDone={()=>{}}
-                                onCancel={()=>{}}
-                                showWeChatInput={true}
-                                weChatId={''}
-                                onWeChatIdChange={()=>{}}
-                />
-                <FriendsForm showForm={true}
-                             faculty={''}
-                             relationship={''}
-                             motto={''} tags={[]}
-                             facultyOptions={['a', 'n']}
-                             relationshipOptions={['a', 'n']}
-                             tagsOptions={['a', 'n']}
-                             onFacultyChange={()=>{}}
-                             onRelationshipChange={()=>{}}
-                             onMottoChange={()=>{}}
-                             onTagChange={()=>{}}
-                             onDone={()=>{}}
-                             onCancel={()=>{}}
-                             showWeChatInput={true}
-                             weChatId={''}
-                             onWeChatIdChange={()=>{}}/>
-                <ProfileTabBar onTabMain={()=>{}} onTabMatching={()=>{}} />
             </div>
         );
     }
 }
 
-export default ProfileContainer;
+ProfileContainer.propTypes = {
+    //states
+    panelIndex: PropTypes.number.isRequired,
+    //actions
+    onTabMain: PropTypes.func.isRequired,
+    onTabMatching: PropTypes.func.isRequired
+};
+
+ProfileContainer.contextTypes = {
+    store: PropTypes.object
+};
+
+const mapStateToProps = (state, ownProps) => ({
+    panelIndex: state.profileUI.panelIndex
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        onTabMain: showProfileMain,
+        onTabMatching: showMatchingList
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

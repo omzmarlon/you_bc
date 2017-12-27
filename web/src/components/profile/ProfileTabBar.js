@@ -20,16 +20,16 @@ const buttonLayout = {
 
 const buttonStyles = Object.assign({}, buttonSize, buttonLayout);
 
-const ProfileTabBar = () => {
+const ProfileTabBar = (props) => {
     return (
         <div className={'tab-bar'}>
-            <FlatButton style={buttonStyles}>
+            <FlatButton style={buttonStyles} onClick={props.onTabMain}>
                 <InfoRow
                     leftElement={<Home color={PRIMARY_GREEN} />}
                     rightElement={<span className={'tab-bar-label'}>主页</span>}
                 />
             </FlatButton>
-            <FlatButton style={buttonStyles}>
+            <FlatButton style={buttonStyles} onClick={props.onTabMatching}>
                 <InfoRow
                     leftElement={<Recent color={PRIMARY_GREEN} />}
                     rightElement={<span className={'tab-bar-label'}>已匹配</span>}

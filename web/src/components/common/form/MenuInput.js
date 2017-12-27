@@ -14,8 +14,6 @@ import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 //styles
 import "./MenuInput.less";
 import {formSize} from '../../../styles/material/formStyles';
-//colors
-import {PRIMARY_GREEN, SECONDARY_GREEN} from "../../../styles/constants/colors";
 
 const menuItemStyle = {
     display: 'flex',
@@ -62,12 +60,12 @@ class MenuInput extends React.Component {
         }
     }
 
-    static inputFieldContent(emptyValueChecker, label, values, tagDisplay, bkgColor, textColor) {
+    static inputFieldContent(emptyValueChecker, hintLabel, values, tagDisplay, bkgColor, textColor) {
         const flattenValues = [].concat.apply([], [values]); // in case props.values is a single string
         return (
             emptyValueChecker(values) ?
                 <div className={'menu-label'}>
-                    {label}
+                    {hintLabel}
                 </div>:
                 <div className={'menu-input-values'}>
                     {flattenValues.map(
@@ -103,8 +101,8 @@ class MenuInput extends React.Component {
                 contentStyle={formSize}
             >
                 <Menu value={this.props.values}
-                      multiple={true}
-                      onChange={this.props.onChange}
+                      multiple={this.props.multiple}
+                      onItemClick={this.props.onChange}
                 >
                     {MenuInput.menuItems(this.props.options)}
                 </Menu>
