@@ -81,15 +81,15 @@ class MainListTemplate extends Component {
                                                     matchRateColor={this.props.themeColor}
                                                     contentList={[
                                                         (user.major && <MajorInfo color={this.props.themeColor} major={user.major} year={user.year}/>),
+                                                        (user.address && <AddressInfo color={this.props.themeColor} address={user.address}/>),
+                                                        (user.faculty && <FacultyInfo color={this.props.themeColor} faculty={user.faculty} year={user.year}/>),
                                                         (user.courses && <CourseInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} courses={user.courses}/>),
+                                                        (user.country && <HometownInfo color={this.props.themeColor} city={user.city} country={user.country}/>),
+                                                        (user.relationship && <RelationshipInfo color={this.props.themeColor} relationship={user.relationship}/>),
                                                         (user.description && <StudyAbilityInfo description={user.description}/>),
                                                         (user.requirements && <StudyRequirementInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} requirements={user.requirements}/>),
-                                                        (user.address && <AddressInfo color={this.props.themeColor} address={}/>),
-                                                        (user.country && <HometownInfo color={this.props.themeColor} city={user.city} country={user.country}/>),
                                                         (user.motto && <MottoInfo color={this.props.themeColor} motto={user.motto}/>),
-                                                        (user.hobbies && <HobbyInfo hobbies={user.hobbies} color={this.props.themeColor} secondColor={this.props.subThemeColor}/>),
-                                                        (user.faculty && <FacultyInfo color={this.props.themeColor} faculty={user.faculty} year={user.year}/>),
-                                                        (user.relationship && <RelationshipInfo color={this.props.themeColor} relationship={user.relationship}/>),
+                                                        (user.hobbies && <HobbyInfo hobbies={user.hobbies} color={this.props.themeColor} secondColor={this.props.subThemeColor}/>)
                                                     ]}
                                                 />
                                             </div>

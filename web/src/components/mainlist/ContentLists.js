@@ -18,8 +18,8 @@ import RelationshipIcon from "../common/svg/RelationshipIcon";
 import './ContentLists.less';
 
 const iconStyle = {
-    width: 14,
-    height: 14
+    width: 15,
+    height: 15
 };
 
 // classmates
@@ -98,7 +98,7 @@ StudyRequirementInfo.propTypes = {
 // roommates
 export const AddressInfo = (props) => (
     <InfoRow
-        leftElement={<LocationIcon style={{...iconStyle, ...{color: props.color}}}/>}
+        leftElement={<LocationIcon style={{color: props.color, height: 16, width: 14}}/>}
         rightElement={<span style={{paddingLeft: 8}}>{props.address}</span>}
     />
 );
@@ -168,7 +168,7 @@ FacultyInfo.propTypes = {
 
 export const RelationshipInfo = (props) => (
     <InfoRow
-        leftElement={<RelationshipIcon style={{...iconStyle, ...{color: props.color}}}/>}
+        leftElement={<RelationshipIcon style={{color: props.color, height: 16, width: 16}}/>}
         rightElement={<span style={{paddingLeft: 8}}>{props.relationship}</span>}
     />
 );
