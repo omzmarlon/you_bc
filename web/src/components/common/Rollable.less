@@ -1,7 +1,9 @@
+@iconHeight: 36px;
+
 .rollable-container {
   overflow: hidden;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 
   .roller-enter {
     opacity: 0.01;
@@ -10,16 +12,16 @@
 
   .roller-enter.roller-enter-active {
     opacity: 1;
-    height: 150px;
+    height: @iconHeight;
     transition: all 800ms ease-in;
   }
 
-  .roller-leave {
+  .roller-exit {
     opacity: 1;
-    height: 150px;
+    height: @iconHeight;
   }
 
-  .roller-leave.roller-leave-active {
+  .roller-exit.roller-exit-active {
     opacity: 0.01;
     height: 0;
     transition: all 800ms ease-in;

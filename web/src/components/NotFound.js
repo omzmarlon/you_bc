@@ -1,5 +1,5 @@
 import React from 'react';
-import warningIcon from "../../public/warning.png";
+import warningIcon from "../../public/images/warning.png";
 import './NotFound.less';
 
 const NotFound = () => {

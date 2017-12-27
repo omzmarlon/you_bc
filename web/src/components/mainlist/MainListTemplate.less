@@ -1,0 +1,60 @@
+@import (reference) "../../styles/constants/misc";
+@import (reference) "../../styles/constants/colors";
+
+@cardHeight: 176px;
+
+.main-list-container {
+  margin-top: @header-height;
+  height: 100%;
+
+  .main-list-card-list {
+    background-color: @pageBackground;
+    padding: 12px;
+    height: 89%;
+    overflow-y: scroll;
+
+    .main-list-row-wrapper {
+
+      .--smile {
+        position: absolute;
+        margin-left: 15%;
+        margin-top: 18%;
+      }
+
+      .--cry {
+        position: absolute;
+        margin-left: 65%;
+        margin-top: 18%;
+      }
+    }
+
+    .card-enter {
+      opacity: 0.01;
+    }
+
+    .card-enter.card-enter-active {
+      opacity: 1;
+      transition: opacity 800ms ease-in;
+    }
+
+    .card-exit {
+      opacity: 1;
+    }
+
+    .card-exit.card-exit-active {
+      opacity: 0.01;
+      transition: opacity 1ms ease-in;
+    }
+
+    .main-list-card-list-item {
+      margin-bottom: 15px;
+      .card-list-item-tags {
+        display: flex;
+        padding-left: 3px;
+        .--tag {
+          padding-right: 3px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@import (reference) "../styles/constants/misc";
+@import (reference) "../styles/constants/colors";
+
+@cardHeight: 176px;
+
+.classmate-container {
+  margin-top: @header-height;
+  height: 100%;
+
+  .classmate-card-list {
+    background-color: @pageBackground;
+    padding: 12px;
+    height: 89%;
+    overflow-y: scroll;
+
+    .card-enter {
+      opacity: 0.01;
+    }
+
+    .card-enter.card-enter-active {
+      opacity: 1;
+      transition: opacity 800ms ease-in;
+    }
+
+    .card-exit {
+      opacity: 1;
+    }
+
+    .card-exit.card-exit-active {
+      opacity: 0.01;
+      transition: opacity 1ms ease-in;
+    }
+
+    .classmate-card-list-item {
+      margin-bottom: 15px;
+      .card-list-item-tags {
+        display: flex;
+        padding-left: 3px;
+        .--tag {
+          padding-right: 3px;
+        }
+      }
+    }
+  }
+}
+
+h2 {
+  display: inline-block;
+}
+
+.classmate-row-wrapper {
+  display: flex;
+  align-items: center;
+
+  .--smile {
+    position: absolute;
+    margin-left: 15%;
+  }
+
+  .--cry {
+    position: absolute;
+    margin-left: 65%;
+  }
+}
