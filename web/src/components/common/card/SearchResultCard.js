@@ -22,15 +22,14 @@ const SearchResultCard = (props) => (
                     age: props.age,
                     constellation: props.constellation
                 }}
+                matchRate={props.matchRate}
+                matchRateColor={props.matchRateColor}
             />
             <List>
                 {props.contentList.map((content,index) => (
-                    <InfoRow
-                        key={index}
-                        className="search-result-card-list-item"
-                        leftElement={content.leftElement}
-                        rightElement={content.rightElement}
-                    />
+                    <div key={index} className="search-result-card-list-item">
+                        {content}
+                    </div>
                 ))}
             </List>
         </div>
@@ -43,12 +42,9 @@ SearchResultCard.propTypes = {
     gender: PropTypes.oneOf(['male', 'female']).isRequired,
     age: PropTypes.number.isRequired,
     constellation: PropTypes.string.isRequired,
-    contentList: PropTypes.arrayOf(
-        PropTypes.shape({
-            leftElement: PropTypes.element,
-            rightElement: PropTypes.element
-        })
-    ).isRequired
+    matchRate: PropTypes.number,
+    matchRateColor: PropTypes.string,
+    contentList: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
 export default SearchResultCard;

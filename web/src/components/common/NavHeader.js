@@ -15,7 +15,7 @@ class NavHeader extends React.Component {
     }
 
     goBack() {
-        console.log('going back!');
+        window.history.back();
     }
 
     render() {
@@ -30,9 +30,7 @@ class NavHeader extends React.Component {
                     {this.props.title}
                 </span>
                 <span className={"right-action"}>
-                    <IconButton>
-                        {this.props.iconRight}
-                    </IconButton>
+                    {this.props.iconRight}
                 </span>
             </div>
         );

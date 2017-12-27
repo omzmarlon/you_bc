@@ -58,7 +58,7 @@ Slidable.propTypes = {
 };
 
 Slidable.defaultProps = {
-    threshold: 300,
+    threshold: 100,
     onFullSwipe: () => {}
 };
 

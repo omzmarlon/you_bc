@@ -14,10 +14,12 @@ import InfoBar from "../common/InfoBar";
 import Modal from "../common/Modal";
 import Slidable from "../common/Slidable";
 import Rollable from '../common/Rollable';
+import {IconButton} from "material-ui";
+
 // assets
 import DemoAndroidIcon from '../common/svg/DemoAndroidIcon';
-import avatar from "../../../public/panda_avatar.jpeg";
-import placeholder from '../../../public/avatar_placeholder.png';
+import avatar from "../../../public/images/panda_avatar.jpeg";
+import placeholder from '../../../public/images/avatar_placeholder.png';
 import SchoolIcon from 'material-ui/svg-icons/social/school';
 import DraftIcon from 'material-ui/svg-icons/content/drafts';
 import MailIcon from 'material-ui/svg-icons/content/mail';
@@ -49,38 +51,9 @@ class Demo extends Component {
                 <NavHeader
                     title={"曾经的人"}
                     color={PRIMARY_BLUE}
-                    iconRight={<DemoAndroidIcon color={PRIMARY_WHITE}/>}
+                    iconRight={<IconButton><DemoAndroidIcon color={PRIMARY_WHITE}/></IconButton>}
                 />
                 <div>Slidable demo</div>
-                <Slidable element={
-                    <div style={{margin:15}}>
-                        <SearchResultCard
-                            avatar={placeholder}
-                            name="小傻瓜"
-                            gender='male'
-                            age={8}
-                            constellation='电插座'
-                            contentList={[
-                                {
-                                    leftElement: <SchoolIcon color={PRIMARY_YELLOW}/>,
-                                    rightElement: <TruncateText style={{paddingLeft: 16}} text="汽修专业 大一" />
-                                },
-                                {
-                                    leftElement: <DraftIcon color={PRIMARY_YELLOW}/>,
-                                    rightElement: <span style={{paddingLeft: 16}}>好好学习</span>
-                                },
-                                {
-                                    leftElement: <MailIcon color={PRIMARY_YELLOW}/>,
-                                    rightElement: <span style={{paddingLeft: 16}}>我其实是个学霸</span>
-                                },
-                                {
-                                    leftElement: <span>兴趣: </span>,
-                                    rightElement: <TruncateText style={{paddingLeft: 16}} text="这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的这个超长的"/>
-                                }
-                            ]}
-                        />
-                    </div>
-                }/>
                 <Slidable element={
                     <div style={{margin:15}}>
                         <ProfileCard

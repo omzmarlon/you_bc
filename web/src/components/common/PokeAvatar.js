@@ -22,12 +22,15 @@ const PokeAvatar = (props) => {
                 <span className='poke-avatar-gender-icon'>
                     {
                         (props.info.gender === 'female') ?
-                            <FemaleIcon viewBox="0 0 1000 1000" style={{height: 12, width: 12}} color={PRIMARY_RED}/> :
-                            <MaleIcon viewBox="0 0 1000 1000" style={{height: 12, width: 12}} color={PRIMARY_BLUE}/>
+                            <FemaleIcon style={{height: 12, width: 12}} color={PRIMARY_RED}/> :
+                            <MaleIcon style={{height: 12, width: 12}} color={PRIMARY_BLUE}/>
                     }
                 </span>
                 <span>{props.info.age}</span>
                 <span className='poke-avatar-constellation'>{props.info.constellation}</span>
+            </div>}
+            {props.matchRate && <div className="poke-avatar-matchRate" style={{color: props.matchRateColor}}>
+                契合度 {props.matchRate * 100} %
             </div>}
         </div>
     );
@@ -41,11 +44,14 @@ PokeAvatar.propTypes = {
         gender: PropTypes.oneOf(['male', 'female']),
         age: PropTypes.number,
         constellation: PropTypes.string
-    })
+    }),
+    matchRateColor: PropTypes.string,
+    matchRate: PropTypes.number // assume its a decimal number from 0 to 1
 };
 
 PokeAvatar.defaultProps = {
-    className: ''
+    className: '',
+    matchRateColor: PRIMARY_RED
 };
 
 export default PokeAvatar;
