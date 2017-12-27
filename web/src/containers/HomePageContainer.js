@@ -42,9 +42,9 @@ class HomePageContainer extends Component {
 
         return(
             <div className="home-page">
-                <Block path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_BLUE}/>
+                <Block path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_RED}/>
                 <Block path={TO_FRIENDS} displayName={friendDisplayName} color={PRIMARY_YELLOW}/>
-                <Block path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_RED}/>
+                <Block path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_BLUE}/>
                 <Link to={'/demo'}>
                     <FloatingActionButton className={'demo-button'}>
                         <span style={{fontSize: 14, lineHeight: '18px'}}>Demo</span>

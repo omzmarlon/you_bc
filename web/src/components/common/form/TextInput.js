@@ -18,6 +18,7 @@ const TextInput = (props) => {
                     errorText={props.errorText}
                     onChange={props.onChange}
                     value={props.value}
+                    type={props.type}
                 />
             }
         />
@@ -29,8 +30,9 @@ TextInput.propTypes = {
     inputIcon: PropTypes.element.isRequired,
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.any.isRequired,
     errorText: PropTypes.string,
+    type: PropTypes.string,
 };
 
 export default TextInput
