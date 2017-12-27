@@ -3,15 +3,30 @@
 
 @cardHeight: 176px;
 
-.classmate-container {
+.main-list-container {
   margin-top: @header-height;
   height: 100%;
 
-  .classmate-card-list {
+  .main-list-card-list {
     background-color: @pageBackground;
     padding: 12px;
     height: 89%;
     overflow-y: scroll;
+
+    .main-list-row-wrapper {
+      display: flex;
+      align-items: center;
+
+      .--smile {
+        position: absolute;
+        margin-left: 15%;
+      }
+
+      .--cry {
+        position: absolute;
+        margin-left: 65%;
+      }
+    }
 
     .card-enter {
       opacity: 0.01;
@@ -31,7 +46,7 @@
       transition: opacity 1ms ease-in;
     }
 
-    .classmate-card-list-item {
+    .main-list-card-list-item {
       margin-bottom: 15px;
       .card-list-item-tags {
         display: flex;
@@ -41,24 +56,5 @@
         }
       }
     }
-  }
-}
-
-h2 {
-  display: inline-block;
-}
-
-.classmate-row-wrapper {
-  display: flex;
-  align-items: center;
-
-  .--smile {
-    position: absolute;
-    margin-left: 15%;
-  }
-
-  .--cry {
-    position: absolute;
-    margin-left: 65%;
   }
 }
