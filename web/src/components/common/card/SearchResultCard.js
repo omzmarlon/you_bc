@@ -27,12 +27,9 @@ const SearchResultCard = (props) => (
             />
             <List>
                 {props.contentList.map((content,index) => (
-                    <InfoRow
-                        key={index}
-                        className="search-result-card-list-item"
-                        leftElement={content.leftElement}
-                        rightElement={content.rightElement}
-                    />
+                    <div key={index} className="search-result-card-list-item">
+                        {content}
+                    </div>
                 ))}
             </List>
         </div>
@@ -47,12 +44,7 @@ SearchResultCard.propTypes = {
     constellation: PropTypes.string.isRequired,
     matchRate: PropTypes.number,
     matchRateColor: PropTypes.string,
-    contentList: PropTypes.arrayOf(
-        PropTypes.shape({
-            leftElement: PropTypes.element,
-            rightElement: PropTypes.element
-        })
-    ).isRequired
+    contentList: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
 export default SearchResultCard;

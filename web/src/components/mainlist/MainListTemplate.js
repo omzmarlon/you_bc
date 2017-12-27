@@ -1,30 +1,19 @@
 'use strict';
 // libs
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 // components
-import NavHeader from '../components/common/NavHeader'
-import SearchResultCard from '../components/common/card/SearchResultCard'
-import Slidable from '../components/common/Slidable'
-import IconMenu from "material-ui/IconMenu"
-import MenuItem from 'material-ui/MenuItem'
-import IconButton from 'material-ui/IconButton'
-
+import MainListHeader from './MainListHeader'
+import SearchResultCard from '../../components/common/card/SearchResultCard'
+import Slidable from '../../components/common/Slidable'
+import {CourseInfo, MajorInfo, StudyAbilityInfo, StudyRequirementInfo,} from './ContentLists';
 // assets
-import avatar1 from '../../public/images/us_03.png'
-import avatar2 from '../../public/images/us_06.png'
-import avatar3 from '../../public/images/us_08.png'
-import avatar4 from '../../public/images/us_10.png'
-import FilterIcon from '../components/common/svg/FilterIcon'
-import FemaleIcon from '../components/common/svg/FemaleIcon'
-import MaleIcon from '../components/common/svg/MaleIcon'
-import MixGenderIcon from '../components/common/svg/MixGenderIcon'
-import HappyFaceImg from '../components/common/svg/HappyFaceImg'
-import CryFaceImg from '../components/common/svg/CryFaceImg'
+import HappyFaceImg from '../../components/common/svg/HappyFaceImg'
+import CryFaceImg from '../../components/common/svg/CryFaceImg'
 // styles
 import {PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE, SECONDARY_RED} from '../styles/constants/colors'
-import './ClassmateContainer.less'
-import {CourseInfo, MajorInfo, StudyAbilityInfo, StudyRequirementInfo} from "../components/mainlist/ContentLists";
+import './MainListTemplate.less'
 
 const hardCodeData = [
     {
@@ -96,7 +85,7 @@ const CardTransition = ({ children, ...props }) => (
     </CSSTransition>
 );
 
-class ClassmateContainer extends Component {
+class MainListTemplate extends Component {
     // state: 1. all data; 2. current three ones to display
     constructor(props) {
         super(props);
@@ -129,22 +118,7 @@ class ClassmateContainer extends Component {
     render() {
         return(
             <div className="classmate-container">
-                <NavHeader
-                    title={"找课友"}
-                    color={PRIMARY_RED}
-                    iconRight={
-                        <IconMenu
-                            iconButtonElement={<IconButton><FilterIcon color={PRIMARY_WHITE}/></IconButton>}
-                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                        >
-                            <MenuItem primaryText={<MaleIcon color={PRIMARY_BLUE}/>} />
-                            <MenuItem primaryText={<FemaleIcon color={PRIMARY_RED}/>} />
-                            <MenuItem primaryText={<MixGenderIcon color={PRIMARY_GREEN}/>} />
-                        </IconMenu>
-                    }
-                    iconRightAction={() => {}}
-                />
+                <MainListHeader title={this.props.title} color={this.props.themeColor}/>
                 <TransitionGroup className="classmate-card-list">
                     {this.state.displayUsers.map(
                         (user, index) => (
@@ -163,12 +137,12 @@ class ClassmateContainer extends Component {
                                                     age={user.age}
                                                     constellation={user.constellation}
                                                     matchRate={user.matchRate}
-                                                    matchRateColor={PRIMARY_RED}
+                                                    matchRateColor={this.props.themeColor}
                                                     contentList={[
-                                                        <MajorInfo color={PRIMARY_RED} major={user.major} year={user.year}/>,
-                                                        <CourseInfo color={PRIMARY_RED} secondColor={SECONDARY_RED} courses={user.courses}/>,
+                                                        <MajorInfo color={this.props.themeColor} major={user.major} year={user.year}/>,
+                                                        <CourseInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} courses={user.courses}/>,
                                                         <StudyAbilityInfo description={user.description}/>,
-                                                        <StudyRequirementInfo color={PRIMARY_RED} secondColor={SECONDARY_RED} requirements={user.requirements}/>
+                                                        <StudyRequirementInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} requirements={user.requirements}/>
                                                     ]}
                                                 />
                                             </div>
@@ -184,4 +158,16 @@ class ClassmateContainer extends Component {
     }
 }
 
-export default ClassmateContainer;
+MainListTemplate.propTypes = {
+    title: PropTypes.string.isRequired,
+    themeColor: PropTypes.string.isRequired,
+    subThemeColor: PropTypes.string.isRequired,
+    contentList: PropTypes.arrayOf(
+        PropTypes.shape({
+            leftElement: PropTypes.element,
+            rightElement: PropTypes.element
+        })
+    ).isRequired
+};
+
+export default MainListTemplate;
