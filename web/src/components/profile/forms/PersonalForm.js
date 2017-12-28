@@ -9,20 +9,22 @@ import MenuInput from "../../common/form/MenuInput";
 import "../../../styles/constants/misc.less";
 //icons
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import WeChatIcon from "../../common/svg/WeChatIcon";
 import AgeIcon from 'material-ui/svg-icons/social/cake';
 import ConstellationIcon from 'material-ui/svg-icons/image/brightness-3';
 //colors
-import {PRIMARY_GREEN, SECONDARY_GREEN} from "../../../styles/constants/colors";
+import {PRIMARY_GREEN} from "../../../styles/constants/colors";
 
 class PersonalForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            weChatId: '',
             age: 0,
             constellation: ''
         };
-
+        this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
         this.onAgeChangeHandler = this.onAgeChangeHandler.bind(this);
         this.onConstellationChangeHandler = this.onConstellationChangeHandler.bind(this);
@@ -30,9 +32,14 @@ class PersonalForm extends React.Component {
 
     componentWillReceiveProps() {
         this.setState({
+            weChatId: this.props.weChatId,
             age: this.props.personal.age,
             constellation: this.props.personal.constellation
         });
+    }
+
+    onWeChatIdChange(event, newValue) {
+        this.setState({weChatId: newValue})
     }
 
     onAgeChangeHandler(event, newValue) {
@@ -49,6 +56,7 @@ class PersonalForm extends React.Component {
 
     onDoneHandler() {
         this.props.onDone(this.state);
+        this.props.onWeChatIdDone(this.state.weChatId);
         this.props.onClose();
     }
 
@@ -61,13 +69,22 @@ class PersonalForm extends React.Component {
                        titleIcon={<AccountIcon />}
                        titleText={'个人信息'}
             >
-                <TextInput inputIcon={<AgeIcon color={SECONDARY_GREEN} />}
+                {
+                    this.props.showWeChatInput &&
+                    <TextInput classNames={'form-input-field'}
+                               inputIcon={<WeChatIcon />}
+                               label={'微信号'}
+                               onChange={this.onWeChatIdChange}
+                               value={this.state.weChatId}
+                    />
+                }
+                <TextInput inputIcon={<AgeIcon color={PRIMARY_GREEN} />}
                            label={'年龄'}
                            onChange={this.onAgeChangeHandler}
                            value={this.state.age}
                            type={'number'}
                 />
-                <MenuInput inputIcon={<ConstellationIcon color={SECONDARY_GREEN} />}
+                <MenuInput inputIcon={<ConstellationIcon color={PRIMARY_GREEN} />}
                            label={'星座'}
                            values={this.state.constellation}
                            onChange={this.onConstellationChangeHandler}
@@ -96,6 +113,10 @@ PersonalForm.propTypes = {
     // on done/cancel
     onDone: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    // WeChat
+    showWeChatInput: PropTypes.bool.isRequired,
+    weChatId: PropTypes.string,
+    onWeChatIdDone: PropTypes.func
 };
 
 export default PersonalForm;

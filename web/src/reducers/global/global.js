@@ -1,7 +1,7 @@
 import {UPDATE_USERNAME, UPDATE_WECHAT_ID} from "../../actions/actionTypes";
 
 const initial = {
-    username: '',
+    username: 'username from wechat',
     weChatId: '',
 };
 

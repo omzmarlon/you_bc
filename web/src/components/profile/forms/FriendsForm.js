@@ -13,7 +13,7 @@ import TagIcon from "../../common/svg/TagIcon";
 import FacultyIcon from "../../common/svg/FacultyIcon";
 import RelationshipIcon from "../../common/svg/RelationshipIcon";
 //colors
-import {PRIMARY_YELLOW, SECONDARY_YELLOW} from "../../../styles/constants/colors";
+import {PRIMARY_YELLOW} from "../../../styles/constants/colors";
 
 class FriendsForm extends React.Component {
     constructor(props) {
@@ -38,10 +38,10 @@ class FriendsForm extends React.Component {
     componentWillReceiveProps() {
         this.setState({
             weChatId: this.props.weChatId,
-            faculty: this.props.faculty,
-            relationship: this.props.relationship,
-            motto: this.props.motto,
-            tags: this.props.tags
+            faculty: this.props.friends.values.faculty,
+            relationship: this.props.friends.values.relationship,
+            motto: this.props.friends.values.motto,
+            tags: this.props.friends.values.tags
         });
     }
 
@@ -51,11 +51,11 @@ class FriendsForm extends React.Component {
     }
 
     onFacultyChange(event, menuItem, index) {
-        this.setState({faculty: this.props.facultyOptions[index]});
+        this.setState({faculty: this.props.friends.options.facultyOptions[index]});
     }
 
     onRelationshipChange(event, menuItem, index) {
-        this.setState({relationship: this.props.relationshipOptions[index]});
+        this.setState({relationship: this.props.friends.options.relationshipOptions[index]});
     }
 
     onMottoChange(event, newValue) {
@@ -63,9 +63,9 @@ class FriendsForm extends React.Component {
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.props.tagsOptions[index]);
+        const ind = this.state.tags.indexOf(this.props.friends.options.tagsOptions[index]);
         if (ind === -1) {
-            this.setState({tags: [...this.state.tags, this.props.tagsOptions[index]]});
+            this.setState({tags: [...this.state.tags, this.props.friends.options.tagsOptions[index]]});
         } else {
             const tags = this.state.tags;
             tags.splice(ind, 1);
@@ -101,34 +101,34 @@ class FriendsForm extends React.Component {
                            label={'学院'}
                            values={this.state.faculty}
                            onChange={this.onFacultyChange}
-                           options={this.props.facultyOptions}
+                           options={this.props.friends.options.facultyOptions}
                            tagColor={PRIMARY_YELLOW}
                            textColor={'white'}
                            tagDisplay={false}
                            multiple={false}
                 />
-                <MenuInput inputIcon={<RelationshipIcon viewBox="0 0 20 19" color={SECONDARY_YELLOW} />}
+                <MenuInput inputIcon={<RelationshipIcon color={PRIMARY_YELLOW} />}
                            label={'情感状况'}
                            values={this.state.relationship}
                            onChange={this.onRelationshipChange}
-                           options={this.props.relationshipOptions}
+                           options={this.props.friends.options.relationshipOptions}
                            tagColor={PRIMARY_YELLOW}
                            textColor={'white'}
                            tagDisplay={false}
                            multiple={false}
                 />
                 <TextInput classNames={'form-input-field'}
-                           inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_YELLOW}/>}
+                           inputIcon={<MottoIcon color={PRIMARY_YELLOW}/>}
                            label={'一句话'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                 />
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_YELLOW}/>}
+                           inputIcon={<TagIcon color={PRIMARY_YELLOW}/>}
                            label={'标签'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
-                           options={this.props.tagsOptions}
+                           options={this.props.friends.options.tagsOptions}
                            tagColor={PRIMARY_YELLOW}
                            textColor={'white'}
                            tagDisplay={true}
@@ -141,19 +141,25 @@ class FriendsForm extends React.Component {
 
 FriendsForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
-    //form values:
-    faculty: PropTypes.string.isRequired,
-    relationship: PropTypes.string.isRequired,
-    motto: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    // options
-    facultyOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    relationshipOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    //form values/options:
+    friends: PropTypes.shape({
+        values: PropTypes.shape({
+            faculty: PropTypes.string.isRequired,
+            relationship: PropTypes.string.isRequired,
+            motto: PropTypes.string.isRequired,
+            tags: PropTypes.arrayOf(PropTypes.string).isRequired
+        }).isRequired,
+        options: PropTypes.shape({
+            facultyOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+            relationshipOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+            tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+        }).isRequired
+    }).isRequired,
+
     // on done/cancel
     onDone: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    // WeChat Number
+    // WeChat
     showWeChatInput: PropTypes.bool.isRequired,
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func

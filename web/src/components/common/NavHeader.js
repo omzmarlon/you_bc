@@ -21,17 +21,17 @@ class NavHeader extends React.Component {
     render() {
         return (
             <div className={'nav-header'} style={{backgroundColor: this.props.color}}>
-                <span className={"left-action"}>
+                <div className={"left-action"}>
                     <IconButton onClick={this.goBack} style={{padding: 6}} iconStyle={{width: 36, height: 36}}>
                         <BackArrow color={PRIMARY_WHITE} />
                     </IconButton>
-                </span>
-                <span className={"header-font"} style={{color: PRIMARY_WHITE}}>
+                </div>
+                <div className={"header-font header-title"} style={{color: PRIMARY_WHITE}}>
                     {this.props.title}
-                </span>
-                <span className={"right-action"}>
+                </div>
+                <div className={"right-action"}>
                     {this.props.iconRight}
-                </span>
+                </div>
             </div>
         );
     }
