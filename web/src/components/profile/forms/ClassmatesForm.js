@@ -15,7 +15,7 @@ import CourseIcon from "../../common/svg/CourseIcon";
 import MottoIcon from "../../common/svg/MottoIcon";
 import TagIcon from "../../common/svg/TagIcon";
 //colors
-import {PRIMARY_RED, SECONDARY_RED} from "../../../styles/constants/colors";
+import {PRIMARY_RED} from "../../../styles/constants/colors";
 
 class ClassmatesForm extends React.Component {
 
@@ -41,10 +41,10 @@ class ClassmatesForm extends React.Component {
     componentWillReceiveProps() {
         this.setState({
             weChatId: this.props.weChatId,
-            major: this.props.major,
-            courses: this.props.courses,
-            motto: this.props.motto,
-            tags: this.props.tags
+            major: this.props.classmates.values.major,
+            courses: this.props.classmates.values.courses,
+            motto: this.props.classmates.values.motto,
+            tags: this.props.classmates.values.tags
         });
     }
 
@@ -53,13 +53,13 @@ class ClassmatesForm extends React.Component {
     }
 
     onMajorChange(event, menuItem, index) {
-        this.setState({major: this.props.majorOptions[index]});
+        this.setState({major: this.props.classmates.options.majorOptions[index]});
     }
 
     onCoursesChange(event, menuItem, index) {
-        const ind = this.state.courses.indexOf(this.props.coursesOptions[index]);
+        const ind = this.state.courses.indexOf(this.props.classmates.options.coursesOptions[index]);
         if (ind === -1) {
-            this.setState({courses: [...this.state.courses, this.props.coursesOptions[index]]});
+            this.setState({courses: [...this.state.courses, this.props.classmates.options.coursesOptions[index]]});
         } else {
             const courses = this.state.courses;
             courses.splice(ind, 1);
@@ -72,9 +72,9 @@ class ClassmatesForm extends React.Component {
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.props.tagsOptions[index]);
+        const ind = this.state.tags.indexOf(this.props.classmates.options.tagsOptions[index]);
         if (ind === -1) {
-            this.setState({tags: [...this.state.tags, this.props.tagsOptions[index]]});
+            this.setState({tags: [...this.state.tags, this.props.classmates.options.tagsOptions[index]]});
         } else {
             const tags = this.state.tags;
             tags.splice(ind, 1);
@@ -107,39 +107,39 @@ class ClassmatesForm extends React.Component {
                     />
                 }
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<MajorIcon viewBox="0 0 18 24.031" color={SECONDARY_RED}/>}
+                           inputIcon={<MajorIcon color={PRIMARY_RED}/>}
                            label={'专业'}
                            values={this.state.major}
                            onChange={this.onMajorChange}
-                           options={this.props.majorOptions}
+                           options={this.props.classmates.options.majorOptions}
                            textColor={'white'}
                            tagDisplay={false}
                            tagColor={PRIMARY_RED}
                            multiple={false}
                 />
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<CourseIcon viewBox="0 0 22 20" color={SECONDARY_RED}/>}
+                           inputIcon={<CourseIcon color={PRIMARY_RED}/>}
                            label={'课程'}
                            values={this.state.courses}
                            onChange={this.onCoursesChange}
-                           options={this.props.coursesOptions}
+                           options={this.props.classmates.options.coursesOptions}
                            textColor={'white'}
                            tagColor={PRIMARY_RED}
                            tagDisplay={false}
                            multiple={true}
                 />
                 <TextInput classNames={'form-input-field'}
-                           inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_RED}/>}
+                           inputIcon={<MottoIcon color={PRIMARY_RED}/>}
                            label={'一句话'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                 />
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_RED}/>}
+                           inputIcon={<TagIcon color={PRIMARY_RED}/>}
                            label={'标签'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
-                           options={this.props.tagsOptions}
+                           options={this.props.classmates.options.tagsOptions}
                            tagColor={PRIMARY_RED}
                            textColor={'white'}
                            tagDisplay={true}
@@ -152,19 +152,25 @@ class ClassmatesForm extends React.Component {
 
 ClassmatesForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
-    // form values:
-    major: PropTypes.string.isRequired,
-    courses: PropTypes.arrayOf(PropTypes.string).isRequired,
-    motto: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    //options
-    majorOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    coursesOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // form values/options:
+    classmates: PropTypes.shape({
+        values: PropTypes.shape({
+            major: PropTypes.string.isRequired,
+            courses: PropTypes.arrayOf(PropTypes.string).isRequired,
+            motto: PropTypes.string.isRequired,
+            tags: PropTypes.arrayOf(PropTypes.string).isRequired
+        }).isRequired,
+        options: PropTypes.shape({
+            majorOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+            coursesOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+            tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+        }).isRequired
+    }).isRequired,
+
     // on done/cancel
     onDone: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    // WeChat Number
+    // WeChat
     showWeChatInput: PropTypes.bool.isRequired,
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func

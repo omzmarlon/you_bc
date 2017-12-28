@@ -15,7 +15,7 @@ import LocationIcon from "../../common/svg/LocationIcon";
 import MottoIcon from "../../common/svg/MottoIcon";
 import TagIcon from "../../common/svg/TagIcon";
 //colors
-import {PRIMARY_BLUE, SECONDARY_BLUE} from "../../../styles/constants/colors";
+import {PRIMARY_BLUE} from "../../../styles/constants/colors";
 
 class RoommatesForm extends React.Component {
     constructor(props) {
@@ -40,10 +40,10 @@ class RoommatesForm extends React.Component {
     componentWillReceiveProps() {
         this.setState({
             weChatId: this.props.weChatId,
-            location: this.props.location,
-            hometown: this.props.hometown,
-            motto: this.props.motto,
-            tags: this.props.tags,
+            location: this.props.roommates.values.location,
+            hometown: this.props.roommates.values.hometown,
+            motto: this.props.roommates.values.motto,
+            tags: this.props.roommates.values.tags,
         });
     }
 
@@ -52,11 +52,11 @@ class RoommatesForm extends React.Component {
     }
 
     onLocationChange(event, menuItem, index) {
-        this.setState({location: this.props.locationOptions[index]})
+        this.setState({location: this.props.roommates.options.locationOptions[index]})
     }
 
     onHometownChange(event, menuItem, index) {
-        this.setState({hometown: this.props.hometownOptions[index]})
+        this.setState({hometown: this.props.roommates.options.hometownOptions[index]})
     }
 
     onMottoChange(event, newValue) {
@@ -64,9 +64,9 @@ class RoommatesForm extends React.Component {
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.props.tagsOptions[index]);
+        const ind = this.state.tags.indexOf(this.props.roommates.options.tagsOptions[index]);
         if (ind === -1) {
-            this.setState({tags: [...this.state.tags, this.props.tagsOptions[index]]});
+            this.setState({tags: [...this.state.tags, this.props.roommates.options.tagsOptions[index]]});
         } else {
             const tags = this.state.tags;
             tags.splice(ind, 1);
@@ -100,39 +100,39 @@ class RoommatesForm extends React.Component {
                     />
                 }
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<LocationIcon viewBox="0 0 24 32" color={SECONDARY_BLUE}/>}
+                           inputIcon={<LocationIcon color={PRIMARY_BLUE}/>}
                            label={'地点'}
                            values={this.state.location}
                            onChange={this.onLocationChange}
-                           options={this.props.locationOptions}
+                           options={this.props.roommates.options.locationOptions}
                            textColor={'white'}
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
                            multiple={false}
                 />
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<HometownIcon viewBox="0 0 26 31.969" color={SECONDARY_BLUE}/>}
+                           inputIcon={<HometownIcon color={PRIMARY_BLUE}/>}
                            label={'家乡'}
                            values={this.state.hometown}
                            onChange={this.onHometownChange}
-                           options={this.props.hometownOptions}
+                           options={this.props.roommates.options.hometownOptions}
                            textColor={'white'}
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
                            multiple={false}
                 />
                 <TextInput classNames={'form-input-field'}
-                           inputIcon={<MottoIcon viewBox="0 0 32 30" color={SECONDARY_BLUE}/>}
+                           inputIcon={<MottoIcon color={PRIMARY_BLUE}/>}
                            label={'一句话'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                 />
                 <MenuInput classNames={'form-input-field'}
-                           inputIcon={<TagIcon viewBox="0 0 32 32" color={SECONDARY_BLUE}/>}
+                           inputIcon={<TagIcon color={PRIMARY_BLUE}/>}
                            label={'标签'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
-                           options={this.props.tagsOptions}
+                           options={this.props.roommates.options.tagsOptions}
                            tagColor={PRIMARY_BLUE}
                            textColor={'white'}
                            tagDisplay={true}
@@ -145,19 +145,25 @@ class RoommatesForm extends React.Component {
 
 RoommatesForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
-    // form values:
-    location: PropTypes.string.isRequired,
-    hometown: PropTypes.string.isRequired,
-    motto: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    //options
-    locationOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    hometownOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // form values/options:
+    roommates: PropTypes.shape({
+        values: PropTypes.shape({
+            location: PropTypes.string.isRequired,
+            hometown: PropTypes.string.isRequired,
+            motto: PropTypes.string.isRequired,
+            tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+        }).isRequired,
+        options: PropTypes.shape({
+            locationOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+            hometownOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+            tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+        }).isRequired
+    }).isRequired,
+
     // on done/cancel
     onDone: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    // WeChat Number
+    // WeChat
     showWeChatInput: PropTypes.bool.isRequired,
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func

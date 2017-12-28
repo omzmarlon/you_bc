@@ -4,29 +4,33 @@ import PropTypes from 'prop-types';
 import {CLASSMATES, FRIENDS, PERSONAL, ROOMMATES} from "../../../constants/api";
 //colors
 import {
-    PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED, SECONDARY_YELLOW
+    PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED, SECONDARY_YELLOW
 } from "../../../styles/constants/colors";
 //components
 import Tag from "../../common/Tag";
 import TruncateText from "../../common/TruncateText";
 import ProfileCard from "../../common/card/ProfileCard";
-import RoommatesForm from "../../../components/profile/forms/RoommatesForm";
-import ClassmatesForm from "../../../components/profile/forms/ClassmatesForm";
-import FriendsForm from "../../../components/profile/forms/FriendsForm";
+import FormGroup from './FormGroup';
+//icons
+import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import WeChatIcon from "../../common/svg/WeChatIcon";
+import MajorIcon from "../../common/svg/MajorIcon";
+import CourseIcon from "../../common/svg/CourseIcon";
+import MottoIcon from "../../common/svg/MottoIcon";
+import TagIcon from "../../common/svg/TagIcon";
+import FacultyIcon from "../../common/svg/FacultyIcon";
+import RelationshipIcon from "../../common/svg/RelationshipIcon";
+import HometownIcon from "../../common/svg/HometownIcon";
+import LocationIcon from "../../common/svg/LocationIcon";
+import AgeIcon from 'material-ui/svg-icons/social/cake';
+import ConstellationIcon from 'material-ui/svg-icons/image/brightness-3';
 //redux
 import { connect }  from 'react-redux'
 import { bindActionCreators } from 'redux';
 import {
-    hideClassmatesForm,
-    hideFriendsForm, hidePersonalForm, hideRoommatesForm, showClassMatesForm, showFriendsForm, showPersonalForm,
-    showRoommatesForm
+    showClassMatesForm, showFriendsForm, showPersonalForm, showRoommatesForm
 } from "../../../actions/profile/profileUIActions";
-import {
-    updateClassmatesValues, updateFriendsValues, updatePersonalValues,
-    updateRoommatesValues
-} from "../../../actions/profile/profileUpdateActions";
-import PersonalForm from "../forms/PersonalForm";
-import {updateUsername, updateWeChatId} from "../../../actions/global/globalUpdateActions";
+import InfoRowTitle from "../../common/InfoRowTitle";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -41,19 +45,19 @@ const ProfileMain = (props) => (
                 type={PERSONAL}
                 contentList={[
                     {
-                        leftElement: <span>微信号</span>,
+                        leftElement: <InfoRowTitle icon={<WeChatIcon/>} text={'微信号'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.global.weChatId}</span>
                     },
                     {
-                        leftElement: <span>昵称</span>,
+                        leftElement: <InfoRowTitle icon={<AccountIcon color={PRIMARY_GREEN}/>} text={'昵称'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.global.username}</span>
                     },
                     {
-                        leftElement: <span>年龄</span>,
+                        leftElement: <InfoRowTitle icon={<AgeIcon color={PRIMARY_GREEN}/>} text={'年龄'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.personal.values.age}</span>
                     },
                     {
-                        leftElement: <span>星座</span>,
+                        leftElement: <InfoRowTitle icon={<ConstellationIcon color={PRIMARY_GREEN}/>} text={'星座'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.personal.values.constellation}</span>
                     }
                 ]}
@@ -65,11 +69,11 @@ const ProfileMain = (props) => (
                 type={CLASSMATES}
                 contentList={[
                     {
-                        leftElement: <span>专业</span>,
+                        leftElement: <InfoRowTitle icon={<MajorIcon color={PRIMARY_RED}/>} text={'专业'} />,
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.classmates.values.major} />
                     },
                     {
-                        leftElement: <span>课程</span>,
+                        leftElement: <InfoRowTitle icon={<CourseIcon color={PRIMARY_RED}/>} text={'课程'}/>,
                         rightElement:
                             <div style={rightElementSpaceApart}>
                                 {
@@ -80,11 +84,11 @@ const ProfileMain = (props) => (
                             </div>
                     },
                     {
-                        leftElement: <span>能力</span>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_RED}/>} text={'能力'}/>,
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.classmates.values.motto} />
                     },
                     {
-                        leftElement: <span>兴趣</span>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_RED}/>} text={'兴趣'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
@@ -103,19 +107,19 @@ const ProfileMain = (props) => (
                 type={FRIENDS}
                 contentList={[
                     {
-                        leftElement: <span>学院</span>,
+                        leftElement: <InfoRowTitle icon={<FacultyIcon color={PRIMARY_YELLOW}/>} text={'学院'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.friends.values.faculty}</span>
                     },
                     {
-                        leftElement: <span>情感状况</span>,
+                        leftElement: <InfoRowTitle icon={<RelationshipIcon color={PRIMARY_YELLOW}/>} text={'情感状况'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.friends.values.relationship}</span>
                     },
                     {
-                        leftElement: <span>自我描述</span>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_YELLOW}/>} text={'自我描述'}/>,
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.friends.values.motto} />
                     },
                     {
-                        leftElement: <span>兴趣</span>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_YELLOW}/>} text={'兴趣'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
@@ -134,19 +138,19 @@ const ProfileMain = (props) => (
                 type={ROOMMATES}
                 contentList={[
                     {
-                        leftElement: <span>地点</span>,
+                        leftElement: <InfoRowTitle icon={<LocationIcon color={PRIMARY_BLUE}/>} text={'地点'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.roommates.values.location}</span>
                     },
                     {
-                        leftElement: <span>家乡</span>,
+                        leftElement: <InfoRowTitle icon={<HometownIcon color={PRIMARY_BLUE}/>} text={'家乡'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.roommates.values.hometown}</span>
                     },
                     {
-                        leftElement: <span>自我描述</span>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_BLUE}/>} text={'自我描述'}/>,
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.roommates.values.motto} />
                     },
                     {
-                        leftElement: <span>兴趣</span>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_BLUE}/>} text={'兴趣'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
@@ -159,112 +163,24 @@ const ProfileMain = (props) => (
                 ]}
             />
         </div>
-        <ClassmatesForm showForm={props.showClassmatesForm}
-                        major={props.classmates.values.major}
-                        courses={props.classmates.values.courses}
-                        motto={props.classmates.values.motto}
-                        tags={props.classmates.values.tags}
-                        majorOptions={props.classmates.options.majorOptions}
-                        coursesOptions={props.classmates.options.coursesOptions}
-                        tagsOptions={props.classmates.options.tagsOptions}
-                        onDone={props.onClassmatesUpdate}
-                        onClose={props.closeClassmatesEdit}
-                        showWeChatInput={!props.global.weChatId}
-                        weChatId={props.global.weChatId}
-                        onWeChatIdDone={props.onWeChatIdDone}
-        />
-        <FriendsForm showForm={props.showFriendsForm}
-                     faculty={props.friends.values.faculty}
-                     relationship={props.friends.values.relationship}
-                     motto={props.friends.values.motto}
-                     tags={props.friends.values.tags}
-                     facultyOptions={props.friends.options.facultyOptions}
-                     relationshipOptions={props.friends.options.relationshipOptions}
-                     tagsOptions={props.friends.options.tagsOptions}
-                     onDone={props.onFriendsUpdate}
-                     onClose={props.closeFriendsEdit}
-                     showWeChatInput={!props.global.weChatId}
-                     weChatId={props.global.weChatId}
-                     onWeChatIdDone={props.onWeChatIdUpdate}
-        />
-        <RoommatesForm showForm={props.showRoommatesForm}
-                       location={props.roommates.values.location}
-                       hometown={props.roommates.values.hometown}
-                       motto={props.roommates.values.motto}
-                       tags={props.roommates.values.tags}
-                       locationOptions={props.roommates.options.locationOptions}
-                       hometownOptions={props.roommates.options.hometownOptions}
-                       tagsOptions={props.roommates.options.tagsOptions}
-                       onDone={props.onRoommatesUpdate}
-                       onClose={props.closeRoommatesEdit}
-                       showWeChatInput={!props.global.weChatId}
-                       weChatId={props.global.weChatId}
-                       onWeChatIdDone={props.onWeChatIdDone}
-        />
-        <PersonalForm showForm={props.showPersonalForm}
-                      onDone={props.onPersonalUpdate}
-                      onClose={props.closePersonalEdit}
-                      personal={props.personal.values}
-                      personalOptions={props.personal.options}
-        />
+        <FormGroup />
     </div>
 );
 
 ProfileMain.propTypes = {
     // states
-    classmates: PropTypes.shape({
-        major: PropTypes.string,
-        courses: PropTypes.arrayOf(PropTypes.string),
-        motto: PropTypes.string,
-        tags: PropTypes.arrayOf(PropTypes.string),
-        majorOptions: PropTypes.arrayOf(PropTypes.string),
-        coursesOptions: PropTypes.arrayOf(PropTypes.string),
-        tagsOptions: PropTypes.arrayOf(PropTypes.string),
-    }).isRequired,
-    roommates: PropTypes.shape({
-        location: PropTypes.string,
-        hometown: PropTypes.string,
-        motto: PropTypes.string,
-        tags: PropTypes.arrayOf(PropTypes.string),
-        locationOptions: PropTypes.arrayOf(PropTypes.string),
-        hometownOptions: PropTypes.arrayOf(PropTypes.string),
-        tagsOptions: PropTypes.arrayOf(PropTypes.string),
-    }).isRequired,
-    friends: PropTypes.shape({
-        faculty: PropTypes.string,
-        relationship: PropTypes.string,
-        motto: PropTypes.string,
-        tags: PropTypes.arrayOf(PropTypes.string),
-        facultyOptions: PropTypes.arrayOf(PropTypes.string),
-        relationshipOptions: PropTypes.arrayOf(PropTypes.string),
-        tagsOptions: PropTypes.arrayOf(PropTypes.string),
-    }).isRequired,
+    classmates: PropTypes.object.isRequired,// from redux store
+    roommates: PropTypes.object.isRequired,// from redux store
+    friends: PropTypes.object.isRequired, // from redux store
     personal: PropTypes.object.isRequired, // from redux store
     global: PropTypes.object.isRequired,// from redux store
-    // form open/close control
-    showRoommatesForm: PropTypes.bool.isRequired,
-    showFriendsForm: PropTypes.bool.isRequired,
-    showClassmatesForm: PropTypes.bool.isRequired,
-    showPersonalForm: PropTypes.bool.isRequired,
+
     // actions
     // open forms
     openClassmatesEdit: PropTypes.func.isRequired,
     openRoommatesEdit: PropTypes.func.isRequired,
     openFriendsEdit: PropTypes.func.isRequired,
     openPersonalEdit: PropTypes.func.isRequired,
-    // close forms
-    closeClassmatesEdit: PropTypes.func.isRequired,
-    closeRoommatesEdit: PropTypes.func.isRequired,
-    closeFriendsEdit: PropTypes.func.isRequired,
-    closePersonalEdit: PropTypes.func.isRequired,
-    // update forms
-    onClassmatesUpdate: PropTypes.func.isRequired,
-    onRoommatesUpdate: PropTypes.func.isRequired,
-    onFriendsUpdate: PropTypes.func.isRequired,
-    onPersonalUpdate: PropTypes.func.isRequired,
-    // global state updates
-    onWeChatIdDone: PropTypes.func.isRequired,
-    onUsernameUpdate: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -272,11 +188,7 @@ const mapStateToProps = (state, ownProps) => ({
     roommates: state.profile.roommates,
     friends: state.profile.friends,
     personal: state.profile.personal,
-    global: state.global,
-    showRoommatesForm: state.profileUI.showRoommatesForm,
-    showFriendsForm: state.profileUI.showFriendsForm,
-    showClassmatesForm: state.profileUI.showClassmatesForm,
-    showPersonalForm: state.profileUI.showPersonalForm
+    global: state.global
 });
 
 const mapDispatchToProps = (dispatch) => (
@@ -286,16 +198,6 @@ const mapDispatchToProps = (dispatch) => (
             openRoommatesEdit: showRoommatesForm,
             openFriendsEdit: showFriendsForm,
             openPersonalEdit: showPersonalForm,
-            closeClassmatesEdit: hideClassmatesForm,
-            closeRoommatesEdit: hideRoommatesForm,
-            closeFriendsEdit: hideFriendsForm,
-            closePersonalEdit: hidePersonalForm,
-            onClassmatesUpdate: updateClassmatesValues,
-            onRoommatesUpdate: updateRoommatesValues,
-            onFriendsUpdate: updateFriendsValues,
-            onPersonalUpdate: updatePersonalValues,
-            onWeChatIdDone: updateWeChatId,
-            onUsernameUpdate: updateUsername
         }, dispatch
     )
 );

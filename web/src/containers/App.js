@@ -9,7 +9,6 @@ import ClassmateContainer from './ClassmateContainer'
 import RoommateContainer from './RoommateContainer'
 import FriendContainer from './FriendContainer'
 import ProfileContainer from './ProfileContainer'
-import Demo from '../components/demo/Demo';
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
 
@@ -22,7 +21,6 @@ class App extends Component {
                 <Route path={TO_FRIENDS} component={FriendContainer}/>
                 <Route path={TO_ROOMMATES} component={RoommateContainer}/>
                 <Route path={TO_PROFILE} component={ProfileContainer}/>
-                <Route path='/demo' component={Demo}/>
                 <Route component={NotFound}/>
             </Switch>
         );

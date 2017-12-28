@@ -1,12 +1,25 @@
 'use strict';
-
+import SvgIcon from 'material-ui/SvgIcon';
 import React from 'react';
 
 const WeChatIcon = (props) => (
-    <img
-        {...props}
-        src={'data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABmFBMVEVClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIhClIgAAABM4fuYAAAAhnRSTlMACGrC7/z++ee6Whu+/fihjs1/SiEfTZDUXAbS8G6T+gLcsg6IwLxFYnPf7sfFVMNXLm0ZQzzowc4x4OLyd7FBsPNdPpcMBNj29NBrxrmL2fsjaOTbtOWrChTThHmjkiVPu+q2eoPxLJje6XGcUDpIgJm9NY927aRVUpuK0fdGMBKH17ielt3AenQAAAABYktHRIf72QvLAAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH4QwTDyg6Bp1H0gAAAeBJREFUOMt9kvlfEmEQxl+IfZFw0SgryFy7zEgiMzspNYOgrDCL1G67s/syu8/v3937vvsGu8Cn+WFmnneenZ1LCCuR6JqYAzLelVgr2iXZ7dKUVE+kJd6rwql16fUbRN/GTZs1yATD2S3QvzWABzwYaOLBbbB9MJRxh/pkZwPtQkbbihqC3dYdhj0mUSOj0Tn2WtzPiDZ5vH0GF/D2KzMqOWBwBndMmYOquy6Nx5VzSDuHyRnCCEe0Oarej2lnVDnHfabMalvkhCGedIoTxpl0pvzy4pzSRjItOkuO09pAKfRcTp+puMjq2XMznPczJIPxC15gJ6a9FIGxly5CLTHcJ2Yv5dVG5vRILnOluYQ6XJ23YKEAi8peI579R5hEBm/hOrrMiMcN+6CGlw4VfBN5S5WFvO3jbupKz3DH6ITSS9w1/XrjhlDlnmlLNvR9HuhqijgZv+OH+ltpMsiEWYCmiWQMHnWYmRDz4B/QY54sP33m8ryF8ALHd17a0b1qIby2K9cEd04NuVIOxd9Ili0h9lYNcKHGUDBeKvo3pFfom3eh8x57T2225Z8rsPTB+hMV3NW2I+mVMFX4+Gnl8xdwvnY4o2+LsnEONdFRvv/I5+o/f0WjVVbFf6X8+4/SfwFGtIPGfFPDMQAAAABJRU5ErkJggg=='}
-    />
+    <SvgIcon {...props} style={{enableBackground: 'new 0 0 256 256'}} viewBox="0 0 256 256">
+            <g id="Background_1_" style={{enableBackground:'new'}}><g><g>
+                    <path d="M249.422,30.679c-2.721-4.985-5.816-9.536-9.793-13.521     c-3.992-3.998-8.709-7.587-13.703-10.314c-8.381-4.576-18.788-6.856-29.002-6.856H59.075c-10.444,0-20.542,2.345-29.265,6.949     c-5.022,2.649-9.588,6.146-13.502,10.126c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.477-6.274,28.65v137.429     c0,10.327,1.671,20.679,6.296,29.135c2.681,4.9,6.191,9.86,10.087,13.794c3.934,3.971,8.583,7.226,13.502,9.956     c8.466,4.7,18.842,6.413,29.202,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.113,13.687-9.966     c3.923-3.969,7.2-8.851,9.886-13.799c4.566-8.415,6.533-18.874,6.533-29.132V59.285     C256.012,48.978,254.031,39.124,249.422,30.679z" style={{fillRule:'evenodd', clipRule: 'evenodd', fill: '#64AB23'}} />
+            </g></g></g>
+            <g id="Shape_3_1_" style={{enableBackground:'new'}}><g id="Shape_3"><g>
+                    <path d="M99.586,47.146c-37.49-0.565-68.642,26.99-68.642,59.488     c0,18.759,8.821,35.033,25.896,46.981c0,0-6.258,20.657-6.169,21.071c0.089,0.415,1.451,1.229,1.925,0.963     s22.622-13.477,22.622-13.477c16.974,5.828,26.869,3.89,27.435,3.851c-1.694-4.961-2.804-12.686-1.54-19.967     c6.617-38.105,45.622-49.958,66.999-47.933C162.209,70.604,136.568,47.703,99.586,47.146z" style={{fillRule:'evenodd', clipRule: 'evenodd', fill: '#FFFFFF'}} />
+            </g></g></g>
+            <g id="Shape_2_1_" style={{enableBackground:'new'}}><g id="Shape_2"><g>
+                    <path d="M222.99,151.854c0-27.841-26.918-49.166-58.146-49.166     c-33.065,0-59.437,21.807-59.437,49.646c0,27.89,25.084,50.979,59.475,51.168c6.922,0.039,17.232-1.741,24.184-4.646     c0,0,16.619,10.079,17.55,10.005c0.93-0.075,1.407-0.812,1.444-1.444c0.037-0.632-5.295-16.364-5.295-16.364     C217.035,179.875,222.99,167.558,222.99,151.854z" style={{fillRule:'evenodd', clipRule: 'evenodd', fill: '#FFFFFF'}} />
+            </g></g></g>
+            <g id="Shape_1_3_" style={{enableBackground:'new'}}><g id="Shape_1"><g>
+                    <path d="M73.528,78.422c-4.918,0-8.904,3.988-8.904,8.908     s3.986,8.908,8.904,8.908s8.905-3.988,8.905-8.908S78.446,78.422,73.528,78.422z M127.435,78.422     c-4.917,0-8.904,3.988-8.904,8.908s3.987,8.908,8.904,8.908c4.918,0,8.905-3.988,8.905-8.908S132.354,78.422,127.435,78.422z" style={{fillRule:'evenodd', clipRule: 'evenodd', fill: '#60A721'}} />
+            </g></g></g>
+            <g id="Shape_1_2_" style={{enableBackground:'new'}}><g id="Shape_1_1_"><g>
+                    <path d="M143.081,125.788c-4.351,0-7.878,3.534-7.878,7.895     c0,4.359,3.527,7.894,7.878,7.894s7.878-3.534,7.878-7.894C150.959,129.322,147.432,125.788,143.081,125.788z M185.207,125.788     c-4.351,0-7.878,3.534-7.878,7.895c0,4.359,3.527,7.894,7.878,7.894c4.352,0,7.879-3.534,7.879-7.894     C193.086,129.322,189.559,125.788,185.207,125.788z" style={{fillRule:'evenodd', clipRule: 'evenodd', fill: '#60A721'}} />
+            </g></g></g>
+    </SvgIcon>
 );
 
 
