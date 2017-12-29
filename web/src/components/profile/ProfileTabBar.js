@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Home from 'material-ui/svg-icons/action/home';
 import Recent from 'material-ui/svg-icons/action/query-builder';
 import FlatButton from 'material-ui/FlatButton';
-import InfoRow from '../../components/common/InfoRow';
 import "./ProfileTabBar.less";
 import {PRIMARY_GREEN} from "../../styles/constants/colors";
 
@@ -12,29 +11,21 @@ const buttonSize = {
     width: '50%'
 };
 
-const buttonLayout = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-};
-
-const buttonStyles = Object.assign({}, buttonSize, buttonLayout);
-
 const ProfileTabBar = (props) => {
     return (
         <div className={'tab-bar'}>
-            <FlatButton style={buttonStyles} onClick={props.onTabMain}>
-                <InfoRow
-                    leftElement={<Home color={PRIMARY_GREEN} />}
-                    rightElement={<span className={'tab-bar-label'}>主页</span>}
-                />
-            </FlatButton>
-            <FlatButton style={buttonStyles} onClick={props.onTabMatching}>
-                <InfoRow
-                    leftElement={<Recent color={PRIMARY_GREEN} />}
-                    rightElement={<span className={'tab-bar-label'}>已匹配</span>}
-                />
-            </FlatButton>
+            <FlatButton style={buttonSize}
+                        onClick={props.onTabMain}
+                        label={'主页'}
+                        icon={<Home color={PRIMARY_GREEN} />}
+                        labelStyle={{color: 'white'}}
+            />
+            <FlatButton style={buttonSize}
+                        onClick={props.onTabMatching}
+                        icon={<Recent color={PRIMARY_GREEN} />}
+                        label={'已匹配'}
+                        labelStyle={{color: 'white'}}
+            />
         </div>
     );
 };
