@@ -5,6 +5,7 @@ export const RECEIVE_CLASSMATES_INFO = 'RECEIVE_CLASSMATES_INFO';
 export const RECEIVE_ROOMMATES_INFO = 'RECEIVE_ROOMMATES_INFO';
 export const RECEIVE_FRIENDS_INFO = 'RECEIVE_FRIENDS_INFO';
 export const RECEIVE_PERSONAL_INFO = 'RECEIVE_PERSONAL_INFO';
+export const RECEIVE_MATCHED_USERS = 'RECEIVE_MATCHED_USERS';
 // updating
 export const UPDATE_CLASSMATES_VALUES = 'UPDATE_CLASSMATES_VALUES';
 export const UPDATE_FRIENDS_VALUES = 'UPDATE_FRIENDS_VALUES';
@@ -26,5 +27,7 @@ export const HIDE_PERSONAL_FORMS = 'HIDE_PERSONAL_FORMS';
 /************************************************************************/
 
 /************************ global actions ************************/
+export const SHOW_INFO_BAR = 'SHOW_INFO_BAR';
+export const HIDE_INFO_BAR = 'HIDE_INFO_BAR';
 export const UPDATE_WECHAT_ID = 'UPDATE_WECHAT_ID';
 export const UPDATE_USERNAME = 'UPDATE_WECHAT_ID';

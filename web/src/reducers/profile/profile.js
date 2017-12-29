@@ -1,6 +1,6 @@
 
 import {
-    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_PERSONAL_INFO,
+    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO,
     RECEIVE_ROOMMATES_INFO, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
     UPDATE_ROOMMATES_VALUES
 } from "../../actions/actionTypes";
@@ -63,13 +63,15 @@ const initialState = {
 const profile = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_CLASSMATES_INFO:
-            return Object.assign({}, state, {classmates: action.classmates});
+            return {...state, classmates: action.classmates};
         case RECEIVE_ROOMMATES_INFO:
-            return Object.assign({}, state, {roommates: action.roommates});
+            return {...state, roommates: action.roommates};
         case RECEIVE_FRIENDS_INFO:
-            return Object.assign({}, state, {friends: action.friends});
+            return {...state, friends: action.friends};
         case RECEIVE_PERSONAL_INFO:
-            return Object.assign({}, state, {personal: action.personal});
+            return {...state, personal: action.personal};
+        case RECEIVE_MATCHED_USERS:
+            return {...state, matchedUsers: action.matchedUsers};
         case UPDATE_CLASSMATES_VALUES:
             return Object.assign({}, state, {classmates: {values: action.classmatesValues, options: state.classmates.options}});
         case UPDATE_ROOMMATES_VALUES:

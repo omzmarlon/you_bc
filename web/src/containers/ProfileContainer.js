@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // components
 import ProfileTabBar from '../components/profile/ProfileTabBar';
 import NavHeader from '../components/common/NavHeader';
-import TextInput from "../components/common/form/TextInput";
+import InfoBar from '../components/common/InfoBar';
 //styles
 import './ProfileContainer.less';
 // colors
@@ -17,9 +17,10 @@ import { connect }  from 'react-redux'
 import { bindActionCreators } from 'redux';
 import {showMatchingList, showProfileMain} from '../actions/profile/profileUIActions';
 import {
-    fetchClassmatesInfo, fetchFriendsInfo, fetchPersonalInfo,
+    fetchClassmatesInfo, fetchFriendsInfo, fetchMatchedUsers, fetchPersonalInfo,
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
+import {showInfoBar} from "../actions/global/globalActions";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -28,6 +29,8 @@ class ProfileContainer extends React.Component {
         store.dispatch(fetchFriendsInfo());
         store.dispatch(fetchRoommatesInfo());
         store.dispatch(fetchPersonalInfo());
+        store.dispatch(fetchMatchedUsers());
+        store.dispatch(showInfoBar('test'));
     }
 
     render() {
@@ -41,6 +44,7 @@ class ProfileContainer extends React.Component {
                     { this.props.panelIndex === 1 && <MatchingList /> }
                     <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.props.onTabMatching} />
                 </div>
+                <InfoBar/>
             </div>
         );
     }

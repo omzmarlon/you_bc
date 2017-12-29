@@ -11,6 +11,8 @@ import Tag from "../../common/Tag";
 import TruncateText from "../../common/TruncateText";
 import ProfileCard from "../../common/card/ProfileCard";
 import FormGroup from './FormGroup';
+import InfoRowTitle from "../../common/InfoRowTitle";
+import AvatarBar from "./AvatarBar";
 //icons
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
 import WeChatIcon from "../../common/svg/WeChatIcon";
@@ -30,7 +32,6 @@ import { bindActionCreators } from 'redux';
 import {
     showClassMatesForm, showFriendsForm, showPersonalForm, showRoommatesForm
 } from "../../../actions/profile/profileUIActions";
-import InfoRowTitle from "../../common/InfoRowTitle";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -39,6 +40,9 @@ const tagSpacing = {marginRight: 3};
 
 const ProfileMain = (props) => (
     <div>
+        <div style={cardMargin}>
+            <AvatarBar/>
+        </div>
         <div style={cardMargin}>
             <ProfileCard
                 onClickEdit={props.openPersonalEdit}
