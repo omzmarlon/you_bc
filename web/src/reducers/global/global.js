@@ -1,7 +1,7 @@
 import {HIDE_INFO_BAR, SHOW_INFO_BAR, UPDATE_USERNAME, UPDATE_WECHAT_ID} from "../../actions/actionTypes";
 
 const initial = {
-    username: 'username from wechat',
+    username: '沐凡成甫',
     weChatId: '',
     showInfoBar: false,
     infoBarMessage: ''

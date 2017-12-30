@@ -1,7 +1,9 @@
 import {
+    HIDE_AVATAR_FORMS,
     HIDE_CLASSMATES_FORMS,
     HIDE_FRIENDS_FORMS, HIDE_PERSONAL_FORMS,
-    HIDE_ROOMMATES_FORMS, SHOW_CLASSMATES_FORMS, SHOW_FRIENDS_FORMS, SHOW_MATCHING_LIST, SHOW_PERSONAL_FORMS,
+    HIDE_ROOMMATES_FORMS, SHOW_AVATAR_FORMS, SHOW_CLASSMATES_FORMS, SHOW_FRIENDS_FORMS, SHOW_MATCHING_LIST,
+    SHOW_PERSONAL_FORMS,
     SHOW_PROFILE_MAIN,
     SHOW_ROOMMATES_FORMS
 } from "../../actions/actionTypes";
@@ -11,7 +13,8 @@ const initialState = {
     showRoommatesForm: false,
     showFriendsForm: false,
     showClassmatesForm: false,
-    showPersonalForm: false
+    showPersonalForm: false,
+    showAvatarForm: false
 };
 
 const profileUI = (state = initialState, action) => {
@@ -38,6 +41,10 @@ const profileUI = (state = initialState, action) => {
             return Object.assign({}, state, {showPersonalForm: true});
         case HIDE_PERSONAL_FORMS:
             return Object.assign({}, state, {showPersonalForm: false});
+        case SHOW_AVATAR_FORMS:
+            return {...state, showAvatarForm: true};
+        case HIDE_AVATAR_FORMS:
+            return {...state, showAvatarForm: false};
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 
 import {
     RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO,
-    RECEIVE_ROOMMATES_INFO, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
+    RECEIVE_ROOMMATES_INFO, UPDATE_AVATAR, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
     UPDATE_ROOMMATES_VALUES
 } from "../../actions/actionTypes";
 
@@ -47,7 +47,7 @@ const initialState = {
     },
     personal: {
         values: {
-            profile_images: [],
+            avatar: '',
             age: 0,
             constellation: ''
         },
@@ -78,8 +78,28 @@ const profile = (state = initialState, action) => {
             return Object.assign({}, state, {roommates: {values: action.roommatesValues, options: state.roommates.options}});
         case UPDATE_FRIENDS_VALUES:
             return Object.assign({}, state, {friends: {values: action.friendsValues, options: state.friends.options}});
-        case UPDATE_PERSONAL_VALUES:
-            return Object.assign({}, state, {personal: {values: action.personalValues, options: state.personal.options}});
+        case UPDATE_PERSONAL_VALUES: // avatar is updated separately
+            return {
+                ...state,
+                personal: {
+                    values: {
+                        avatar: state.personal.values.avatar,
+                        ...action.personalValues
+                    },
+                    options: state.personal.options
+                }
+            };
+        case UPDATE_AVATAR:
+            return {
+                ...state,
+                personal: {
+                    values: {
+                        ...state.personal.values,
+                        avatar: action.avatar,
+                    },
+                    options: state.personal.options
+                }
+            };
         default:
             return state;
     }

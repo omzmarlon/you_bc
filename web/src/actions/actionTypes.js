@@ -11,6 +11,7 @@ export const UPDATE_CLASSMATES_VALUES = 'UPDATE_CLASSMATES_VALUES';
 export const UPDATE_FRIENDS_VALUES = 'UPDATE_FRIENDS_VALUES';
 export const UPDATE_ROOMMATES_VALUES = 'UPDATE_ROOMMATES';
 export const UPDATE_PERSONAL_VALUES = 'UPDATE_PERSONAL_VALUES';
+export const UPDATE_AVATAR = 'UPDATE_AVATAR';
 // UI Actions
 // profile panels
 export const SHOW_PROFILE_MAIN = 'SHOW_PROFILE_MAIN';
@@ -24,6 +25,8 @@ export const HIDE_ROOMMATES_FORMS = 'HIDE_ROOMMATES_FORMS';
 export const HIDE_FRIENDS_FORMS = 'HIDE_FRIENDS_FORMS';
 export const HIDE_CLASSMATES_FORMS = 'HIDE_CLASSMATES_FORMS';
 export const HIDE_PERSONAL_FORMS = 'HIDE_PERSONAL_FORMS';
+export const SHOW_AVATAR_FORMS = 'SHOW_AVATAR_FORMS';
+export const HIDE_AVATAR_FORMS  = 'HIDE_AVATAR_FORMS';
 /************************************************************************/
 
 /************************ global actions ************************/

@@ -86,7 +86,7 @@ export const fetchPersonalInfo = () => dispatch => {
     // TODO: connect with backend API
     return Promise.resolve({
         values: {
-            profile_images: ['https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4'],
+            avatar: 'https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4',
             age: 22,
             constellation: '天蝎座'
         },
