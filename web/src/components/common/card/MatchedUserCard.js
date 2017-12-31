@@ -9,60 +9,75 @@ import CopyIcon from 'material-ui/svg-icons/content/content-copy';
 import PokeCard from './PokeCard';
 import PokeAvatar from '../PokeAvatar';
 import Tag from '../Tag';
+import Clipboard from 'react-clipboard.js';
 // constants
-import {CLASSMATES, FRIENDS, ROOMMATES} from '../../../constants/api';
 import {PRIMARY_YELLOW, SECONDARY_YELLOW, PRIMARY_RED, SECONDARY_RED, PRIMARY_BLUE, SECONDARY_BLUE} from '../../../styles/constants/colors';
 
 // styling
 import './MatchedUserCard.less';
+import {showInfoBar} from "../../../actions/global/globalActions";
 
-const MatchedUserCard = (props) => {
-    let tagColor = {};
-    switch (props.type) {
-        case CLASSMATES:
-            tagColor = {bkg: SECONDARY_RED, text: PRIMARY_RED};
-            break;
-        case FRIENDS:
-            tagColor = {bkg: SECONDARY_YELLOW, text: PRIMARY_YELLOW};
-            break;
-        case ROOMMATES:
-            tagColor = {bkg: SECONDARY_BLUE, text: PRIMARY_BLUE};
-            break;
-        default:
-            tagColor = {bkg: SECONDARY_RED, text: PRIMARY_RED};
+class MatchedUserCard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.notifySuccessCopy = this.notifySuccessCopy.bind(this);
     }
 
-    return (
-        <PokeCard
-            rightCorner={<CopyIcon style={{color: 'grey', height: 24, width: 24}}/>}
-        >
-            <div className="matched-user-card-body">
-                <PokeAvatar
-                    className="matched-user-card-avatar"
-                    img={props.avatar}
-                />
-                <div className="matched-user-card-info">
-                    <span className="--name">{props.name}</span>
-                    <span className="--weChat">微信号：{props.weChatId}</span>
-                    <div className="matched-user-card-tags">
-                        {props.tags.map((tag,index) => (
-                            <div key={index} className="--tag">
-                                <Tag text={tag} bkgColor={tagColor.bkg} textColor={tagColor.text}/>
-                            </div>
-                        ))}
+    notifySuccessCopy() {
+        const {store} = this.context;
+        store.dispatch(showInfoBar('微信号已成功复制到剪切板'));
+    }
+
+    render() {
+        return (
+            <PokeCard
+                rightCorner={
+                    <Clipboard data-clipboard-text={this.props.weChatId} onClick={this.notifySuccessCopy} style={{borderStyle: 'none'}}>
+                        <CopyIcon style={{color: 'grey', height: 24, width: 24}}/>
+                    </Clipboard>
+                }
+            >
+                <div className="matched-user-card-body">
+                    <PokeAvatar
+                        className="matched-user-card-avatar"
+                        img={this.props.avatarURL}
+                    />
+                    <div className="matched-user-card-info">
+                        <div className="--name">{this.props.username}</div>
+                        <div className="--weChat">微信号：{this.props.weChatId}</div>
+                        <div className="matched-user-card-tags">
+                            {
+                                this.props.matchedAtClassmates &&
+                                <Tag classNames={'--tag'} text={'找课友'} bkgColor={PRIMARY_RED} textColor={SECONDARY_RED}/>
+                            }
+                            {
+                                this.props.matchedAtFriends &&
+                                <Tag classNames={'--tag'} text={'找_友'} bkgColor={PRIMARY_YELLOW} textColor={SECONDARY_YELLOW}/>
+                            }
+                            {
+                                this.props.matchedAtRoommates &&
+                                <Tag classNames={'--tag'} text={'找室友'} bkgColor={PRIMARY_BLUE} textColor={SECONDARY_BLUE}/>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </PokeCard>
-    );
-};
+            </PokeCard>
+        );
+    }
+}
 
 MatchedUserCard.propTypes = {
-    type: PropTypes.oneOf([CLASSMATES, FRIENDS, ROOMMATES]).isRequired,
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    avatarURL: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     weChatId: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired
+    matchedAtClassmates: PropTypes.bool.isRequired,
+    matchedAtRoommates: PropTypes.bool.isRequired,
+    matchedAtFriends: PropTypes.bool.isRequired,
+};
+
+MatchedUserCard.contextTypes = {
+    store: PropTypes.object
 };
 
 export default MatchedUserCard;

@@ -1,7 +1,7 @@
 
 import {
-    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_PERSONAL_INFO,
-    RECEIVE_ROOMMATES_INFO, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
+    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO,
+    RECEIVE_ROOMMATES_INFO, UPDATE_AVATAR, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
     UPDATE_ROOMMATES_VALUES
 } from "../../actions/actionTypes";
 
@@ -47,7 +47,7 @@ const initialState = {
     },
     personal: {
         values: {
-            profile_images: [],
+            avatar: '',
             age: 0,
             constellation: ''
         },
@@ -63,21 +63,43 @@ const initialState = {
 const profile = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_CLASSMATES_INFO:
-            return Object.assign({}, state, {classmates: action.classmates});
+            return {...state, classmates: action.classmates};
         case RECEIVE_ROOMMATES_INFO:
-            return Object.assign({}, state, {roommates: action.roommates});
+            return {...state, roommates: action.roommates};
         case RECEIVE_FRIENDS_INFO:
-            return Object.assign({}, state, {friends: action.friends});
+            return {...state, friends: action.friends};
         case RECEIVE_PERSONAL_INFO:
-            return Object.assign({}, state, {personal: action.personal});
+            return {...state, personal: action.personal};
+        case RECEIVE_MATCHED_USERS:
+            return {...state, matchedUsers: action.matchedUsers};
         case UPDATE_CLASSMATES_VALUES:
             return Object.assign({}, state, {classmates: {values: action.classmatesValues, options: state.classmates.options}});
         case UPDATE_ROOMMATES_VALUES:
             return Object.assign({}, state, {roommates: {values: action.roommatesValues, options: state.roommates.options}});
         case UPDATE_FRIENDS_VALUES:
             return Object.assign({}, state, {friends: {values: action.friendsValues, options: state.friends.options}});
-        case UPDATE_PERSONAL_VALUES:
-            return Object.assign({}, state, {personal: {values: action.personalValues, options: state.personal.options}});
+        case UPDATE_PERSONAL_VALUES: // avatar is updated separately
+            return {
+                ...state,
+                personal: {
+                    values: {
+                        avatar: state.personal.values.avatar,
+                        ...action.personalValues
+                    },
+                    options: state.personal.options
+                }
+            };
+        case UPDATE_AVATAR:
+            return {
+                ...state,
+                personal: {
+                    values: {
+                        ...state.personal.values,
+                        avatar: action.avatar,
+                    },
+                    options: state.personal.options
+                }
+            };
         default:
             return state;
     }

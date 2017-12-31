@@ -1,5 +1,5 @@
 import {
-    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_PERSONAL_INFO,
+    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO,
     RECEIVE_ROOMMATES_INFO
 } from "../actionTypes";
 
@@ -86,7 +86,7 @@ export const fetchPersonalInfo = () => dispatch => {
     // TODO: connect with backend API
     return Promise.resolve({
         values: {
-            profile_images: ['https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4'],
+            avatar: 'https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4',
             age: 22,
             constellation: '天蝎座'
         },
@@ -95,6 +95,34 @@ export const fetchPersonalInfo = () => dispatch => {
         }
     }).then(
         response => dispatch(receivePersonalInfo(response)),
+        err => console.log('implement certain error handling')
+    );
+};
+
+export const receiveMatchedUsers = (matchedUsers) => ({type: RECEIVE_MATCHED_USERS, matchedUsers});
+
+// fetch matched users
+export const fetchMatchedUsers = () => dispatch => {
+    // TODO: connect with backend API
+    return Promise.resolve([
+        {
+            avatarURL: 'https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4',
+            username: 'omzmarlon',
+            weChatId: 'omzmarlon',
+            matchedAtClassmates: true,
+            matchedAtRoommates: false,
+            matchedAtFriends: true,
+        },
+        {
+            avatarURL: 'https://avatars3.githubusercontent.com/u/15700985?s=460&v=4',
+            username: 'tomyang',
+            weChatId: 'studentom',
+            matchedAtClassmates: true,
+            matchedAtRoommates: true,
+            matchedAtFriends: true,
+        }
+    ]).then(
+        response => dispatch(receiveMatchedUsers(response)),
         err => console.log('implement certain error handling')
     );
 };

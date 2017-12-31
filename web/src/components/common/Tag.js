@@ -32,7 +32,9 @@ Tag.propTypes = {
     text: PropTypes.string.isRequired,
     fontSize: PropTypes.number,
     classNames: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    bkgColor: PropTypes.string,
+    textColor: PropTypes.string
 };
 
 Tag.defaultProps = {

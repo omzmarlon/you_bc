@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import "./InfoBar.less";
+import {connect} from 'react-redux';
 
 const InfoBar = (props) => {
     return (
@@ -19,4 +20,9 @@ InfoBar.propTypes = {
     show: PropTypes.bool.isRequired
 };
 
-export default InfoBar;
+const mapStateToProps = (states, ownProps) => ({
+    show: states.global.showInfoBar,
+    msg: states.global.infoBarMessage
+});
+
+export default connect(mapStateToProps)(InfoBar);
