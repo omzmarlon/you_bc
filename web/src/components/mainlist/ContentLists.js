@@ -69,11 +69,11 @@ CourseInfo.propTypes = {
 export const StudyAbilityInfo = (props) => (
     <InfoRow
         leftElement={<span>自我描述:</span>}
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.description}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility}/>}
     />
 );
 StudyAbilityInfo.propTypes = {
-    description: PropTypes.string.isRequired
+    studyAbility: PropTypes.string.isRequired
 };
 
 export const StudyRequirementInfo = (props) => (

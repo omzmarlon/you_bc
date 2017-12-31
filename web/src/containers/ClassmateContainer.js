@@ -22,7 +22,7 @@ const hardCodeData = [
         major: 'Marketing',
         year: 'III',
         courses: ['COMM296', 'COMM294'],
-        description: '我是一个学霸',
+        studyAbility: '我是一个学霸',
         requirements: ['自习', '上课', '同桌']
     },
     {
@@ -34,7 +34,7 @@ const hardCodeData = [
         major: 'Finance',
         year: 'IV',
         courses: ['COMM298', 'COMM488'],
-        description: '我是一个学霸',
+        studyAbility: '我是一个学霸',
         requirements: ['自习', '上课']
     },
     {
@@ -47,7 +47,7 @@ const hardCodeData = [
         major: 'Marketing',
         year: 'III',
         courses: ['COMM296', 'COMM294'],
-        description: '我是一个学霸',
+        studyAbility: '我是一个学霸',
         requirements: ['自习', '上课', '同桌']
     },
     {
@@ -60,7 +60,7 @@ const hardCodeData = [
         major: 'Marketing',
         year: 'V',
         courses: ['COMM296', 'COMM294'],
-        description: '我是一个学霸',
+        studyAbility: '我是一个学霸',
         requirements: ['自习', '上课', '同桌']
     }
 ];

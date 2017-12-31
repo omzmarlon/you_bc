@@ -33,7 +33,7 @@ class MainListTemplate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayUsers: []
+            visibleUsers: []
         };
         this.cardUpdateHandler = this.cardUpdateHandler.bind(this);
     }
@@ -41,16 +41,16 @@ class MainListTemplate extends Component {
     // get data
     componentDidMount() {
         this.setState({
-            displayUsers: this.props.userData.slice(0, 3)
+            visibleUsers: this.props.userData.slice(0, 3)
         });
     }
 
     // handle card swiped
     cardUpdateHandler(index) {
         this.setState({
-            displayUsers: [
-                ...this.state.displayUsers.slice(0, index),
-                ...this.state.displayUsers.slice(index+1, 3),
+            visibleUsers: [
+                ...this.state.visibleUsers.slice(0, index),
+                ...this.state.visibleUsers.slice(index+1, 3),
                 this.props.userData[3] // TODO: how to handle the user list? keep looping? what if run out of users?
             ]
         });
@@ -61,7 +61,7 @@ class MainListTemplate extends Component {
             <div className="main-list-container">
                 <MainListHeader title={this.props.title} color={this.props.themeColor}/>
                 <TransitionGroup className="main-list-card-list">
-                    {this.state.displayUsers.map(
+                    {this.state.visibleUsers.map(
                         (user, index) => (
                             <CardTransition key={user.name}>
                                 <div className="main-list-row-wrapper">
@@ -86,7 +86,7 @@ class MainListTemplate extends Component {
                                                         (user.courses && <CourseInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} courses={user.courses}/>),
                                                         (user.country && <HometownInfo color={this.props.themeColor} city={user.city} country={user.country}/>),
                                                         (user.relationship && <RelationshipInfo color={this.props.themeColor} relationship={user.relationship}/>),
-                                                        (user.description && <StudyAbilityInfo description={user.description}/>),
+                                                        (user.studyAbility && <StudyAbilityInfo studyAbility={user.studyAbility}/>),
                                                         (user.requirements && <StudyRequirementInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} requirements={user.requirements}/>),
                                                         (user.motto && <MottoInfo color={this.props.themeColor} motto={user.motto}/>),
                                                         (user.hobbies && <HobbyInfo hobbies={user.hobbies} color={this.props.themeColor} secondColor={this.props.subThemeColor}/>)
