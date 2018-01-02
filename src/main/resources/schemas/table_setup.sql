@@ -1,5 +1,6 @@
 CREATE TABLE user (
-  wechat_token VARCHAR(100) PRIMARY KEY # hashed wechat id from WeChat
+  wechat_token VARCHAR(100) PRIMARY KEY, # hashed wechat id from WeChat
+  time_created DATETIME NOT NULL
 );
 
 # user verification table
@@ -10,6 +11,7 @@ CREATE TABLE ubc_student_verification (
   studentID_image_url VARCHAR(100),
   location_lat DECIMAL(11, 8),
   location_lon DECIMAL(11, 8),
+  time_created DATETIME NOT NULL,
   FOREIGN KEY (wechat_token) REFERENCES user(wechat_token) ON DELETE CASCADE
 );
 
@@ -19,8 +21,16 @@ CREATE TABLE user_profile (
   age INT,
   sex INT,
   horoscope VARCHAR(10),
-  profile_image_url VARCHAR(100),
+  time_created DATETIME NOT NULL,
   FOREIGN KEY (wechat_token) REFERENCES user(wechat_token) ON DELETE CASCADE
+);
+
+CREATE TABLE profile_image (
+  profile_image_id INT PRIMARY KEY AUTO_INCREMENT,
+  original_image_url VARCHAR(10),
+  thumbnail_image_url VARCHAR(10),
+  wechat_token VARCHAR(100),
+  FOREIGN KEY (wechat_token) REFERENCES user_profile(wechat_token) ON DELETE CASCADE
 );
 
 # Roommates tables
@@ -44,6 +54,7 @@ CREATE TABLE roommates_profile (
   location_id INT,
   hometown_id INT,
   motto VARCHAR(100),
+  time_created DATETIME NOT NULL,
   FOREIGN KEY (wechat_token) REFERENCES user(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (location_id) REFERENCES roommates_locations(location_id) ON DELETE SET NULL,
   FOREIGN KEY (hometown_id) REFERENCES roommates_hometown(hometown_id) ON DELETE SET NULL
@@ -77,6 +88,7 @@ CREATE TABLE classmates_profile (
   wechat_token VARCHAR(100) PRIMARY KEY,
   marjor_id INT,
   motto VARCHAR(100),
+  time_created DATETIME NOT NULL,
   FOREIGN KEY (wechat_token) REFERENCES user(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (marjor_id) REFERENCES classmates_major(major_id) ON DELETE SET NULL
 );
@@ -118,6 +130,7 @@ CREATE TABLE friends_profile (
   faculty_id INT,
   relationship_id INT,
   motto VARCHAR(100),
+  time_created DATETIME NOT NULL,
   FOREIGN KEY (wechat_token) REFERENCES classmates_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (faculty_id) REFERENCES faculties(faculty_id) ON DELETE SET NULL,
   FOREIGN KEY (relationship_id) REFERENCES relationship_status (relationship_id) ON DELETE SET NULL
@@ -136,6 +149,7 @@ CREATE TABLE friends_profile_tags (
 CREATE TABLE roommates_likes (
   liker VARCHAR(100),
   likee VARCHAR(100),
+  time_created DATETIME NOT NULL,
   PRIMARY KEY (liker, likee),
   FOREIGN KEY (liker) REFERENCES roommates_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (likee) REFERENCES roommates_profile(wechat_token) ON DELETE CASCADE
@@ -143,6 +157,7 @@ CREATE TABLE roommates_likes (
 CREATE TABLE roommates_dislikes (
   disliker VARCHAR(100),
   dislikee VARCHAR(100),
+  time_created DATETIME NOT NULL,
   PRIMARY KEY (disliker, dislikee),
   FOREIGN KEY (disliker) REFERENCES roommates_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (dislikee) REFERENCES roommates_profile(wechat_token) ON DELETE CASCADE
@@ -151,6 +166,7 @@ CREATE TABLE roommates_dislikes (
 CREATE TABLE classmates_likes(
   liker VARCHAR(100),
   likee VARCHAR(100),
+  time_created DATETIME NOT NULL,
   PRIMARY KEY (liker, likee),
   FOREIGN KEY (liker) REFERENCES classmates_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (likee) REFERENCES classmates_profile(wechat_token) ON DELETE CASCADE
@@ -158,6 +174,7 @@ CREATE TABLE classmates_likes(
 CREATE TABLE classmates_dislikes(
   disliker VARCHAR(100),
   dislikee VARCHAR(100),
+  time_created DATETIME NOT NULL,
   PRIMARY KEY (disliker, dislikee),
   FOREIGN KEY (disliker) REFERENCES classmates_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (dislikee) REFERENCES classmates_profile(wechat_token) ON DELETE CASCADE
@@ -166,6 +183,7 @@ CREATE TABLE classmates_dislikes(
 CREATE TABLE friends_likes (
   liker VARCHAR(100),
   likee VARCHAR(100),
+  time_created DATETIME NOT NULL,
   PRIMARY KEY (liker, likee),
   FOREIGN KEY (liker) REFERENCES friends_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (likee) REFERENCES friends_profile(wechat_token) ON DELETE CASCADE
@@ -173,6 +191,7 @@ CREATE TABLE friends_likes (
 CREATE TABLE friends_dislikes(
   disliker VARCHAR(100),
   dislikee VARCHAR(100),
+  time_created DATETIME NOT NULL,
   PRIMARY KEY (disliker, dislikee),
   FOREIGN KEY (disliker) REFERENCES friends_profile(wechat_token) ON DELETE CASCADE,
   FOREIGN KEY (dislikee) REFERENCES friends_profile(wechat_token) ON DELETE CASCADE
