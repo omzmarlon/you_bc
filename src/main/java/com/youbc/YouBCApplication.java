@@ -1,11 +1,11 @@
-package com.pokecabin;
+package com.youbc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PokeCabinApplication {
+public class YouBCApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PokeCabinApplication.class, args);
+        SpringApplication.run(YouBCApplication.class, args);
     }
 }

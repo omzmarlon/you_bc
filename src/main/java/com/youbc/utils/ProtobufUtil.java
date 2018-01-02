@@ -1,4 +1,4 @@
-package com.pokecabin.utils;
+package com.youbc.utils;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
