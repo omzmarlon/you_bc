@@ -1,9 +1,9 @@
-package com.pokecabin.controllers;
+package com.youbc.controllers;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.pokecabin.generated.protobuf.DemoProto.Demo;
-import static com.pokecabin.generated.schema.tables.TestTable.TEST_TABLE;
-import com.pokecabin.utils.ProtobufUtil;
+import com.youbc.generated.protobuf.DemoProto.Demo;
+import static com.youbc.generated.schema.tables.TestTable.TEST_TABLE;
+import com.youbc.utils.ProtobufUtil;
 import org.jooq.DSLContext;
 import org.jooq.Record3;
 import org.jooq.Result;

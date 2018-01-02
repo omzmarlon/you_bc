@@ -1,4 +1,4 @@
-package com.pokecabin.utils;
+package com.youbc.utils;
 
 public class EnvProperties {
     public static String DATASOURCE_URL = "pokecabin.db.url";

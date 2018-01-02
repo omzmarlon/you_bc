@@ -1,7 +1,7 @@
-package com.pokecabin.beans;
+package com.youbc.beans;
 
-import com.pokecabin.utils.EnvProperties;
-import com.pokecabin.utils.JooqExecutionListener;
+import com.youbc.utils.EnvProperties;
+import com.youbc.utils.JooqExecutionListener;
 import org.jooq.SQLDialect;
 import org.jooq.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan({"com.pokecabin"})
+@ComponentScan({"com.youbc"})
 @PropertySource("classpath:configurations/application.properties")
 public class PersistenceBeans {
     private Environment env;

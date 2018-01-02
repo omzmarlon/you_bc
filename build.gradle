@@ -18,7 +18,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'com.google.protobuf'
 
 jar {
-    baseName = 'poke-cabin'
+    baseName = 'you_bc'
     version =  '0.1.0'
 }
 

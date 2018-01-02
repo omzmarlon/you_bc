@@ -1,4 +1,4 @@
-package com.pokecabin.utils;
+package com.youbc.utils;
 
 import org.jooq.ExecuteContext;
 import org.jooq.SQLDialect;

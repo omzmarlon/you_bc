@@ -1,4 +1,4 @@
-package com.pokecabin.test;
+package com.youbc.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
