@@ -1,6 +1,9 @@
-DROP DATABASE IF EXISTS pokecabin;
+DROP DATABASE IF EXISTS poke_you_bc;
 
-CREATE DATABASE pokecabin;
+CREATE DATABASE poke_you_bc;
 
-CREATE USER IF NOT EXISTS 'poke_user'@'localhost' IDENTIFIED BY 'poke_user';
-GRANT ALL PRIVILEGES ON pokecabin . * TO 'poke_user'@'localhost';
+CREATE USER IF NOT EXISTS 'poke_you_bc_user'@'localhost' IDENTIFIED BY 'poke_you_bc_user';
+GRANT ALL PRIVILEGES ON poke_you_bc . * TO 'poke_you_bc_user'@'localhost';
+
+SET NAMES utf8;
+SET CHARACTER SET utf8;
