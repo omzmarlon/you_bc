@@ -4,7 +4,8 @@ import * as ActionTypes from '../../actions/actionTypes';
 
 const initialState = {
     isFetching: false,
-    candidates: []
+    candidates: [],
+    visibleUsers: []
 };
 
 /**
@@ -27,14 +28,41 @@ const mainList = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                error: action.error
             };
-        case ActionTypes.LIKE_CANDIDATE_ERROR:
-        case ActionTypes.DISLIKE_CANDIDATE_ERROR:
+        case ActionTypes.INITIALIZE_VISIBLE_USERS:
+            let visible = (state.candidates.length <= 3) ?
+                state.candidates : state.candidates.slice(0, 3);
             return {
                 ...state,
-                error: action.error
+                visibleUsers: visible
             };
+        case ActionTypes.RECEIVE_MORE_CANDIDATES:
+            return {
+                ...state,
+                candidates: [...state.candidates, ...action.candidates]
+            };
+        case ActionTypes.UPDATE_USER_LISTS:
+            let visibles = state.visibleUsers;
+            let candidates = state.candidates;
+            if (candidates.length > 0) {
+                return {
+                    ...state,
+                    candidates: candidates.slice(1, candidates.length),
+                    visibleUsers: [
+                        ...visibles.slice(0, action.index),
+                        ...visibles.slice(action.index+1, visibles.length),
+                        candidates[0]
+                    ]
+                };
+            } else {
+                return {
+                    ...state,
+                    visibleUsers: [
+                        ...visibles.slice(0, action.index),
+                        ...visibles.slice(action.index+1, visibles.length)
+                    ]
+                };
+            }
         case ActionTypes.LIKE_CANDIDATE:
         case ActionTypes.DISLIKE_CANDIDATE:
         default:

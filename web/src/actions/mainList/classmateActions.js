@@ -1,65 +1,95 @@
+/**
+ * fetch data
+ */
 'use strict';
 
 import * as ActionTypes from '../actionTypes';
+import {showInfoBar} from "../global/globalActions";
+// assets
+import avatar1 from '../../../public/images/us_03.png'
+import avatar2 from '../../../public/images/us_06.png'
+import avatar3 from '../../../public/images/us_08.png'
+import avatar4 from '../../../public/images/us_10.png'
+import avatar5 from '../../../public/images/us_12.png'
 
-const mockAPICall = () => {
+const mockAPICall = quantity => {
     return new Promise((fulfill, reject) => {
         setTimeout(() => {
-            fulfill({
-                mockData: [
-                    {
-                        avatar: avatar1,
-                        name: '驴打滚',
-                        gender: 'female',
-                        age: 20,
-                        constellation: '处女座',
-                        matchRate: 0.8,
-                        major: 'Marketing',
-                        year: 'III',
-                        courses: ['COMM296', 'COMM294'],
-                        studyAbility: '我是一个学霸',
-                        requirements: ['自习', '上课', '同桌']
-                    },
-                    {
-                        avatar: avatar2,
-                        name: '艾窝窝',
-                        gender: 'male',
-                        age: 23,
-                        constellation: '天蝎座',
-                        major: 'Finance',
-                        year: 'IV',
-                        courses: ['COMM298', 'COMM488'],
-                        studyAbility: '我是一个学霸',
-                        requirements: ['自习', '上课']
-                    },
-                    {
-                        avatar: avatar3,
-                        name: '麻花',
-                        gender: 'female',
-                        age: 21,
-                        constellation: '处女座',
-                        matchRate: 0.8,
-                        major: 'Marketing',
-                        year: 'III',
-                        courses: ['COMM296', 'COMM294'],
-                        studyAbility: '我是一个学霸',
-                        requirements: ['自习', '上课', '同桌']
-                    },
-                    {
-                        avatar: avatar4,
-                        name: '红烧肉',
-                        gender: 'female',
-                        age: 19,
-                        constellation: '摩羯座',
-                        matchRate: 0.8,
-                        major: 'Marketing',
-                        year: 'V',
-                        courses: ['COMM296', 'COMM294'],
-                        studyAbility: '我是一个学霸',
-                        requirements: ['自习', '上课', '同桌']
-                    }
-                ]
-            });
+            if (quantity === 1) {
+                fulfill({
+                    mockData: [
+                        {
+                            avatar: avatar5,
+                            name: '北京烤鸭',
+                            gender: 'female',
+                            age: 20,
+                            constellation: '处女座',
+                            matchRate: 0.8,
+                            major: 'Marketing',
+                            year: 'III',
+                            courses: ['COMM296', 'COMM294'],
+                            studyAbility: '我是一个学霸',
+                            requirements: ['自习', '上课', '同桌']
+                        }
+                    ]
+                });
+            } else {
+                fulfill({
+                    mockData: [
+                        {
+                            avatar: avatar1,
+                            name: '驴打滚',
+                            gender: 'female',
+                            age: 20,
+                            constellation: '处女座',
+                            matchRate: 0.8,
+                            major: 'Marketing',
+                            year: 'III',
+                            courses: ['COMM296', 'COMM294'],
+                            studyAbility: '我是一个学霸',
+                            requirements: ['自习', '上课', '同桌']
+                        },
+                        {
+                            avatar: avatar2,
+                            name: '艾窝窝',
+                            gender: 'male',
+                            age: 23,
+                            constellation: '天蝎座',
+                            major: 'Finance',
+                            year: 'IV',
+                            courses: ['COMM298', 'COMM488'],
+                            studyAbility: '我是一个学霸',
+                            requirements: ['自习', '上课']
+                        },
+                        {
+                            avatar: avatar3,
+                            name: '麻花',
+                            gender: 'female',
+                            age: 21,
+                            constellation: '处女座',
+                            matchRate: 0.8,
+                            major: 'Marketing',
+                            year: 'III',
+                            courses: ['COMM296', 'COMM294'],
+                            studyAbility: '我是一个学霸',
+                            requirements: ['自习', '上课', '同桌']
+                        },
+                        {
+                            avatar: avatar4,
+                            name: '红烧肉',
+                            gender: 'female',
+                            age: 19,
+                            constellation: '摩羯座',
+                            matchRate: 0.8,
+                            major: 'Marketing',
+                            year: 'V',
+                            courses: ['COMM296', 'COMM294'],
+                            studyAbility: '我是一个学霸',
+                            requirements: ['自习', '上课', '同桌']
+                        }
+                    ]
+                });
+            }
         }, 500);
     });
 };
@@ -71,59 +101,79 @@ const mockPostAPI = () => {
 };
 
 /**
- * fetch data
+ * fetch data (Async Action)
+ * @param quantity
  */
 export const fetchCandidates = (quantity) => dispatch => {
     dispatch(fetchCandidatesRequest());
-    mockAPICall()
-        .then(res => {
-            dispatch(fetchCandidatesSuccess(res.mockData));
-        })
-        .catch(error => {
-            dispatch(fetchCandidatesFailure(error));
-        })
+    mockAPICall(quantity)
+        .then(
+            response => {
+                dispatch(fetchCandidatesSuccess(response.mockData));
+                dispatch(initVisibleUsers())
+            },
+            // todo: error handling
+            error => {
+                dispatch(fetchCandidatesFailure());
+                dispatch(showInfoBar(error));
+            }
+        )
 };
 
 const fetchCandidatesRequest = () => ({ type: ActionTypes.FETCH_CANDIDATES_REQUEST });
 
 const fetchCandidatesSuccess = (candidates) => ({ type: ActionTypes.FETCH_CANDIDATES_SUCCESS, candidates });
 
-const fetchCandidatesFailure = (error) => ({ type: ActionTypes.FETCH_CANDIDATES_FAILURE, error });
+const fetchCandidatesFailure = () => ({ type: ActionTypes.FETCH_CANDIDATES_FAILURE});
 
 /**
- * like candidate
+ * fetch one more user (Async Action)
+ * @param quantity
  */
-export const likeCandidate = (userId) => dispatch => {
+export const fetchMoreCandidate = (quantity) => dispatch => {
+    mockAPICall(quantity)
+        .then(
+            response => dispatch(receiveMoreCandidates(response.mockData)),
+            // todo: error handling
+            error => {
+                console.log(error);
+            }
+        )
+};
+
+const receiveMoreCandidates = candidates => ({ type: ActionTypes.RECEIVE_MORE_CANDIDATES, candidates });
+
+/**
+ * like candidate (Not action)
+ * @param user
+ */
+export const likeCandidate = (user) => {
     mockPostAPI()
-        .then(res => console.log(res))
-        .catch(error => {
-            dispatch(likeCandidateError(error));
-        })
+        .then(
+            res => console.log(res),
+            error => showInfoBar(error)
+        )
 };
-
-const likeCandidateError = (error) => ({ type: ActionTypes.LIKE_CANDIDATE_ERROR, error });
 
 /**
- * dislike candidate
+ * dislike candidate (Not action)
+ * @param user
  */
-export const dislikeCandidate = (userId) => dispatch => {
-    mockPostAPI(userId)
-        .then(res => console.log("dis" + res))
-        .catch(error => {
-            dispatch(dislikeCandidateError(error));
-        })
+export const dislikeCandidate = (user) => {
+    mockPostAPI()
+        .then(
+            res => console.log("dis" + res),
+            error => showInfoBar(error)
+        )
 };
-
-const dislikeCandidateError = (error) => ({ type: ActionTypes.DISLIKE_CANDIDATE_ERROR, error });
 
 /**
- * UI: visible users
+ * update visible users (Sync Action)
+ * @param index
  */
-export const updateVisibleUsers = (candidateIndex, nextCandidate) => dispatch => {
-    dispatch({
-        type: ActionTypes.UPDATE_VISIBLE_USERS,
-        index: candidateIndex,
-        next: nextCandidate
-    });
-};
+export const updateVisibleUsersAndCandidates = (index) => ({ type: ActionTypes.UPDATE_USER_LISTS, index });
 
+/**
+ * initialize the three visible users (Sync Action)
+ */
+const initVisibleUsers = () => ({ type: ActionTypes.INITIALIZE_VISIBLE_USERS });

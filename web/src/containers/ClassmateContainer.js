@@ -1,81 +1,64 @@
 'use strict';
 // libs
 import React, {Component} from 'react'
+import { connect }  from 'react-redux'
+// component
 import MainListTemplate from "../components/mainlist/MainListTemplate";
-// assets
-import avatar1 from '../../public/images/us_03.png'
-import avatar2 from '../../public/images/us_06.png'
-import avatar3 from '../../public/images/us_08.png'
-import avatar4 from '../../public/images/us_10.png'
+import LoadingModal from "../components/common/LoadingModal";
 // styles
 import { PRIMARY_RED, SECONDARY_RED } from '../styles/constants/colors'
-import './ClassmateContainer.less'
-
-const hardCodeData = [
-    {
-        avatar: avatar1,
-        name: '驴打滚',
-        gender: 'female',
-        age: 20,
-        constellation: '处女座',
-        matchRate: 0.8,
-        major: 'Marketing',
-        year: 'III',
-        courses: ['COMM296', 'COMM294'],
-        studyAbility: '我是一个学霸',
-        requirements: ['自习', '上课', '同桌']
-    },
-    {
-        avatar: avatar2,
-        name: '艾窝窝',
-        gender: 'male',
-        age: 23,
-        constellation: '天蝎座',
-        major: 'Finance',
-        year: 'IV',
-        courses: ['COMM298', 'COMM488'],
-        studyAbility: '我是一个学霸',
-        requirements: ['自习', '上课']
-    },
-    {
-        avatar: avatar3,
-        name: '麻花',
-        gender: 'female',
-        age: 21,
-        constellation: '处女座',
-        matchRate: 0.8,
-        major: 'Marketing',
-        year: 'III',
-        courses: ['COMM296', 'COMM294'],
-        studyAbility: '我是一个学霸',
-        requirements: ['自习', '上课', '同桌']
-    },
-    {
-        avatar: avatar4,
-        name: '红烧肉',
-        gender: 'female',
-        age: 19,
-        constellation: '摩羯座',
-        matchRate: 0.8,
-        major: 'Marketing',
-        year: 'V',
-        courses: ['COMM296', 'COMM294'],
-        studyAbility: '我是一个学霸',
-        requirements: ['自习', '上课', '同桌']
-    }
-];
+// actions
+import {
+    dislikeCandidate,
+    fetchCandidates, fetchMoreCandidate, likeCandidate,
+    updateVisibleUsersAndCandidates
+} from "../actions/mainList/classmateActions";
 
 class ClassmateContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.onUserSwiped = this.onUserSwiped.bind(this);
+    }
+
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(fetchCandidates(10));
+    }
+
+    onUserSwiped(index, deltaX) {
+        const { dispatch } = this.props;
+        let targetUser = this.props.visibleUsers[index];
+        /*
+         1. remove swiped user from visibleUsers
+         2. pop a user from candidates and add it to the end of visibleUsers (if candidates is not empty)
+         3. detect like/dislike action, make a post request
+         4. make a new request fetch one more user and add to candidates
+         */
+        dispatch(updateVisibleUsersAndCandidates(index));
+        dispatch(fetchMoreCandidate(1));
+        (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
+    }
+
     render() {
         return(
-            <MainListTemplate
-                title="找课友"
-                themeColor={PRIMARY_RED}
-                subThemeColor={SECONDARY_RED}
-                userData={hardCodeData}
-            />
+            <div>
+                <LoadingModal show={this.props.isFetching}/>
+                <MainListTemplate
+                    title="找课友"
+                    themeColor={PRIMARY_RED}
+                    subThemeColor={SECONDARY_RED}
+                    userList={this.props.visibleUsers}
+                    onUserSwiped={this.onUserSwiped}
+                />
+            </div>
         )
     }
 }
 
-export default ClassmateContainer;
+const mapStateToProps = state => ({
+    isFetching: state.mainList.isFetching,
+    candidates: state.mainList.candidates,
+    visibleUsers: state.mainList.visibleUsers
+});
+
+export default connect(mapStateToProps)(ClassmateContainer);

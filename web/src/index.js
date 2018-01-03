@@ -8,7 +8,7 @@ import App from './containers/App';
 import { BrowserRouter } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-// const preloadedState = window.__PRELOADED_STATE__;
+// const preloadedState = window.__PRELOADED_STATE__;  // for server-side rendering
 const store = configureStore({});
 
 ReactDOM.render(

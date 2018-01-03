@@ -5,14 +5,12 @@ import profileUI from './profile/profileUI';
 import global from './global/global';
 import globalUI from './global/globalUI';
 import mainList from "./mainList/mainList";
-import mainListUI from "./mainList/mainListUI";
 
 const rootReducer = combineReducers({
     example,
     global,
     globalUI,
     mainList,
-    mainListUI,
     profile,
     profileUI
 });

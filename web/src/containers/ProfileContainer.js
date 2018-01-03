@@ -22,6 +22,7 @@ import {
 class ProfileContainer extends React.Component {
     componentDidMount() {
         const { store } = this.context;
+        // todo: wrap these into a PromiseAll OR keep them separate but have multiple isFetching
         store.dispatch(fetchClassmatesInfo());
         store.dispatch(fetchFriendsInfo());
         store.dispatch(fetchRoommatesInfo());

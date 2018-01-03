@@ -18,7 +18,6 @@ import CryFaceImg from '../../components/common/svg/CryFaceImg'
 // styles
 import './MainListTemplate.less'
 
-
 const CardTransition = ({ children, ...props }) => (
     <CSSTransition
         {...props}
@@ -30,45 +29,19 @@ const CardTransition = ({ children, ...props }) => (
 );
 
 class MainListTemplate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visibleUsers: []
-        };
-        this.cardUpdateHandler = this.cardUpdateHandler.bind(this);
-    }
-
-    // get data
-    componentDidMount() {
-        this.setState({
-            visibleUsers: this.props.userData.slice(0, 3)
-        });
-    }
-
-    // handle card swiped
-    cardUpdateHandler(index) {
-        this.setState({
-            visibleUsers: [
-                ...this.state.visibleUsers.slice(0, index),
-                ...this.state.visibleUsers.slice(index+1, 3),
-                this.props.userData[3] // TODO: how to handle the user list? keep looping? what if run out of users?
-            ]
-        });
-    }
-
     render() {
         return(
             <div className="main-list-container">
                 <MainListHeader title={this.props.title} color={this.props.themeColor}/>
                 <TransitionGroup className="main-list-card-list">
-                    {this.state.visibleUsers.map(
+                    {this.props.userList.map(
                         (user, index) => (
                             <CardTransition key={user.name}>
                                 <div className="main-list-row-wrapper">
                                     <span className="--smile">{<HappyFaceImg />}</span>
                                     <span className="--cry">{<CryFaceImg />}</span>
                                     <Slidable
-                                        onFullSwipe={() => this.cardUpdateHandler(index)}
+                                        onFullSwipe={deltaX => this.props.onUserSwiped(index, deltaX)}
                                         element={
                                             <div className="main-list-card-list-item">
                                                 <SearchResultCard
@@ -109,7 +82,8 @@ MainListTemplate.propTypes = {
     title: PropTypes.string.isRequired,
     themeColor: PropTypes.string.isRequired,
     subThemeColor: PropTypes.string.isRequired,
-    userData: PropTypes.arrayOf(PropTypes.object).isRequired
+    userList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onUserSwiped: PropTypes.func.isRequired
 };
 
 export default MainListTemplate;
