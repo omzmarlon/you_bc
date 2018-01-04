@@ -3,7 +3,7 @@
 import React, {Component} from 'react'
 import { Route, Switch} from 'react-router-dom'
 // components
-import NotFound from '../components/NotFound'
+import NotFound from '../components/notFound/NotFound'
 import HomePageContainer from './HomePageContainer'
 import ClassmateContainer from './ClassmateContainer'
 import RoommateContainer from './RoommateContainer'
@@ -11,6 +11,7 @@ import FriendContainer from './FriendContainer'
 import ProfileContainer from './ProfileContainer'
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
+import DemoContainer from "../components/DemoContainer";
 
 class App extends Component {
     render() {
@@ -21,6 +22,7 @@ class App extends Component {
                 <Route path={TO_FRIENDS} component={FriendContainer}/>
                 <Route path={TO_ROOMMATES} component={RoommateContainer}/>
                 <Route path={TO_PROFILE} component={ProfileContainer}/>
+                <Route path='/demo' component={DemoContainer}/>
                 <Route component={NotFound}/>
             </Switch>
         );
