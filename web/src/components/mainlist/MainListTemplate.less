@@ -1,7 +1,6 @@
 @import (reference) "../../styles/constants/misc";
 @import (reference) "../../styles/constants/colors";
-
-@cardHeight: 176px;
+@import (reference) "../../styles/constants/fonts";
 
 .main-list-container {
   margin-top: @header-height;
@@ -10,20 +9,21 @@
   .main-list-card-list {
     background-color: @pageBackground;
     padding: 12px;
-    height: 89%;
+    height: 90vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 
     .main-list-row-wrapper {
 
       .--smile {
-        position: absolute;
-        margin-left: 15%;
+        float: left;
+        margin-left: -22%;
         margin-top: 18%;
       }
 
       .--cry {
-        position: absolute;
-        margin-left: 65%;
+        float: right;
+        margin-right: -22%;
         margin-top: 18%;
       }
     }
@@ -56,5 +56,15 @@
         }
       }
     }
+  }
+
+  .no-more-user {
+    .common-font;
+    position: absolute;
+    top: @header-height;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 25px;
+    color: grey;
   }
 }

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // components
 import ProfileTabBar from '../components/profile/ProfileTabBar';
 import ProfileNavHeader from '../components/profile/ProfileNavHeader';
-import InfoBar from '../components/common/InfoBar';
 //styles
 import './ProfileContainer.less';
 // icons
@@ -22,6 +21,7 @@ import {
 class ProfileContainer extends React.Component {
     componentDidMount() {
         const { store } = this.context;
+        // todo: wrap these into a PromiseAll OR keep them separate but have multiple isFetching
         store.dispatch(fetchClassmatesInfo());
         store.dispatch(fetchFriendsInfo());
         store.dispatch(fetchRoommatesInfo());
@@ -38,7 +38,6 @@ class ProfileContainer extends React.Component {
                     { this.props.panelIndex === 1 && <MatchingList /> }
                     <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.props.onTabMatching} />
                 </div>
-                <InfoBar/>
             </div>
         );
     }

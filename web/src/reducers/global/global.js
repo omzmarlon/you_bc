@@ -1,21 +1,22 @@
-import {HIDE_INFO_BAR, SHOW_INFO_BAR, UPDATE_USERNAME, UPDATE_WECHAT_ID} from "../../actions/actionTypes";
+import * as ActionTypes from "../../actions/actionTypes";
 
 const initial = {
     username: '沐凡成甫',
     weChatId: '',
     showInfoBar: false,
-    infoBarMessage: ''
+    infoBarMessage: '',
+    isLoading: false
 };
 
 const global = (state = initial, action) => {
     switch (action.type) {
-        case UPDATE_WECHAT_ID:
-            return Object.assign({}, state, {weChatId: action.weChatId});
-        case UPDATE_USERNAME:
-            return Object.assign({}, state, {username: action.username});
-        case SHOW_INFO_BAR:
+        case ActionTypes.UPDATE_WECHAT_ID:
+            return {...state, weChatId: action.weChatId};
+        case ActionTypes.UPDATE_USERNAME:
+            return {...state, username: action.username};
+        case ActionTypes.SHOW_INFO_BAR:
             return {...state, showInfoBar: true, infoBarMessage: action.infoBarMessage};
-        case HIDE_INFO_BAR:
+        case ActionTypes.HIDE_INFO_BAR:
             return {...state, showInfoBar: false, infoBarMessage: ''};
         default:
             return state;

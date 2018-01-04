@@ -14,12 +14,12 @@ const Tag = (props) => {
                 {
                     borderRadius: 5,
                     backgroundColor: props.bkgColor,
-                    fontSize: props.fontSize,
+                    fontSize: `${props.fontSize}vw`,
                     color: props.textColor,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    padding: `${verticalPadding}px ${horizontalPadding}px`
+                    padding: `${verticalPadding}vw ${horizontalPadding}vw`
                 }
             )}
         >
@@ -38,7 +38,7 @@ Tag.propTypes = {
 };
 
 Tag.defaultProps = {
-    fontSize: 12,
+    fontSize: 3.2,
     bkgColor: PRIMARY_GREEN,
     textColor: SECONDARY_GREEN
 };

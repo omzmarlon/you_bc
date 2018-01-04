@@ -1,4 +1,11 @@
 export const INCREMENT = 'INCREMENT';
+
+/************************ global actions ************************/
+export const SHOW_INFO_BAR = 'SHOW_INFO_BAR';
+export const HIDE_INFO_BAR = 'HIDE_INFO_BAR';
+export const UPDATE_WECHAT_ID = 'UPDATE_WECHAT_ID';
+export const UPDATE_USERNAME = 'UPDATE_WECHAT_ID';
+
 /************************ profile actions ************************/
 // receiving
 export const RECEIVE_CLASSMATES_INFO = 'RECEIVE_CLASSMATES_INFO';
@@ -27,10 +34,15 @@ export const HIDE_CLASSMATES_FORMS = 'HIDE_CLASSMATES_FORMS';
 export const HIDE_PERSONAL_FORMS = 'HIDE_PERSONAL_FORMS';
 export const SHOW_AVATAR_FORMS = 'SHOW_AVATAR_FORMS';
 export const HIDE_AVATAR_FORMS  = 'HIDE_AVATAR_FORMS';
-/************************************************************************/
 
-/************************ global actions ************************/
-export const SHOW_INFO_BAR = 'SHOW_INFO_BAR';
-export const HIDE_INFO_BAR = 'HIDE_INFO_BAR';
-export const UPDATE_WECHAT_ID = 'UPDATE_WECHAT_ID';
-export const UPDATE_USERNAME = 'UPDATE_WECHAT_ID';
+/************************ main list actions ************************/
+export const FETCH_CANDIDATES_REQUEST = 'FETCH_CANDIDATES_REQUEST';
+export const FETCH_CANDIDATES_SUCCESS = 'FETCH_CANDIDATES_SUCCESS';
+export const FETCH_CANDIDATES_FAILURE = 'FETCH_CANDIDATES_FAILURE';
+export const LIKE_CANDIDATE = 'LIKE_CANDIDATE';
+export const LIKE_CANDIDATE_ERROR = 'LIKE_CANDIDATE_ERROR';
+export const DISLIKE_CANDIDATE = 'DISLIKE_CANDIDATE';
+export const DISLIKE_CANDIDATE_ERROR = 'DISLIKE_CANDIDATE_ERROR';
+export const UPDATE_USER_LISTS = 'UPDATE_USER_LISTS';
+export const INITIALIZE_VISIBLE_USERS = 'INITIALIZE_VISIBLE_USERS';
+export const RECEIVE_MORE_CANDIDATES = 'RECEIVE_MORE_CANDIDATES';

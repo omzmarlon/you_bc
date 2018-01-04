@@ -20,7 +20,7 @@ InfoBar.propTypes = {
     show: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (states, ownProps) => ({
+const mapStateToProps = (states) => ({
     show: states.global.showInfoBar,
     msg: states.global.infoBarMessage
 });

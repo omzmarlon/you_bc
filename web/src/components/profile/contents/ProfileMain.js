@@ -187,7 +187,7 @@ ProfileMain.propTypes = {
     openPersonalEdit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     classmates: state.profile.classmates,
     roommates: state.profile.roommates,
     friends: state.profile.friends,
