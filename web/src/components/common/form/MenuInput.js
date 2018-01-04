@@ -47,7 +47,7 @@ class MenuInput extends React.Component {
         if (showTag) {
             return (
                 <Tag classNames={'menu-input-value'}
-                     fontSize={14} text={value} key={index}
+                     text={value} key={index}
                      bkgColor={bkgColor}
                      textColor={textColor}/>
             )
