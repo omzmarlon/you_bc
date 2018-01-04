@@ -34,6 +34,7 @@ const mainList = (state = initialState, action) => {
                 state.candidates : state.candidates.slice(0, 3);
             return {
                 ...state,
+                candidates: state.candidates.slice(3, state.candidates.length), // slice is robust
                 visibleUsers: visible
             };
         case ActionTypes.RECEIVE_MORE_CANDIDATES:

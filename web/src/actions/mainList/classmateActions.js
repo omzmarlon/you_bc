@@ -110,7 +110,7 @@ export const fetchCandidates = (quantity) => dispatch => {
         .then(
             response => {
                 dispatch(fetchCandidatesSuccess(response.mockData));
-                dispatch(initVisibleUsers())
+                dispatch(initVisibleUsers());
             },
             // todo: error handling
             error => {
