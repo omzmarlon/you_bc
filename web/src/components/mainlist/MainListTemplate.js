@@ -73,6 +73,7 @@ class MainListTemplate extends Component {
                         )
                     )}
                 </TransitionGroup>
+                {this.props.userList.length === 0 && <div className="no-more-user">已没有更多</div>}
             </div>
         )
     }

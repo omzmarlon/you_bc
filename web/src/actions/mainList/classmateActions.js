@@ -18,19 +18,19 @@ const mockAPICall = quantity => {
             if (quantity === 1) {
                 fulfill({
                     mockData: [
-                        {
-                            avatar: avatar5,
-                            name: '北京烤鸭',
-                            gender: 'female',
-                            age: 20,
-                            constellation: '处女座',
-                            matchRate: 0.8,
-                            major: 'Marketing',
-                            year: 'III',
-                            courses: ['COMM296', 'COMM294'],
-                            studyAbility: '我是一个学霸',
-                            requirements: ['自习', '上课', '同桌']
-                        }
+                        // {
+                        //     avatar: avatar5,
+                        //     name: '北京烤鸭',
+                        //     gender: 'female',
+                        //     age: 20,
+                        //     constellation: '处女座',
+                        //     matchRate: 0.8,
+                        //     major: 'Marketing',
+                        //     year: 'III',
+                        //     courses: ['COMM296', 'COMM294'],
+                        //     studyAbility: '我是一个学霸',
+                        //     requirements: ['自习', '上课', '同桌']
+                        // }
                     ]
                 });
             } else {

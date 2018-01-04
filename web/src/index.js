@@ -7,6 +7,7 @@ import configureStore from './store/configureStore';
 import App from './containers/App';
 import { BrowserRouter } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import InfoBar from "./components/common/InfoBar";
 
 // const preloadedState = window.__PRELOADED_STATE__;  // for server-side rendering
 const store = configureStore({});
@@ -14,9 +15,12 @@ const store = configureStore({});
 ReactDOM.render(
     <MuiThemeProvider>
         <Provider store={store}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+            <div>
+                <InfoBar/>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </div>
         </Provider>
     </MuiThemeProvider>,
     document.getElementById('root')
