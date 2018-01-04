@@ -15,18 +15,18 @@ const mockAPICall = quantity => {
             if (quantity === 1) {
                 fulfill({
                     mockData: [
-                        {
-                            avatar: avatar5,
-                            name: '北京烤鸭',
-                            gender: 'female',
-                            age: 20,
-                            constellation: '处女座',
-                            faculty: 'Sauder',
-                            year: '一年级',
-                            relationship: '单身',
-                            motto: '人生就是不停的吃吃喝喝',
-                            hobbies: ['跑步', '音乐', '登山']
-                        }
+                        // {
+                        //     avatar: avatar5,
+                        //     name: '北京烤鸭',
+                        //     gender: 'female',
+                        //     age: 20,
+                        //     constellation: '处女座',
+                        //     faculty: 'Sauder',
+                        //     year: '一年级',
+                        //     relationship: '单身',
+                        //     motto: '人生就是不停的吃吃喝喝',
+                        //     hobbies: ['跑步', '音乐', '登山']
+                        // }
                     ]
                 });
             } else {
