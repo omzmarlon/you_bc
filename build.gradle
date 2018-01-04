@@ -85,8 +85,11 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-params:5.0.1")
     //Ignored JUnit Vintage
     //JUnit 5 - End
+    // jooq
     compile("org.jooq:jooq")
     jooqRuntime group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    //aws
+    compile("com.amazonaws:aws-java-sdk:1.11.133")
 }
 
 jooq {
