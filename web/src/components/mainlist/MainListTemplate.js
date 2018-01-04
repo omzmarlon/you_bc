@@ -38,12 +38,13 @@ class MainListTemplate extends Component {
                         (user, index) => (
                             <CardTransition key={user.name}>
                                 <div className="main-list-row-wrapper">
-                                    <span className="--smile">{<HappyFaceImg />}</span>
-                                    <span className="--cry">{<CryFaceImg />}</span>
+
                                     <Slidable
                                         onFullSwipe={deltaX => this.props.onUserSwiped(index, deltaX)}
                                         element={
                                             <div className="main-list-card-list-item">
+                                                <span className="--smile">{<HappyFaceImg />}</span>
+                                                <span className="--cry">{<CryFaceImg />}</span>
                                                 <SearchResultCard
                                                     avatar={user.avatar}
                                                     name={user.name}

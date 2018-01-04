@@ -42,7 +42,6 @@ class ClassmateContainer extends Component {
     render() {
         return(
             <div>
-                <LoadingModal show={this.props.isFetching}/>
                 <MainListTemplate
                     title="找课友"
                     themeColor={PRIMARY_RED}
@@ -50,6 +49,7 @@ class ClassmateContainer extends Component {
                     userList={this.props.visibleUsers}
                     onUserSwiped={this.onUserSwiped}
                 />
+                <LoadingModal show={this.props.isFetching}/>
             </div>
         )
     }

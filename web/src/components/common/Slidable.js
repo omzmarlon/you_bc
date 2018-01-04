@@ -39,6 +39,7 @@ class Slidable extends React.Component {
             <Swipeable
                 onSwiping={this.swipingHandler}
                 onSwiped={this.swipedHandler}
+                stopPropagation={true}
             >
                 <div style={{transform: `translateX(${this.state.swipeDelta})`}}
                      className={classNames({'slidable-container': this.state.animate})}
