@@ -1,11 +1,11 @@
 package com.youbc.utils;
 
 public class EnvProperties {
-    public static String DATASOURCE_URL = "pokecabin.db.url";
-    public static String DATASOURCE_DRIVER = "pokecabin.db.driver";
-    public static String DATASOURCE_USERNAME = "pokecabin.db.username";
-    public static String DATASOURCE_PASSWORD = "pokecabin.db.password";
-    public static String DATASOURCE_DIALECT = "pokecabin.db.dialect";
+    public static String DATASOURCE_URL = "youbc.db.url";
+    public static String DATASOURCE_DRIVER = "youbc.db.driver";
+    public static String DATASOURCE_USERNAME = "youbc.db.username";
+    public static String DATASOURCE_PASSWORD = "youbc.db.password";
+    public static String DATASOURCE_DIALECT = "youbc.db.dialect";
 
     //aws
     public static String S3_ENDPOINT_URL = "s3.endpointUrl";
