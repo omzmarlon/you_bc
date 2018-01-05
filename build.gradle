@@ -27,21 +27,21 @@ repositories {
 }
 
 
-protobuf {
-    protoc {
-        // The artifact spec for the Protobuf Compiler
-        artifact = 'com.google.protobuf:protoc:3.0.0'
-    }
-    sourceSets {
-        main {
-            proto {
-                srcDir "$projectDir/src/main/protobuf"
-            }
-        }
-    }
-
-    generatedFilesBaseDir = "$projectDir/src"
-}
+//protobuf {
+//    protoc {
+//        // The artifact spec for the Protobuf Compiler
+//        artifact = 'com.google.protobuf:protoc:3.0.0'
+//    }
+//    sourceSets {
+//        main {
+//            proto {
+//                srcDir "$projectDir/src/main/protobuf"
+//            }
+//        }
+//    }
+//
+//    generatedFilesBaseDir = "$projectDir/src"
+//}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -90,6 +90,8 @@ dependencies {
     jooqRuntime group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
     //aws
     compile("com.amazonaws:aws-java-sdk:1.11.133")
+    //jwt
+    compile("io.jsonwebtoken:jjwt:0.7.0")
 }
 
 jooq {
