@@ -2,6 +2,7 @@ package com.youbc.securities.services;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Optional;
@@ -10,17 +11,19 @@ public class JWTTokenService {
     private static final String TOKEN_PREFIX = "Bear ";
 
     private String secret;
-    private long expiryMillis;
+    private long shortExpiryMillis;
+    private long longExpiryMillis;
 
-    public JWTTokenService(String secret, long expiryMillis) {
+    public JWTTokenService(String secret, long shortExpiryMillis, long longExpiryMillis) {
         this.secret = secret;
-        this.expiryMillis = expiryMillis;
+        this.shortExpiryMillis = shortExpiryMillis;
+        this.longExpiryMillis = longExpiryMillis;
     }
 
 
     /***
      * @param token - the token to verify
-     * @return Some<String> if verification successful, or None if failed
+     * @return Some<String> of subject if verification successful, or None if failed
      */
     public Optional<String> verifyToken(String token) {
         String userID = Jwts.parser()
@@ -35,11 +38,19 @@ public class JWTTokenService {
      * @param userID - unique ID in current application to identify a user
      * @return JWT token
      */
-    public String generateToken(String userID) {
+    public String generateShortLiveToken(String userID) {
+        return generateToken(userID, shortExpiryMillis);
+    }
+
+    public String generateLongLiveToken(String userID) {
+        return generateToken(userID, longExpiryMillis);
+    }
+
+    private String generateToken(String userID, long expiry) {
         return TOKEN_PREFIX +
                 Jwts.builder()
                         .setSubject(userID)
-                        .setExpiration(new Date(System.currentTimeMillis()+expiryMillis))
+                        .setExpiration(new Date(System.currentTimeMillis()+expiry))
                         .signWith(SignatureAlgorithm.HS256, secret)
                         .compact();
     }

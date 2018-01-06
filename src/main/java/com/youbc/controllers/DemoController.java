@@ -17,7 +17,13 @@ public class DemoController {
 
     @RequestMapping(path = "/demoJooq", method = RequestMethod.GET)
     public String demoJooq() {
-        userDAO.buildNewUser("some_user_id");
-        return "";
+        //userDAO.buildNewUser("some_user_id");
+        return "demoJooq";
+    }
+
+    @RequestMapping(path = "/api/demoJooq", method = RequestMethod.GET)
+    public String demoJooqAPI() {
+        //userDAO.buildNewUser("some_user_id");
+        return "demoJooqAPI";
     }
 }

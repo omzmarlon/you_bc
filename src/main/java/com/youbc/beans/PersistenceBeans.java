@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan({"com.youbc"})
-@PropertySource("classpath:configurations/application.properties")
+@PropertySource("classpath:configurations/database.properties")
 public class PersistenceBeans {
     private Environment env;
 
