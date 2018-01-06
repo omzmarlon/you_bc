@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UbcStudentVerification extends TableImpl<UbcStudentVerificationRecord> {
 
-    private static final long serialVersionUID = 1487446255;
+    private static final long serialVersionUID = 49001328;
 
     /**
      * The reference instance of <code>poke_you_bc.ubc_student_verification</code>
@@ -60,7 +60,7 @@ public class UbcStudentVerification extends TableImpl<UbcStudentVerificationReco
     /**
      * The column <code>poke_you_bc.ubc_student_verification.approved</code>.
      */
-    public final TableField<UbcStudentVerificationRecord, Byte> APPROVED = createField("approved", org.jooq.impl.SQLDataType.TINYINT, this, "");
+    public final TableField<UbcStudentVerificationRecord, Byte> APPROVED = createField("approved", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
 
     /**
      * The column <code>poke_you_bc.ubc_student_verification.email</code>.

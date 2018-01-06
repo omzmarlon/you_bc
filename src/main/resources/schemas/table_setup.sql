@@ -7,7 +7,7 @@ CREATE TABLE user (
 # user verification table
 CREATE TABLE ubc_student_verification (
   user_id VARCHAR(100) PRIMARY KEY,
-  approved TINYINT(1),
+  approved BOOLEAN NOT NULL,
   email VARCHAR(50),
   studentID_image_url VARCHAR(100),
   location_lat DECIMAL(11, 8),
