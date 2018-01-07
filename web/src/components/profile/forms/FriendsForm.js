@@ -46,7 +46,6 @@ class FriendsForm extends React.Component {
     }
 
     onWeChatIdChange(event, newValue) {
-        console.log(newValue);
         this.setState({weChatId: newValue})
     }
 
