@@ -85,8 +85,8 @@ jooq {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'
             url = 'jdbc:mysql://localhost:3306/poke_you_bc'
-            user = 'poke_you_bc_user'
-            password = 'poke_you_bc_user'
+            user = 'youbcuser'
+            password = 'youbcuser'
         }
         generator {
             name = 'org.jooq.util.DefaultGenerator'

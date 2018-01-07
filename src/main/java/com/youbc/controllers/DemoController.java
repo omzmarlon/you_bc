@@ -23,6 +23,11 @@ public class DemoController {
         return "demoJooq";
     }
 
+    @RequestMapping(path = "/demoJooq2", method = RequestMethod.GET)
+    public boolean demoJooq2() {
+        return userDAO.userExists("sdakjf38");
+    }
+
     @RequestMapping(path = "/api/demoJooq", method = RequestMethod.GET)
     public String demoJooqAPI() {
         //userDAO.buildNewUser("some_user_id");
