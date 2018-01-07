@@ -1,7 +1,7 @@
 package com.youbc.beans;
 
-import com.youbc.utils.EnvProperties;
-import com.youbc.utils.aws.S3Client;
+import com.youbc.utilities.EnvProperties;
+import com.youbc.services.aws.S3Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

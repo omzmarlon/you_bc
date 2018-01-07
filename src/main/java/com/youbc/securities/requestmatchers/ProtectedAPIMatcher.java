@@ -1,6 +1,6 @@
 package com.youbc.securities.requestmatchers;
 
-import com.youbc.utils.Endpoints;
+import com.youbc.utilities.Endpoints;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;

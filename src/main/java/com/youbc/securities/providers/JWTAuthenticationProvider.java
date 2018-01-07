@@ -1,15 +1,15 @@
 package com.youbc.securities.providers;
 
-import com.amazonaws.services.directory.model.AuthenticationFailedException;
 import com.youbc.database.UserDAO;
 import com.youbc.securities.services.JWTTokenService;
 import com.youbc.securities.tokens.JWTAuthenticationToken;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import static java.util.Collections.emptyList;
@@ -30,14 +30,18 @@ public class JWTAuthenticationProvider implements AuthenticationProvider {
     }
 
     public Authentication authenticate(Authentication authentication) {
-        String token = ((String) authentication.getPrincipal());
-        String subjectUserId = tokenService
-                .verifyToken(token)
-                .orElseThrow(() -> new AuthenticationFailedException("JWT Auth Provider Could not find subject"));
-        if (userDAO.userExists(subjectUserId)) {
-            return new UsernamePasswordAuthenticationToken(subjectUserId, null, emptyList());
-        } else {
-            throw new AuthenticationFailedException("JWT Auth Provider user does not exists");
+        try {
+            String token = ((String) authentication.getPrincipal());
+            String subjectUserId = tokenService
+                    .verifyToken(token)
+                    .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Token does not have valid subject"));
+            if (userDAO.userExists(subjectUserId)) {
+                return new UsernamePasswordAuthenticationToken(subjectUserId, null, emptyList());
+            } else {
+                throw new AuthenticationCredentialsNotFoundException("User does not exists");
+            }
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
+            throw new BadCredentialsException("Invalid JWT", e);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.youbc.securities.services;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -25,7 +24,7 @@ public class JWTTokenService {
      * @param token - the token to verify
      * @return Some<String> of subject if verification successful, or None if failed
      */
-    public Optional<String> verifyToken(String token) {
+    public Optional<String> verifyToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException {
         String userID = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))

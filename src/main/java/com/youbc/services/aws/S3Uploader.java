@@ -1,4 +1,4 @@
-package com.youbc.utils.aws;
+package com.youbc.services.aws;
 
 import java.io.File;
 

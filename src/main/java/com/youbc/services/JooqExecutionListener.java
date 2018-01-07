@@ -1,4 +1,4 @@
-package com.youbc.utils;
+package com.youbc.services;
 
 import org.jooq.ExecuteContext;
 import org.jooq.SQLDialect;

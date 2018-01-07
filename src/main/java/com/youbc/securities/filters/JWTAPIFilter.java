@@ -1,9 +1,9 @@
 package com.youbc.securities.filters;
 
-import com.amazonaws.services.directory.model.AuthenticationFailedException;
 import com.youbc.securities.requestmatchers.ProtectedAPIMatcher;
 import com.youbc.securities.services.CookieService;
 import com.youbc.securities.tokens.JWTAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -34,7 +34,7 @@ public class JWTAPIFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String jwtToken = cookieService
                 .getAuthenticationCookie(request)
-                .orElseThrow(() -> new AuthenticationFailedException("Authentication cookie not found"));
+                .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Auth cookie not found"));
         return getAuthenticationManager().authenticate(new JWTAuthenticationToken(jwtToken));
     }
 }

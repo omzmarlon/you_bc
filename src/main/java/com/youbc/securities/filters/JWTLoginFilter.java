@@ -1,9 +1,9 @@
 package com.youbc.securities.filters;
 
-import com.amazonaws.services.directory.model.AuthenticationFailedException;
 import com.youbc.securities.handlers.LoginSuccessHandler;
 import com.youbc.securities.requestmatchers.LoginRequestMatcher;
 import com.youbc.securities.tokens.JWTAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -32,7 +32,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String jwtToken = request.getParameter(LOGIN_AUTH_PARAM);
         if (jwtToken == null || jwtToken.equals("")) {
-            throw new AuthenticationFailedException("Authentication token not found");
+            throw new AuthenticationCredentialsNotFoundException("Login Param not found");
         }
         return getAuthenticationManager().authenticate(new JWTAuthenticationToken(jwtToken));
     }
