@@ -30,7 +30,7 @@ public class UserDAO {
                 .from(USER)
                 .where(USER.USER_ID.eq(userID))
                 .fetch();
-        return result.isEmpty();
+        return result.isNotEmpty();
     }
 
     public void buildNewUser(String userID) {
