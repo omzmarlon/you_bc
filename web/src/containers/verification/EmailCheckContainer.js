@@ -63,7 +63,6 @@ class EmailCheckContainer extends Component {
     }
 
     editEmailHandler() {
-        // set code back to null, since we submit email only when code is null
         this.setState({ emailSubmitted: false });
     }
 
