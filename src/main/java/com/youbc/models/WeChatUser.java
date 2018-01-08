@@ -9,9 +9,11 @@ public class WeChatUser {
     private String country;
     private String headimgurl;
     private String errcode;
+    private String errmsg;
 
+    public WeChatUser() {}
 
-    public WeChatUser(String openid, String nickname, String sex, String province, String city, String country, String headimgurl) {
+    public WeChatUser(String openid, String nickname, String sex, String province, String city, String country, String headimgurl, String errmsg) {
         this.openid = openid;
         this.nickname = nickname;
         this.sex = sex;
@@ -20,6 +22,15 @@ public class WeChatUser {
         this.country = country;
         this.headimgurl = headimgurl;
         this.errcode = errcode;
+        this.errmsg = errmsg;
+    }
+
+    public String getErrmsg() {
+        return errmsg;
+    }
+
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
     }
 
     public String getErrcode() {

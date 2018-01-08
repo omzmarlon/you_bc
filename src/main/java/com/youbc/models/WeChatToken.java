@@ -7,6 +7,9 @@ public class WeChatToken {
     private String openid;
     private String scope;
     private String errcode;
+    private String errmsg;
+
+    public WeChatToken() {}
 
     public WeChatToken(
             String access_token,
@@ -14,7 +17,8 @@ public class WeChatToken {
             String refresh_token,
             String openid,
             String scope,
-            String errcode
+            String errcode,
+            String errmsg
     ) {
         this.access_token = access_token;
         this.expires_in = expires_in;
@@ -22,6 +26,15 @@ public class WeChatToken {
         this.openid = openid;
         this.scope = scope;
         this.errcode = errcode;
+        this.errmsg = errmsg;
+    }
+
+    public String getErrmsg() {
+        return errmsg;
+    }
+
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
     }
 
     public String getErrcode() {

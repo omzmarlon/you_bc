@@ -1,5 +1,6 @@
 package com.youbc.controllers;
 
+import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +15,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({YouBCException.class})
-    public ResponseEntity<Object> handleYouBCException(YouBCException ex) {
-        return ResponseEntity.status(ex.getHttpStatus().value()).body(ex.getMessage());
+    public ResponseEntity<YouBCError> handleYouBCException(YouBCException ex) {
+        return ResponseEntity
+                .status(ex.getYouBCError().getStatus())
+                .body(ex.getYouBCError());
     }
 }

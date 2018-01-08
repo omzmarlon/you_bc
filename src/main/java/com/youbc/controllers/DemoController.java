@@ -1,6 +1,7 @@
 package com.youbc.controllers;
 
 import com.youbc.database.UserDAO;
+import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,6 @@ public class DemoController {
 
     @RequestMapping(path = "/exception")
     public String testException() {
-        throw new YouBCException(HttpStatus.BAD_REQUEST, "demo exception");
+        throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "demo exception"));
     }
 }

@@ -1,17 +1,15 @@
 package com.youbc.error_handling;
 
-import org.springframework.http.HttpStatus;
-
 public class YouBCException extends RuntimeException {
 
-    private HttpStatus httpStatus;
+    private YouBCError youBCError;
 
-    public YouBCException(HttpStatus httpStatus, String msg) {
-        super(msg);
-        this.httpStatus = httpStatus;
+    public YouBCException(YouBCError youBCError) {
+        super(youBCError.getMessage());
+        this.youBCError = youBCError;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
+    public YouBCError getYouBCError() {
+        return youBCError;
     }
 }

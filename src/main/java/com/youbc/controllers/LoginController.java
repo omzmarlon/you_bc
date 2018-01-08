@@ -25,17 +25,9 @@ public class LoginController {
 
     @RequestMapping(value = Endpoints.WECHAT_OAUTH, method = RequestMethod.GET)
     public void wechatOAuth(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            String accessGrant = request.getParameter("code");
-            if (accessGrant !=null && !accessGrant.equals("")) {
-                WeChatUser weChatUser = weChatOAuthService.login(accessGrant);
-                String loginToken = tokenService.generateShortLiveToken(weChatUser.getOpenid());
-                response.sendRedirect("http://pokedemo.91university.com/?auth="+loginToken);
-            } else {
-                response.sendRedirect("http://pokedemo.91university.com/?auth=");
-            }
-        } catch (Exception e) {
-            response.sendRedirect("http://pokedemo.91university.com/?auth=");
-        }
+        String accessGrant = request.getParameter("code");
+        WeChatUser weChatUser = weChatOAuthService.login(accessGrant);
+        String loginToken = tokenService.generateShortLiveToken(weChatUser.getOpenid());
+        response.sendRedirect("http://pokedemo.91university.com/?auth="+loginToken);
     }
 }
