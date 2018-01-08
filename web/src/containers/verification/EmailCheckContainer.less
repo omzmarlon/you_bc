@@ -25,8 +25,26 @@
     }
   }
 
-  .email-display {
+  .verify-code-container {
+    margin: auto;
+    .email-display {
+      display: flex;
+      padding-bottom: 12px;
+      .--email {
+        .common-font;
+        color: @generalText;
+        max-width: 40vw;
+        overflow-wrap: break-word;
+      }
+    }
 
+    .verification-code {
+      padding-bottom: 36px;
+      .--code {
+        .common-font;
+        color: @generalText;
+      }
+    }
   }
 
   .link {
