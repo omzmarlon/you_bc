@@ -18,6 +18,7 @@ class ClassmateContainer extends Component {
     constructor(props) {
         super(props);
         this.onUserSwiped = this.onUserSwiped.bind(this);
+        this.genderFilter = this.genderFilter.bind(this);
     }
 
     componentDidMount() {
@@ -39,6 +40,11 @@ class ClassmateContainer extends Component {
         (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
     }
 
+    genderFilter(event, child) {
+        const { dispatch } = this.props;
+        dispatch(fetchCandidates(10, child.key));
+    }
+
     render() {
         return(
             <div>
@@ -48,6 +54,7 @@ class ClassmateContainer extends Component {
                     subThemeColor={SECONDARY_RED}
                     userList={this.props.visibleUsers}
                     onUserSwiped={this.onUserSwiped}
+                    genderFilter={this.genderFilter}
                 />
                 <LoadingModal show={this.props.isFetching}/>
             </div>

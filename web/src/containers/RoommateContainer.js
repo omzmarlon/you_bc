@@ -17,6 +17,7 @@ class RoommateContainer extends Component {
     constructor(props) {
         super(props);
         this.onUserSwiped = this.onUserSwiped.bind(this);
+        this.genderFilter = this.genderFilter.bind(this);
     }
 
     componentDidMount() {
@@ -38,6 +39,11 @@ class RoommateContainer extends Component {
         (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
     }
 
+    genderFilter(event, child) {
+        const { dispatch } = this.props;
+        dispatch(fetchCandidates(10, child.key));
+    }
+
     render() {
         return(
             <div>
@@ -48,6 +54,7 @@ class RoommateContainer extends Component {
                     subThemeColor={SECONDARY_BLUE}
                     userList={this.props.visibleUsers}
                     onUserSwiped={this.onUserSwiped}
+                    genderFilter={this.genderFilter}
                 />
             </div>
         )
