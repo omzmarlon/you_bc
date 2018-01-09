@@ -60,7 +60,7 @@ class MainListTemplate extends Component {
                                                         (user.courses && <CourseInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} courses={user.courses}/>),
                                                         (user.country && <HometownInfo color={this.props.themeColor} city={user.city} country={user.country}/>),
                                                         (user.relationship && <RelationshipInfo color={this.props.themeColor} relationship={user.relationship}/>),
-                                                        (user.studyAbility && <StudyAbilityInfo studyAbility={user.studyAbility}/>),
+                                                        (user.studyAbility && <StudyAbilityInfo color={this.props.themeColor} studyAbility={user.studyAbility}/>),
                                                         (user.requirements && <StudyRequirementInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} requirements={user.requirements}/>),
                                                         (user.motto && <MottoInfo color={this.props.themeColor} motto={user.motto}/>),
                                                         (user.hobbies && <HobbyInfo hobbies={user.hobbies} color={this.props.themeColor} secondColor={this.props.subThemeColor}/>)
