@@ -18,6 +18,7 @@ class FriendContainer extends Component {
     constructor(props) {
         super(props);
         this.onUserSwiped = this.onUserSwiped.bind(this);
+        this.genderFilter = this.genderFilter.bind(this);
     }
 
     componentDidMount() {
@@ -39,6 +40,11 @@ class FriendContainer extends Component {
         (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
     }
 
+    genderFilter(event, child) {
+        const { dispatch } = this.props;
+        dispatch(fetchCandidates(10, child.key));
+    }
+
     render() {
         return(
             <div>
@@ -49,6 +55,7 @@ class FriendContainer extends Component {
                     subThemeColor={SECONDARY_YELLOW}
                     userList={this.props.visibleUsers}
                     onUserSwiped={this.onUserSwiped}
+                    genderFilter={this.genderFilter}
                 />
             </div>
         )

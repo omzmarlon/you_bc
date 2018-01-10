@@ -28,24 +28,23 @@ const rollingIconStyle = {
     height: 36
 };
 
+const friendRollingIcon = [
+    <MacIcon style={rollingIconStyle} />,
+    <DockIcon style={rollingIconStyle} />,
+    <SecurityIcon style={rollingIconStyle} />,
+    <WindowIcon style={rollingIconStyle} />,
+    <PhoneIcon style={rollingIconStyle} />,
+    <AndroidIcon style={rollingIconStyle} />
+];
+
 class HomePageContainer extends Component {
     render() {
-
         const friendDisplayName = (
             <div className="friend-display-name">
                 <span>找</span>
                 <Rollable
                     rollingInterval={2500}
-                    rollingItems={
-                        [
-                            <MacIcon style={rollingIconStyle} />,
-                            <DockIcon style={rollingIconStyle} />,
-                            <SecurityIcon style={rollingIconStyle} />,
-                            <WindowIcon style={rollingIconStyle} />,
-                            <PhoneIcon style={rollingIconStyle} />,
-                            <AndroidIcon style={rollingIconStyle} />
-                        ]
-                    }
+                    rollingItems={friendRollingIcon}
                 />
                 <span>友</span>
             </div>
@@ -53,9 +52,9 @@ class HomePageContainer extends Component {
 
         return(
             <div className="home-page">
-                <Block path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_RED}/>
-                <Block path={TO_FRIENDS} displayName={friendDisplayName} color={PRIMARY_YELLOW}/>
-                <Block path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_BLUE}/>
+                <Block className="classmate-block" path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_RED}/>
+                <Block className="friend-block" path={TO_FRIENDS} displayName={friendDisplayName} color={PRIMARY_YELLOW}/>
+                <Block className="roommate-block" path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_BLUE}/>
                 <Link to={TO_PROFILE}>
                     <FloatingActionButton className={'profile-button'}>
                         <Profile style={defaultIconSize} />

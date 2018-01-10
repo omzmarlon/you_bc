@@ -12,6 +12,7 @@ import MaleIcon from '../../components/common/svg/MaleIcon';
 import MixGenderIcon from '../../components/common/svg/MixGenderIcon';
 import FilterIcon from "../common/svg/FilterIcon";
 import {PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE} from "../../styles/constants/colors";
+import InfoRow from "../common/InfoRow";
 
 const MainListHeader = (props) => (
     <NavHeader
@@ -22,10 +23,35 @@ const MainListHeader = (props) => (
                 iconButtonElement={<IconButton><FilterIcon color={PRIMARY_WHITE}/></IconButton>}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                onItemClick={props.genderFilter}
             >
-                <MenuItem primaryText={<MaleIcon color={PRIMARY_BLUE}/>} />
-                <MenuItem primaryText={<FemaleIcon color={PRIMARY_RED}/>} />
-                <MenuItem primaryText={<MixGenderIcon color={PRIMARY_GREEN}/>} />
+                <MenuItem
+                    key="male"
+                    primaryText={
+                        <InfoRow
+                            leftElement={<MaleIcon color={PRIMARY_BLUE}/>}
+                            rightElement={<span style={{paddingLeft: 8}}>男生</span>}
+                        />
+                    }
+                />
+                <MenuItem
+                    key="female"
+                    primaryText={
+                        <InfoRow
+                            leftElement={<FemaleIcon color={PRIMARY_RED}/>}
+                            rightElement={<span style={{paddingLeft: 8}}>女生</span>}
+                        />
+                    }
+                />
+                <MenuItem
+                    key="mix"
+                    primaryText={
+                        <InfoRow
+                            leftElement={<MixGenderIcon color={PRIMARY_GREEN}/>}
+                            rightElement={<span style={{paddingLeft: 8}}>混合</span>}
+                        />
+                    }
+                />
             </IconMenu>
         }
     />
@@ -33,7 +59,8 @@ const MainListHeader = (props) => (
 
 MainListHeader.propTypes = {
     title: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired
+    color: PropTypes.string.isRequired,
+    genderFilter: PropTypes.func.isRequired
 };
 
 export default MainListHeader;

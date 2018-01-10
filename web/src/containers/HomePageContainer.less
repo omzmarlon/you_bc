@@ -1,8 +1,37 @@
 @import "../styles/constants/fonts";
 @import "../styles/constants/icon";
 
+@skewScale: 8deg;
+
 .home-page {
   height: 100vh;
+
+  .classmate-block {
+    height: 40vh;
+    transform: skewY(@skewScale);
+    position: absolute;
+    top: -5vh;
+    z-index: 100;
+    span {
+      transform: skewY(-1 * @skewScale) translateY(3vh);
+    }
+  }
+
+  .friend-block {
+    position: absolute;
+    top: 30vh;
+    height: 43% !important;
+  }
+
+  .roommate-block {
+    height: 39vh;
+    transform: skewY(-1 * @skewScale);
+    position: absolute;
+    top: 66vh;
+    span {
+      transform: skewY(@skewScale) translateY(-3vh);
+    }
+  }
 }
 
 .profile-button {

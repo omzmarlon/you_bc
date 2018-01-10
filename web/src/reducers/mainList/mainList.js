@@ -5,7 +5,8 @@ import * as ActionTypes from '../../actions/actionTypes';
 const initialState = {
     isFetching: false,
     candidates: [],
-    visibleUsers: []
+    visibleUsers: [],
+    genderFilter: 'mix'
 };
 
 /**
@@ -16,7 +17,8 @@ const mainList = (state = initialState, action) => {
         case ActionTypes.FETCH_CANDIDATES_REQUEST:
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                genderFilter: action.gender
             };
         case ActionTypes.FETCH_CANDIDATES_SUCCESS:
             return {

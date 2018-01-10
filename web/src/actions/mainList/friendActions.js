@@ -98,10 +98,11 @@ const mockPostAPI = () => {
 /**
  * fetch data (Async Action)
  * @param quantity
+ * @param gender (default = mix)
  */
-export const fetchCandidates = (quantity) => dispatch => {
-    dispatch(fetchCandidatesRequest());
-    mockAPICall(quantity)
+export const fetchCandidates = (quantity, gender = 'mix') => dispatch => {
+    dispatch(fetchCandidatesRequest(gender));
+    mockAPICall(quantity, gender)
         .then(
             response => {
                 dispatch(fetchCandidatesSuccess(response.mockData));
@@ -115,7 +116,7 @@ export const fetchCandidates = (quantity) => dispatch => {
         )
 };
 
-const fetchCandidatesRequest = () => ({ type: ActionTypes.FETCH_CANDIDATES_REQUEST });
+const fetchCandidatesRequest = gender => ({ type: ActionTypes.FETCH_CANDIDATES_REQUEST, gender });
 
 const fetchCandidatesSuccess = (candidates) => ({ type: ActionTypes.FETCH_CANDIDATES_SUCCESS, candidates });
 
