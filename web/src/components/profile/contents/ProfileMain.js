@@ -49,7 +49,7 @@ const ProfileMain = (props) => (
                 type={PERSONAL}
                 contentList={[
                     {
-                        leftElement: <InfoRowTitle icon={<WeChatIcon/>} text={'微信号'}/>,
+                        leftElement: <InfoRowTitle icon={<WeChatIcon color={PRIMARY_GREEN}/>} text={'微信号'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.global.weChatId}</span>
                     },
                     {

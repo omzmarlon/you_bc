@@ -93,7 +93,7 @@ class RoommatesForm extends React.Component {
                 {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'form-input-field'}
-                               inputIcon={<WeChatIcon />}
+                               inputIcon={<WeChatIcon color={PRIMARY_BLUE} />}
                                label={'微信号'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
