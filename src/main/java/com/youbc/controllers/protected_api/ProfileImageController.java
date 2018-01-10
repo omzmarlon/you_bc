@@ -1,6 +1,6 @@
-package com.youbc.controllers;
+package com.youbc.controllers.protected_api;
 
-import com.youbc.utils.aws.S3Client;
+import com.youbc.services.aws.S3Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/profileStorage")
+@RequestMapping("/api/profileStorage")
 public class ProfileImageController {
     private S3Client s3Client;
 

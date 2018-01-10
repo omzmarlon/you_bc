@@ -1,7 +1,7 @@
 package com.youbc.beans;
 
+import com.youbc.securities.services.JWTTokenService;
 import com.youbc.utilities.EnvProperties;
-import com.youbc.services.aws.S3Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,22 +11,22 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @ComponentScan({"com.youbc"})
-@PropertySource("classpath:configurations/aws.properties")
-public class AWSBeans {
+@PropertySource("classpath:configurations/security.properties")
+public class SecurityBeans {
     private Environment env;
 
     @Autowired
-    public AWSBeans(Environment env) {
+    public SecurityBeans(Environment env) {
         this.env = env;
     }
 
     @Bean
-    public S3Client s3Client() {
-        return new S3Client(
-                env.getProperty(EnvProperties.S3_ENDPOINT_URL),
-                env.getProperty(EnvProperties.S3_ACCESS_KEY),
-                env.getProperty(EnvProperties.S3_SECRET_KEY),
-                env.getProperty(EnvProperties.S3_BUCKET_NAME)
+    public JWTTokenService jwtTokenService() {
+        return new JWTTokenService(
+                env.getProperty(EnvProperties.JWT_SECRET),
+                env.getProperty(EnvProperties.JWT_EXPIRY_SHORT, Long.class),
+                env.getProperty(EnvProperties.JWT_EXPIRY_LONG, Long.class)
         );
     }
+
 }

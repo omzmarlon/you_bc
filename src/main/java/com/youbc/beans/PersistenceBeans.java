@@ -1,7 +1,7 @@
 package com.youbc.beans;
 
-import com.youbc.utils.EnvProperties;
-import com.youbc.utils.JooqExecutionListener;
+import com.youbc.utilities.EnvProperties;
+import com.youbc.services.JooqExecutionListener;
 import org.jooq.SQLDialect;
 import org.jooq.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan({"com.youbc"})
-@PropertySource("classpath:configurations/application.properties")
+@PropertySource("classpath:configurations/database.properties")
 public class PersistenceBeans {
     private Environment env;
 
