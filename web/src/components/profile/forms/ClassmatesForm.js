@@ -69,7 +69,13 @@ class ClassmatesForm extends React.Component {
     onCoursesChange(event, menuItem, index) {
         const ind = this.state.courses.indexOf(this.props.classmates.options.coursesOptions[index]);
         if (ind === -1) {
-            this.setState({courses: [...this.state.courses, this.props.classmates.options.coursesOptions[index]]});
+            // TODO: factor out common code to enforce max 3
+            // can only choose max 3
+            if (this.state.courses.length <3) {
+                this.setState({courses: [...this.state.courses, this.props.classmates.options.coursesOptions[index]]});
+            } else {
+                this.setState({courses: [this.state.courses[1], this.state.courses[2], this.props.classmates.options.coursesOptions[index]]});
+            }
         } else {
             const courses = this.state.courses;
             courses.splice(ind, 1);
@@ -84,7 +90,13 @@ class ClassmatesForm extends React.Component {
     onTagChange(event, menuItem, index) {
         const ind = this.state.tags.indexOf(this.props.classmates.options.tagsOptions[index]);
         if (ind === -1) {
-            this.setState({tags: [...this.state.tags, this.props.classmates.options.tagsOptions[index]]});
+            // TODO: factor out common code to enforce max 3
+            // can only choose max 3
+            if (this.state.tags.length <3) {
+                this.setState({tags: [...this.state.tags, this.props.classmates.options.tagsOptions[index]]});
+            } else {
+                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.props.classmates.options.tagsOptions[index]]});
+            }
         } else {
             const tags = this.state.tags;
             tags.splice(ind, 1);

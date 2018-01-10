@@ -76,7 +76,13 @@ class RoommatesForm extends React.Component {
     onTagChange(event, menuItem, index) {
         const ind = this.state.tags.indexOf(this.props.roommates.options.tagsOptions[index]);
         if (ind === -1) {
-            this.setState({tags: [...this.state.tags, this.props.roommates.options.tagsOptions[index]]});
+            // TODO: factor out common code to enforce max 3
+            // can only choose max 3
+            if (this.state.tags.length <3) {
+                this.setState({tags: [...this.state.tags, this.props.roommates.options.tagsOptions[index]]});
+            } else {
+                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.props.roommates.options.tagsOptions[index]]});
+            }
         } else {
             const tags = this.state.tags;
             tags.splice(ind, 1);
