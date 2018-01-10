@@ -116,7 +116,9 @@ class MenuInput extends React.Component {
                 className={`menu-input-container ${this.props.classNames}`}
                 leftElement={this.props.inputIcon}
                 rightElement={
-                    <div className={'menu-container'}>
+                    <div className={'menu-container'}
+                         onClick={this.onClickMenuButton}
+                    >
                         <div className={'menu-content'}>
                             {/*display selected choices*/}
                             {
@@ -138,6 +140,9 @@ class MenuInput extends React.Component {
                             </IconButton>
                         </div>
                         <Divider/>
+                        {
+                            this.props.errorText && <span className={"error-text"}>必填</span>
+                        }
                         {this.menuDialogHelper()}
                     </div>
                 }
@@ -159,7 +164,8 @@ MenuInput.propTypes = {
     textColor: PropTypes.string.isRequired,
     tagDisplay: PropTypes.bool.isRequired,
     multiple: PropTypes.bool.isRequired,
-    tagColor: PropTypes.string
+    tagColor: PropTypes.string,
+    errorText: PropTypes.string
 };
 
 export default MenuInput;

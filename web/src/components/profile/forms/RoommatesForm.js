@@ -28,6 +28,7 @@ class RoommatesForm extends React.Component {
             hometown: '',
             motto: '',
             tags: [],
+            showError: false
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -35,6 +36,15 @@ class RoommatesForm extends React.Component {
         this.onHometownChange = this.onHometownChange.bind(this);
         this.onMottoChange = this.onMottoChange.bind(this);
         this.onTagChange = this.onTagChange.bind(this);
+        this.showError = this.showError.bind(this);
+    }
+
+    showError(field) {
+        if (this.state.showError) {
+            return field.length?'':'必填';
+        } else {
+            return "";
+        }
     }
 
     componentWillReceiveProps() {
@@ -75,9 +85,13 @@ class RoommatesForm extends React.Component {
     }
 
     onDoneHandler() {
-        this.props.onDone(this.state);
-        this.props.onWeChatIdDone(this.state.weChatId);
-        this.props.onClose();
+        if (this.state.weChatId && this.state.location && this.state.hometown && this.state.motto && this.state.tags.length) {
+            this.props.onDone(this.state);
+            this.props.onWeChatIdDone(this.state.weChatId);
+            this.props.onClose();
+        } else {
+            this.setState({showError: true});
+        }
     }
 
     render() {
@@ -97,6 +111,7 @@ class RoommatesForm extends React.Component {
                                label={'微信号'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
+                               errorText={this.showError(this.state.weChatId)}
                     />
                 }
                 <MenuInput classNames={'form-input-field'}
@@ -109,6 +124,7 @@ class RoommatesForm extends React.Component {
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
                            multiple={false}
+                           errorText={this.showError(this.state.location)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<HometownIcon color={PRIMARY_BLUE}/>}
@@ -120,12 +136,14 @@ class RoommatesForm extends React.Component {
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
                            multiple={false}
+                           errorText={this.showError(this.state.hometown)}
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_BLUE}/>}
                            label={'一句话'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
+                           errorText={this.showError(this.state.motto)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_BLUE}/>}
@@ -137,6 +155,7 @@ class RoommatesForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={true}
                            multiple={true}
+                           errorText={this.showError(this.state.tags)}
                 />
             </ModalForm>
         )
