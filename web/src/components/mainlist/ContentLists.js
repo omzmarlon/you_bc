@@ -143,7 +143,7 @@ export const MottoInfo = (props) => (
                 }
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto} maxLength={6}/>}
     />
 );
 MottoInfo.propTypes = {
