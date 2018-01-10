@@ -11,30 +11,29 @@ import Block from "../components/homePage/Block";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Profile from 'material-ui/svg-icons/action/account-circle';
 import Rollable from '../components/common/Rollable';
-//assets
-// TODO: change svg icons
-import MacIcon from 'material-ui/svg-icons/hardware/desktop-mac'
-import WindowIcon from 'material-ui/svg-icons/hardware/desktop-windows'
-import DockIcon from 'material-ui/svg-icons/hardware/dock'
-import SecurityIcon from 'material-ui/svg-icons/hardware/security'
-import PhoneIcon from 'material-ui/svg-icons/hardware/smartphone'
-import AndroidIcon from 'material-ui/svg-icons/hardware/phone-android'
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_ROOMMATES, TO_PROFILE} from "../constants/api";
+//assets
+import ChickenIcon from "../components/common/svg/ChickenIcon";
+import CatIcon from "../components/common/svg/CatIcon";
+import WaveIcon from "../components/common/svg/WaveIcon";
+import CannonIcon from "../components/common/svg/CannonIcon";
+import BasketballIcon from "../components/common/svg/BasketballIcon";
+import FoodIcon from "../components/common/svg/FoodIcon";
 
 const rollingIconStyle = {
     color: PRIMARY_WHITE,
-    width: 36,
-    height: 36
+    width: 40,
+    height: 40
 };
 
 const friendRollingIcon = [
-    <MacIcon style={rollingIconStyle} />,
-    <DockIcon style={rollingIconStyle} />,
-    <SecurityIcon style={rollingIconStyle} />,
-    <WindowIcon style={rollingIconStyle} />,
-    <PhoneIcon style={rollingIconStyle} />,
-    <AndroidIcon style={rollingIconStyle} />
+    <ChickenIcon style={rollingIconStyle}/>,
+    <CatIcon style={rollingIconStyle}/>,
+    <WaveIcon style={rollingIconStyle}/>,
+    <CannonIcon style={rollingIconStyle}/>,
+    <BasketballIcon style={rollingIconStyle}/>,
+    <FoodIcon style={rollingIconStyle}/>
 ];
 
 class HomePageContainer extends Component {
