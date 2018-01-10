@@ -16,6 +16,7 @@ import FacultyIcon from "../common/svg/FacultyIcon";
 import RelationshipIcon from "../common/svg/RelationshipIcon";
 
 import './ContentLists.less';
+import TagIcon from "../common/svg/TagIcon";
 
 const iconStyle = {
     width: 15,
@@ -68,17 +69,28 @@ CourseInfo.propTypes = {
 
 export const StudyAbilityInfo = (props) => (
     <InfoRow
-        leftElement={<span>自我描述:</span>}
+        leftElement={
+            <InfoRow
+                leftElement={<MottoIcon style={{...iconStyle, ...{color: props.color}}}/>}
+                rightElement={<span style={{paddingLeft: 3}}>自我描述:</span>}
+            />
+        }
         rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility}/>}
     />
 );
 StudyAbilityInfo.propTypes = {
+    color: PropTypes.string.isRequired,
     studyAbility: PropTypes.string.isRequired
 };
 
 export const StudyRequirementInfo = (props) => (
     <InfoRow
-        leftElement={<span>一起:</span>}
+        leftElement={
+            <InfoRow
+                leftElement={<TagIcon style={{...iconStyle, ...{color: props.color}}}/>}
+                rightElement={<span style={{paddingLeft: 3}}>一起:</span>}
+            />
+        }
         rightElement={
             <span className="content-list-item-tags">
                 {props.requirements.map(req =>
@@ -121,7 +133,16 @@ HometownInfo.propTypes = {
 
 export const MottoInfo = (props) => (
     <InfoRow
-        leftElement={<MottoIcon style={{...iconStyle, ...{color: props.color}}} />}
+        leftElement={
+            <InfoRow
+                leftElement={
+                    <MottoIcon style={{...iconStyle, ...{color: props.color}}} />
+                }
+                rightElement={
+                    <span style={{paddingLeft: 3}}>一句话</span>
+                }
+            />
+        }
         rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto}/>}
     />
 );
@@ -132,7 +153,12 @@ MottoInfo.propTypes = {
 
 export const HobbyInfo = (props) => (
     <InfoRow
-        leftElement={<span>兴趣:</span>}
+        leftElement={
+            <InfoRow
+                leftElement={<TagIcon style={{...iconStyle, ...{color: props.color}}}/>}
+                rightElement={<span style={{paddingLeft: 3}}>兴趣:</span>}
+            />
+        }
         rightElement={
             <span className="content-list-item-tags">
                 {props.hobbies.map(hobby =>
@@ -153,7 +179,14 @@ HobbyInfo.propTypes = {
 export const FacultyInfo = (props) => (
     <InfoRow
         leftElement={
-            <FacultyIcon style={{...iconStyle, ...{color: props.color}}}/>
+            <InfoRow
+                leftElement={
+                    <FacultyIcon style={{...iconStyle, ...{color: props.color}}}/>
+                }
+                rightElement={
+                    <span style={{paddingLeft: 3}}>学院:</span>
+                }
+            />
         }
         rightElement={
             <span style={{paddingLeft: 8}}>{props.faculty} {props.year}</span>
@@ -168,7 +201,16 @@ FacultyInfo.propTypes = {
 
 export const RelationshipInfo = (props) => (
     <InfoRow
-        leftElement={<RelationshipIcon style={{color: props.color, height: 16, width: 16}}/>}
+        leftElement={
+            <InfoRow
+                leftElement={
+                    <RelationshipIcon style={{color: props.color, height: 16, width: 16}}/>
+                }
+                rightElement={
+                    <span style={{paddingLeft: 3}}>情感:</span>
+                }
+            />
+        }
         rightElement={<span style={{paddingLeft: 8}}>{props.relationship}</span>}
     />
 );
