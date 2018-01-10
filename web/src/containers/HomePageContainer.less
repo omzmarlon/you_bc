@@ -5,12 +5,14 @@
 
 .home-page {
   height: 100vh;
+  position: relative;
+  overflow: hidden;
 
   .classmate-block {
     height: 40vh;
     transform: skewY(@skewScale);
     position: absolute;
-    top: -5vh;
+    top: -7vh;
     z-index: 100;
     span {
       transform: skewY(-1 * @skewScale) translateY(3vh);
@@ -19,8 +21,8 @@
 
   .friend-block {
     position: absolute;
-    top: 30vh;
-    height: 43% !important;
+    top: 26vh;
+    height: 46% !important;
   }
 
   .roommate-block {

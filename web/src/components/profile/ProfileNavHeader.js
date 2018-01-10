@@ -15,7 +15,7 @@ ProfileNavHeader.propTypes = {
 const mapStateToProps = (state, ownProps) => {
     let title = '';
     if (state.profileUI.panelIndex === 0) {
-        title = `${state.global.username}的个人主页`;
+        title = "个人主页";
     } else if (state.profileUI.panelIndex === 1) {
         title = '已匹配';
     }
