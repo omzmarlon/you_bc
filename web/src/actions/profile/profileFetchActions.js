@@ -11,10 +11,10 @@ export const fetchClassmatesInfo = () => dispatch => {
     return Promise.resolve(
             {
                 values: {
-                    major: 'CPSC',
-                    courses: ['MATH 307', 'CPSC 310', 'CPSC 340'],
-                    motto: '我是一个大学霸',
-                    tags: ['Good', 'Great', 'Handsome'],
+                    major: '',
+                    courses: [],
+                    motto: '',
+                    tags: [],
                 },
                 options: {
                     majorOptions: ['CPSC', 'ECON', 'COMM', 'CHEM', 'PHYS'],
@@ -37,10 +37,10 @@ export const fetchRoommatesInfo = () => dispatch => {
     return Promise.resolve(
         {
             values: {
-                location: 'West Vancouver',
-                hometown: '福州',
-                motto: '我是一个爱干净的人',
-                tags: ['Clean', 'Early'],
+                location: '',
+                hometown: '',
+                motto: '',
+                tags: [],
             },
             options: {
                 locationOptions: ['West Vancouver', 'Wesbrook Village', 'On campus'],
@@ -62,10 +62,10 @@ export const fetchFriendsInfo = () => dispatch => {
     return Promise.resolve(
         {
             values: {
-                faculty: 'Science',
-                relationship: '单身',
-                motto: '约约约',
-                tags: ['Coding', '约', 'Coffee', 'photography'],
+                faculty: '',
+                relationship: '',
+                motto: '',
+                tags: [],
             },
             options: {
                 facultyOptions: ['Science', 'Forestry', 'Sauder', 'Arts'],
@@ -87,11 +87,13 @@ export const fetchPersonalInfo = () => dispatch => {
     return Promise.resolve({
         values: {
             avatar: 'https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4',
-            age: 22,
-            constellation: '天蝎座'
+            age: 0,
+            constellation: ''
         },
         options: {
-            constellationOptions: ['天蝎座', '水瓶座']
+            constellationOptions: [
+                "天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"
+            ]
         }
     }).then(
         response => dispatch(receivePersonalInfo(response)),

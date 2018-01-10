@@ -26,6 +26,7 @@ class FriendsForm extends React.Component {
             relationship: '',
             motto: '',
             tags: [],
+            showError: false
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -33,6 +34,15 @@ class FriendsForm extends React.Component {
         this.onRelationshipChange = this.onRelationshipChange.bind(this);
         this.onMottoChange = this.onMottoChange.bind(this);
         this.onTagChange = this.onTagChange.bind(this);
+        this.showError = this.showError.bind(this);
+    }
+
+    showError(field) {
+        if (this.state.showError) {
+            return field.length?'':'必填';
+        } else {
+            return "";
+        }
     }
 
     componentWillReceiveProps() {
@@ -73,9 +83,13 @@ class FriendsForm extends React.Component {
     }
 
     onDoneHandler() {
-        this.props.onDone(this.state);
-        this.props.onWeChatIdDone(this.state.weChatId);
-        this.props.onClose();
+        if (this.state.weChatId && this.state.faculty && this.state.relationship && this.state.motto && this.state.tags.length) {
+            this.props.onDone(this.state);
+            this.props.onWeChatIdDone(this.state.weChatId);
+            this.props.onClose();
+        } else {
+            this.setState({showError: true});
+        }
     }
 
     render() {
@@ -94,6 +108,7 @@ class FriendsForm extends React.Component {
                                label={'微信号'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
+                               errorText={this.showError(this.state.weChatId)}
                     />
                 }
                 <MenuInput inputIcon={<FacultyIcon/>}
@@ -105,6 +120,7 @@ class FriendsForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={false}
                            multiple={false}
+                           errorText={this.showError(this.state.faculty)}
                 />
                 <MenuInput inputIcon={<RelationshipIcon color={PRIMARY_YELLOW} />}
                            label={'情感状况'}
@@ -115,12 +131,14 @@ class FriendsForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={false}
                            multiple={false}
+                           errorText={this.showError(this.state.relationship)}
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_YELLOW}/>}
                            label={'一句话'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
+                           errorText={this.showError(this.state.motto)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_YELLOW}/>}
@@ -132,6 +150,7 @@ class FriendsForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={true}
                            multiple={true}
+                           errorText={this.showError(this.state.tags)}
                 />
             </ModalForm>
         )

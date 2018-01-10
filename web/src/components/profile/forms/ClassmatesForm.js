@@ -29,6 +29,7 @@ class ClassmatesForm extends React.Component {
             courses: [],
             motto: '',
             tags: [],
+            showError: false
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -36,6 +37,15 @@ class ClassmatesForm extends React.Component {
         this.onCoursesChange = this.onCoursesChange.bind(this);
         this.onMottoChange = this.onMottoChange.bind(this);
         this.onTagChange = this.onTagChange.bind(this);
+        this.showError = this.showError.bind(this);
+    }
+
+    showError(field) {
+        if (this.state.showError) {
+            return field.length?'':'必填';
+        } else {
+            return "";
+        }
     }
 
     componentWillReceiveProps() {
@@ -83,9 +93,13 @@ class ClassmatesForm extends React.Component {
     }
 
     onDoneHandler() {
-        this.props.onDone(this.state);
-        this.props.onWeChatIdDone(this.state.weChatId);
-        this.props.onClose();
+        if (this.state.weChatId && this.state.major && this.state.courses.length && this.state.motto && this.state.tags.length) {
+            this.props.onDone(this.state);
+            this.props.onWeChatIdDone(this.state.weChatId);
+            this.props.onClose();
+        } else {
+            this.setState({showError: true});
+        }
     }
 
     render() {
@@ -104,6 +118,7 @@ class ClassmatesForm extends React.Component {
                                label={'微信号'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
+                               errorText={this.showError(this.state.weChatId)}
                     />
                 }
                 <MenuInput classNames={'form-input-field'}
@@ -116,6 +131,7 @@ class ClassmatesForm extends React.Component {
                            tagDisplay={false}
                            tagColor={PRIMARY_RED}
                            multiple={false}
+                           errorText={this.showError(this.state.major)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<CourseIcon color={PRIMARY_RED}/>}
@@ -127,12 +143,14 @@ class ClassmatesForm extends React.Component {
                            tagColor={PRIMARY_RED}
                            tagDisplay={false}
                            multiple={true}
+                           errorText={this.showError(this.state.courses)}
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_RED}/>}
                            label={'一句话'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
+                           errorText={this.showError(this.state.motto)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_RED}/>}
@@ -144,6 +162,7 @@ class ClassmatesForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={true}
                            multiple={true}
+                           errorText={this.showError(this.state.tags)}
                 />
             </ModalForm>
         )

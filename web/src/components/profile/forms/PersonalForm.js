@@ -22,12 +22,22 @@ class PersonalForm extends React.Component {
         this.state = {
             weChatId: '',
             age: 0,
-            constellation: ''
+            constellation: '',
+            showError: false
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
         this.onAgeChangeHandler = this.onAgeChangeHandler.bind(this);
         this.onConstellationChangeHandler = this.onConstellationChangeHandler.bind(this);
+        this.showError = this.showError.bind(this);
+    }
+
+    showError(field) {
+        if (this.state.showError) {
+            return field?'':'必填';
+        } else {
+            return "";
+        }
     }
 
     componentWillReceiveProps() {
@@ -55,9 +65,13 @@ class PersonalForm extends React.Component {
     }
 
     onDoneHandler() {
-        this.props.onDone(this.state);
-        this.props.onWeChatIdDone(this.state.weChatId);
-        this.props.onClose();
+        if (this.state.weChatId && this.state.age && this.state.constellation) {
+            this.props.onDone(this.state);
+            this.props.onWeChatIdDone(this.state.weChatId);
+            this.props.onClose();
+        } else {
+            this.setState({showError: true});
+        }
     }
 
     render() {
@@ -76,6 +90,7 @@ class PersonalForm extends React.Component {
                                label={'微信号'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
+                               errorText={this.showError(this.state.weChatId)}
                     />
                 }
                 <TextInput inputIcon={<AgeIcon color={PRIMARY_GREEN} />}
@@ -83,6 +98,7 @@ class PersonalForm extends React.Component {
                            onChange={this.onAgeChangeHandler}
                            value={this.state.age}
                            type={'number'}
+                           errorText={this.showError(this.state.age)}
                 />
                 <MenuInput inputIcon={<ConstellationIcon color={PRIMARY_GREEN} />}
                            label={'星座'}
@@ -93,6 +109,7 @@ class PersonalForm extends React.Component {
                            tagColor={PRIMARY_GREEN}
                            tagDisplay={false}
                            multiple={false}
+                           errorText={this.showError(this.state.constellation)}
                 />
             </ModalForm>
         );
