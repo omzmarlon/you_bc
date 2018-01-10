@@ -33,7 +33,7 @@ class MatchedUserCard extends React.Component {
         return (
             <PokeCard
                 rightCorner={
-                    <Clipboard data-clipboard-text={this.props.weChatId} onClick={this.notifySuccessCopy} style={{borderStyle: 'none'}}>
+                    <Clipboard data-clipboard-text={this.props.weChatId} onClick={this.notifySuccessCopy}>
                         <CopyIcon style={{color: 'grey', height: 24, width: 24}}/>
                     </Clipboard>
                 }
@@ -44,8 +44,10 @@ class MatchedUserCard extends React.Component {
                         img={this.props.avatarURL}
                     />
                     <div className="matched-user-card-info">
-                        <div className="--name">{this.props.username}</div>
-                        <div className="--weChat">微信号：{this.props.weChatId}</div>
+                        <div className="matched-user-card-text">
+                            <span className="--name">{this.props.username}</span>
+                            <span className="--weChat">微信号：{this.props.weChatId}</span>
+                        </div>
                         <div className="matched-user-card-tags">
                             {
                                 this.props.matchedAtClassmates &&

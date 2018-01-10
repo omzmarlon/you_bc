@@ -1,5 +1,5 @@
-@import "../../../styles/constants/fonts";
-@import "../../../styles/constants/colors";
+@import (reference) "../../../styles/constants/fonts";
+@import (reference) "../../../styles/constants/colors";
 
 .matched-user-card-body {
   display: flex;
@@ -8,22 +8,24 @@
   padding: 10px;
 
   .matched-user-card-avatar {
-
+    transform: translateY(-10px);
   }
 
   .matched-user-card-info {
     margin-left: 15px;
-    .--name {
-      font-family: @generalFontFamily;
-      font-size: 18px;
-      color: @generalText;
+    .matched-user-card-text {
       margin-bottom: 8px;
-    }
+      .--name {
+        .common-font;
+        color: @generalText;
+        padding-right: 8px;
+      }
 
-    .--weChat {
-      .common-font;
-      color: @secondaryText;
-      margin-bottom: 8px;
+      .--weChat {
+        font-size: small;
+        font-family: @generalFontFamily;
+        color: @secondaryText;
+      }
     }
 
     .matched-user-card-tags {
