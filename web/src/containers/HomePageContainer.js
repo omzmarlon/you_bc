@@ -28,24 +28,23 @@ const rollingIconStyle = {
     height: 36
 };
 
+const friendRollingIcon = [
+    <MacIcon style={rollingIconStyle} />,
+    <DockIcon style={rollingIconStyle} />,
+    <SecurityIcon style={rollingIconStyle} />,
+    <WindowIcon style={rollingIconStyle} />,
+    <PhoneIcon style={rollingIconStyle} />,
+    <AndroidIcon style={rollingIconStyle} />
+];
+
 class HomePageContainer extends Component {
     render() {
-
         const friendDisplayName = (
             <div className="friend-display-name">
                 <span>找</span>
                 <Rollable
                     rollingInterval={2500}
-                    rollingItems={
-                        [
-                            <MacIcon style={rollingIconStyle} />,
-                            <DockIcon style={rollingIconStyle} />,
-                            <SecurityIcon style={rollingIconStyle} />,
-                            <WindowIcon style={rollingIconStyle} />,
-                            <PhoneIcon style={rollingIconStyle} />,
-                            <AndroidIcon style={rollingIconStyle} />
-                        ]
-                    }
+                    rollingItems={friendRollingIcon}
                 />
                 <span>友</span>
             </div>
