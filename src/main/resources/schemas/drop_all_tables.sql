@@ -23,4 +23,7 @@ DROP TABLE roommates_locations;
 DROP TABLE profile_image;
 DROP TABLE user_profile;
 DROP TABLE ubc_student_verification;
+DROP TABLE answer;
+DROP TABLE question;
+DROP TABLE survey;
 DROP TABLE user;
