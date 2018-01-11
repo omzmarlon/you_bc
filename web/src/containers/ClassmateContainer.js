@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
     isFetching: state.mainList.isFetching,
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
-    hasInfo: state.profile.classmates.values.major === ""
+    hasInfo: !(state.profile.classmates.values.major === "")
 });
 
 export default connect(mapStateToProps)(ClassmateContainer);

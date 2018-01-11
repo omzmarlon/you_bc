@@ -78,7 +78,7 @@ const mapStateToProps = state => ({
     isFetching: state.mainList.isFetching,
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
-    hasInfo: state.profile.roommates.values.hometown === ""
+    hasInfo: !(state.profile.roommates.values.hometown === "")
 });
 
 export default connect(mapStateToProps)(RoommateContainer);
