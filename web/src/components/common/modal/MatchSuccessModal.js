@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Dialog, RaisedButton} from "material-ui";
 import "./MatchSuccessModal.less";
-import {GENERAL_TEXT, PRIMARY_RED, PRIMARY_WHITE} from "../../styles/constants/colors";
-import PokeAvatar from "../common/PokeAvatar";
-import RibbonIcon from "../common/svg/RibbonIcon";
+import {GENERAL_TEXT, PRIMARY_RED, PRIMARY_WHITE} from "../../../styles/constants/colors";
+import PokeAvatar from "../../common/PokeAvatar";
+import RibbonIcon from "../../common/svg/RibbonIcon";
 
 const MatchSuccessModal = (props) => {
     return (

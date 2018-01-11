@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Dialog, IconButton} from "material-ui";
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
-import CheckIcon from '../common/svg/CheckIcon';
+import CheckIcon from '../svg/CheckIcon';
 import "./SurveyCompleteModal.less";
 
 const closeIconStyle = {
