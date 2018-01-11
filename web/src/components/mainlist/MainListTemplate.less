@@ -4,16 +4,20 @@
 
 .main-list-container {
   margin-top: @header-height;
-  height: 100%;
+  height: 92vh; // NOTE: this height is 100vh - @header-height
 
   .main-list-card-list {
     background-color: @pageBackground;
     padding: 12px;
-    height: 90vh;
+    height: 96%;
     overflow-y: scroll;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
     .main-list-row-wrapper {
+      flex: 1 0 auto;
 
       .--smile {
         float: left;
@@ -47,7 +51,7 @@
     }
 
     .main-list-card-list-item {
-      margin-bottom: 15px;
+      //margin-bottom: 15px;
       .card-list-item-tags {
         display: flex;
         padding-left: 3px;
