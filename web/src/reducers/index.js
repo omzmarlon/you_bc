@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     mainList,
     profile,
     profileUI,
-    verification
+    verification,
 });
 
 export default rootReducer;

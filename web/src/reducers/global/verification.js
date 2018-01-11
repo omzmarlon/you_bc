@@ -5,7 +5,8 @@ const initial = {
     isStudentCardVerified: false,
     studentCardUrl: '',
     isEmailVerified: false,
-    email: ''
+    email: '',
+    pending: 'none' // one of ['none', 'email', 'card']; so that we know what the status is
 };
 
 const verification = (state = initial, action) => {
