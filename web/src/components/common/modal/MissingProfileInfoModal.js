@@ -20,24 +20,16 @@ const MissingProfileInfoModal = (props) => {
             style={{top: '-6vh'}}
             actionsContainerClassName="survey-complete-modal-buttons"
             actions={[
-                <RaisedButton
-                    onClick={props.onClose}
-                    backgroundColor={PRIMARY_GREEN}
-                    label="稍后再说"
-                    labelColor={PRIMARY_WHITE}
-                />,
-                <Link to={TO_PROFILE}>
+                <Link style={{width: '100%'}} to={TO_PROFILE} >
                     <RaisedButton
                         backgroundColor={PRIMARY_GREEN}
+                        fullWidth={true}
                         label="去填写"
                         labelColor={PRIMARY_WHITE}
                     />
                 </Link>
             ]}
         >
-            <IconButton onClick={props.onClose} style={closeIconStyle}>
-                <CloseIcon/>
-            </IconButton>
             <p className="survey-complete-modal-text">{props.content}</p>
         </Dialog>
     );
