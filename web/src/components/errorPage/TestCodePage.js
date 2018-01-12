@@ -20,7 +20,7 @@ class TestCodePage extends React.Component {
     render() {
         return (
             <Dialog
-                title={'请输入内侧码'}
+                title={'请输入内测授权码'}
                 modal={true}
                 open={this.state.testCode !== 'pokedemo'}
                 contentStyle={{

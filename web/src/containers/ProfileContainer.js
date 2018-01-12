@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // components
 import ProfileTabBar from '../components/profile/ProfileTabBar';
 import ProfileNavHeader from '../components/profile/ProfileNavHeader';
+import { Redirect } from "react-router-dom";
 //styles
 import './ProfileContainer.less';
 // icons
@@ -30,16 +31,20 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <ProfileNavHeader/>
-                <div className={'profile-container'} style={{overflow: 'scroll', height: '100%'}}>
-                    { this.props.panelIndex === 0 && <ProfileMain /> }
-                    { this.props.panelIndex === 1 && <MatchingList /> }
-                    <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.props.onTabMatching} />
+        if (this.props.grantAccess) {
+            return (
+                <div>
+                    <ProfileNavHeader/>
+                    <div className={'profile-container'} style={{overflow: 'scroll', height: '100%'}}>
+                        { this.props.panelIndex === 0 && <ProfileMain /> }
+                        { this.props.panelIndex === 1 && <MatchingList /> }
+                        <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.props.onTabMatching} />
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return <Redirect to={"/"}/>
+        }
     }
 }
 
@@ -56,7 +61,11 @@ ProfileContainer.contextTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-    panelIndex: state.profileUI.panelIndex
+    panelIndex: state.profileUI.panelIndex,
+    grantAccess:
+    (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
+    &&
+    state.authentication.authStatusCode===200
 });
 
 const mapDispatchToProps = (dispatch) => {
