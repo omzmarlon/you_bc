@@ -33,7 +33,7 @@ class MatchedUserCard extends React.Component {
         return (
             <PokeCard
                 rightCorner={
-                    <Clipboard data-clipboard-text={this.props.weChatId} onClick={this.notifySuccessCopy}>
+                    <Clipboard data-clipboard-text={this.props.weChatId} onClick={this.notifySuccessCopy} style={{borderStyle: 'none'}}>
                         <CopyIcon style={{color: 'grey', height: 24, width: 24}}/>
                     </Clipboard>
                 }
