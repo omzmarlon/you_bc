@@ -50,7 +50,7 @@ class AuthFacade extends Component {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.global.authStatusCode === 200,
+    isAuthenticated: state.authentication.authStatusCode === 200,
     isVerified: state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified,
     pending: state.verification.pending
 });

@@ -19,9 +19,9 @@ const AuthPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    isAuthenticating: state.global.isAuthenticating,
-    statusCode: state.global.authStatusCode,
-    errorMessage: state.global.authMessage
+    isAuthenticating: state.authentication.isAuthenticating,
+    statusCode: state.authentication.authStatusCode,
+    errorMessage: state.authentication.authMessage
 });
 
 export default connect(mapStateToProps)(AuthPage);
