@@ -7,6 +7,10 @@ import {RaisedButton} from "material-ui";
 import {GENERAL_TEXT, PRIMARY_GREEN, PRIMARY_WHITE} from "../../styles/constants/colors";
 import StudentCard from "../../components/common/svg/StudentCard";
 import "./StudentCardCheckContainer.less";
+//redux
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {switchVerificationMethod} from "../../actions/global/verificationActions";
 
 class StudentCardCheckContainer extends Component {
     render() {
@@ -24,7 +28,7 @@ class StudentCardCheckContainer extends Component {
                         labelColor={PRIMARY_WHITE}
                     />
                     <RaisedButton
-                        onClick={() => {}}
+                        onClick={() => {this.props.switchVerification('email')}}
                         fullWidth={true}
                         style={{marginBottom: 12}}
                         label="其他方式验证"
@@ -36,4 +40,19 @@ class StudentCardCheckContainer extends Component {
     }
 }
 
-export default StudentCardCheckContainer;
+StudentCardCheckContainer.propTypes = {
+    switchVerification: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state, ownProps) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => (
+    bindActionCreators({
+        switchVerification: switchVerificationMethod
+    }, dispatch)
+);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentCardCheckContainer);

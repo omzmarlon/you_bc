@@ -9,7 +9,7 @@ import {PRIMARY_GREEN} from "../../styles/constants/colors";
 import Paper from "material-ui/Paper";
 
 const bodyStyle = {
-    maxHeight: '75vh',
+    maxHeight: '85vh',
     width: '90vw',
     margin: 'auto',
     transform: 'translateY(18vh)'

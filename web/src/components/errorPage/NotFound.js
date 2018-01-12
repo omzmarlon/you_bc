@@ -6,7 +6,7 @@ const NotFound = () => {
     return (
         <div className="not-found">
             <img src={warningIcon} alt="Warning!"/>
-            <p>此内容因违规无法查看</p>
+            <p>同学，没事别随便乱看哦</p>
         </div>
     );
 };
