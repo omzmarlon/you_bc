@@ -14,8 +14,7 @@ import EmailCheckContainer from "./verification/EmailCheckContainer";
 import StudentCardCheckContainer from "./verification/StudentCardCheckContainer";
 // constants
 import {
-    TO_CLASSMATES, TO_EMAIL_CHECK, TO_FRIENDS, TO_LOCATION_CHECK, TO_PROFILE, TO_ROOMMATES,
-    TO_STUDENT_CARD_CHECK
+    TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES
 } from "../constants/api";
 import DemoContainer from "../components/DemoContainer";
 
@@ -28,9 +27,6 @@ class App extends Component {
                 <Route path={TO_FRIENDS} component={FriendContainer}/>
                 <Route path={TO_ROOMMATES} component={RoommateContainer}/>
                 <Route path={TO_PROFILE} component={ProfileContainer}/>
-                <Route path={TO_LOCATION_CHECK} component={LocationCheckContainer}/>
-                <Route path={TO_EMAIL_CHECK} component={EmailCheckContainer}/>
-                <Route path={TO_STUDENT_CARD_CHECK} component={StudentCardCheckContainer}/>
                 <Route path='/demo' component={DemoContainer}/>
                 <Route component={NotFound}/>
             </Switch>
