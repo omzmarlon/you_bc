@@ -5,6 +5,7 @@ import global from './global/global';
 import verification from './global/verification';
 import globalUI from './global/globalUI';
 import mainList from "./mainList/mainList";
+import authentication from "./global/authentication";
 
 const rootReducer = combineReducers({
     global,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     mainList,
     profile,
     profileUI,
-    verification
+    verification,
+    authentication
 });
 
 export default rootReducer;

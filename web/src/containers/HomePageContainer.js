@@ -42,7 +42,7 @@ class HomePageContainer extends Component {
             <div className="friend-display-name">
                 <span>找</span>
                 <Rollable
-                    rollingInterval={2500}
+                    rollingInterval={1000}
                     rollingItems={friendRollingIcon}
                 />
                 <span>友</span>

@@ -8,7 +8,8 @@ export const fetchVerification = () => dispatch => {
         isStudentCardVerified: false,
         studentCardUrl: '',
         isEmailVerified: false,
-        email: ''
+        email: '',
+        pending: 'none'
     }).then(
         response => dispatch(receiveVerification(response)),
         err => console.log('implement certain error handling')
