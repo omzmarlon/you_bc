@@ -8,6 +8,7 @@ import App from './containers/App';
 import { BrowserRouter } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import InfoBar from "./components/common/InfoBar";
+import TestCodePage from "./components/errorPage/TestCodePage";
 
 // const preloadedState = window.__PRELOADED_STATE__;  // for server-side rendering
 const store = configureStore({});
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Provider store={store}>
             <div>
                 <InfoBar/>
+                <TestCodePage/>
                 <BrowserRouter>
                     <App />
                 </BrowserRouter>

@@ -30,9 +30,11 @@ class LocationCheckContainer extends Component {
         // max tolerance 0.028999999999997833
         const ubcLat  = 49.2606;
         const ubcLong = -123.2460;
+        const tolerance = 0.028999999999997833;
 
         const distance = Math.sqrt(Math.pow(ubcLat-position.coords.latitude, 2) + Math.pow(ubcLong-position.coords.longitude, 2));
-        if (distance < 0.028999999999997833) {
+        //distance < tolerance
+        if (true) { // disable location for now
             this.props.verify();
             this.props.showInfoBar("认证成功");
         } else {
@@ -43,8 +45,8 @@ class LocationCheckContainer extends Component {
     }
 
     onClickVerify() {
-        this.setState({isVerifying: true});
         if (navigator.geolocation) {
+            this.setState({isVerifying: true});
             navigator.geolocation.getCurrentPosition(this.verifyLocation);
         } else {
             this.props.showInfoBar("同学的浏览器不支持地理位置获取，请用其他方式认证");
@@ -53,7 +55,9 @@ class LocationCheckContainer extends Component {
 
     render() {
         return (
-            <VerificationTemplate header="地理位置设定">
+            <VerificationTemplate
+                header="验证学生身份"
+            >
                 <div className="location-check-container">
                     <p className="content">为了确认用户 <span className="highlight">UBC学生身份</span> ，我们需要获取您的地理位置</p>
                     <div className="location-check-img"><LocationImg/></div>

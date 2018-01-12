@@ -9,7 +9,6 @@ import AuthPage from "../components/errorPage/AuthPage";
 import EmailCheckContainer from "./verification/EmailCheckContainer";
 import StudentCardCheckContainer from "./verification/StudentCardCheckContainer";
 import LocationCheckContainer from "./verification/LocationCheckContainer";
-import TestCodePage from "../components/errorPage/TestCodePage";
 
 
 class AuthFacade extends Component {
@@ -19,11 +18,6 @@ class AuthFacade extends Component {
             testCode: ''
         };
         this.login = this.login.bind(this);
-        this.onEnterTestCode = this.onEnterTestCode.bind(this);
-    }
-
-    onEnterTestCode(event, newValue) {
-        this.setState({testCode: newValue});
     }
 
     login() {
@@ -39,37 +33,33 @@ class AuthFacade extends Component {
 
     render() {
         const { isAuthenticated, isVerified, pending, using } = this.props;
-        if (this.state.testCode === 'pokedemo') {
-            if (isAuthenticated) {
-                if (isVerified) {
-                    return <HomePageContainer/>;
+        if (isAuthenticated) {
+            if (isVerified) {
+                return <HomePageContainer/>;
+            } else {
+                if (pending !== 'none') {
+                    switch (pending) {
+                        case 'email':
+                            return <EmailCheckContainer/>;
+                        case 'card':
+                            return <StudentCardCheckContainer/>;
+                        case 'none':
+                        default:
+                            return <LocationCheckContainer/>;
+                    }
                 } else {
-                    if (pending !== 'none') {
-                        switch (pending) {
-                            case 'email':
-                                return <EmailCheckContainer/>;
-                            case 'card':
-                                return <StudentCardCheckContainer/>;
-                            case 'none':
-                            default:
-                                return <LocationCheckContainer/>;
-                        }
-                    } else {
-                        switch (using) {
-                            case 'email':
-                                return <EmailCheckContainer/>;
-                            case 'card':
-                                return <StudentCardCheckContainer/>;
-                            default:
-                                return <LocationCheckContainer/>;
-                        }
+                    switch (using) {
+                        case 'email':
+                            return <EmailCheckContainer/>;
+                        case 'card':
+                            return <StudentCardCheckContainer/>;
+                        default:
+                            return <LocationCheckContainer/>;
                     }
                 }
-            } else {
-                return <AuthPage/>;
             }
         } else {
-            return <TestCodePage onChange={this.onEnterTestCode}/>;
+            return <AuthPage/>;
         }
     }
 }

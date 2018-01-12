@@ -12,7 +12,7 @@ const bodyStyle = {
     maxHeight: '85vh',
     width: '90vw',
     margin: 'auto',
-    transform: 'translateY(18vh)'
+    transform: 'translateY(15vh)'
 };
 
 class VerificationTemplate extends Component {
@@ -20,7 +20,7 @@ class VerificationTemplate extends Component {
     render() {
         return (
             <div className="verification-container">
-                <NavHeader color={PRIMARY_GREEN} title={this.props.header} />
+                <NavHeader color={PRIMARY_GREEN} title={this.props.header} onClickGoBack={this.props.onClickGoBack} />
                 <Paper style={bodyStyle} zDepth={1}>
                     {this.props.children}
                 </Paper>
@@ -30,7 +30,8 @@ class VerificationTemplate extends Component {
 }
 
 VerificationTemplate.propTypes = {
-    header: PropTypes.string.isRequired
+    header: PropTypes.string.isRequired,
+    onClickGoBack: PropTypes.func,
 };
 
 export default VerificationTemplate;

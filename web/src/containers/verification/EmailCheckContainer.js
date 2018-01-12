@@ -1,12 +1,17 @@
 'use strict';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import VerificationTemplate from "../../components/verification/VerificationTemplate";
 import './EmailCheckContainer.less';
 import {RaisedButton, TextField} from "material-ui";
 import {PRIMARY_GREEN, PRIMARY_WHITE} from "../../styles/constants/colors";
 import EmailImg from "../../components/common/svg/EmailImg";
 import FlatButton from 'material-ui/FlatButton';
+//redux
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {switchVerificationMethod} from "../../actions/global/verificationActions";
 
 const inputStyle = {
     width: '43vw',
@@ -68,7 +73,10 @@ class EmailCheckContainer extends Component {
 
     render() {
         return (
-            <VerificationTemplate header="验证学生身份">
+            <VerificationTemplate
+                header="验证学生身份"
+                onClickGoBack={() => {this.props.switchVerification('card')}}
+            >
                 <div className="email-check-container">
                     <p className="content">UBC邮箱</p>
                     <div className="email-check-img"><EmailImg/></div>
@@ -125,4 +133,19 @@ class EmailCheckContainer extends Component {
     }
 }
 
-export default EmailCheckContainer;
+EmailCheckContainer.propTypes = {
+    switchVerification: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state, ownProps) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => (
+    bindActionCreators({
+        switchVerification: switchVerificationMethod
+    }, dispatch)
+);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmailCheckContainer);

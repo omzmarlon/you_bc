@@ -1,28 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
-
-const style = {
-    position: 'fixed',
-    top: '45%',
-    width: '70vw'
-};
+import Dialog from 'material-ui/Dialog';
 
 class TestCodePage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            testCode: ''
+        };
+        this.onCodeChange = this.onCodeChange.bind(this);
+    }
+
+    onCodeChange(event, newValue) {
+        this.setState({testCode: newValue});
+    }
+
     render() {
         return (
-            <TextField
-                style={style}
-                hintText="请输入内侧码"
-                fullWidth={true}
-                onChange={this.props.onChange}
-            />
+            <Dialog
+                title={'请输入内侧码'}
+                modal={true}
+                open={this.state.testCode !== 'pokedemo'}
+                contentStyle={{
+                    width: '100%'
+                }}
+            >
+                <TextField
+                    hintText="请输入内测授权码"
+                    fullWidth={true}
+                    onChange={this.onCodeChange}
+                />
+            </Dialog>
         );
     }
 }
-
-TestCodePage.propTypes = {
-    onChange: PropTypes.func.isRequired
-};
 
 export default TestCodePage;

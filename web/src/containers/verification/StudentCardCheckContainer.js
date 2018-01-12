@@ -15,7 +15,10 @@ import {switchVerificationMethod} from "../../actions/global/verificationActions
 class StudentCardCheckContainer extends Component {
     render() {
         return (
-            <VerificationTemplate header="验证学生身份">
+            <VerificationTemplate
+                header="验证学生身份"
+                onClickGoBack={() => {this.props.switchVerification('location')}}
+            >
                 <div className={"student-card-check-container"}>
                     <p className="content">为了确认用户 <span className="highlight">UBC学生身份</span> ，需要上传同学的学生卡</p>
                     <div className="student-card-check-img"><StudentCard/></div>

@@ -15,7 +15,11 @@ class NavHeader extends React.Component {
     }
 
     goBack() {
-        window.history.back();
+        if (this.props.onClickGoBack) {
+            this.props.onClickGoBack();
+        } else {
+            window.history.back();
+        }
     }
 
     render() {
@@ -40,6 +44,8 @@ class NavHeader extends React.Component {
 NavHeader.propTypes = {
     title: PropTypes.string.isRequired,
     iconRight: PropTypes.element,
-    color: PropTypes.string.isRequired
+    color: PropTypes.string.isRequired,
+    onClickGoBack: PropTypes.func,
 };
+
 export default NavHeader;
