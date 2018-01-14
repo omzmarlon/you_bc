@@ -1,5 +1,8 @@
 package com.youbc.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true) // user info from WeChat has fields that we don't need
 public class WeChatUser {
     private String openid;
     private String nickname;

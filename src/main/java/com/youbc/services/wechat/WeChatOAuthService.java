@@ -31,7 +31,8 @@ public class WeChatOAuthService {
         if (YouBCUtils.isEmptyString(accessGrantCode)) {
             throw new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "access grant not found"));
         }
-        return getWeChatUserInfo(getWeChatToken(accessGrantCode).getAccess_token());
+        WeChatToken weChatToken = getWeChatToken(accessGrantCode);
+        return getWeChatUserInfo(weChatToken.getAccess_token(), weChatToken.getOpenid());
     }
 
     private WeChatToken getWeChatToken(String accessGrantCode) throws IOException {
@@ -51,8 +52,18 @@ public class WeChatOAuthService {
     }
 
 
-    private WeChatUser getWeChatUserInfo(String accessToken) {
-        return null;
+    private WeChatUser getWeChatUserInfo(String accessToken, String openId) throws IOException {
+        String url = String.format(
+                "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=en",
+                accessToken,
+                openId
+        );
+        WeChatUser weChatUser = mapper.readValue(Request.Get(url).execute().returnContent().asStream(), WeChatUser.class);
+        if (YouBCUtils.isEmptyString(weChatUser.getErrcode())) {
+            return weChatUser;
+        } else {
+            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, weChatUser.getErrcode()+" "+weChatUser.getErrmsg()));
+        }
     }
 
 }
