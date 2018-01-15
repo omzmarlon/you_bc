@@ -29,7 +29,7 @@ public class WeChatOAuthService {
 
     public WeChatUser login(String accessGrantCode) throws IOException {
         if (YouBCUtils.isEmptyString(accessGrantCode)) {
-            throw new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "access grant not found"));
+            throw new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "Grant Not Found", "access grant not found"));
         }
         WeChatToken weChatToken = getWeChatToken(accessGrantCode);
         return getWeChatUserInfo(weChatToken.getAccess_token(), weChatToken.getOpenid());
@@ -46,7 +46,7 @@ public class WeChatOAuthService {
         if (YouBCUtils.isEmptyString(weChatToken.getErrcode())) {
             return weChatToken;
         } else {
-            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, weChatToken.getErrcode()+" "+weChatToken.getErrmsg()));
+            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "WeChat Login Error", weChatToken.getErrcode()+" "+weChatToken.getErrmsg()));
         }
 
     }
@@ -62,7 +62,7 @@ public class WeChatOAuthService {
         if (YouBCUtils.isEmptyString(weChatUser.getErrcode())) {
             return weChatUser;
         } else {
-            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, weChatUser.getErrcode()+" "+weChatUser.getErrmsg()));
+            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "WeChat Login Error", weChatUser.getErrcode()+" "+weChatUser.getErrmsg()));
         }
     }
 

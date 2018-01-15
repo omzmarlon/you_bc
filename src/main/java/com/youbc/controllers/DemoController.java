@@ -37,6 +37,6 @@ public class DemoController {
 
     @RequestMapping(path = "/exception")
     public String testException() {
-        throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "demo exception"));
+        throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "demo", "demo exception"));
     }
 }
