@@ -3,6 +3,7 @@ package com.youbc.database;
 import org.jooq.DSLContext;
 import static com.youbc.generated.schema.tables.User.USER;
 import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
+import static com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
 import static com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
 import static com.youbc.generated.schema.tables.RoommatesProfile.ROOMMATES_PROFILE;
 import static com.youbc.generated.schema.tables.ClassmatesProfile.CLASSMATES_PROFILE;
@@ -33,9 +34,10 @@ public class UserDAO {
         return result.isNotEmpty();
     }
 
-    public void buildNewUser(String userID) {
+    public void buildNewUser(String userID, String imageUrl) {
         initUser(userID);
         initUserProfile(userID);
+        initUserProfileImage(userID, imageUrl);
         initStudentVerification(userID);
         initClassmatesProfile(userID);
         initRoommateProfile(userID);
@@ -54,6 +56,14 @@ public class UserDAO {
         dslContext.insertInto(USER_PROFILE)
                 .set(USER_PROFILE.USER_ID, userID)
                 .set(USER_PROFILE.TIME_CREATED, DSL.currentTimestamp())
+                .execute();
+    }
+
+    private void initUserProfileImage(String userID, String imageUrl) {
+        dslContext.insertInto(PROFILE_IMAGE)
+                .set(PROFILE_IMAGE.USER_ID, userID)
+                .set(PROFILE_IMAGE.THUMBNAIL_IMAGE_URL, imageUrl)
+                .set(PROFILE_IMAGE.ORIGINAL_IMAGE_URL, imageUrl)
                 .execute();
     }
 
