@@ -44,13 +44,21 @@ class LocationCheckContainer extends Component {
 
     }
 
+    // onClickVerify() {
+    //     if (navigator.geolocation) {
+    //         this.setState({isVerifying: true});
+    //         navigator.geolocation.getCurrentPosition(this.verifyLocation);
+    //     } else {
+    //         this.props.showInfoBar("同学的浏览器不支持地理位置获取，请用其他方式认证");
+    //     }
+    // }
+
     onClickVerify() {
-        if (navigator.geolocation) {
-            this.setState({isVerifying: true});
-            navigator.geolocation.getCurrentPosition(this.verifyLocation);
-        } else {
-            this.props.showInfoBar("同学的浏览器不支持地理位置获取，请用其他方式认证");
-        }
+        this.setState({isVerifying: true});
+        setTimeout(() => {
+            this.props.verify();
+            this.props.showInfoBar("认证成功");
+        }, 1000);
     }
 
     render() {

@@ -24,7 +24,7 @@ export const fetchAuthToken = code => dispatch => {
 };
 
 const fetchAuthTokenRequest = () => ({type: ActionTypes.FETCH_AUTH_TOKEN_REQUEST});
-const fetchAuthTokenComplete = (statusCode, message) => (
+export const fetchAuthTokenComplete = (statusCode, message) => (
     {
         type: ActionTypes.FETCH_AUTH_TOKEN_COMPLETE,
         statusCode,
