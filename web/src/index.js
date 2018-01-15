@@ -18,7 +18,6 @@ ReactDOM.render(
         <Provider store={store}>
             <div>
                 <InfoBar/>
-                <TestCodePage/>
                 <BrowserRouter>
                     <App />
                 </BrowserRouter>

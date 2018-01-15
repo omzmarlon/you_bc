@@ -1,5 +1,20 @@
-.auth-page-container {
+@import (reference) "../../styles/constants/fonts";
+@import (reference) "../../styles/constants/colors";
+
+.auth-page-loading-container {
+  width: 60vw;
+  margin: 50vh auto 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  transform: translateY(-50%);
+  p {
+    .common-font;
+    color: @generalText;
+  }
+}
+
+.auth-page-error-container {
+
 }

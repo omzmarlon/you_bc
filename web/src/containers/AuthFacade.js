@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import { connect }  from 'react-redux'
 
-import {fetchAuthToken} from "../actions/global/authenticationActions";
+import {fetchAuthToken, fetchAuthTokenComplete} from "../actions/global/authenticationActions";
 import HomePageContainer from "./HomePageContainer";
 import AuthPage from "../components/errorPage/AuthPage";
 import EmailCheckContainer from "./verification/EmailCheckContainer";
@@ -14,9 +14,6 @@ import LocationCheckContainer from "./verification/LocationCheckContainer";
 class AuthFacade extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            testCode: ''
-        };
         this.login = this.login.bind(this);
     }
 
@@ -24,7 +21,11 @@ class AuthFacade extends Component {
         let { dispatch } = this.props;
         let queryStr = this.props.location.search;
         let code = queryStr.substring(queryStr.indexOf('='));
-        dispatch(fetchAuthToken(code));
+        if (code === 'fail') {
+            dispatch(fetchAuthTokenComplete(401, "微信登录失败，请稍后重试"))
+        } else {
+            dispatch(fetchAuthToken(code));
+        }
     }
 
     componentDidMount() {
