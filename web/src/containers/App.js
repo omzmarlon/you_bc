@@ -17,7 +17,6 @@ import {
     TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES
 } from "../constants/api";
 import DemoContainer from "../components/DemoContainer";
-import AuthPage from "../components/errorPage/AuthPage";
 
 class App extends Component {
     render() {
@@ -29,7 +28,6 @@ class App extends Component {
                 <Route path={TO_ROOMMATES} component={RoommateContainer}/>
                 <Route path={TO_PROFILE} component={ProfileContainer}/>
                 <Route path='/demo' component={DemoContainer}/>
-                <Route path='/authen' component={AuthPage}/>
                 <Route component={NotFound}/>
             </Switch>
         );
