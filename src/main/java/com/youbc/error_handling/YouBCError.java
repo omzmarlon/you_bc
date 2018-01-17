@@ -5,13 +5,13 @@ import org.springframework.http.HttpStatus;
 public class YouBCError {
 
     private String message;
-    private String errorCode;
+    private String error;
     private HttpStatus status;
 
-    public YouBCError(HttpStatus status, String errorCode, String message) {
+    public YouBCError(HttpStatus status, String error, String message) {
         this.message = message;
         this.status = status;
-        this.errorCode = errorCode;
+        this.error = error;
     }
 
     public int getStatus() {
@@ -30,11 +30,11 @@ public class YouBCError {
         this.message = message;
     }
 
-    public String getErrorCode() {
-        return errorCode;
+    public String getError() {
+        return error;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setError(String error) {
+        this.error = error;
     }
 }
