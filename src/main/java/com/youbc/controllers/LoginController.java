@@ -56,6 +56,7 @@ public class LoginController {
             String loginToken = tokenService.generateShortLiveToken(weChatUser.getOpenid());
             response.sendRedirect(redirectURL+"?auth="+loginToken);
         } catch (YouBCException e) {
+            e.printStackTrace();
             response.sendRedirect(redirectURL+"?auth=fail&message="+e.getYouBCError().getErrorCode());
         }
     }

@@ -4,7 +4,7 @@ const mockAPI = (code) => {
     console.log(code);
     return new Promise((fulfill, reject) => {
         setTimeout(() => {
-            fulfill({statusCode: 200, message: 'OK'})
+            reject({statusCode: 200, message: 'OK'})
         }, 1000)
     });
 };

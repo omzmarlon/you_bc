@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import { connect }  from 'react-redux'
+const queryStringParser = require('query-string');
 
 import {fetchAuthToken, fetchAuthTokenComplete} from "../actions/global/authenticationActions";
 import HomePageContainer from "./HomePageContainer";
@@ -19,10 +20,10 @@ class AuthFacade extends Component {
 
     login() {
         let { dispatch } = this.props;
-        let queryStr = this.props.location.search;
-        let code = queryStr.substring(queryStr.indexOf('='));
-        if (code === 'fail') {
-            dispatch(fetchAuthTokenComplete(401, "微信登录失败，请稍后重试"))
+        let queryStr = queryStringParser.parse(this.props.location.search);
+        let code = queryStr["auth"];
+        if (code === 'fail' || !code) {
+            dispatch(fetchAuthTokenComplete(401, queryStr["message"]))
         } else {
             dispatch(fetchAuthToken(code));
         }

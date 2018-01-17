@@ -1,13 +1,12 @@
 package com.youbc.securities.services;
 
 import io.jsonwebtoken.*;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Optional;
 
 public class JWTTokenService {
-    private static final String TOKEN_PREFIX = "Bear ";
+    //private static final String TOKEN_PREFIX = "Bear ";
 
     private String secret;
     private long shortExpiryMillis;
@@ -27,7 +26,7 @@ public class JWTTokenService {
     public Optional<String> verifyToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException {
         String userID = Jwts.parser()
                 .setSigningKey(secret)
-                .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
         return userID != null && !(userID.equals(""))? Optional.of(userID) : Optional.empty();
@@ -46,12 +45,11 @@ public class JWTTokenService {
     }
 
     private String generateToken(String userID, long expiry) {
-        return TOKEN_PREFIX +
-                Jwts.builder()
-                        .setSubject(userID)
-                        .setExpiration(new Date(System.currentTimeMillis()+expiry))
-                        .signWith(SignatureAlgorithm.HS256, secret)
-                        .compact();
+        return Jwts.builder()
+                .setSubject(userID)
+                .setExpiration(new Date(System.currentTimeMillis()+expiry))
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
     }
 
 }
