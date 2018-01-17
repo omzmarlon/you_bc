@@ -11,3 +11,14 @@ export const TO_ROOMMATES = "/roommates";
 export const TO_PROFILE = "/profiles";
 
 // APIs
+
+export function requestUrl(api) {
+    if (process.env.NODE_ENV === 'production') {
+        //TODO: backend endpoint haven't set up yet
+        return "http://localhost:8080" + api;
+    } else {
+        return "http://localhost:8080" + api;
+    }
+}
+
+export const LOGIN_API = "/login";
