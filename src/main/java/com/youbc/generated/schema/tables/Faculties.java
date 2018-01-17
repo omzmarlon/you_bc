@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Faculties extends TableImpl<FacultiesRecord> {
 
-    private static final long serialVersionUID = 570936068;
+    private static final long serialVersionUID = 659604354;
 
     /**
      * The reference instance of <code>poke_you_bc.faculties</code>
@@ -51,14 +50,9 @@ public class Faculties extends TableImpl<FacultiesRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.faculties.faculty_id</code>.
-     */
-    public final TableField<FacultiesRecord, Integer> FACULTY_ID = createField("faculty_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>poke_you_bc.faculties.faculty</code>.
      */
-    public final TableField<FacultiesRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<FacultiesRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.faculties</code> table reference
@@ -88,14 +82,6 @@ public class Faculties extends TableImpl<FacultiesRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<FacultiesRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_FACULTIES;
     }
 
     /**

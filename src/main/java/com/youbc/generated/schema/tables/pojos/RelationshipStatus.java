@@ -22,26 +22,18 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RelationshipStatus implements Serializable {
 
-    private static final long serialVersionUID = -1147060601;
+    private static final long serialVersionUID = 1190237602;
 
-    private final Integer relationshipId;
-    private final String  relationship;
+    private final String relationship;
 
     public RelationshipStatus(RelationshipStatus value) {
-        this.relationshipId = value.relationshipId;
         this.relationship = value.relationship;
     }
 
     public RelationshipStatus(
-        Integer relationshipId,
-        String  relationship
+        String relationship
     ) {
-        this.relationshipId = relationshipId;
         this.relationship = relationship;
-    }
-
-    public Integer getRelationshipId() {
-        return this.relationshipId;
     }
 
     public String getRelationship() {
@@ -52,8 +44,7 @@ public class RelationshipStatus implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("RelationshipStatus (");
 
-        sb.append(relationshipId);
-        sb.append(", ").append(relationship);
+        sb.append(relationship);
 
         sb.append(")");
         return sb.toString();

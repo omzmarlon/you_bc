@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
 
-    private static final long serialVersionUID = 1000358861;
+    private static final long serialVersionUID = -769834782;
 
     /**
      * The reference instance of <code>poke_you_bc.roommates_hometown</code>
@@ -51,14 +50,9 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.roommates_hometown.hometown_id</code>.
+     * The column <code>poke_you_bc.roommates_hometown.hometown</code>.
      */
-    public final TableField<RoommatesHometownRecord, Integer> HOMETOWN_ID = createField("hometown_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>poke_you_bc.roommates_hometown.hometwon</code>.
-     */
-    public final TableField<RoommatesHometownRecord, String> HOMETWON = createField("hometwon", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<RoommatesHometownRecord, String> HOMETOWN = createField("hometown", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.roommates_hometown</code> table reference
@@ -88,14 +82,6 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<RoommatesHometownRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_ROOMMATES_HOMETOWN;
     }
 
     /**

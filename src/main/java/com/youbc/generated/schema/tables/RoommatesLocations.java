@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesLocations extends TableImpl<RoommatesLocationsRecord> {
 
-    private static final long serialVersionUID = 1534720611;
+    private static final long serialVersionUID = 449233878;
 
     /**
      * The reference instance of <code>poke_you_bc.roommates_locations</code>
@@ -51,14 +50,9 @@ public class RoommatesLocations extends TableImpl<RoommatesLocationsRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.roommates_locations.location_id</code>.
-     */
-    public final TableField<RoommatesLocationsRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>poke_you_bc.roommates_locations.location</code>.
      */
-    public final TableField<RoommatesLocationsRecord, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<RoommatesLocationsRecord, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.roommates_locations</code> table reference
@@ -88,14 +82,6 @@ public class RoommatesLocations extends TableImpl<RoommatesLocationsRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<RoommatesLocationsRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_ROOMMATES_LOCATIONS;
     }
 
     /**

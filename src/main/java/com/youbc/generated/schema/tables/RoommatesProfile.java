@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfile extends TableImpl<RoommatesProfileRecord> {
 
-    private static final long serialVersionUID = 748551470;
+    private static final long serialVersionUID = 2102093836;
 
     /**
      * The reference instance of <code>poke_you_bc.roommates_profile</code>
@@ -57,14 +57,14 @@ public class RoommatesProfile extends TableImpl<RoommatesProfileRecord> {
     public final TableField<RoommatesProfileRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.location_id</code>.
+     * The column <code>poke_you_bc.roommates_profile.location</code>.
      */
-    public final TableField<RoommatesProfileRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<RoommatesProfileRecord, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.hometown_id</code>.
+     * The column <code>poke_you_bc.roommates_profile.hometown</code>.
      */
-    public final TableField<RoommatesProfileRecord, Integer> HOMETOWN_ID = createField("hometown_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<RoommatesProfileRecord, String> HOMETOWN = createField("hometown", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * The column <code>poke_you_bc.roommates_profile.motto</code>.

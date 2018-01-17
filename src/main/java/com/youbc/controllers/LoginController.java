@@ -57,7 +57,7 @@ public class LoginController {
             response.sendRedirect(redirectURL+"?auth="+loginToken);
         } catch (YouBCException e) {
             e.printStackTrace();
-            response.sendRedirect(redirectURL+"?auth=fail&message="+e.getYouBCError().getErrorCode());
+            response.sendRedirect(redirectURL+"?auth=fail&message="+e.getYouBCError().getError());
         }
     }
 

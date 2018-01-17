@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsTags extends TableImpl<FriendsTagsRecord> {
 
-    private static final long serialVersionUID = -1760386811;
+    private static final long serialVersionUID = 800530865;
 
     /**
      * The reference instance of <code>poke_you_bc.friends_tags</code>
@@ -51,14 +50,9 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.friends_tags.tag_id</code>.
-     */
-    public final TableField<FriendsTagsRecord, Integer> TAG_ID = createField("tag_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>poke_you_bc.friends_tags.tag</code>.
      */
-    public final TableField<FriendsTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<FriendsTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.friends_tags</code> table reference
@@ -88,14 +82,6 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<FriendsTagsRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_FRIENDS_TAGS;
     }
 
     /**

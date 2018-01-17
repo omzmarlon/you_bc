@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
 
-    private static final long serialVersionUID = -2146120005;
+    private static final long serialVersionUID = -77054463;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_tags</code>
@@ -51,14 +50,9 @@ public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_tags.tag_id</code>.
-     */
-    public final TableField<ClassmatesTagsRecord, Integer> TAG_ID = createField("tag_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>poke_you_bc.classmates_tags.tag</code>.
      */
-    public final TableField<ClassmatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<ClassmatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.classmates_tags</code> table reference
@@ -88,14 +82,6 @@ public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<ClassmatesTagsRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_CLASSMATES_TAGS;
     }
 
     /**

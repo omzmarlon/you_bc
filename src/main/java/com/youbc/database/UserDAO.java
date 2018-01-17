@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
 
-    private DSLContext dslContext;
+    public DSLContext dslContext;
 
     @Autowired
     public UserDAO(DSLContext dslContext) {
@@ -26,12 +26,12 @@ public class UserDAO {
     }
 
     public boolean userExists(String userID) {
-        Result<Record1<String>> result = dslContext
+        Record1<String> result = dslContext
                 .select(USER.USER_ID)
                 .from(USER)
                 .where(USER.USER_ID.eq(userID))
-                .fetch();
-        return result.isNotEmpty();
+                .fetchOne();
+        return result != null;
     }
 
     public void buildNewUser(String userID, String imageUrl) {
@@ -44,7 +44,7 @@ public class UserDAO {
         initFriendsProfile(userID);
     }
 
-    private void initUser(String userID) {
+    public void initUser(String userID) {
         dslContext
                 .insertInto(USER)
                 .set(USER.USER_ID, userID)
@@ -52,14 +52,14 @@ public class UserDAO {
                 .execute();
     }
 
-    private void initUserProfile(String userID) {
+    public void initUserProfile(String userID) {
         dslContext.insertInto(USER_PROFILE)
                 .set(USER_PROFILE.USER_ID, userID)
                 .set(USER_PROFILE.TIME_CREATED, DSL.currentTimestamp())
                 .execute();
     }
 
-    private void initUserProfileImage(String userID, String imageUrl) {
+    public void initUserProfileImage(String userID, String imageUrl) {
         dslContext.insertInto(PROFILE_IMAGE)
                 .set(PROFILE_IMAGE.USER_ID, userID)
                 .set(PROFILE_IMAGE.THUMBNAIL_IMAGE_URL, imageUrl)
@@ -67,7 +67,7 @@ public class UserDAO {
                 .execute();
     }
 
-    private void initStudentVerification(String userID) {
+    public void initStudentVerification(String userID) {
         dslContext
                 .insertInto(UBC_STUDENT_VERIFICATION)
                 .set(UBC_STUDENT_VERIFICATION.USER_ID, userID)
@@ -76,7 +76,7 @@ public class UserDAO {
                 .execute();
     }
 
-    private void initRoommateProfile(String userID) {
+    public void initRoommateProfile(String userID) {
         dslContext
                 .insertInto(ROOMMATES_PROFILE)
                 .set(ROOMMATES_PROFILE.USER_ID, userID)
@@ -84,7 +84,7 @@ public class UserDAO {
                 .execute();
     }
 
-    private void initClassmatesProfile(String userID) {
+    public void initClassmatesProfile(String userID) {
         dslContext
                 .insertInto(CLASSMATES_PROFILE)
                 .set(CLASSMATES_PROFILE.USER_ID, userID)
@@ -92,7 +92,7 @@ public class UserDAO {
                 .execute();
     }
 
-    private void initFriendsProfile(String userID) {
+    public void initFriendsProfile(String userID) {
         dslContext
                 .insertInto(FRIENDS_PROFILE)
                 .set(FRIENDS_PROFILE.USER_ID, userID)

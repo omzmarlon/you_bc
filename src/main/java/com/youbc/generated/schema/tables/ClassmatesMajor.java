@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
 
-    private static final long serialVersionUID = 726643039;
+    private static final long serialVersionUID = 1825097444;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_major</code>
@@ -51,14 +50,9 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_major.major_id</code>.
-     */
-    public final TableField<ClassmatesMajorRecord, Integer> MAJOR_ID = createField("major_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>poke_you_bc.classmates_major.major</code>.
      */
-    public final TableField<ClassmatesMajorRecord, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<ClassmatesMajorRecord, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.classmates_major</code> table reference
@@ -88,14 +82,6 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<ClassmatesMajorRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_CLASSMATES_MAJOR;
     }
 
     /**

@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
 
-    private static final long serialVersionUID = -435956837;
+    private static final long serialVersionUID = -914182412;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_courses</code>
@@ -51,14 +50,9 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_courses.course_id</code>.
+     * The column <code>poke_you_bc.classmates_courses.course</code>.
      */
-    public final TableField<ClassmatesCoursesRecord, Integer> COURSE_ID = createField("course_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>poke_you_bc.classmates_courses.course_name</code>.
-     */
-    public final TableField<ClassmatesCoursesRecord, String> COURSE_NAME = createField("course_name", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<ClassmatesCoursesRecord, String> COURSE = createField("course", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.classmates_courses</code> table reference
@@ -88,14 +82,6 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<ClassmatesCoursesRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_CLASSMATES_COURSES;
     }
 
     /**

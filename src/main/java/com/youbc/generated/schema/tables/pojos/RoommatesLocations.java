@@ -22,26 +22,18 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesLocations implements Serializable {
 
-    private static final long serialVersionUID = 1658480992;
+    private static final long serialVersionUID = -1974617978;
 
-    private final Integer locationId;
-    private final String  location;
+    private final String location;
 
     public RoommatesLocations(RoommatesLocations value) {
-        this.locationId = value.locationId;
         this.location = value.location;
     }
 
     public RoommatesLocations(
-        Integer locationId,
-        String  location
+        String location
     ) {
-        this.locationId = locationId;
         this.location = location;
-    }
-
-    public Integer getLocationId() {
-        return this.locationId;
     }
 
     public String getLocation() {
@@ -52,8 +44,7 @@ public class RoommatesLocations implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("RoommatesLocations (");
 
-        sb.append(locationId);
-        sb.append(", ").append(location);
+        sb.append(location);
 
         sb.append(")");
         return sb.toString();
