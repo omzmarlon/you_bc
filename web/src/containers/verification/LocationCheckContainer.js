@@ -33,8 +33,7 @@ class LocationCheckContainer extends Component {
         const tolerance = 0.028999999999997833;
 
         const distance = Math.sqrt(Math.pow(ubcLat-position.coords.latitude, 2) + Math.pow(ubcLong-position.coords.longitude, 2));
-        //distance < tolerance
-        if (true) { // disable location for now
+        if (distance < tolerance) { // disable location for now
             this.props.verify();
             this.props.showInfoBar("认证成功");
         } else {
@@ -44,22 +43,24 @@ class LocationCheckContainer extends Component {
 
     }
 
-    // onClickVerify() {
-    //     if (navigator.geolocation) {
-    //         this.setState({isVerifying: true});
-    //         navigator.geolocation.getCurrentPosition(this.verifyLocation);
-    //     } else {
-    //         this.props.showInfoBar("同学的浏览器不支持地理位置获取，请用其他方式认证");
-    //     }
-    // }
-
     onClickVerify() {
-        this.setState({isVerifying: true});
-        setTimeout(() => {
-            this.props.verify();
-            this.props.showInfoBar("认证成功");
-        }, 1000);
+        if (navigator.geolocation) {
+            this.setState({isVerifying: true});
+            console.log("triggered verification");
+            navigator.geolocation.getCurrentPosition(this.verifyLocation);
+        } else {
+            this.props.showInfoBar("同学的浏览器不支持地理位置获取，请用其他方式认证");
+        }
     }
+
+    // Use this when location verification needs to be turned off temporarily
+    // onClickVerify() {
+    //     this.setState({isVerifying: true});
+    //     setTimeout(() => {
+    //         this.props.verify();
+    //         this.props.showInfoBar("认证成功");
+    //     }, 1000);
+    // }
 
     render() {
         return (
