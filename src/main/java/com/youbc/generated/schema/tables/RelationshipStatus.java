@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
 
-    private static final long serialVersionUID = -877051819;
+    private static final long serialVersionUID = 475754993;
 
     /**
      * The reference instance of <code>poke_you_bc.relationship_status</code>
@@ -51,14 +50,9 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.relationship_status.relationship_id</code>.
-     */
-    public final TableField<RelationshipStatusRecord, Integer> RELATIONSHIP_ID = createField("relationship_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>poke_you_bc.relationship_status.relationship</code>.
      */
-    public final TableField<RelationshipStatusRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<RelationshipStatusRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.relationship_status</code> table reference
@@ -88,14 +82,6 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
     @Override
     public Schema getSchema() {
         return PokeYouBc.POKE_YOU_BC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Identity<RelationshipStatusRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_RELATIONSHIP_STATUS;
     }
 
     /**

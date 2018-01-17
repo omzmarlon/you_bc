@@ -22,30 +22,30 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfileTags implements Serializable {
 
-    private static final long serialVersionUID = 506664424;
+    private static final long serialVersionUID = -194578160;
 
-    private final String  userId;
-    private final Integer tagId;
+    private final String userId;
+    private final String tag;
 
     public RoommatesProfileTags(RoommatesProfileTags value) {
         this.userId = value.userId;
-        this.tagId = value.tagId;
+        this.tag = value.tag;
     }
 
     public RoommatesProfileTags(
-        String  userId,
-        Integer tagId
+        String userId,
+        String tag
     ) {
         this.userId = userId;
-        this.tagId = tagId;
+        this.tag = tag;
     }
 
     public String getUserId() {
         return this.userId;
     }
 
-    public Integer getTagId() {
-        return this.tagId;
+    public String getTag() {
+        return this.tag;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class RoommatesProfileTags implements Serializable {
         StringBuilder sb = new StringBuilder("RoommatesProfileTags (");
 
         sb.append(userId);
-        sb.append(", ").append(tagId);
+        sb.append(", ").append(tag);
 
         sb.append(")");
         return sb.toString();

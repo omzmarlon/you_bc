@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ProfileImage extends TableImpl<ProfileImageRecord> {
 
-    private static final long serialVersionUID = -758183635;
+    private static final long serialVersionUID = -1274320243;
 
     /**
      * The reference instance of <code>poke_you_bc.profile_image</code>
@@ -59,12 +59,12 @@ public class ProfileImage extends TableImpl<ProfileImageRecord> {
     /**
      * The column <code>poke_you_bc.profile_image.original_image_url</code>.
      */
-    public final TableField<ProfileImageRecord, String> ORIGINAL_IMAGE_URL = createField("original_image_url", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
+    public final TableField<ProfileImageRecord, String> ORIGINAL_IMAGE_URL = createField("original_image_url", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>poke_you_bc.profile_image.thumbnail_image_url</code>.
      */
-    public final TableField<ProfileImageRecord, String> THUMBNAIL_IMAGE_URL = createField("thumbnail_image_url", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
+    public final TableField<ProfileImageRecord, String> THUMBNAIL_IMAGE_URL = createField("thumbnail_image_url", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>poke_you_bc.profile_image.user_id</code>.

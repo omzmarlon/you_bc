@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsProfile extends TableImpl<FriendsProfileRecord> {
 
-    private static final long serialVersionUID = 1974124398;
+    private static final long serialVersionUID = 1621753558;
 
     /**
      * The reference instance of <code>poke_you_bc.friends_profile</code>
@@ -57,14 +57,14 @@ public class FriendsProfile extends TableImpl<FriendsProfileRecord> {
     public final TableField<FriendsProfileRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile.faculty_id</code>.
+     * The column <code>poke_you_bc.friends_profile.faculty</code>.
      */
-    public final TableField<FriendsProfileRecord, Integer> FACULTY_ID = createField("faculty_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<FriendsProfileRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile.relationship_id</code>.
+     * The column <code>poke_you_bc.friends_profile.relationship</code>.
      */
-    public final TableField<FriendsProfileRecord, Integer> RELATIONSHIP_ID = createField("relationship_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<FriendsProfileRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * The column <code>poke_you_bc.friends_profile.motto</code>.

@@ -22,38 +22,29 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesCourses implements Serializable {
 
-    private static final long serialVersionUID = 325570540;
+    private static final long serialVersionUID = -982683617;
 
-    private final Integer courseId;
-    private final String  courseName;
+    private final String course;
 
     public ClassmatesCourses(ClassmatesCourses value) {
-        this.courseId = value.courseId;
-        this.courseName = value.courseName;
+        this.course = value.course;
     }
 
     public ClassmatesCourses(
-        Integer courseId,
-        String  courseName
+        String course
     ) {
-        this.courseId = courseId;
-        this.courseName = courseName;
+        this.course = course;
     }
 
-    public Integer getCourseId() {
-        return this.courseId;
-    }
-
-    public String getCourseName() {
-        return this.courseName;
+    public String getCourse() {
+        return this.course;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("ClassmatesCourses (");
 
-        sb.append(courseId);
-        sb.append(", ").append(courseName);
+        sb.append(course);
 
         sb.append(")");
         return sb.toString();

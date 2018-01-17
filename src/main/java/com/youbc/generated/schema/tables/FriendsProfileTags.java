@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsProfileTags extends TableImpl<FriendsProfileTagsRecord> {
 
-    private static final long serialVersionUID = 1907687917;
+    private static final long serialVersionUID = -1927355463;
 
     /**
      * The reference instance of <code>poke_you_bc.friends_profile_tags</code>
@@ -56,9 +56,9 @@ public class FriendsProfileTags extends TableImpl<FriendsProfileTagsRecord> {
     public final TableField<FriendsProfileTagsRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile_tags.tag_id</code>.
+     * The column <code>poke_you_bc.friends_profile_tags.tag</code>.
      */
-    public final TableField<FriendsProfileTagsRecord, Integer> TAG_ID = createField("tag_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<FriendsProfileTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
      * Create a <code>poke_you_bc.friends_profile_tags</code> table reference

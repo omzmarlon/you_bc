@@ -23,32 +23,32 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsProfile implements Serializable {
 
-    private static final long serialVersionUID = 1650574405;
+    private static final long serialVersionUID = -509424637;
 
     private final String    userId;
-    private final Integer   facultyId;
-    private final Integer   relationshipId;
+    private final String    faculty;
+    private final String    relationship;
     private final String    motto;
     private final Timestamp timeCreated;
 
     public FriendsProfile(FriendsProfile value) {
         this.userId = value.userId;
-        this.facultyId = value.facultyId;
-        this.relationshipId = value.relationshipId;
+        this.faculty = value.faculty;
+        this.relationship = value.relationship;
         this.motto = value.motto;
         this.timeCreated = value.timeCreated;
     }
 
     public FriendsProfile(
         String    userId,
-        Integer   facultyId,
-        Integer   relationshipId,
+        String    faculty,
+        String    relationship,
         String    motto,
         Timestamp timeCreated
     ) {
         this.userId = userId;
-        this.facultyId = facultyId;
-        this.relationshipId = relationshipId;
+        this.faculty = faculty;
+        this.relationship = relationship;
         this.motto = motto;
         this.timeCreated = timeCreated;
     }
@@ -57,12 +57,12 @@ public class FriendsProfile implements Serializable {
         return this.userId;
     }
 
-    public Integer getFacultyId() {
-        return this.facultyId;
+    public String getFaculty() {
+        return this.faculty;
     }
 
-    public Integer getRelationshipId() {
-        return this.relationshipId;
+    public String getRelationship() {
+        return this.relationship;
     }
 
     public String getMotto() {
@@ -78,8 +78,8 @@ public class FriendsProfile implements Serializable {
         StringBuilder sb = new StringBuilder("FriendsProfile (");
 
         sb.append(userId);
-        sb.append(", ").append(facultyId);
-        sb.append(", ").append(relationshipId);
+        sb.append(", ").append(faculty);
+        sb.append(", ").append(relationship);
         sb.append(", ").append(motto);
         sb.append(", ").append(timeCreated);
 

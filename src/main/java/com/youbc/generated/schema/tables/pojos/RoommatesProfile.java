@@ -23,32 +23,32 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfile implements Serializable {
 
-    private static final long serialVersionUID = 829224117;
+    private static final long serialVersionUID = -1853863367;
 
     private final String    userId;
-    private final Integer   locationId;
-    private final Integer   hometownId;
+    private final String    location;
+    private final String    hometown;
     private final String    motto;
     private final Timestamp timeCreated;
 
     public RoommatesProfile(RoommatesProfile value) {
         this.userId = value.userId;
-        this.locationId = value.locationId;
-        this.hometownId = value.hometownId;
+        this.location = value.location;
+        this.hometown = value.hometown;
         this.motto = value.motto;
         this.timeCreated = value.timeCreated;
     }
 
     public RoommatesProfile(
         String    userId,
-        Integer   locationId,
-        Integer   hometownId,
+        String    location,
+        String    hometown,
         String    motto,
         Timestamp timeCreated
     ) {
         this.userId = userId;
-        this.locationId = locationId;
-        this.hometownId = hometownId;
+        this.location = location;
+        this.hometown = hometown;
         this.motto = motto;
         this.timeCreated = timeCreated;
     }
@@ -57,12 +57,12 @@ public class RoommatesProfile implements Serializable {
         return this.userId;
     }
 
-    public Integer getLocationId() {
-        return this.locationId;
+    public String getLocation() {
+        return this.location;
     }
 
-    public Integer getHometownId() {
-        return this.hometownId;
+    public String getHometown() {
+        return this.hometown;
     }
 
     public String getMotto() {
@@ -78,8 +78,8 @@ public class RoommatesProfile implements Serializable {
         StringBuilder sb = new StringBuilder("RoommatesProfile (");
 
         sb.append(userId);
-        sb.append(", ").append(locationId);
-        sb.append(", ").append(hometownId);
+        sb.append(", ").append(location);
+        sb.append(", ").append(hometown);
         sb.append(", ").append(motto);
         sb.append(", ").append(timeCreated);
 

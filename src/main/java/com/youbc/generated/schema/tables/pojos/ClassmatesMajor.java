@@ -22,26 +22,18 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesMajor implements Serializable {
 
-    private static final long serialVersionUID = -546082672;
+    private static final long serialVersionUID = 529800872;
 
-    private final Integer majorId;
-    private final String  major;
+    private final String major;
 
     public ClassmatesMajor(ClassmatesMajor value) {
-        this.majorId = value.majorId;
         this.major = value.major;
     }
 
     public ClassmatesMajor(
-        Integer majorId,
-        String  major
+        String major
     ) {
-        this.majorId = majorId;
         this.major = major;
-    }
-
-    public Integer getMajorId() {
-        return this.majorId;
     }
 
     public String getMajor() {
@@ -52,8 +44,7 @@ public class ClassmatesMajor implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("ClassmatesMajor (");
 
-        sb.append(majorId);
-        sb.append(", ").append(major);
+        sb.append(major);
 
         sb.append(")");
         return sb.toString();

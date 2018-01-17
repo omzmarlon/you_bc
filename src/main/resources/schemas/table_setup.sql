@@ -36,113 +36,104 @@ CREATE TABLE profile_image (
 
 # Roommates tables
 CREATE TABLE roommates_locations (
-  location_id INT PRIMARY KEY AUTO_INCREMENT,
-  location VARCHAR(50)
+  location VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE roommates_hometown (
-  hometown_id INT PRIMARY KEY  AUTO_INCREMENT,
-  hometwon VARCHAR(50)
+  hometown VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE roommates_tags (
-  tag_id INT PRIMARY KEY AUTO_INCREMENT,
-  tag VARCHAR(50)
+  tag VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE roommates_profile (
   user_id VARCHAR(100) PRIMARY KEY,
-  location_id INT,
-  hometown_id INT,
+  location VARCHAR(50),
+  hometown VARCHAR(50),
   motto VARCHAR(100),
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (location_id) REFERENCES roommates_locations(location_id) ON DELETE SET NULL,
-  FOREIGN KEY (hometown_id) REFERENCES roommates_hometown(hometown_id) ON DELETE SET NULL
+  FOREIGN KEY (location) REFERENCES roommates_locations(location) ON DELETE SET NULL,
+  FOREIGN KEY (hometown) REFERENCES roommates_hometown(hometown) ON DELETE SET NULL
 );
 
 CREATE TABLE roommates_profile_tags (
   user_id VARCHAR(100),
-  tag_id INT,
-  PRIMARY KEY (user_id, tag_id),
+  tag VARCHAR(50),
+  PRIMARY KEY (user_id, tag),
   FOREIGN KEY (user_id) REFERENCES roommates_profile(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (tag_id) REFERENCES roommates_tags(tag_id) ON DELETE CASCADE
+  FOREIGN KEY (tag) REFERENCES roommates_tags(tag) ON DELETE CASCADE
 );
 
 # Classmates tables
 CREATE TABLE classmates_major (
-  major_id INT PRIMARY KEY AUTO_INCREMENT,
-  major VARCHAR(50)
+  major VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE classmates_courses (
-  course_id INT PRIMARY KEY AUTO_INCREMENT,
-  course_name VARCHAR(50)
+  course VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE classmates_tags (
-  tag_id INT PRIMARY KEY AUTO_INCREMENT,
-  tag VARCHAR(50)
+  tag VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE classmates_profile (
   user_id VARCHAR(100) PRIMARY KEY,
-  marjor_id INT,
+  marjor VARCHAR(50),
   motto VARCHAR(100),
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (marjor_id) REFERENCES classmates_major(major_id) ON DELETE SET NULL
+  FOREIGN KEY (marjor) REFERENCES classmates_major(major) ON DELETE SET NULL
 );
 
 CREATE TABLE classmates_profile_courses (
   user_id VARCHAR(100),
-  course_id INT,
-  PRIMARY KEY (user_id, course_id),
+  course VARCHAR(50),
+  PRIMARY KEY (user_id, course),
   FOREIGN KEY (user_id) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (course_id) REFERENCES classmates_courses(course_id) on DELETE CASCADE
+  FOREIGN KEY (course) REFERENCES classmates_courses(course) on DELETE CASCADE
 );
 
 CREATE TABLE classmates_profile_tags (
   user_id VARCHAR(100),
-  tag_id INT,
-  PRIMARY KEY (user_id, tag_id),
+  tag VARCHAR(50),
+  PRIMARY KEY (user_id, tag),
   FOREIGN KEY (user_id) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (tag_id) REFERENCES classmates_tags(tag_id) ON DELETE CASCADE
+  FOREIGN KEY (tag) REFERENCES classmates_tags(tag) ON DELETE CASCADE
 );
 
 # Friends tables
 CREATE TABLE faculties (
-  faculty_id INT PRIMARY KEY AUTO_INCREMENT,
-  faculty VARCHAR(50)
+  faculty VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE relationship_status (
-  relationship_id INT PRIMARY KEY AUTO_INCREMENT,
-  relationship VARCHAR(50)
+  relationship VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE friends_tags (
-  tag_id INT PRIMARY KEY AUTO_INCREMENT,
-  tag VARCHAR(50)
+  tag VARCHAR(50) PRIMARY KEY
 );
 
 CREATE TABLE friends_profile (
   user_id VARCHAR(100) PRIMARY KEY,
-  faculty_id INT,
-  relationship_id INT,
+  faculty VARCHAR(50),
+  relationship VARCHAR(50),
   motto VARCHAR(100),
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (faculty_id) REFERENCES faculties(faculty_id) ON DELETE SET NULL,
-  FOREIGN KEY (relationship_id) REFERENCES relationship_status (relationship_id) ON DELETE SET NULL
+  FOREIGN KEY (faculty) REFERENCES faculties(faculty) ON DELETE SET NULL,
+  FOREIGN KEY (relationship) REFERENCES relationship_status (relationship) ON DELETE SET NULL
 );
 
 CREATE TABLE friends_profile_tags (
   user_id VARCHAR(100),
-  tag_id INT,
-  PRIMARY KEY (user_id, tag_id),
+  tag VARCHAR(50),
+  PRIMARY KEY (user_id, tag),
   FOREIGN KEY (user_id) REFERENCES friends_profile(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (tag_id) REFERENCES friends_tags(tag_id) ON DELETE CASCADE
+  FOREIGN KEY (tag) REFERENCES friends_tags(tag) ON DELETE CASCADE
 );
 
 
