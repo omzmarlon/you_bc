@@ -9,7 +9,7 @@ CREATE TABLE ubc_student_verification (
   user_id VARCHAR(100) PRIMARY KEY,
   approved BOOLEAN NOT NULL,
   email VARCHAR(50),
-  studentID_image_url VARCHAR(100),
+  studentID_image_url TEXT,
   location_lat DECIMAL(11, 8),
   location_lon DECIMAL(11, 8),
   time_created DATETIME NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE user_profile (
 
 CREATE TABLE profile_image (
   profile_image_id INT PRIMARY KEY AUTO_INCREMENT,
-  original_image_url VARCHAR(10),
-  thumbnail_image_url VARCHAR(10),
+  original_image_url TEXT,
+  thumbnail_image_url TEXT,
   user_id VARCHAR(100),
   FOREIGN KEY (user_id) REFERENCES user_profile(user_id) ON DELETE CASCADE
 );
