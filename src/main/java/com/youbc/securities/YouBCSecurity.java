@@ -54,7 +54,10 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf()
+        // enable CORS in Spring Security so that our CORS filter will be picked up
+        http.cors()
+                .and()
+                .csrf()
                 .disable()
                 .authorizeRequests()
                 .antMatchers(Endpoints.PROTECTED_API_PATTERN)

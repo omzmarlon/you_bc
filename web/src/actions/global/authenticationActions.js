@@ -1,26 +1,18 @@
 import * as ActionTypes from "../actionTypes";
-
-const mockAPI = (code) => {
-    console.log(code);
-    return new Promise((fulfill, reject) => {
-        setTimeout(() => {
-            reject({statusCode: 200, message: 'OK'})
-        }, 1000)
-    });
-};
+import axios from 'axios';
+import {LOGIN_API, requestUrl} from "../../constants/api";
+import {showInfoBar} from "./globalActions";
 
 export const fetchAuthToken = code => dispatch => {
     dispatch(fetchAuthTokenRequest());
-    mockAPI(code)
-        .then(
-            response => {
-                dispatch(fetchAuthTokenComplete(response.statusCode, response.message));
-            },
-            error => {
-                dispatch(fetchAuthTokenComplete(error.statusCode, error.message));
-                console.log("implement error handling");
-            }
-        )
+    axios.get(requestUrl(LOGIN_API)+`?auth=${code}`, {withCredentials: true})
+        .then((response) => {
+            dispatch(fetchAuthTokenComplete(200, "OK"));
+        })
+        .catch((err) => {
+            dispatch(fetchAuthTokenComplete(401, err.response.data.message));
+            dispatch(showInfoBar(err.response.data.message));
+        });
 };
 
 const fetchAuthTokenRequest = () => ({type: ActionTypes.FETCH_AUTH_TOKEN_REQUEST});
