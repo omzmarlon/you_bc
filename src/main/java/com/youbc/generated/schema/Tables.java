@@ -18,7 +18,9 @@ import com.youbc.generated.schema.tables.FriendsLikes;
 import com.youbc.generated.schema.tables.FriendsProfile;
 import com.youbc.generated.schema.tables.FriendsProfileTags;
 import com.youbc.generated.schema.tables.FriendsTags;
+import com.youbc.generated.schema.tables.OfferedAnswer;
 import com.youbc.generated.schema.tables.ProfileImage;
+import com.youbc.generated.schema.tables.Question;
 import com.youbc.generated.schema.tables.RelationshipStatus;
 import com.youbc.generated.schema.tables.RoommatesDislikes;
 import com.youbc.generated.schema.tables.RoommatesHometown;
@@ -27,8 +29,12 @@ import com.youbc.generated.schema.tables.RoommatesLocations;
 import com.youbc.generated.schema.tables.RoommatesProfile;
 import com.youbc.generated.schema.tables.RoommatesProfileTags;
 import com.youbc.generated.schema.tables.RoommatesTags;
+import com.youbc.generated.schema.tables.Survey;
+import com.youbc.generated.schema.tables.SurveyQuestion;
+import com.youbc.generated.schema.tables.SurveyQuestionAnswer;
 import com.youbc.generated.schema.tables.UbcStudentVerification;
 import com.youbc.generated.schema.tables.User;
+import com.youbc.generated.schema.tables.UserAnswer;
 import com.youbc.generated.schema.tables.UserProfile;
 
 import javax.annotation.Generated;
@@ -118,9 +124,19 @@ public class Tables {
     public static final FriendsTags FRIENDS_TAGS = com.youbc.generated.schema.tables.FriendsTags.FRIENDS_TAGS;
 
     /**
+     * The table <code>poke_you_bc.offered_answer</code>.
+     */
+    public static final OfferedAnswer OFFERED_ANSWER = com.youbc.generated.schema.tables.OfferedAnswer.OFFERED_ANSWER;
+
+    /**
      * The table <code>poke_you_bc.profile_image</code>.
      */
     public static final ProfileImage PROFILE_IMAGE = com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
+
+    /**
+     * The table <code>poke_you_bc.question</code>.
+     */
+    public static final Question QUESTION = com.youbc.generated.schema.tables.Question.QUESTION;
 
     /**
      * The table <code>poke_you_bc.relationship_status</code>.
@@ -163,6 +179,21 @@ public class Tables {
     public static final RoommatesTags ROOMMATES_TAGS = com.youbc.generated.schema.tables.RoommatesTags.ROOMMATES_TAGS;
 
     /**
+     * The table <code>poke_you_bc.survey</code>.
+     */
+    public static final Survey SURVEY = com.youbc.generated.schema.tables.Survey.SURVEY;
+
+    /**
+     * The table <code>poke_you_bc.survey_question</code>.
+     */
+    public static final SurveyQuestion SURVEY_QUESTION = com.youbc.generated.schema.tables.SurveyQuestion.SURVEY_QUESTION;
+
+    /**
+     * The table <code>poke_you_bc.survey_question_answer</code>.
+     */
+    public static final SurveyQuestionAnswer SURVEY_QUESTION_ANSWER = com.youbc.generated.schema.tables.SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER;
+
+    /**
      * The table <code>poke_you_bc.ubc_student_verification</code>.
      */
     public static final UbcStudentVerification UBC_STUDENT_VERIFICATION = com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
@@ -171,6 +202,11 @@ public class Tables {
      * The table <code>poke_you_bc.user</code>.
      */
     public static final User USER = com.youbc.generated.schema.tables.User.USER;
+
+    /**
+     * The table <code>poke_you_bc.user_answer</code>.
+     */
+    public static final UserAnswer USER_ANSWER = com.youbc.generated.schema.tables.UserAnswer.USER_ANSWER;
 
     /**
      * The table <code>poke_you_bc.user_profile</code>.

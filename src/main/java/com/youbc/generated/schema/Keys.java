@@ -18,7 +18,9 @@ import com.youbc.generated.schema.tables.FriendsLikes;
 import com.youbc.generated.schema.tables.FriendsProfile;
 import com.youbc.generated.schema.tables.FriendsProfileTags;
 import com.youbc.generated.schema.tables.FriendsTags;
+import com.youbc.generated.schema.tables.OfferedAnswer;
 import com.youbc.generated.schema.tables.ProfileImage;
+import com.youbc.generated.schema.tables.Question;
 import com.youbc.generated.schema.tables.RelationshipStatus;
 import com.youbc.generated.schema.tables.RoommatesDislikes;
 import com.youbc.generated.schema.tables.RoommatesHometown;
@@ -27,8 +29,12 @@ import com.youbc.generated.schema.tables.RoommatesLocations;
 import com.youbc.generated.schema.tables.RoommatesProfile;
 import com.youbc.generated.schema.tables.RoommatesProfileTags;
 import com.youbc.generated.schema.tables.RoommatesTags;
+import com.youbc.generated.schema.tables.Survey;
+import com.youbc.generated.schema.tables.SurveyQuestion;
+import com.youbc.generated.schema.tables.SurveyQuestionAnswer;
 import com.youbc.generated.schema.tables.UbcStudentVerification;
 import com.youbc.generated.schema.tables.User;
+import com.youbc.generated.schema.tables.UserAnswer;
 import com.youbc.generated.schema.tables.UserProfile;
 import com.youbc.generated.schema.tables.records.ClassmatesCoursesRecord;
 import com.youbc.generated.schema.tables.records.ClassmatesDislikesRecord;
@@ -44,7 +50,9 @@ import com.youbc.generated.schema.tables.records.FriendsLikesRecord;
 import com.youbc.generated.schema.tables.records.FriendsProfileRecord;
 import com.youbc.generated.schema.tables.records.FriendsProfileTagsRecord;
 import com.youbc.generated.schema.tables.records.FriendsTagsRecord;
+import com.youbc.generated.schema.tables.records.OfferedAnswerRecord;
 import com.youbc.generated.schema.tables.records.ProfileImageRecord;
+import com.youbc.generated.schema.tables.records.QuestionRecord;
 import com.youbc.generated.schema.tables.records.RelationshipStatusRecord;
 import com.youbc.generated.schema.tables.records.RoommatesDislikesRecord;
 import com.youbc.generated.schema.tables.records.RoommatesHometownRecord;
@@ -53,7 +61,11 @@ import com.youbc.generated.schema.tables.records.RoommatesLocationsRecord;
 import com.youbc.generated.schema.tables.records.RoommatesProfileRecord;
 import com.youbc.generated.schema.tables.records.RoommatesProfileTagsRecord;
 import com.youbc.generated.schema.tables.records.RoommatesTagsRecord;
+import com.youbc.generated.schema.tables.records.SurveyQuestionAnswerRecord;
+import com.youbc.generated.schema.tables.records.SurveyQuestionRecord;
+import com.youbc.generated.schema.tables.records.SurveyRecord;
 import com.youbc.generated.schema.tables.records.UbcStudentVerificationRecord;
+import com.youbc.generated.schema.tables.records.UserAnswerRecord;
 import com.youbc.generated.schema.tables.records.UserProfileRecord;
 import com.youbc.generated.schema.tables.records.UserRecord;
 
@@ -112,7 +124,9 @@ public class Keys {
     public static final UniqueKey<FriendsProfileRecord> KEY_FRIENDS_PROFILE_PRIMARY = UniqueKeys0.KEY_FRIENDS_PROFILE_PRIMARY;
     public static final UniqueKey<FriendsProfileTagsRecord> KEY_FRIENDS_PROFILE_TAGS_PRIMARY = UniqueKeys0.KEY_FRIENDS_PROFILE_TAGS_PRIMARY;
     public static final UniqueKey<FriendsTagsRecord> KEY_FRIENDS_TAGS_PRIMARY = UniqueKeys0.KEY_FRIENDS_TAGS_PRIMARY;
+    public static final UniqueKey<OfferedAnswerRecord> KEY_OFFERED_ANSWER_PRIMARY = UniqueKeys0.KEY_OFFERED_ANSWER_PRIMARY;
     public static final UniqueKey<ProfileImageRecord> KEY_PROFILE_IMAGE_PRIMARY = UniqueKeys0.KEY_PROFILE_IMAGE_PRIMARY;
+    public static final UniqueKey<QuestionRecord> KEY_QUESTION_PRIMARY = UniqueKeys0.KEY_QUESTION_PRIMARY;
     public static final UniqueKey<RelationshipStatusRecord> KEY_RELATIONSHIP_STATUS_PRIMARY = UniqueKeys0.KEY_RELATIONSHIP_STATUS_PRIMARY;
     public static final UniqueKey<RoommatesDislikesRecord> KEY_ROOMMATES_DISLIKES_PRIMARY = UniqueKeys0.KEY_ROOMMATES_DISLIKES_PRIMARY;
     public static final UniqueKey<RoommatesHometownRecord> KEY_ROOMMATES_HOMETOWN_PRIMARY = UniqueKeys0.KEY_ROOMMATES_HOMETOWN_PRIMARY;
@@ -121,8 +135,12 @@ public class Keys {
     public static final UniqueKey<RoommatesProfileRecord> KEY_ROOMMATES_PROFILE_PRIMARY = UniqueKeys0.KEY_ROOMMATES_PROFILE_PRIMARY;
     public static final UniqueKey<RoommatesProfileTagsRecord> KEY_ROOMMATES_PROFILE_TAGS_PRIMARY = UniqueKeys0.KEY_ROOMMATES_PROFILE_TAGS_PRIMARY;
     public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_PRIMARY = UniqueKeys0.KEY_ROOMMATES_TAGS_PRIMARY;
+    public static final UniqueKey<SurveyRecord> KEY_SURVEY_PRIMARY = UniqueKeys0.KEY_SURVEY_PRIMARY;
+    public static final UniqueKey<SurveyQuestionRecord> KEY_SURVEY_QUESTION_PRIMARY = UniqueKeys0.KEY_SURVEY_QUESTION_PRIMARY;
+    public static final UniqueKey<SurveyQuestionAnswerRecord> KEY_SURVEY_QUESTION_ANSWER_PRIMARY = UniqueKeys0.KEY_SURVEY_QUESTION_ANSWER_PRIMARY;
     public static final UniqueKey<UbcStudentVerificationRecord> KEY_UBC_STUDENT_VERIFICATION_PRIMARY = UniqueKeys0.KEY_UBC_STUDENT_VERIFICATION_PRIMARY;
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
+    public static final UniqueKey<UserAnswerRecord> KEY_USER_ANSWER_PRIMARY = UniqueKeys0.KEY_USER_ANSWER_PRIMARY;
     public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_PRIMARY = UniqueKeys0.KEY_USER_PROFILE_PRIMARY;
 
     // -------------------------------------------------------------------------
@@ -158,7 +176,16 @@ public class Keys {
     public static final ForeignKey<RoommatesProfileRecord, RoommatesHometownRecord> ROOMMATES_PROFILE_IBFK_3 = ForeignKeys0.ROOMMATES_PROFILE_IBFK_3;
     public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesProfileRecord> ROOMMATES_PROFILE_TAGS_IBFK_1 = ForeignKeys0.ROOMMATES_PROFILE_TAGS_IBFK_1;
     public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesTagsRecord> ROOMMATES_PROFILE_TAGS_IBFK_2 = ForeignKeys0.ROOMMATES_PROFILE_TAGS_IBFK_2;
+    public static final ForeignKey<SurveyQuestionRecord, SurveyRecord> SURVEY_QUESTION_IBFK_1 = ForeignKeys0.SURVEY_QUESTION_IBFK_1;
+    public static final ForeignKey<SurveyQuestionRecord, QuestionRecord> SURVEY_QUESTION_IBFK_2 = ForeignKeys0.SURVEY_QUESTION_IBFK_2;
+    public static final ForeignKey<SurveyQuestionAnswerRecord, SurveyRecord> SURVEY_QUESTION_ANSWER_IBFK_1 = ForeignKeys0.SURVEY_QUESTION_ANSWER_IBFK_1;
+    public static final ForeignKey<SurveyQuestionAnswerRecord, QuestionRecord> SURVEY_QUESTION_ANSWER_IBFK_2 = ForeignKeys0.SURVEY_QUESTION_ANSWER_IBFK_2;
+    public static final ForeignKey<SurveyQuestionAnswerRecord, OfferedAnswerRecord> SURVEY_QUESTION_ANSWER_IBFK_3 = ForeignKeys0.SURVEY_QUESTION_ANSWER_IBFK_3;
     public static final ForeignKey<UbcStudentVerificationRecord, UserRecord> UBC_STUDENT_VERIFICATION_IBFK_1 = ForeignKeys0.UBC_STUDENT_VERIFICATION_IBFK_1;
+    public static final ForeignKey<UserAnswerRecord, SurveyRecord> USER_ANSWER_IBFK_2 = ForeignKeys0.USER_ANSWER_IBFK_2;
+    public static final ForeignKey<UserAnswerRecord, QuestionRecord> USER_ANSWER_IBFK_3 = ForeignKeys0.USER_ANSWER_IBFK_3;
+    public static final ForeignKey<UserAnswerRecord, UserRecord> USER_ANSWER_IBFK_1 = ForeignKeys0.USER_ANSWER_IBFK_1;
+    public static final ForeignKey<UserAnswerRecord, OfferedAnswerRecord> USER_ANSWER_IBFK_4 = ForeignKeys0.USER_ANSWER_IBFK_4;
     public static final ForeignKey<UserProfileRecord, UserRecord> USER_PROFILE_IBFK_1 = ForeignKeys0.USER_PROFILE_IBFK_1;
 
     // -------------------------------------------------------------------------
@@ -193,7 +220,9 @@ public class Keys {
         public static final UniqueKey<FriendsProfileRecord> KEY_FRIENDS_PROFILE_PRIMARY = createUniqueKey(FriendsProfile.FRIENDS_PROFILE, "KEY_friends_profile_PRIMARY", FriendsProfile.FRIENDS_PROFILE.USER_ID);
         public static final UniqueKey<FriendsProfileTagsRecord> KEY_FRIENDS_PROFILE_TAGS_PRIMARY = createUniqueKey(FriendsProfileTags.FRIENDS_PROFILE_TAGS, "KEY_friends_profile_tags_PRIMARY", FriendsProfileTags.FRIENDS_PROFILE_TAGS.USER_ID, FriendsProfileTags.FRIENDS_PROFILE_TAGS.TAG_ID);
         public static final UniqueKey<FriendsTagsRecord> KEY_FRIENDS_TAGS_PRIMARY = createUniqueKey(FriendsTags.FRIENDS_TAGS, "KEY_friends_tags_PRIMARY", FriendsTags.FRIENDS_TAGS.TAG_ID);
+        public static final UniqueKey<OfferedAnswerRecord> KEY_OFFERED_ANSWER_PRIMARY = createUniqueKey(OfferedAnswer.OFFERED_ANSWER, "KEY_offered_answer_PRIMARY", OfferedAnswer.OFFERED_ANSWER.OFFERED_ANSWER_ID);
         public static final UniqueKey<ProfileImageRecord> KEY_PROFILE_IMAGE_PRIMARY = createUniqueKey(ProfileImage.PROFILE_IMAGE, "KEY_profile_image_PRIMARY", ProfileImage.PROFILE_IMAGE.PROFILE_IMAGE_ID);
+        public static final UniqueKey<QuestionRecord> KEY_QUESTION_PRIMARY = createUniqueKey(Question.QUESTION, "KEY_question_PRIMARY", Question.QUESTION.QUESTION_ID);
         public static final UniqueKey<RelationshipStatusRecord> KEY_RELATIONSHIP_STATUS_PRIMARY = createUniqueKey(RelationshipStatus.RELATIONSHIP_STATUS, "KEY_relationship_status_PRIMARY", RelationshipStatus.RELATIONSHIP_STATUS.RELATIONSHIP_ID);
         public static final UniqueKey<RoommatesDislikesRecord> KEY_ROOMMATES_DISLIKES_PRIMARY = createUniqueKey(RoommatesDislikes.ROOMMATES_DISLIKES, "KEY_roommates_dislikes_PRIMARY", RoommatesDislikes.ROOMMATES_DISLIKES.DISLIKER, RoommatesDislikes.ROOMMATES_DISLIKES.DISLIKEE);
         public static final UniqueKey<RoommatesHometownRecord> KEY_ROOMMATES_HOMETOWN_PRIMARY = createUniqueKey(RoommatesHometown.ROOMMATES_HOMETOWN, "KEY_roommates_hometown_PRIMARY", RoommatesHometown.ROOMMATES_HOMETOWN.HOMETOWN_ID);
@@ -202,8 +231,12 @@ public class Keys {
         public static final UniqueKey<RoommatesProfileRecord> KEY_ROOMMATES_PROFILE_PRIMARY = createUniqueKey(RoommatesProfile.ROOMMATES_PROFILE, "KEY_roommates_profile_PRIMARY", RoommatesProfile.ROOMMATES_PROFILE.USER_ID);
         public static final UniqueKey<RoommatesProfileTagsRecord> KEY_ROOMMATES_PROFILE_TAGS_PRIMARY = createUniqueKey(RoommatesProfileTags.ROOMMATES_PROFILE_TAGS, "KEY_roommates_profile_tags_PRIMARY", RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.USER_ID, RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.TAG_ID);
         public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_PRIMARY = createUniqueKey(RoommatesTags.ROOMMATES_TAGS, "KEY_roommates_tags_PRIMARY", RoommatesTags.ROOMMATES_TAGS.TAG_ID);
+        public static final UniqueKey<SurveyRecord> KEY_SURVEY_PRIMARY = createUniqueKey(Survey.SURVEY, "KEY_survey_PRIMARY", Survey.SURVEY.SURVEY_ID);
+        public static final UniqueKey<SurveyQuestionRecord> KEY_SURVEY_QUESTION_PRIMARY = createUniqueKey(SurveyQuestion.SURVEY_QUESTION, "KEY_survey_question_PRIMARY", SurveyQuestion.SURVEY_QUESTION.SURVEY_ID, SurveyQuestion.SURVEY_QUESTION.QUESTION_ID);
+        public static final UniqueKey<SurveyQuestionAnswerRecord> KEY_SURVEY_QUESTION_ANSWER_PRIMARY = createUniqueKey(SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER, "KEY_survey_question_answer_PRIMARY", SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER.SURVEY_ID, SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER.QUESTION_ID, SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER.OFFERED_ANSWER_ID);
         public static final UniqueKey<UbcStudentVerificationRecord> KEY_UBC_STUDENT_VERIFICATION_PRIMARY = createUniqueKey(UbcStudentVerification.UBC_STUDENT_VERIFICATION, "KEY_ubc_student_verification_PRIMARY", UbcStudentVerification.UBC_STUDENT_VERIFICATION.USER_ID);
         public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = createUniqueKey(User.USER, "KEY_user_PRIMARY", User.USER.USER_ID);
+        public static final UniqueKey<UserAnswerRecord> KEY_USER_ANSWER_PRIMARY = createUniqueKey(UserAnswer.USER_ANSWER, "KEY_user_answer_PRIMARY", UserAnswer.USER_ANSWER.SURVEY_ID, UserAnswer.USER_ANSWER.QUESTION_ID, UserAnswer.USER_ANSWER.USER_ID, UserAnswer.USER_ANSWER.OFFERED_ANSWER_ID);
         public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_PRIMARY = createUniqueKey(UserProfile.USER_PROFILE, "KEY_user_profile_PRIMARY", UserProfile.USER_PROFILE.USER_ID);
     }
 
@@ -237,7 +270,16 @@ public class Keys {
         public static final ForeignKey<RoommatesProfileRecord, RoommatesHometownRecord> ROOMMATES_PROFILE_IBFK_3 = createForeignKey(com.youbc.generated.schema.Keys.KEY_ROOMMATES_HOMETOWN_PRIMARY, RoommatesProfile.ROOMMATES_PROFILE, "roommates_profile_ibfk_3", RoommatesProfile.ROOMMATES_PROFILE.HOMETOWN_ID);
         public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesProfileRecord> ROOMMATES_PROFILE_TAGS_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_ROOMMATES_PROFILE_PRIMARY, RoommatesProfileTags.ROOMMATES_PROFILE_TAGS, "roommates_profile_tags_ibfk_1", RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.USER_ID);
         public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesTagsRecord> ROOMMATES_PROFILE_TAGS_IBFK_2 = createForeignKey(com.youbc.generated.schema.Keys.KEY_ROOMMATES_TAGS_PRIMARY, RoommatesProfileTags.ROOMMATES_PROFILE_TAGS, "roommates_profile_tags_ibfk_2", RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.TAG_ID);
+        public static final ForeignKey<SurveyQuestionRecord, SurveyRecord> SURVEY_QUESTION_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_SURVEY_PRIMARY, SurveyQuestion.SURVEY_QUESTION, "survey_question_ibfk_1", SurveyQuestion.SURVEY_QUESTION.SURVEY_ID);
+        public static final ForeignKey<SurveyQuestionRecord, QuestionRecord> SURVEY_QUESTION_IBFK_2 = createForeignKey(com.youbc.generated.schema.Keys.KEY_QUESTION_PRIMARY, SurveyQuestion.SURVEY_QUESTION, "survey_question_ibfk_2", SurveyQuestion.SURVEY_QUESTION.QUESTION_ID);
+        public static final ForeignKey<SurveyQuestionAnswerRecord, SurveyRecord> SURVEY_QUESTION_ANSWER_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_SURVEY_PRIMARY, SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER, "survey_question_answer_ibfk_1", SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER.SURVEY_ID);
+        public static final ForeignKey<SurveyQuestionAnswerRecord, QuestionRecord> SURVEY_QUESTION_ANSWER_IBFK_2 = createForeignKey(com.youbc.generated.schema.Keys.KEY_QUESTION_PRIMARY, SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER, "survey_question_answer_ibfk_2", SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER.QUESTION_ID);
+        public static final ForeignKey<SurveyQuestionAnswerRecord, OfferedAnswerRecord> SURVEY_QUESTION_ANSWER_IBFK_3 = createForeignKey(com.youbc.generated.schema.Keys.KEY_OFFERED_ANSWER_PRIMARY, SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER, "survey_question_answer_ibfk_3", SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER.OFFERED_ANSWER_ID);
         public static final ForeignKey<UbcStudentVerificationRecord, UserRecord> UBC_STUDENT_VERIFICATION_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_USER_PRIMARY, UbcStudentVerification.UBC_STUDENT_VERIFICATION, "ubc_student_verification_ibfk_1", UbcStudentVerification.UBC_STUDENT_VERIFICATION.USER_ID);
+        public static final ForeignKey<UserAnswerRecord, SurveyRecord> USER_ANSWER_IBFK_2 = createForeignKey(com.youbc.generated.schema.Keys.KEY_SURVEY_PRIMARY, UserAnswer.USER_ANSWER, "user_answer_ibfk_2", UserAnswer.USER_ANSWER.SURVEY_ID);
+        public static final ForeignKey<UserAnswerRecord, QuestionRecord> USER_ANSWER_IBFK_3 = createForeignKey(com.youbc.generated.schema.Keys.KEY_QUESTION_PRIMARY, UserAnswer.USER_ANSWER, "user_answer_ibfk_3", UserAnswer.USER_ANSWER.QUESTION_ID);
+        public static final ForeignKey<UserAnswerRecord, UserRecord> USER_ANSWER_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_USER_PRIMARY, UserAnswer.USER_ANSWER, "user_answer_ibfk_1", UserAnswer.USER_ANSWER.USER_ID);
+        public static final ForeignKey<UserAnswerRecord, OfferedAnswerRecord> USER_ANSWER_IBFK_4 = createForeignKey(com.youbc.generated.schema.Keys.KEY_OFFERED_ANSWER_PRIMARY, UserAnswer.USER_ANSWER, "user_answer_ibfk_4", UserAnswer.USER_ANSWER.OFFERED_ANSWER_ID);
         public static final ForeignKey<UserProfileRecord, UserRecord> USER_PROFILE_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_USER_PRIMARY, UserProfile.USER_PROFILE, "user_profile_ibfk_1", UserProfile.USER_PROFILE.USER_ID);
     }
 }

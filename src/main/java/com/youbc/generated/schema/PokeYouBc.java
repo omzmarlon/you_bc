@@ -18,7 +18,9 @@ import com.youbc.generated.schema.tables.FriendsLikes;
 import com.youbc.generated.schema.tables.FriendsProfile;
 import com.youbc.generated.schema.tables.FriendsProfileTags;
 import com.youbc.generated.schema.tables.FriendsTags;
+import com.youbc.generated.schema.tables.OfferedAnswer;
 import com.youbc.generated.schema.tables.ProfileImage;
+import com.youbc.generated.schema.tables.Question;
 import com.youbc.generated.schema.tables.RelationshipStatus;
 import com.youbc.generated.schema.tables.RoommatesDislikes;
 import com.youbc.generated.schema.tables.RoommatesHometown;
@@ -27,8 +29,12 @@ import com.youbc.generated.schema.tables.RoommatesLocations;
 import com.youbc.generated.schema.tables.RoommatesProfile;
 import com.youbc.generated.schema.tables.RoommatesProfileTags;
 import com.youbc.generated.schema.tables.RoommatesTags;
+import com.youbc.generated.schema.tables.Survey;
+import com.youbc.generated.schema.tables.SurveyQuestion;
+import com.youbc.generated.schema.tables.SurveyQuestionAnswer;
 import com.youbc.generated.schema.tables.UbcStudentVerification;
 import com.youbc.generated.schema.tables.User;
+import com.youbc.generated.schema.tables.UserAnswer;
 import com.youbc.generated.schema.tables.UserProfile;
 
 import java.util.ArrayList;
@@ -55,7 +61,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PokeYouBc extends SchemaImpl {
 
-    private static final long serialVersionUID = -1477080726;
+    private static final long serialVersionUID = -1816782932;
 
     /**
      * The reference instance of <code>poke_you_bc</code>
@@ -133,9 +139,19 @@ public class PokeYouBc extends SchemaImpl {
     public final FriendsTags FRIENDS_TAGS = com.youbc.generated.schema.tables.FriendsTags.FRIENDS_TAGS;
 
     /**
+     * The table <code>poke_you_bc.offered_answer</code>.
+     */
+    public final OfferedAnswer OFFERED_ANSWER = com.youbc.generated.schema.tables.OfferedAnswer.OFFERED_ANSWER;
+
+    /**
      * The table <code>poke_you_bc.profile_image</code>.
      */
     public final ProfileImage PROFILE_IMAGE = com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
+
+    /**
+     * The table <code>poke_you_bc.question</code>.
+     */
+    public final Question QUESTION = com.youbc.generated.schema.tables.Question.QUESTION;
 
     /**
      * The table <code>poke_you_bc.relationship_status</code>.
@@ -178,6 +194,21 @@ public class PokeYouBc extends SchemaImpl {
     public final RoommatesTags ROOMMATES_TAGS = com.youbc.generated.schema.tables.RoommatesTags.ROOMMATES_TAGS;
 
     /**
+     * The table <code>poke_you_bc.survey</code>.
+     */
+    public final Survey SURVEY = com.youbc.generated.schema.tables.Survey.SURVEY;
+
+    /**
+     * The table <code>poke_you_bc.survey_question</code>.
+     */
+    public final SurveyQuestion SURVEY_QUESTION = com.youbc.generated.schema.tables.SurveyQuestion.SURVEY_QUESTION;
+
+    /**
+     * The table <code>poke_you_bc.survey_question_answer</code>.
+     */
+    public final SurveyQuestionAnswer SURVEY_QUESTION_ANSWER = com.youbc.generated.schema.tables.SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER;
+
+    /**
      * The table <code>poke_you_bc.ubc_student_verification</code>.
      */
     public final UbcStudentVerification UBC_STUDENT_VERIFICATION = com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
@@ -186,6 +217,11 @@ public class PokeYouBc extends SchemaImpl {
      * The table <code>poke_you_bc.user</code>.
      */
     public final User USER = com.youbc.generated.schema.tables.User.USER;
+
+    /**
+     * The table <code>poke_you_bc.user_answer</code>.
+     */
+    public final UserAnswer USER_ANSWER = com.youbc.generated.schema.tables.UserAnswer.USER_ANSWER;
 
     /**
      * The table <code>poke_you_bc.user_profile</code>.
@@ -231,7 +267,9 @@ public class PokeYouBc extends SchemaImpl {
             FriendsProfile.FRIENDS_PROFILE,
             FriendsProfileTags.FRIENDS_PROFILE_TAGS,
             FriendsTags.FRIENDS_TAGS,
+            OfferedAnswer.OFFERED_ANSWER,
             ProfileImage.PROFILE_IMAGE,
+            Question.QUESTION,
             RelationshipStatus.RELATIONSHIP_STATUS,
             RoommatesDislikes.ROOMMATES_DISLIKES,
             RoommatesHometown.ROOMMATES_HOMETOWN,
@@ -240,8 +278,12 @@ public class PokeYouBc extends SchemaImpl {
             RoommatesProfile.ROOMMATES_PROFILE,
             RoommatesProfileTags.ROOMMATES_PROFILE_TAGS,
             RoommatesTags.ROOMMATES_TAGS,
+            Survey.SURVEY,
+            SurveyQuestion.SURVEY_QUESTION,
+            SurveyQuestionAnswer.SURVEY_QUESTION_ANSWER,
             UbcStudentVerification.UBC_STUDENT_VERIFICATION,
             User.USER,
+            UserAnswer.USER_ANSWER,
             UserProfile.USER_PROFILE);
     }
 }
