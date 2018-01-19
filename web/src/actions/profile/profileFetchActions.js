@@ -3,7 +3,8 @@ import {
     RECEIVE_PERSONAL_INFO, RECEIVE_ROOMMATES_INFO
 } from "../actionTypes";
 import axios from 'axios';
-import {requestUrl} from "../../constants/api";
+import {CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, requestUrl, ROOMMATES_PROFILE_API} from "../../constants/api";
+import {showInfoBar} from "../global/globalActions";
 
 
 
@@ -11,53 +12,42 @@ import {requestUrl} from "../../constants/api";
 export const receiveClassmatesInfo = (classmates) => ({type: RECEIVE_CLASSMATES_INFO, classmates});
 
 export const fetchClassmatesInfo = () => dispatch => {
-    // TODO: connect with backend API
-    return Promise.resolve(
-            {
-                major: '',
-                courses: [],
-                motto: '',
-                tags: []
-                //values: {
-                //     ,
-                // },
-                // options: {
-                //     majorOptions: ['CPSC', 'ECON', 'COMM', 'CHEM', 'PHYS'],
-                //     coursesOptions: ['CPSC 310', 'CPSC 340', 'MATH 307',
-                //         'CPSC 304', 'ENG 112', 'MATH 302', 'MATH 104', 'MATH 105', 'ECON 102', 'ECON 101'],
-                //     tagsOptions: ['Good', 'Great', 'Handsome', 'Ugly']
-                // }
+    axios.get(requestUrl(CLASSMATES_PROFILE_API), {withCredentials: true})
+        .then( response => {
+            dispatch(receiveClassmatesInfo({
+                major: response.data.major? response.data.major: '',
+                courses: response.data.courses,
+                motto: response.data.motto? response.data.motto: '',
+                tags: response.data.tags
+            }))
+        }).catch( err => {
+            // TODO: centralize error handling
+            dispatch(showInfoBar("获取找课友信息失败"));
+            if (err.response.data.error) {
+                console.log(err.response.data.error);
             }
-        ).then(
-            response => dispatch(receiveClassmatesInfo(response)),
-            err => console.log('implement certain error handling')
-        );
+        });
 };
 
 // user fetch for own roommates module data
 export const receiveRoommatesInfo = (roommates) => ({type: RECEIVE_ROOMMATES_INFO, roommates});
 
 export const fetchRoommatesInfo = () => dispatch => {
-    // TODO: connect with backend API
-    return Promise.resolve(
-        {
-            location: '',
-            hometown: '',
-            motto: '',
-            tags: [],
-            // values: {
-            //
-            // },
-            // options: {
-            //     locationOptions: ['West Vancouver', 'Wesbrook Village', 'On campus'],
-            //     hometownOptions: ['福州', '北京', '重庆', '上海', '广东'],
-            //     tagsOptions: ['Clean', 'Early', 'Dirty', 'Late'],
-            // }
-        }
-    ).then(
-        response => dispatch(receiveRoommatesInfo(response)),
-        err => console.log('implement certain error handling')
-    )
+    axios.get(requestUrl(ROOMMATES_PROFILE_API), {withCredentials: true})
+        .then( response => {
+            dispatch(receiveRoommatesInfo({
+                location: response.data.location? response.data.location: '',
+                hometown: response.data.hometown? response.data.hometown: '',
+                motto: response.data.motto? response.data.motto: '',
+                tags: response.data.tags,
+            }))
+        }).catch( err => {
+        // TODO: centralize error handling
+            dispatch(showInfoBar("获取找室友信息失败"));
+            if (err.response.data.error) {
+                console.log(err.response.data.error);
+            }
+        });
 };
 
 // user fetch for own friends module data
@@ -65,25 +55,21 @@ export const receiveFriendsInfo = (friends) => ({type: RECEIVE_FRIENDS_INFO, fri
 
 export const fetchFriendsInfo = () => dispatch => {
     // TODO: connect with backend API
-    return Promise.resolve(
-        {
-            faculty: '',
-            relationship: '',
-            motto: '',
-            tags: [],
-            // values: {
-            //
-            // },
-            // options: {
-            //     facultyOptions: ['Science', 'Forestry', 'Sauder', 'Arts'],
-            //     relationshipOptions: ['单身', '恋爱中'],
-            //     tagsOptions: ['Coding', '约', 'Coffee', 'photography', 'Hiking'],
-            // }
+    axios.get(requestUrl(FRIENDS_PROFILE_API), {withCredentials: true})
+        .then( response => {
+            dispatch(receiveFriendsInfo({
+                faculty: response.data.faculty? response.data.faculty: '',
+                relationship: response.data.relationship? response.data.relationship: '',
+                motto: response.data.motto? response.data.motto: '',
+                tags: response.data.tags,
+            }))
+        }).catch( err => {
+        // TODO: centralize error handling
+        dispatch(showInfoBar("获取找X友信息失败"));
+        if (err.response.data.error) {
+            console.log(err.response.data.error);
         }
-    ).then(
-        response => dispatch(receiveFriendsInfo(response)),
-        err => console.log('implement certain error handling')
-    );
+    });
 };
 
 // user fetch for personal info data

@@ -10,7 +10,7 @@ import {
     CLASSMATES_TAGS_OPTIONS_API, COURSES_OPTIONS_API, FACULTIES_OPTIONS_API, FRIENDS_TAGS_API, HOMETOWN_OPTIONS_API,
     LOCATION_OPTIONS_API,
     MAJOR_OPTIONS_API, RELATIONSHIP_OPTIONS_API,
-    requestUrl
+    requestUrl, ROOMMATES_TAGS_OPTIONS_API
 } from "../../constants/api";
 import {showInfoBar} from "../global/globalActions";
 
@@ -30,6 +30,7 @@ export const fetchMajors = () => dispatch => {
             dispatch(receiveMajorOptions(res.data))
         })
         .catch(err => {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取专业选项失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
@@ -43,6 +44,7 @@ export const fetchCourses = () => dispatch => {
             dispatch(receiveCoursesOptions(res.data))
         })
         .catch(err => {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取课程选项失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
@@ -56,6 +58,7 @@ export const fetchClassmatesTags = () => dispatch => {
             dispatch(receiveClassmatesTags(res.data))
         })
         .catch(err => {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取找课友标签失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
@@ -69,6 +72,7 @@ export const fetchLocationOptions = () => dispatch => {
             dispatch(receiveLocationOptions(response.data));
         })
         .catch(err => {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取找室友地点失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
@@ -82,6 +86,7 @@ export const fetchHometownOptions = () => dispatch => {
             dispatch(receiveHometownOptions(response.data));
         })
         .catch(err => {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取家乡信息失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
@@ -90,11 +95,12 @@ export const fetchHometownOptions = () => dispatch => {
 };
 
 export const fetchRoommatesTags = () => dispatch => {
-    return axios.get(requestUrl(CLASSMATES_TAGS_OPTIONS_API), {withCredentials: true})
+    return axios.get(requestUrl(ROOMMATES_TAGS_OPTIONS_API), {withCredentials: true})
         .then(response => {
             dispatch(receiveRoommateTags(response.data));
         })
         .catch(err=> {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取找室友标签失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
@@ -108,6 +114,7 @@ export const fetchFaculties = () => dispatch => {
             dispatch(receiveFaculties(response.data));
         })
         .catch(err=> {
+            // TODO: centralize error handling
             dispatch(showInfoBar("获取学院信息失败"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);

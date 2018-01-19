@@ -81,11 +81,11 @@ CREATE TABLE classmates_tags (
 
 CREATE TABLE classmates_profile (
   user_id VARCHAR(100) CHARACTER SET utf8 PRIMARY KEY,
-  marjor VARCHAR(50) CHARACTER SET utf8,
+  major VARCHAR(50) CHARACTER SET utf8,
   motto VARCHAR(100) CHARACTER SET utf8,
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (marjor) REFERENCES classmates_major(major) ON DELETE SET NULL
+  FOREIGN KEY (major) REFERENCES classmates_major(major) ON DELETE SET NULL
 );
 
 CREATE TABLE classmates_profile_courses (

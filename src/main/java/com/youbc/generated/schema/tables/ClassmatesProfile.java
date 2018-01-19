@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesProfile extends TableImpl<ClassmatesProfileRecord> {
 
-    private static final long serialVersionUID = 1359741813;
+    private static final long serialVersionUID = 1216643943;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_profile</code>
@@ -57,9 +57,9 @@ public class ClassmatesProfile extends TableImpl<ClassmatesProfileRecord> {
     public final TableField<ClassmatesProfileRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.classmates_profile.marjor</code>.
+     * The column <code>poke_you_bc.classmates_profile.major</code>.
      */
-    public final TableField<ClassmatesProfileRecord, String> MARJOR = createField("marjor", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+    public final TableField<ClassmatesProfileRecord, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * The column <code>poke_you_bc.classmates_profile.motto</code>.
