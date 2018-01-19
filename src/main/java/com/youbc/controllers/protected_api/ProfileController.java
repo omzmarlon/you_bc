@@ -61,10 +61,9 @@ public class ProfileController {
                 );
     }
 
-    @RequestMapping(path = "/api/profile/friends", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/profile/friends", method = RequestMethod.PUT)
     public String  updateFriendsProfile(
-            HttpServletRequest request,
-            FriendsProfile friendsProfile
+            HttpServletRequest request, @RequestBody FriendsProfile friendsProfile
     ) {
         String userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillFriendsProfile(
@@ -77,10 +76,9 @@ public class ProfileController {
         return userID;
     }
 
-    @RequestMapping(path = "/api/profile/roommates", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/profile/roommates", method = RequestMethod.PUT)
     public String  updateRoommatesProfile(
-            HttpServletRequest request,
-            RoommatesProfile roommatesProfile
+            HttpServletRequest request, @RequestBody RoommatesProfile roommatesProfile
     ) {
         String userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillRoommatesProfile(
@@ -93,10 +91,9 @@ public class ProfileController {
         return userID;
     }
 
-    @RequestMapping(path = "/api/profile/classmates", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/profile/classmates", method = RequestMethod.PUT)
     public String updateClassmatesProfile(
-            HttpServletRequest request,
-            ClassmatesProfile classmatesProfile
+            HttpServletRequest request, @RequestBody ClassmatesProfile classmatesProfile
     ) {
         String userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillClassmatesProfile(
