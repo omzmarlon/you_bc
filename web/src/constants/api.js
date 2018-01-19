@@ -22,3 +22,12 @@ export function requestUrl(api) {
 }
 
 export const LOGIN_API = "/login";
+export const MAJOR_OPTIONS_API = "/api/profile/majors";
+export const COURSES_OPTIONS_API = "/api/profile/courses";
+export const CLASSMATES_TAGS_OPTIONS_API = "/api/profile/classmatesTags";
+export const LOCATION_OPTIONS_API = "/api/profile/locations";
+export const HOMETOWN_OPTIONS_API = "/api/profile/hometowns";
+export const ROOMMATES_TAGS_OPTIONS_API = "/api/profile/roommatesTags";
+export const FACULTIES_OPTIONS_API = "/api/profile/faculties";
+export const RELATIONSHIP_OPTIONS_API = "/api/profile/relationshipStatuses";
+export const FRIENDS_TAGS_API = "/api/profile/friendsTags";

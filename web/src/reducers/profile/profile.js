@@ -1,6 +1,11 @@
 
 import {
-    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO,
+    RECEIVE_CLASSMATES_INFO, RECEIVE_CLASSMATES_TAGS, RECEIVE_COURSES_OPTIONS, RECEIVE_FACULTIES_OPTIONS,
+    RECEIVE_FRIENDS_INFO, RECEIVE_FRIENDS_TAGS,
+    RECEIVE_HOMETOWNS_OPTIONS,
+    RECEIVE_LOCATIONS_OPTIONS,
+    RECEIVE_MAJORS_OPTIONS,
+    RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO, RECEIVE_RELATIONSHIP_STATUSES_OPTIONS, RECEIVE_ROOMMATE_TAGS,
     RECEIVE_ROOMMATES_INFO, UPDATE_AVATAR, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
     UPDATE_ROOMMATES_VALUES
 } from "../../actions/actionTypes";
@@ -63,11 +68,11 @@ const initialState = {
 const profile = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_CLASSMATES_INFO:
-            return {...state, classmates: action.classmates};
+            return {...state, classmates: {values: action.classmates, options: state.classmates.options}};
         case RECEIVE_ROOMMATES_INFO:
-            return {...state, roommates: action.roommates};
+            return {...state, roommates: {values: action.roommates, options: state.roommates.options}};
         case RECEIVE_FRIENDS_INFO:
-            return {...state, friends: action.friends};
+            return {...state, friends: {values: action.friends, options: state.friends.options}};
         case RECEIVE_PERSONAL_INFO:
             return {...state, personal: action.personal};
         case RECEIVE_MATCHED_USERS:
@@ -98,6 +103,106 @@ const profile = (state = initialState, action) => {
                         avatar: action.avatar,
                     },
                     options: state.personal.options
+                }
+            };
+        // menu options
+        case RECEIVE_MAJORS_OPTIONS:
+            return {...state,
+                classmates: {
+                    values: {...state.classmates.values},
+                    options: {
+                        majorOptions: action.majorOptions,
+                        coursesOptions: state.classmates.options.coursesOptions,
+                        tagsOptions: state.classmates.options.tagsOptions
+                    }
+                }
+            };
+        case RECEIVE_COURSES_OPTIONS:
+            return {...state,
+                classmates: {
+                    values: {...state.classmates.values},
+                    options: {
+                        majorOptions: state.classmates.options.majorOptions,
+                        coursesOptions: action.coursesOptions,
+                        tagsOptions: state.classmates.options.tagsOptions
+                    }
+                }
+            };
+        case RECEIVE_CLASSMATES_TAGS:
+            return {...state,
+                classmates: {
+                    values: {...state.classmates.values},
+                    options: {
+                        majorOptions: state.classmates.options.majorOptions,
+                        coursesOptions: state.classmates.options.coursesOptions,
+                        tagsOptions: action.classmatesTags
+                    }
+                }
+            };
+        case RECEIVE_LOCATIONS_OPTIONS:
+            return {...state,
+                roommates: {
+                    values: {...state.roommates.values},
+                    options: {
+                        locationOptions: action.locationOptions,
+                        hometownOptions: state.roommates.options.hometownOptions,
+                        tagsOptions: state.roommates.options.tagsOptions
+                    }
+                }
+            };
+        case RECEIVE_HOMETOWNS_OPTIONS:
+            return {...state,
+                roommates: {
+                    values: {...state.roommates.values},
+                    options: {
+                        locationOptions: state.roommates.options.locationOptions,
+                        hometownOptions: action.hometownOptions,
+                        tagsOptions: state.roommates.options.tagsOptions
+                    }
+                }
+            };
+        case RECEIVE_ROOMMATE_TAGS:
+            return {...state,
+                roommates: {
+                    values: {...state.roommates.values},
+                    options: {
+                        locationOptions: state.roommates.options.locationOptions,
+                        hometownOptions: state.roommates.options.hometownOptions,
+                        tagsOptions: action.roommatesTags
+                    }
+                }
+            };
+        case RECEIVE_FACULTIES_OPTIONS:
+            return {...state,
+                friends: {
+                    values: {...state.friends.values},
+                    options: {
+                        facultyOptions: action.facultyOptions,
+                        relationshipOptions: state.friends.options.relationshipOptions,
+                        tagsOptions: state.friends.options.tagsOptions,
+                    }
+                }
+            };
+        case RECEIVE_RELATIONSHIP_STATUSES_OPTIONS:
+            return {...state,
+                friends: {
+                    values: {...state.friends.values},
+                    options: {
+                        facultyOptions: state.friends.options.facultyOptions,
+                        relationshipOptions: action.relationshipOptions,
+                        tagsOptions: state.friends.options.tagsOptions,
+                    }
+                }
+            };
+        case RECEIVE_FRIENDS_TAGS:
+            return {...state,
+                friends: {
+                    values: {...state.friends.values},
+                    options: {
+                        facultyOptions: state.friends.options.facultyOptions,
+                        relationshipOptions: state.friends.options.relationshipOptions,
+                        tagsOptions: action.friendsTags
+                    }
                 }
             };
         default:

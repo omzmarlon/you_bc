@@ -30,7 +30,7 @@ public class JWTAPIFilter extends AbstractAuthenticationProcessingFilter {
     ) {
         //TODO: should be super(requestMatcher); but not sure why it always gives status 302. super("/"); works for now
         //super(requestMatcher);
-        super("/");
+        super("/s");
         setAuthenticationManager(authenticationManager);
         this.cookieService = cookieService;
     }

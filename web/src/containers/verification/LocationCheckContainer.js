@@ -46,7 +46,6 @@ class LocationCheckContainer extends Component {
     onClickVerify() {
         if (navigator.geolocation) {
             this.setState({isVerifying: true});
-            console.log("triggered verification");
             navigator.geolocation.getCurrentPosition(this.verifyLocation);
         } else {
             this.props.showInfoBar("同学的浏览器不支持地理位置获取，请用其他方式认证");

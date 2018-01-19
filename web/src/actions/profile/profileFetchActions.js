@@ -1,7 +1,11 @@
 import {
-    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO,
-    RECEIVE_ROOMMATES_INFO
+    RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS,
+    RECEIVE_PERSONAL_INFO, RECEIVE_ROOMMATES_INFO
 } from "../actionTypes";
+import axios from 'axios';
+import {requestUrl} from "../../constants/api";
+
+
 
 // user fetch for own classmates module data
 export const receiveClassmatesInfo = (classmates) => ({type: RECEIVE_CLASSMATES_INFO, classmates});
@@ -10,18 +14,19 @@ export const fetchClassmatesInfo = () => dispatch => {
     // TODO: connect with backend API
     return Promise.resolve(
             {
-                values: {
-                    major: '',
-                    courses: [],
-                    motto: '',
-                    tags: [],
-                },
-                options: {
-                    majorOptions: ['CPSC', 'ECON', 'COMM', 'CHEM', 'PHYS'],
-                    coursesOptions: ['CPSC 310', 'CPSC 340', 'MATH 307',
-                        'CPSC 304', 'ENG 112', 'MATH 302', 'MATH 104', 'MATH 105', 'ECON 102', 'ECON 101'],
-                    tagsOptions: ['Good', 'Great', 'Handsome', 'Ugly']
-                }
+                major: '',
+                courses: [],
+                motto: '',
+                tags: []
+                //values: {
+                //     ,
+                // },
+                // options: {
+                //     majorOptions: ['CPSC', 'ECON', 'COMM', 'CHEM', 'PHYS'],
+                //     coursesOptions: ['CPSC 310', 'CPSC 340', 'MATH 307',
+                //         'CPSC 304', 'ENG 112', 'MATH 302', 'MATH 104', 'MATH 105', 'ECON 102', 'ECON 101'],
+                //     tagsOptions: ['Good', 'Great', 'Handsome', 'Ugly']
+                // }
             }
         ).then(
             response => dispatch(receiveClassmatesInfo(response)),
@@ -36,17 +41,18 @@ export const fetchRoommatesInfo = () => dispatch => {
     // TODO: connect with backend API
     return Promise.resolve(
         {
-            values: {
-                location: '',
-                hometown: '',
-                motto: '',
-                tags: [],
-            },
-            options: {
-                locationOptions: ['West Vancouver', 'Wesbrook Village', 'On campus'],
-                hometownOptions: ['福州', '北京', '重庆', '上海', '广东'],
-                tagsOptions: ['Clean', 'Early', 'Dirty', 'Late'],
-            }
+            location: '',
+            hometown: '',
+            motto: '',
+            tags: [],
+            // values: {
+            //
+            // },
+            // options: {
+            //     locationOptions: ['West Vancouver', 'Wesbrook Village', 'On campus'],
+            //     hometownOptions: ['福州', '北京', '重庆', '上海', '广东'],
+            //     tagsOptions: ['Clean', 'Early', 'Dirty', 'Late'],
+            // }
         }
     ).then(
         response => dispatch(receiveRoommatesInfo(response)),
@@ -61,17 +67,18 @@ export const fetchFriendsInfo = () => dispatch => {
     // TODO: connect with backend API
     return Promise.resolve(
         {
-            values: {
-                faculty: '',
-                relationship: '',
-                motto: '',
-                tags: [],
-            },
-            options: {
-                facultyOptions: ['Science', 'Forestry', 'Sauder', 'Arts'],
-                relationshipOptions: ['单身', '恋爱中'],
-                tagsOptions: ['Coding', '约', 'Coffee', 'photography', 'Hiking'],
-            }
+            faculty: '',
+            relationship: '',
+            motto: '',
+            tags: [],
+            // values: {
+            //
+            // },
+            // options: {
+            //     facultyOptions: ['Science', 'Forestry', 'Sauder', 'Arts'],
+            //     relationshipOptions: ['单身', '恋爱中'],
+            //     tagsOptions: ['Coding', '约', 'Coffee', 'photography', 'Hiking'],
+            // }
         }
     ).then(
         response => dispatch(receiveFriendsInfo(response)),
