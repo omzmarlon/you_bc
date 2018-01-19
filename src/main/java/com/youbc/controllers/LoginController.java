@@ -43,7 +43,7 @@ public class LoginController {
                 weChatUser = weChatOAuthService.login(accessGrant);
             } else {
                 weChatUser = new WeChatUser(
-                        "mock_open_id_1",
+                        accessGrant,
                         "nickname",
                         "", "", "", "",
                         "https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4",

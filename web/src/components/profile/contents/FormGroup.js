@@ -13,8 +13,8 @@ import {
     hideClassmatesForm, hideFriendsForm, hidePersonalForm, hideRoommatesForm
 } from "../../../actions/profile/profileUIActions";
 import {
-    updateClassmatesValues, updateFriendsValues, updatePersonalValues,
-    updateRoommatesValues
+    updateClassmatesValuesRequest, updateFriendsValuesRequest, updatePersonalValues,
+    updateRoommatesValuesRequest
 } from "../../../actions/profile/profileUpdateActions";
 import {updateUsername, updateWeChatId} from "../../../actions/global/globalUpdateActions";
 
@@ -103,9 +103,9 @@ const mapDispatchToProps = (dispatch) => (
             closeRoommatesEdit: hideRoommatesForm,
             closeFriendsEdit: hideFriendsForm,
             closePersonalEdit: hidePersonalForm,
-            onClassmatesUpdate: updateClassmatesValues,
-            onRoommatesUpdate: updateRoommatesValues,
-            onFriendsUpdate: updateFriendsValues,
+            onClassmatesUpdate: updateClassmatesValuesRequest,
+            onRoommatesUpdate: updateRoommatesValuesRequest,
+            onFriendsUpdate: updateFriendsValuesRequest,
             onPersonalUpdate: updatePersonalValues,
             onWeChatIdDone: updateWeChatId,
             onUsernameUpdate: updateUsername
