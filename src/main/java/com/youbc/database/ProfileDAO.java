@@ -226,7 +226,7 @@ public class ProfileDAO {
     }
 
     public void fillClassmatesProfile(String userID, String major, Set<String> courses, String motto, Set<String> tags) {
-        if (!userDAO.userExists(userID)) {
+        if (!userDAO.classmatesProfileExists(userID)) {
             userDAO.initClassmatesProfile(userID);
         }
         dslContext.update(CLASSMATES_PROFILE)
@@ -256,7 +256,7 @@ public class ProfileDAO {
     }
 
     public void fillRoommatesProfile(String userID, String location, String hometown, String motto, Set<String> tags) {
-        if (!userDAO.userExists(userID)) {
+        if (!userDAO.roommatesProfileExists(userID)) {
             userDAO.initRoommateProfile(userID);
         }
         dslContext.update(ROOMMATES_PROFILE)
@@ -276,7 +276,7 @@ public class ProfileDAO {
     }
 
     public void fillFriendsProfile(String userID, String faculty, String relationship, String motto, Set<String> tags) {
-        if (!userDAO.userExists(userID)) {
+        if (!userDAO.friendsProfileExists(userID)) {
             userDAO.initFriendsProfile(userID);
         }
         dslContext.update(FRIENDS_PROFILE)

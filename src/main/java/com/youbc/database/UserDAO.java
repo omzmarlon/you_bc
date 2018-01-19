@@ -34,6 +34,34 @@ public class UserDAO {
         return result != null;
     }
 
+    public boolean classmatesProfileExists(String userID) {
+        Record1<String> result = dslContext
+                .select(CLASSMATES_PROFILE.USER_ID)
+                .from(CLASSMATES_PROFILE)
+                .where(CLASSMATES_PROFILE.USER_ID.eq(userID))
+                .fetchOne();
+        return result != null;
+    }
+
+    public boolean friendsProfileExists(String userID) {
+        Record1<String> result = dslContext
+                .select(FRIENDS_PROFILE.USER_ID)
+                .from(FRIENDS_PROFILE)
+                .where(FRIENDS_PROFILE.USER_ID.eq(userID))
+                .fetchOne();
+        return result != null;
+    }
+
+
+    public boolean roommatesProfileExists(String userID) {
+        Record1<String> result = dslContext
+                .select(ROOMMATES_PROFILE.USER_ID)
+                .from(ROOMMATES_PROFILE)
+                .where(ROOMMATES_PROFILE.USER_ID.eq(userID))
+                .fetchOne();
+        return result != null;
+    }
+
     public void buildNewUser(String userID, String imageUrl) {
         initUser(userID);
         initUserProfile(userID);

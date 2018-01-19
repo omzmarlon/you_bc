@@ -22,7 +22,6 @@ public class CookieService {
     public Cookie createAuthCookie(String cookieValue) {
         Cookie cookie = new Cookie(AUTH_COOKIE, cookieValue);
         cookie.setHttpOnly(true);
-        cookie.setSecure(true);
         return cookie;
     }
 
