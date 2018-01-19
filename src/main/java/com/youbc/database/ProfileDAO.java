@@ -45,16 +45,12 @@ public class ProfileDAO {
     public Optional<RoommatesProfile> fetchRoommatesProfile(String userId) {
         Record3<String, String, String> profile = dslContext
                 .select(
-                        ROOMMATES_LOCATIONS.LOCATION,
-                        ROOMMATES_HOMETOWN.HOMETOWN,
+                        ROOMMATES_PROFILE.LOCATION,
+                        ROOMMATES_PROFILE.HOMETOWN,
                         ROOMMATES_PROFILE.MOTTO
                 )
-                .from(ROOMMATES_PROFILE, ROOMMATES_LOCATIONS, ROOMMATES_HOMETOWN)
-                .where(
-                        ROOMMATES_PROFILE.USER_ID.eq(userId)
-                                .and(ROOMMATES_LOCATIONS.LOCATION.eq(ROOMMATES_PROFILE.LOCATION))
-                                .and(ROOMMATES_HOMETOWN.HOMETOWN.eq(ROOMMATES_PROFILE.HOMETOWN))
-                )
+                .from(ROOMMATES_PROFILE)
+                .where(ROOMMATES_PROFILE.USER_ID.eq(userId))
                 .fetchOne();
 
         Result<Record1<String>> profileTags = dslContext
@@ -82,12 +78,9 @@ public class ProfileDAO {
 
     public Optional<ClassmatesProfile> fetchClassmatesProfile(String userID) {
         Record2<String, String> profile = dslContext
-                .select(CLASSMATES_MAJOR.MAJOR, CLASSMATES_PROFILE.MOTTO)
-                .from(CLASSMATES_PROFILE, CLASSMATES_TAGS)
-                .where(
-                        CLASSMATES_PROFILE.USER_ID.eq(userID)
-                                .and(CLASSMATES_PROFILE.MARJOR.eq(CLASSMATES_MAJOR.MAJOR))
-                )
+                .select(CLASSMATES_PROFILE.MAJOR, CLASSMATES_PROFILE.MOTTO)
+                .from(CLASSMATES_PROFILE)
+                .where(CLASSMATES_PROFILE.USER_ID.eq(userID))
                 .fetchOne();
         Result<Record1<String>> courses = dslContext
                 .select(CLASSMATES_COURSES.COURSE)
@@ -122,13 +115,9 @@ public class ProfileDAO {
 
     public Optional<FriendsProfile> fetchFriendsProfile(String userId) {
         Record3<String, String, String> profile = dslContext
-                .select(FACULTIES.FACULTY, RELATIONSHIP_STATUS.RELATIONSHIP, FRIENDS_PROFILE.MOTTO)
-                .from(FRIENDS_PROFILE, FACULTIES, RELATIONSHIP_STATUS)
-                .where(
-                        FRIENDS_PROFILE.USER_ID.eq(userId)
-                        .and(FRIENDS_PROFILE.FACULTY.eq(FACULTIES.FACULTY))
-                        .and(FRIENDS_PROFILE.RELATIONSHIP.eq(RELATIONSHIP_STATUS.RELATIONSHIP))
-                )
+                .select(FRIENDS_PROFILE.FACULTY, FRIENDS_PROFILE.RELATIONSHIP, FRIENDS_PROFILE.MOTTO)
+                .from(FRIENDS_PROFILE)
+                .where(FRIENDS_PROFILE.USER_ID.eq(userId))
                 .fetchOne();
         Result<Record1<String>> tags = dslContext
                 .select(FRIENDS_TAGS.TAG)
@@ -230,7 +219,7 @@ public class ProfileDAO {
             userDAO.initClassmatesProfile(userID);
         }
         dslContext.update(CLASSMATES_PROFILE)
-                .set(CLASSMATES_PROFILE.MARJOR, major)
+                .set(CLASSMATES_PROFILE.MAJOR, major)
                 .set(CLASSMATES_PROFILE.MOTTO, motto)
                 .execute();
 

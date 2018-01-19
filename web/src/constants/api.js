@@ -31,3 +31,6 @@ export const ROOMMATES_TAGS_OPTIONS_API = "/api/profile/roommatesTags";
 export const FACULTIES_OPTIONS_API = "/api/profile/faculties";
 export const RELATIONSHIP_OPTIONS_API = "/api/profile/relationshipStatuses";
 export const FRIENDS_TAGS_API = "/api/profile/friendsTags";
+export const CLASSMATES_PROFILE_API = "/api/profile/classmates";
+export const ROOMMATES_PROFILE_API  = "/api/profile/roommates";
+export const FRIENDS_PROFILE_API = "/api/profile/friends";

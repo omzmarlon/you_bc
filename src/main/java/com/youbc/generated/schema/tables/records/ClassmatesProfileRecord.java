@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesProfileRecord extends UpdatableRecordImpl<ClassmatesProfileRecord> implements Record4<String, String, String, Timestamp> {
 
-    private static final long serialVersionUID = -1562318347;
+    private static final long serialVersionUID = -1972877913;
 
     /**
      * Setter for <code>poke_you_bc.classmates_profile.user_id</code>.
@@ -48,17 +48,17 @@ public class ClassmatesProfileRecord extends UpdatableRecordImpl<ClassmatesProfi
     }
 
     /**
-     * Setter for <code>poke_you_bc.classmates_profile.marjor</code>.
+     * Setter for <code>poke_you_bc.classmates_profile.major</code>.
      */
-    public ClassmatesProfileRecord setMarjor(String value) {
+    public ClassmatesProfileRecord setMajor(String value) {
         set(1, value);
         return this;
     }
 
     /**
-     * Getter for <code>poke_you_bc.classmates_profile.marjor</code>.
+     * Getter for <code>poke_you_bc.classmates_profile.major</code>.
      */
-    public String getMarjor() {
+    public String getMajor() {
         return (String) get(1);
     }
 
@@ -137,7 +137,7 @@ public class ClassmatesProfileRecord extends UpdatableRecordImpl<ClassmatesProfi
      */
     @Override
     public Field<String> field2() {
-        return ClassmatesProfile.CLASSMATES_PROFILE.MARJOR;
+        return ClassmatesProfile.CLASSMATES_PROFILE.MAJOR;
     }
 
     /**
@@ -169,7 +169,7 @@ public class ClassmatesProfileRecord extends UpdatableRecordImpl<ClassmatesProfi
      */
     @Override
     public String value2() {
-        return getMarjor();
+        return getMajor();
     }
 
     /**
@@ -202,7 +202,7 @@ public class ClassmatesProfileRecord extends UpdatableRecordImpl<ClassmatesProfi
      */
     @Override
     public ClassmatesProfileRecord value2(String value) {
-        setMarjor(value);
+        setMajor(value);
         return this;
     }
 
@@ -250,11 +250,11 @@ public class ClassmatesProfileRecord extends UpdatableRecordImpl<ClassmatesProfi
     /**
      * Create a detached, initialised ClassmatesProfileRecord
      */
-    public ClassmatesProfileRecord(String userId, String marjor, String motto, Timestamp timeCreated) {
+    public ClassmatesProfileRecord(String userId, String major, String motto, Timestamp timeCreated) {
         super(ClassmatesProfile.CLASSMATES_PROFILE);
 
         set(0, userId);
-        set(1, marjor);
+        set(1, major);
         set(2, motto);
         set(3, timeCreated);
     }

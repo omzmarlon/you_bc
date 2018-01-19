@@ -23,28 +23,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesProfile implements Serializable {
 
-    private static final long serialVersionUID = 4866180;
+    private static final long serialVersionUID = 39666006;
 
     private final String    userId;
-    private final String    marjor;
+    private final String    major;
     private final String    motto;
     private final Timestamp timeCreated;
 
     public ClassmatesProfile(ClassmatesProfile value) {
         this.userId = value.userId;
-        this.marjor = value.marjor;
+        this.major = value.major;
         this.motto = value.motto;
         this.timeCreated = value.timeCreated;
     }
 
     public ClassmatesProfile(
         String    userId,
-        String    marjor,
+        String    major,
         String    motto,
         Timestamp timeCreated
     ) {
         this.userId = userId;
-        this.marjor = marjor;
+        this.major = major;
         this.motto = motto;
         this.timeCreated = timeCreated;
     }
@@ -53,8 +53,8 @@ public class ClassmatesProfile implements Serializable {
         return this.userId;
     }
 
-    public String getMarjor() {
-        return this.marjor;
+    public String getMajor() {
+        return this.major;
     }
 
     public String getMotto() {
@@ -70,7 +70,7 @@ public class ClassmatesProfile implements Serializable {
         StringBuilder sb = new StringBuilder("ClassmatesProfile (");
 
         sb.append(userId);
-        sb.append(", ").append(marjor);
+        sb.append(", ").append(major);
         sb.append(", ").append(motto);
         sb.append(", ").append(timeCreated);
 
