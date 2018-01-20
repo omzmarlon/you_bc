@@ -76,7 +76,6 @@ class ClassmateContainer extends Component {
                     <LoadingModal show={this.props.isFetching}/>
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}
-                        onClose={() => {this.setState({showMissingInfoModal: false})}}
                         content="您还没有填写找课友相关信息，信息完整后才能继续匹配😊 ! 请填写个人主页中找课友（红色部分）信息"
                         onClick={this.missingInfoModalActionHandler}
                     />

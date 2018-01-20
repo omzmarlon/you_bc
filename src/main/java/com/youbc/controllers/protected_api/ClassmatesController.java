@@ -1,16 +1,15 @@
 package com.youbc.controllers.protected_api;
 
-import com.youbc.database.UserDAO;
 import com.youbc.models.candidate.BasicCandidate;
-import com.youbc.models.candidate.ClassmateCandidate;
-import com.youbc.pooling.PoolingRandomRoommates;
 import com.youbc.pooling.UserPoolManager;
 import com.youbc.pooling.WeightedStrategy;
 import com.youbc.pooling.classmates.PoolingByLikesClassmates;
 import com.youbc.pooling.classmates.PoolingRandomClassmates;
 import com.youbc.securities.services.CookieService;
+import com.youbc.utilities.Endpoints;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,7 @@ public class ClassmatesController {
     private UserPoolManager userPoolManager;
     private CookieService cookieService;
 
-    public ClassmatesController(CookieService cookieService, PoolingRandomClassmates poolingRandomClassmates, PoolingByLikesClassmates poolingByLikesClassmates) {
+    public ClassmatesController(CookieService cookieService, PoolingRandomClassmates poolingRandomClassmates) {
         this.cookieService = cookieService;
         // init userPoolManager
         ArrayList<WeightedStrategy> strategies = new ArrayList<>();
@@ -32,10 +31,13 @@ public class ClassmatesController {
         userPoolManager = new UserPoolManager(strategies);
     }
 
-    @RequestMapping(path = "/api/classmates", method = RequestMethod.GET)
-    public Set<BasicCandidate> getClassmateCandidates(HttpServletRequest request) {
-        // todo: finish controller
-        return null;
+    @RequestMapping(path = Endpoints.CLASSMATE_CANDIDATES, params = {"amount", "gender"}, method = RequestMethod.GET)
+    public Set<BasicCandidate> getClassmateCandidates(
+            @RequestParam(value = "amount") int amount,
+            @RequestParam(value = "gender", required = false) String gender
+    ) {
+        if (gender == null) gender = "mixed";
+        return userPoolManager.poolUsers(amount);
     }
 
 }
