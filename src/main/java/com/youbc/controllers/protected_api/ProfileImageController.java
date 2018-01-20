@@ -18,8 +18,13 @@ public class ProfileImageController {
     }
 
     @PostMapping("/image")
-    public String uploadFile(@RequestPart(value = "file") MultipartFile file) throws IOException {
+    public String uploadImage(@RequestPart(value = "image") MultipartFile file) throws IOException {
         return this.s3Client.uploadProfileImage(file);
+    }
+
+    @PostMapping("/imageEdit")
+    public String uploadImageEdit(@RequestPart(value = "image") MultipartFile file) throws IOException {
+        return this.s3Client.uploadProfileImageEdit(file);
     }
 
 }

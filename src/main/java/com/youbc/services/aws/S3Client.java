@@ -35,6 +35,16 @@ public class S3Client {
         );
     }
 
+    public String uploadProfileImageEdit(MultipartFile multipartFile) throws IOException {
+        return uploadMultipartFile(
+                multipartFile,
+                (key, file) ->
+                        amazonS3.putObject(new PutObjectRequest(bucketName, key, file)
+                                .withCannedAcl(CannedAccessControlList.PublicRead)),
+                "profileEdit"
+        );
+    }
+
     public String uploadMultipartFile(MultipartFile multipartFile, S3Uploader s3Uploader, String folderName) throws IOException {
         String key = folderName + "/" + generateFilename();
         File file = convertMultiPartToFile(multipartFile);

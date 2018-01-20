@@ -22,6 +22,8 @@ export function requestUrl(api) {
 }
 
 export const LOGIN_API = "/login";
+
+// personal profile
 export const MAJOR_OPTIONS_API = "/api/profile/majors";
 export const COURSES_OPTIONS_API = "/api/profile/courses";
 export const CLASSMATES_TAGS_OPTIONS_API = "/api/profile/classmatesTags";
@@ -34,3 +36,7 @@ export const FRIENDS_TAGS_API = "/api/profile/friendsTags";
 export const CLASSMATES_PROFILE_API = "/api/profile/classmates";
 export const ROOMMATES_PROFILE_API  = "/api/profile/roommates";
 export const FRIENDS_PROFILE_API = "/api/profile/friends";
+
+// image upload
+export const UPLOAD_IMAGE_API = "/api/profileStorage/image";
+export const UPLOAD_IMAGE_EDIT_API = "/api/profileStorage/imageEdit";
