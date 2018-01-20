@@ -42,6 +42,8 @@ class AvatarEditorForm extends React.Component {
             const validImageTypes = ["image/jpeg", "image/png"];
             if (validImageTypes.indexOf(fileType) === -1) {
                 this.rejectAvatarEdit('同学必须上传图片噢');
+            } else if (files[0].size > 3145728) {
+                this.rejectAvatarEdit('同学的照片不能超过3MB哦');
             } else {
                 //prepare form data
                 let formData = new FormData();
