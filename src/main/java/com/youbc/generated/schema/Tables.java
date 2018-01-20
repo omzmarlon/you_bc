@@ -27,7 +27,7 @@ import com.youbc.generated.schema.tables.RoommatesLocations;
 import com.youbc.generated.schema.tables.RoommatesProfile;
 import com.youbc.generated.schema.tables.RoommatesProfileTags;
 import com.youbc.generated.schema.tables.RoommatesTags;
-import com.youbc.generated.schema.tables.UbcStudentVerification;
+import com.youbc.generated.schema.tables.StudentVerification;
 import com.youbc.generated.schema.tables.User;
 import com.youbc.generated.schema.tables.UserProfile;
 
@@ -163,9 +163,9 @@ public class Tables {
     public static final RoommatesTags ROOMMATES_TAGS = com.youbc.generated.schema.tables.RoommatesTags.ROOMMATES_TAGS;
 
     /**
-     * The table <code>poke_you_bc.ubc_student_verification</code>.
+     * The table <code>poke_you_bc.student_verification</code>.
      */
-    public static final UbcStudentVerification UBC_STUDENT_VERIFICATION = com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
+    public static final StudentVerification STUDENT_VERIFICATION = com.youbc.generated.schema.tables.StudentVerification.STUDENT_VERIFICATION;
 
     /**
      * The table <code>poke_you_bc.user</code>.

@@ -5,7 +5,7 @@ CREATE TABLE user (
 );
 
 # user verification table
-CREATE TABLE ubc_student_verification (
+CREATE TABLE student_verification (
   user_id VARCHAR(100) CHARACTER SET utf8 PRIMARY KEY,
   approved BOOLEAN NOT NULL,
   email VARCHAR(50) CHARACTER SET utf8,

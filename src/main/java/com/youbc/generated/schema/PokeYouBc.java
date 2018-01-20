@@ -27,7 +27,7 @@ import com.youbc.generated.schema.tables.RoommatesLocations;
 import com.youbc.generated.schema.tables.RoommatesProfile;
 import com.youbc.generated.schema.tables.RoommatesProfileTags;
 import com.youbc.generated.schema.tables.RoommatesTags;
-import com.youbc.generated.schema.tables.UbcStudentVerification;
+import com.youbc.generated.schema.tables.StudentVerification;
 import com.youbc.generated.schema.tables.User;
 import com.youbc.generated.schema.tables.UserProfile;
 
@@ -55,7 +55,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PokeYouBc extends SchemaImpl {
 
-    private static final long serialVersionUID = -1477080726;
+    private static final long serialVersionUID = 1540080158;
 
     /**
      * The reference instance of <code>poke_you_bc</code>
@@ -178,9 +178,9 @@ public class PokeYouBc extends SchemaImpl {
     public final RoommatesTags ROOMMATES_TAGS = com.youbc.generated.schema.tables.RoommatesTags.ROOMMATES_TAGS;
 
     /**
-     * The table <code>poke_you_bc.ubc_student_verification</code>.
+     * The table <code>poke_you_bc.student_verification</code>.
      */
-    public final UbcStudentVerification UBC_STUDENT_VERIFICATION = com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
+    public final StudentVerification STUDENT_VERIFICATION = com.youbc.generated.schema.tables.StudentVerification.STUDENT_VERIFICATION;
 
     /**
      * The table <code>poke_you_bc.user</code>.
@@ -240,7 +240,7 @@ public class PokeYouBc extends SchemaImpl {
             RoommatesProfile.ROOMMATES_PROFILE,
             RoommatesProfileTags.ROOMMATES_PROFILE_TAGS,
             RoommatesTags.ROOMMATES_TAGS,
-            UbcStudentVerification.UBC_STUDENT_VERIFICATION,
+            StudentVerification.STUDENT_VERIFICATION,
             User.USER,
             UserProfile.USER_PROFILE);
     }
