@@ -90,7 +90,7 @@ export const fetchPersonalInfo = () => dispatch => {
             }
             dispatch(receivePersonalInfo({
                 avatar: response.data.avatarUrl? response.data.avatarUrl: '',
-                age: response.data.horoscope? response.data.age: '',
+                age: response.data.horoscope? response.data.age: 0,
                 constellation: response.data.horoscope? response.data.horoscope: '',
                 username: response.data.username? response.data.username: '',
                 sex: sex,

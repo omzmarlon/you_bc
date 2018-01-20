@@ -246,10 +246,10 @@ public class ProfileDAO {
                 .intoSet(FRIENDS_TAGS.TAG);
     }
 
-    public void fillPersonalProfile(String userID, String username, int age, int sex, String horoscope) {
+    public void fillPersonalProfile(String userID, String username, Integer age, Integer sex, String horoscope) {
         // wechatId and avatar url are updated separately
         if (!userDAO.userProfileExists(userID)) {
-            userDAO.initUserProfile(userID);
+            userDAO.initUserProfile(userID, username, String.valueOf(sex));
         }
         dslContext.update(USER_PROFILE)
                 .set(USER_PROFILE.USERNAME, username)
@@ -346,7 +346,8 @@ public class ProfileDAO {
 
     public void updateWechatId(String userID, String wechatId) {
         if (!userDAO.userProfileExists(userID)) {
-            userDAO.initUserProfile(userID);
+            // TODO: don't use null here
+            userDAO.initUserProfile(userID, null, null);
         }
         dslContext.update(USER_PROFILE)
                 .set(USER_PROFILE.WECHATID, wechatId)

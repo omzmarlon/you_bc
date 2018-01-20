@@ -63,7 +63,10 @@ const ProfileMain = (props) => (
                     },
                     {
                         leftElement: <InfoRowTitle icon={<AgeIcon color={PRIMARY_GREEN}/>} text={'年龄'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.personal.values.age}</span>
+                        rightElement: <span style={rightElementSpaceApart}>
+                            {/*so that age display won't be zero*/}
+                            {props.personal.values.age?props.personal.values.age:''}
+                        </span>
                     },
                     {
                         leftElement: <InfoRowTitle icon={<ConstellationIcon color={PRIMARY_GREEN}/>} text={'星座'}/>,

@@ -72,9 +72,9 @@ public class UserDAO {
         return result != null;
     }
 
-    public void buildNewUser(String userID, String imageUrl) {
+    public void buildNewUser(String userID, String imageUrl, String username, String sex) {
         initUser(userID);
-        initUserProfile(userID);
+        initUserProfile(userID, username, sex);
         initUserProfileImage(userID, imageUrl);
         initStudentVerification(userID);
         initClassmatesProfile(userID);
@@ -90,9 +90,17 @@ public class UserDAO {
                 .execute();
     }
 
-    public void initUserProfile(String userID) {
+    public void initUserProfile(String userID, String username, String sex) {
+        Integer sexInt = null;
+        if (sex.equals("1")) {
+            sexInt = 1;
+        } else if (sex.equals("2")) {
+            sexInt = 2;
+        }
         dslContext.insertInto(USER_PROFILE)
                 .set(USER_PROFILE.USER_ID, userID)
+                .set(USER_PROFILE.USERNAME, username)
+                .set(USER_PROFILE.SEX, sexInt)
                 .set(USER_PROFILE.TIME_CREATED, DSL.currentTimestamp())
                 .execute();
     }

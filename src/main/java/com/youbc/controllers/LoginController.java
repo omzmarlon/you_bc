@@ -44,14 +44,19 @@ public class LoginController {
             } else {
                 weChatUser = new WeChatUser(
                         accessGrant,
-                        "nickname",
-                        "", "", "", "",
+                        accessGrant+"_nickname",
+                        "1", "", "", "",
                         "https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4",
                         ""
                 );
             }
             if (!userDAO.userExists(weChatUser.getOpenid())) {
-                userDAO.buildNewUser(weChatUser.getOpenid(), weChatUser.getHeadimgurl());
+                userDAO.buildNewUser(
+                        weChatUser.getOpenid(),
+                        weChatUser.getHeadimgurl(),
+                        weChatUser.getNickname(),
+                        weChatUser.getSex()
+                );
             }
             String loginToken = tokenService.generateShortLiveToken(weChatUser.getOpenid());
             response.sendRedirect(redirectURL+"?auth="+loginToken);
