@@ -1,5 +1,6 @@
 package com.youbc.database;
 
+import static com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
 import static com.youbc.generated.schema.tables.RoommatesLocations.ROOMMATES_LOCATIONS;
 import static com.youbc.generated.schema.tables.RoommatesHometown.ROOMMATES_HOMETOWN;
 import static com.youbc.generated.schema.tables.RoommatesTags.ROOMMATES_TAGS;
@@ -18,10 +19,12 @@ import static com.youbc.generated.schema.tables.Faculties.FACULTIES;
 import static com.youbc.generated.schema.tables.RelationshipStatus.RELATIONSHIP_STATUS;
 import static com.youbc.generated.schema.tables.FriendsProfileTags.FRIENDS_PROFILE_TAGS;
 import static com.youbc.generated.schema.tables.FriendsTags.FRIENDS_TAGS;
+import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 
 import com.youbc.models.profile.ClassmatesProfile;
 import com.youbc.models.profile.FriendsProfile;
 import com.youbc.models.profile.RoommatesProfile;
+import com.youbc.models.profile.UserProfile;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,34 @@ public class ProfileDAO {
     public ProfileDAO(DSLContext dslContext, UserDAO userDAO) {
         this.dslContext = dslContext;
         this.userDAO = userDAO;
+    }
+
+    public Optional<UserProfile> fetchUserProfile(String userId) {
+        Record4<Integer, Integer, String, String> profile = dslContext
+                .select(
+                        USER_PROFILE.AGE,
+                        USER_PROFILE.SEX,
+                        USER_PROFILE.HOROSCOPE,
+                        PROFILE_IMAGE.THUMBNAIL_IMAGE_URL
+                )
+                .from(USER_PROFILE, PROFILE_IMAGE)
+                .where(
+                        USER_PROFILE.USER_ID.eq(userId)
+                        .and(PROFILE_IMAGE.USER_ID.eq(userId))
+                )
+                .fetchOne();
+        return (profile == null) ?
+                Optional.empty() :
+                Optional.of(
+                        new UserProfile(
+                                "name?", // todo: add name attribute
+                                profile.value1(),
+                                profile.value2(),
+                                profile.value4(),
+                                profile.value3(),
+                                0.8     // todo: add matchRate attribute
+                        )
+                );
     }
 
     public Optional<RoommatesProfile> fetchRoommatesProfile(String userId) {
