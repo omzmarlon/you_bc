@@ -25,28 +25,27 @@ public class S3Client {
         this.amazonS3 = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
     }
 
-    public String uploadProfileImage(MultipartFile multipartFile) throws IOException {
+    public String uploadImage(MultipartFile multipartFile,
+                              String fileNamePrefix,
+                              String s3Folder,
+                              CannedAccessControlList accessControl
+    ) throws IOException {
         return uploadMultipartFile(
                 multipartFile,
                 (key, file) ->
                         amazonS3.putObject(new PutObjectRequest(bucketName, key, file)
-                                .withCannedAcl(CannedAccessControlList.PublicRead)),
-                "profile"
+                                .withCannedAcl(accessControl)),
+                fileNamePrefix,
+                s3Folder
         );
     }
 
-    public String uploadProfileImageEdit(MultipartFile multipartFile) throws IOException {
-        return uploadMultipartFile(
-                multipartFile,
-                (key, file) ->
-                        amazonS3.putObject(new PutObjectRequest(bucketName, key, file)
-                                .withCannedAcl(CannedAccessControlList.PublicRead)),
-                "profileEdit"
-        );
-    }
-
-    public String uploadMultipartFile(MultipartFile multipartFile, S3Uploader s3Uploader, String folderName) throws IOException {
-        String key = folderName + "/" + generateFilename();
+    public String uploadMultipartFile(MultipartFile multipartFile,
+                                      S3Uploader s3Uploader,
+                                      String fileNamePrefix,
+                                      String folderName
+    ) throws IOException {
+        String key = folderName + "/" + generateFilename(fileNamePrefix);
         File file = convertMultiPartToFile(multipartFile);
         s3Uploader.upload(key, file);
         file.delete();
@@ -62,10 +61,10 @@ public class S3Client {
         return file;
     }
 
-    private String generateFilename() {
+    private String generateFilename(String fileNamePrefix) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return calendar.getTime().toString().replace(" ", "_");
+        return fileNamePrefix+"__"+calendar.getTime().toString().replace(" ", "_");
     }
 
 }

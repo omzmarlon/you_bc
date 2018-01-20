@@ -9,6 +9,7 @@ CREATE TABLE ubc_student_verification (
   user_id VARCHAR(100) CHARACTER SET utf8 PRIMARY KEY,
   approved BOOLEAN NOT NULL,
   email VARCHAR(50) CHARACTER SET utf8,
+  emailVerificationCode VARCHAR(100) CHARACTER SET utf8,
   studentID_image_url TEXT,
   location_lat DECIMAL(11, 8),
   location_lon DECIMAL(11, 8),
