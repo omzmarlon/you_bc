@@ -14,6 +14,7 @@ import {
 } from "../actions/mainList/RoommateActions";
 import {PRIMARY_BLUE, SECONDARY_BLUE } from "../styles/constants/colors";
 import MissingProfileInfoModal from "../components/common/modal/MissingProfileInfoModal";
+import {showRoommatesForm} from "../actions/profile/profileUIActions";
 
 class RoommateContainer extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class RoommateContainer extends Component {
         };
         this.onUserSwiped = this.onUserSwiped.bind(this);
         this.genderFilter = this.genderFilter.bind(this);
+        this.missingInfoModalActionHandler = this.missingInfoModalActionHandler.bind(this);
     }
 
     componentDidMount() {
@@ -53,6 +55,11 @@ class RoommateContainer extends Component {
         dispatch(fetchCandidates(10, child.key));
     }
 
+    missingInfoModalActionHandler() {
+        const { dispatch } = this.props;
+        dispatch(showRoommatesForm());
+    }
+
     render() {
         if (this.props.grantAccess) {
             return(
@@ -70,6 +77,7 @@ class RoommateContainer extends Component {
                         openModal={this.state.showMissingInfoModal}
                         onClose={() => {this.setState({showMissingInfoModal: false})}}
                         content="您还没有填写找室友相关信息，信息完整后才能继续匹配😊 ! 请填写个人主页中找室友（蓝色部分）信息"
+                        onClick={this.missingInfoModalActionHandler}
                     />
                 </div>
             )

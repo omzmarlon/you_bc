@@ -30,13 +30,4 @@ public class UserPoolManager {
 
         return result;
     }
-
-//    public void addStrategy(WeightedStrategy strategy) {
-//
-//    }
-//
-//    public boolean removeStrategy() {
-//
-//    }
-
 }

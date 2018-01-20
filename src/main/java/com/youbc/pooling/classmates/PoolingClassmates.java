@@ -1,7 +1,6 @@
-package com.youbc.pooling;
+package com.youbc.pooling.classmates;
 
 import com.youbc.database.ProfileDAO;
-import com.youbc.database.UserPoolStrategyDAO;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import com.youbc.models.candidate.BasicCandidate;
@@ -14,21 +13,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PoolingRandomClassmates implements PoolingStrategy {
+public abstract class PoolingClassmates {
 
     private ProfileDAO profileDAO;
-    private UserPoolStrategyDAO userPoolStrategyDAO;
 
-    public PoolingRandomClassmates(ProfileDAO profileDAO, UserPoolStrategyDAO userPoolStrategyDAO) {
+    public PoolingClassmates(ProfileDAO profileDAO) {
         this.profileDAO = profileDAO;
-        this.userPoolStrategyDAO = userPoolStrategyDAO;
     }
 
-    public Set<BasicCandidate> poolUsers(int amount, Set<String> except) {
-        List<String> candidateIDs = userPoolStrategyDAO.fetchRandomClassmates(amount, except);
+    public Set<BasicCandidate> populateToClassmates(List<String> userIds) {
+
         Set<BasicCandidate> candidates = new HashSet<>();
 
-        for (String id : candidateIDs) {
+        for (String id : userIds) {
             ClassmatesProfile classmatesProfile = profileDAO.fetchClassmatesProfile(id)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "cannot find user info", "cannot find  module profile info")));
             UserProfile userProfile = profileDAO.fetchUserProfile(id)

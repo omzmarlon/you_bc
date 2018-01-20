@@ -15,6 +15,7 @@ import {
 // style
 import { PRIMARY_YELLOW, SECONDARY_YELLOW } from "../styles/constants/colors";
 import MissingProfileInfoModal from "../components/common/modal/MissingProfileInfoModal";
+import {showFriendsForm} from "../actions/profile/profileUIActions";
 
 class FriendContainer extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class FriendContainer extends Component {
         };
         this.onUserSwiped = this.onUserSwiped.bind(this);
         this.genderFilter = this.genderFilter.bind(this);
+        this.missingInfoModalActionHandler = this.missingInfoModalActionHandler.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +56,11 @@ class FriendContainer extends Component {
         dispatch(fetchCandidates(10, child.key));
     }
 
+    missingInfoModalActionHandler() {
+        const { dispatch } = this.props;
+        dispatch(showFriendsForm());
+    }
+
     render() {
         if (this.props.grantAccess) {
             return(
@@ -71,6 +78,7 @@ class FriendContainer extends Component {
                         openModal={this.state.showMissingInfoModal}
                         onClose={() => {this.setState({showMissingInfoModal: false})}}
                         content="您还没有填写相关个人信息，信息完整后才能继续匹配😊 ! 请填写个人主页中黄色部分信息"
+                        onClick={this.missingInfoModalActionHandler}
                     />
                 </div>
             )
