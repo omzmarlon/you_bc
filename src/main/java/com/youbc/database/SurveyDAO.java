@@ -12,11 +12,13 @@ import static com.youbc.generated.schema.tables.SurveyQuestion.SURVEY_QUESTION;
 import static com.youbc.generated.schema.tables.OfferedAnswer.OFFERED_ANSWER;
 import static com.youbc.generated.schema.tables.UserAnswer.USER_ANSWER;
 
+import org.jooq.tools.json.JSONArray;
+import org.jooq.tools.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Component
 public class SurveyDAO {
@@ -29,7 +31,7 @@ public class SurveyDAO {
     }
 
     // check if survey with ID survey_ID exists in database.
-    public boolean surveyExists(Integer survey_ID) {
+    public boolean surveyExists(int survey_ID) {
         Result<Record> result = dslContext
                 .select()
                 .from(SURVEY)
@@ -38,54 +40,7 @@ public class SurveyDAO {
         return result.isNotEmpty();
     }
 
-
-    // build a new survey
-    public void initSurvey(Integer survey_ID){
-        dslContext
-                .insertInto(SURVEY)
-                .set(SURVEY.SURVEY_ID, survey_ID)
-                .execute();
-    }
-
-    // build a new question with ID question_ID.
-    public void initQuestion(Integer question_ID, String content) {
-        dslContext
-                .insertInto(QUESTION)
-                .set(QUESTION.QUESTION_ID, question_ID)
-                .set(QUESTION.QUESTION_CONTENT, content)
-                .execute();
-    }
-
-    // build a new question belongs to survey with ID survey_ID and question ID question_ID
-    public void initSurveyQuestion(Integer survey_ID, Integer question_ID) {
-        dslContext
-                .insertInto(SURVEY_QUESTION)
-                .set(SURVEY_QUESTION.SURVEY_ID, survey_ID)
-                .set(SURVEY_QUESTION.QUESTION_ID, question_ID)
-                .execute();
-    }
-
-    // build a new selection to some questions
-    public void initOfferedAnswer(Integer offered_answer_ID, String content) {
-        dslContext
-                .insertInto(OFFERED_ANSWER)
-                .set(OFFERED_ANSWER.OFFERED_ANSWER_ID, offered_answer_ID)
-                .set(OFFERED_ANSWER.ANSWER_CONTENT, content)
-                .execute();
-    }
-
-    // build user answer
-    public void userAnswer(String user_ID, Integer survey_ID, Integer question_ID, Integer offered_answer_ID) {
-        dslContext
-                .insertInto(USER_ANSWER)
-                .set(USER_ANSWER.USER_ID, user_ID)
-                .set(USER_ANSWER.SURVEY_ID, survey_ID)
-                .set(USER_ANSWER.QUESTION_ID, question_ID)
-                .set(USER_ANSWER.OFFERED_ANSWER_ID, offered_answer_ID)
-                .execute();
-    }
-
-    public Survey getSurvey(Integer surveyID){
+    public Survey getSurvey(int surveyID) {
         Result<Record> result = dslContext
                 .select()
                 .from(SURVEY)
@@ -93,19 +48,18 @@ public class SurveyDAO {
                 .fetch();
 
         Survey survey = new Survey();
-
-        survey.setSurveyID(surveyID);
-
-        String surveyDescription = result.getValue(1, SURVEY.SURVEY_DESCRIPTION);
-        survey.setSurveyDescription(surveyDescription);
-
+        // set survey description
+        for (Record record : result) {
+            String surveyDescription = record.getValue(SURVEY.SURVEY_DESCRIPTION);
+            survey.setSurveyDescription(surveyDescription);
+        }
+        // set questions for this survey
         List<SurveyQuestion> loq = getLoq(surveyID);
         survey.setLoq(loq);
-
         return survey;
     }
 
-    public List<SurveyQuestion> getLoq(Integer surveyID){
+    public List<SurveyQuestion> getLoq(int surveyID) {
         Result<Record2<Integer, String>> result = dslContext
                 .select(QUESTION.QUESTION_ID, QUESTION.QUESTION_CONTENT)
                 .from(SURVEY_QUESTION, QUESTION)
@@ -115,11 +69,11 @@ public class SurveyDAO {
 
         List<SurveyQuestion> loq = new ArrayList<SurveyQuestion>();
 
-        for(Record record : result){
+        for (Record record : result) {
             SurveyQuestion surveyQuestion = new SurveyQuestion();
             surveyQuestion.setSurveyID(surveyID);
 
-            Integer questionID = record.getValue(QUESTION.QUESTION_ID);
+            int questionID = record.getValue(QUESTION.QUESTION_ID);
             String questionContent = record.getValue(QUESTION.QUESTION_CONTENT);
 
             surveyQuestion.setQuestionID(questionID);
@@ -133,9 +87,9 @@ public class SurveyDAO {
         return loq;
     }
 
-    public List<SurveyQuestionAnswer> getLoa(Integer surveyID, Integer questionID){
+    public List<SurveyQuestionAnswer> getLoa(int surveyID, int questionID) {
         Result<Record2<Integer, String>> result = dslContext
-                .select(SURVEY_QUESTION_ANSWER.OFFERED_ANSWER_ID,OFFERED_ANSWER.ANSWER_CONTENT)
+                .select(SURVEY_QUESTION_ANSWER.OFFERED_ANSWER_ID, OFFERED_ANSWER.ANSWER_CONTENT)
                 .from(SURVEY_QUESTION_ANSWER, OFFERED_ANSWER)
                 .where(SURVEY_QUESTION_ANSWER.SURVEY_ID.eq(surveyID))
                 .and(SURVEY_QUESTION_ANSWER.QUESTION_ID.eq(questionID))
@@ -144,12 +98,12 @@ public class SurveyDAO {
 
         List<SurveyQuestionAnswer> loa = new ArrayList<>();
 
-        for(Record record : result){
+        for (Record record : result) {
             SurveyQuestionAnswer surveyQuestionAnswer = new SurveyQuestionAnswer();
             surveyQuestionAnswer.setSurveyID(surveyID);
             surveyQuestionAnswer.setQuestionID(questionID);
 
-            Integer answerID = record.getValue(SURVEY_QUESTION_ANSWER.OFFERED_ANSWER_ID);
+            int answerID = record.getValue(SURVEY_QUESTION_ANSWER.OFFERED_ANSWER_ID);
             String answerContent = record.getValue(OFFERED_ANSWER.ANSWER_CONTENT);
             surveyQuestionAnswer.setAnswerID(answerID);
             surveyQuestionAnswer.setAnswerContent(answerContent);
@@ -159,7 +113,62 @@ public class SurveyDAO {
         return loa;
     }
 
-    public void fillQuestion(){
-        
+    public void getUserAnswersIDForSurvey(String userID, int surveyID) {
+
+//        SELECT *
+//        FROM user_answer, offered_answer
+//        WHERE user_id = 'cunjunwang1'
+//        AND survey_id = 1
+//        AND offered_answer.offered_answer_id = user_answer.offered_answer_id;
+
+        Result<Record> result = dslContext
+                .select()
+                .from(USER_ANSWER, OFFERED_ANSWER)
+                .where(USER_ANSWER.USER_ID.eq(userID))
+                .and(USER_ANSWER.SURVEY_ID.eq(surveyID))
+                .fetch();
+
+        JSONObject surveyAnswersObj = new JSONObject();
+
+        for (Record record : result) {
+            String questionID = record.get(USER_ANSWER.QUESTION_ID).toString();
+            int answerID = record.get(USER_ANSWER.OFFERED_ANSWER_ID);
+            if (!surveyAnswersObj.containsKey(questionID)) {
+                surveyAnswersObj.put(questionID, answerID);
+            } else {
+                if (!(surveyAnswersObj.get(questionID) instanceof JSONArray)) {
+                    JSONArray array = new JSONArray();
+                    array.add(surveyAnswersObj.get(questionID));
+                    array.add(answerID);
+                }
+                else{
+                    ((JSONArray) surveyAnswersObj.get(questionID)).add(answerID);
+                }
+            }
+        }
+    }
+
+    public void fillQuestion(String userID, Survey survey, SurveyQuestion surveyQuestion,
+                             SurveyQuestionAnswer surveyQuestionAnswer) {
+        int surveyID = survey.getSurveyID();
+        int questionID = surveyQuestion.getQuestionID();
+        int answerID = surveyQuestionAnswer.getAnswerID();
+        dslContext
+                .insertInto(USER_ANSWER)
+                .set(USER_ANSWER.USER_ID, userID)
+                .set(USER_ANSWER.SURVEY_ID, surveyID)
+                .set(USER_ANSWER.QUESTION_ID, questionID)
+                .set(USER_ANSWER.OFFERED_ANSWER_ID, answerID)
+                .execute();
+    }
+
+    public void fillSurvey(String userID, Survey survey, SurveyQuestionAnswer selectedAnswer) {
+        int surveyID = survey.getSurveyID();
+        if (surveyExists(surveyID)) {
+            List<SurveyQuestion> loq = survey.getLoq();
+            for (SurveyQuestion surveyQuestion : loq) {
+                fillQuestion(userID, survey, surveyQuestion, selectedAnswer);
+            }
+        }
     }
 }

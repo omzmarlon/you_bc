@@ -38,9 +38,6 @@ CREATE TABLE user_answer (
   user_id           VARCHAR(100),
   offered_answer_id INT,
   PRIMARY KEY (survey_id, question_id, user_id, offered_answer_id),
-
-  FOREIGN KEY (survey_id, question_id, offered_answer_id)
-  REFERENCES survey_question_answer(survey_id, question_id, offered_answer_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id),
   FOREIGN KEY (survey_id) REFERENCES survey (survey_id),
   FOREIGN KEY (question_id) REFERENCES question (question_id),
