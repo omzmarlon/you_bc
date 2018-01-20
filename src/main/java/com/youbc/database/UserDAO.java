@@ -4,7 +4,7 @@ import org.jooq.DSLContext;
 import static com.youbc.generated.schema.tables.User.USER;
 import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 import static com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
-import static com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
+import static com.youbc.generated.schema.tables.StudentVerification.STUDENT_VERIFICATION;
 import static com.youbc.generated.schema.tables.RoommatesProfile.ROOMMATES_PROFILE;
 import static com.youbc.generated.schema.tables.ClassmatesProfile.CLASSMATES_PROFILE;
 import static com.youbc.generated.schema.tables.FriendsProfile.FRIENDS_PROFILE;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
 
-    public DSLContext dslContext;
+    private DSLContext dslContext;
 
     @Autowired
     public UserDAO(DSLContext dslContext) {
@@ -115,10 +115,10 @@ public class UserDAO {
 
     public void initStudentVerification(String userID) {
         dslContext
-                .insertInto(UBC_STUDENT_VERIFICATION)
-                .set(UBC_STUDENT_VERIFICATION.USER_ID, userID)
-                .set(UBC_STUDENT_VERIFICATION.APPROVED, (byte)0)
-                .set(UBC_STUDENT_VERIFICATION.TIME_CREATED, DSL.currentTimestamp())
+                .insertInto(STUDENT_VERIFICATION)
+                .set(STUDENT_VERIFICATION.USER_ID, userID)
+                .set(STUDENT_VERIFICATION.APPROVED, (byte)0)
+                .set(STUDENT_VERIFICATION.TIME_CREATED, DSL.currentTimestamp())
                 .execute();
     }
 
