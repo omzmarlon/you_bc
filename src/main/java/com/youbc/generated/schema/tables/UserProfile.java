@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile extends TableImpl<UserProfileRecord> {
 
-    private static final long serialVersionUID = 479242877;
+    private static final long serialVersionUID = 863970534;
 
     /**
      * The reference instance of <code>poke_you_bc.user_profile</code>
@@ -65,6 +65,16 @@ public class UserProfile extends TableImpl<UserProfileRecord> {
      * The column <code>poke_you_bc.user_profile.sex</code>.
      */
     public final TableField<UserProfileRecord, Integer> SEX = createField("sex", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>poke_you_bc.user_profile.wechatId</code>.
+     */
+    public final TableField<UserProfileRecord, String> WECHATID = createField("wechatId", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+
+    /**
+     * The column <code>poke_you_bc.user_profile.username</code>.
+     */
+    public final TableField<UserProfileRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * The column <code>poke_you_bc.user_profile.horoscope</code>.
