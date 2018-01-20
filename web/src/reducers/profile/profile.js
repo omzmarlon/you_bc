@@ -7,7 +7,7 @@ import {
     RECEIVE_MAJORS_OPTIONS,
     RECEIVE_MATCHED_USERS, RECEIVE_PERSONAL_INFO, RECEIVE_RELATIONSHIP_STATUSES_OPTIONS, RECEIVE_ROOMMATE_TAGS,
     RECEIVE_ROOMMATES_INFO, UPDATE_AVATAR, UPDATE_CLASSMATES_VALUES, UPDATE_FRIENDS_VALUES, UPDATE_PERSONAL_VALUES,
-    UPDATE_ROOMMATES_VALUES
+    UPDATE_ROOMMATES_VALUES, UPDATE_WECHAT_ID
 } from "../../actions/actionTypes";
 
 const initialState = {
@@ -52,12 +52,16 @@ const initialState = {
     },
     personal: {
         values: {
-            avatar: '',
             age: 0,
-            constellation: ''
+            constellation: '',
+            username: '',
+            sex: '',
+            // these are updated separately
+            avatar: '',
+            weChatId: ''
         },
         options: {
-            constellationOptions: []
+            constellationOptions: ["天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"]
         }
     },
     matchedUsers: [],
@@ -74,7 +78,7 @@ const profile = (state = initialState, action) => {
         case RECEIVE_FRIENDS_INFO:
             return {...state, friends: {values: action.friends, options: state.friends.options}};
         case RECEIVE_PERSONAL_INFO:
-            return {...state, personal: action.personal};
+            return {...state, personal: {values: action.personal, options: state.personal.options}};
         case RECEIVE_MATCHED_USERS:
             return {...state, matchedUsers: action.matchedUsers};
         case UPDATE_CLASSMATES_VALUES:
@@ -83,13 +87,25 @@ const profile = (state = initialState, action) => {
             return Object.assign({}, state, {roommates: {values: action.roommatesValues, options: state.roommates.options}});
         case UPDATE_FRIENDS_VALUES:
             return Object.assign({}, state, {friends: {values: action.friendsValues, options: state.friends.options}});
-        case UPDATE_PERSONAL_VALUES: // avatar is updated separately
+        case UPDATE_PERSONAL_VALUES: // avatar & weChatId is updated separately
             return {
                 ...state,
                 personal: {
                     values: {
                         avatar: state.personal.values.avatar,
+                        weChatId: state.personal.values.weChatId,
                         ...action.personalValues
+                    },
+                    options: state.personal.options
+                }
+            };
+        case UPDATE_WECHAT_ID:
+            return {
+                ...state,
+                personal: {
+                    values: {
+                        ...state.personal.values,
+                        weChatId: action.weChatId
                     },
                     options: state.personal.options
                 }
@@ -111,9 +127,8 @@ const profile = (state = initialState, action) => {
                 classmates: {
                     values: {...state.classmates.values},
                     options: {
+                        ...state.classmates.options,
                         majorOptions: action.majorOptions,
-                        coursesOptions: state.classmates.options.coursesOptions,
-                        tagsOptions: state.classmates.options.tagsOptions
                     }
                 }
             };
@@ -122,9 +137,8 @@ const profile = (state = initialState, action) => {
                 classmates: {
                     values: {...state.classmates.values},
                     options: {
-                        majorOptions: state.classmates.options.majorOptions,
+                        ...state.classmates.options,
                         coursesOptions: action.coursesOptions,
-                        tagsOptions: state.classmates.options.tagsOptions
                     }
                 }
             };
@@ -133,8 +147,7 @@ const profile = (state = initialState, action) => {
                 classmates: {
                     values: {...state.classmates.values},
                     options: {
-                        majorOptions: state.classmates.options.majorOptions,
-                        coursesOptions: state.classmates.options.coursesOptions,
+                        ...state.classmates.options,
                         tagsOptions: action.classmatesTags
                     }
                 }
@@ -144,9 +157,8 @@ const profile = (state = initialState, action) => {
                 roommates: {
                     values: {...state.roommates.values},
                     options: {
-                        locationOptions: action.locationOptions,
-                        hometownOptions: state.roommates.options.hometownOptions,
-                        tagsOptions: state.roommates.options.tagsOptions
+                        ...state.roommates.options,
+                        locationOptions: action.locationOptions
                     }
                 }
             };
@@ -155,9 +167,8 @@ const profile = (state = initialState, action) => {
                 roommates: {
                     values: {...state.roommates.values},
                     options: {
-                        locationOptions: state.roommates.options.locationOptions,
+                        ...state.roommates.options,
                         hometownOptions: action.hometownOptions,
-                        tagsOptions: state.roommates.options.tagsOptions
                     }
                 }
             };
@@ -166,8 +177,7 @@ const profile = (state = initialState, action) => {
                 roommates: {
                     values: {...state.roommates.values},
                     options: {
-                        locationOptions: state.roommates.options.locationOptions,
-                        hometownOptions: state.roommates.options.hometownOptions,
+                        ...state.roommates.options,
                         tagsOptions: action.roommatesTags
                     }
                 }
@@ -177,9 +187,8 @@ const profile = (state = initialState, action) => {
                 friends: {
                     values: {...state.friends.values},
                     options: {
+                        ...state.friends.options,
                         facultyOptions: action.facultyOptions,
-                        relationshipOptions: state.friends.options.relationshipOptions,
-                        tagsOptions: state.friends.options.tagsOptions,
                     }
                 }
             };
@@ -188,9 +197,8 @@ const profile = (state = initialState, action) => {
                 friends: {
                     values: {...state.friends.values},
                     options: {
-                        facultyOptions: state.friends.options.facultyOptions,
+                        ...state.friends.options,
                         relationshipOptions: action.relationshipOptions,
-                        tagsOptions: state.friends.options.tagsOptions,
                     }
                 }
             };
@@ -199,8 +207,7 @@ const profile = (state = initialState, action) => {
                 friends: {
                     values: {...state.friends.values},
                     options: {
-                        facultyOptions: state.friends.options.facultyOptions,
-                        relationshipOptions: state.friends.options.relationshipOptions,
+                        ...state.friends.options,
                         tagsOptions: action.friendsTags
                     }
                 }

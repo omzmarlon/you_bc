@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {PRIMARY_GREEN} from "../../../styles/constants/colors";
 //icons
 import FaceIcon from 'material-ui/svg-icons/action/face';
+import Progress from 'material-ui/CircularProgress';
 //components
 import ModalForm from "../../common/form/ModalForm";
 import Cropper from 'react-cropper';
@@ -11,12 +12,12 @@ import 'cropperjs/dist/cropper.css';
 // redux
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {updateAvatar} from "../../../actions/profile/profileUpdateActions";
+import {updateAvatarRequest} from "../../../actions/profile/profileUpdateActions";
 import {hideAvatarForm} from "../../../actions/profile/profileUIActions";
 import {showInfoBar} from "../../../actions/global/globalActions";
+// api
 import {requestUrl, UPLOAD_IMAGE_API, UPLOAD_IMAGE_EDIT_API} from "../../../constants/api";
 import {uploadImageHelper} from "../../helpers/imageUploadHelpers";
-import Progress from 'material-ui/CircularProgress';
 
 class AvatarEditorForm extends React.Component {
     constructor(props) {
@@ -41,18 +42,19 @@ class AvatarEditorForm extends React.Component {
             const validImageTypes = ["image/jpeg", "image/png"];
             if (validImageTypes.indexOf(fileType) === -1) {
                 this.rejectAvatarEdit('同学必须上传图片噢');
-            }
-            //prepare form data
-            let formData = new FormData();
-            formData.append("image", files[0]);
+            } else {
+                //prepare form data
+                let formData = new FormData();
+                formData.append("image", files[0]);
 
-            this.setState({isUploading: true});
-            uploadImageHelper(requestUrl(UPLOAD_IMAGE_EDIT_API), formData)
-                .then(
-                    response => this.setState({editAvatarUrl: response.data}),
-                    err => this.rejectAvatarEdit('选取图片失败')
-                )
-                .finally(() => this.setState({isUploading: false}));
+                this.setState({isUploading: true});
+                uploadImageHelper(requestUrl(UPLOAD_IMAGE_EDIT_API), formData)
+                    .then(
+                        response => this.setState({editAvatarUrl: response.data}),
+                        err => this.rejectAvatarEdit('选取图片失败')
+                    )
+                    .finally(() => this.setState({isUploading: false}));
+            }
         } else {
             this.rejectAvatarEdit('同学须至少上传一张图片噢');
         }
@@ -128,7 +130,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => (
     bindActionCreators({
-        onDone: updateAvatar,
+        onDone: updateAvatarRequest,
         onClose: hideAvatarForm,
         onFail: showInfoBar
     }, dispatch)

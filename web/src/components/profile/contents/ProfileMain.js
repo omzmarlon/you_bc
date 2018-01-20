@@ -32,6 +32,7 @@ import { bindActionCreators } from 'redux';
 import {
     showClassMatesForm, showFriendsForm, showPersonalForm, showRoommatesForm
 } from "../../../actions/profile/profileUIActions";
+import MixGenderIcon from "../../common/svg/MixGenderIcon";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -50,11 +51,15 @@ const ProfileMain = (props) => (
                 contentList={[
                     {
                         leftElement: <InfoRowTitle icon={<WeChatIcon color={PRIMARY_GREEN}/>} text={'微信号'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.global.weChatId}</span>
+                        rightElement: <span style={rightElementSpaceApart}>{props.personal.values.weChatId}</span>
                     },
                     {
                         leftElement: <InfoRowTitle icon={<AccountIcon color={PRIMARY_GREEN}/>} text={'昵称'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.global.username}</span>
+                        rightElement: <span style={rightElementSpaceApart}>{props.personal.values.username}</span>
+                    },
+                    {
+                        leftElement: <InfoRowTitle icon={<MixGenderIcon color={PRIMARY_GREEN}/>} text={'性别'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.personal.values.sex}</span>
                     },
                     {
                         leftElement: <InfoRowTitle icon={<AgeIcon color={PRIMARY_GREEN}/>} text={'年龄'}/>,

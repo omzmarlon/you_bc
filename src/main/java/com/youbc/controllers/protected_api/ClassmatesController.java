@@ -10,10 +10,10 @@ public class ClassmatesController {
     private UserPoolManager userPoolManager;
     private UserDAO userDAO;
 
-    public ClassmatesController(UserPoolManager userPoolManager, UserDAO userDAO) {
-        this.userPoolManager = userPoolManager;
-        this.userDAO = userDAO;
-    }
+//    public ClassmatesController(UserPoolManager userPoolManager, UserDAO userDAO) {
+//        this.userPoolManager = userPoolManager;
+//        this.userDAO = userDAO;
+//    }
 
 
 }

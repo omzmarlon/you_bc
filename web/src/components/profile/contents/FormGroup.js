@@ -13,10 +13,9 @@ import {
     hideClassmatesForm, hideFriendsForm, hidePersonalForm, hideRoommatesForm
 } from "../../../actions/profile/profileUIActions";
 import {
-    updateClassmatesValuesRequest, updateFriendsValuesRequest, updatePersonalValues,
-    updateRoommatesValuesRequest
+    updateClassmatesValuesRequest, updateFriendsValuesRequest, updatePersonalValuesRequest,
+    updateRoommatesValuesRequest, updateWeChatIdRequest
 } from "../../../actions/profile/profileUpdateActions";
-import {updateUsername, updateWeChatId} from "../../../actions/global/globalUpdateActions";
 
 const FormGroup = (props) => (
     <div>
@@ -24,24 +23,24 @@ const FormGroup = (props) => (
                         classmates={props.classmates}
                         onDone={props.onClassmatesUpdate}
                         onClose={props.closeClassmatesEdit}
-                        showWeChatInput={!props.global.weChatId}
-                        weChatId={props.global.weChatId}
+                        showWeChatInput={!props.personal.values.weChatId}
+                        weChatId={props.personal.values.weChatId}
                         onWeChatIdDone={props.onWeChatIdDone}
         />
         <FriendsForm showForm={props.showFriendsForm}
                      friends={props.friends}
                      onDone={props.onFriendsUpdate}
                      onClose={props.closeFriendsEdit}
-                     showWeChatInput={!props.global.weChatId}
-                     weChatId={props.global.weChatId}
+                     showWeChatInput={!props.personal.values.weChatId}
+                     weChatId={props.personal.values.weChatId}
                      onWeChatIdDone={props.onWeChatIdDone}
         />
         <RoommatesForm showForm={props.showRoommatesForm}
                        roommates={props.roommates}
                        onDone={props.onRoommatesUpdate}
                        onClose={props.closeRoommatesEdit}
-                       showWeChatInput={!props.global.weChatId}
-                       weChatId={props.global.weChatId}
+                       showWeChatInput={!props.personal.values.weChatId}
+                       weChatId={props.personal.values.weChatId}
                        onWeChatIdDone={props.onWeChatIdDone}
         />
         <PersonalForm showForm={props.showPersonalForm}
@@ -49,8 +48,8 @@ const FormGroup = (props) => (
                       onClose={props.closePersonalEdit}
                       personal={props.personal.values}
                       personalOptions={props.personal.options}
-                      showWeChatInput={!props.global.weChatId}
-                      weChatId={props.global.weChatId}
+                      showWeChatInput={!props.personal.values.weChatId}
+                      weChatId={props.personal.values.weChatId}
                       onWeChatIdDone={props.onWeChatIdDone}
         />
     </div>
@@ -62,7 +61,6 @@ FormGroup.propTypes = {
     roommates: PropTypes.object.isRequired, // from redux store
     friends: PropTypes.object.isRequired, // from redux store
     personal: PropTypes.object.isRequired, // from redux store
-    global: PropTypes.object.isRequired,// from redux store
     // form open/close control
     showRoommatesForm: PropTypes.bool.isRequired,
     showFriendsForm: PropTypes.bool.isRequired,
@@ -81,7 +79,6 @@ FormGroup.propTypes = {
     onPersonalUpdate: PropTypes.func.isRequired,
     // global state updates
     onWeChatIdDone: PropTypes.func.isRequired,
-    onUsernameUpdate: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -89,7 +86,6 @@ const mapStateToProps = (state, ownProps) => ({
     roommates: state.profile.roommates,
     friends: state.profile.friends,
     personal: state.profile.personal,
-    global: state.global,
     showRoommatesForm: state.profileUI.showRoommatesForm,
     showFriendsForm: state.profileUI.showFriendsForm,
     showClassmatesForm: state.profileUI.showClassmatesForm,
@@ -106,9 +102,8 @@ const mapDispatchToProps = (dispatch) => (
             onClassmatesUpdate: updateClassmatesValuesRequest,
             onRoommatesUpdate: updateRoommatesValuesRequest,
             onFriendsUpdate: updateFriendsValuesRequest,
-            onPersonalUpdate: updatePersonalValues,
-            onWeChatIdDone: updateWeChatId,
-            onUsernameUpdate: updateUsername
+            onPersonalUpdate: updatePersonalValuesRequest,
+            onWeChatIdDone: updateWeChatIdRequest
         }, dispatch
     )
 );

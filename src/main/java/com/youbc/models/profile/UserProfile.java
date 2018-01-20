@@ -9,10 +9,11 @@ public class UserProfile {
     private String avatarUrl;
     private String horoscope;
     private double matchRate;
+    private String weChatId;
 
     public UserProfile () {}
 
-    public UserProfile (String userId, String username, int age, int sex, String avatarUrl, String horoscope, double matchRate) {
+    public UserProfile (String userId, String weChatId, String username, int age, int sex, String avatarUrl, String horoscope, double matchRate) {
         this.userId = userId;
         this.username = username;
         this.age = age;
@@ -20,6 +21,15 @@ public class UserProfile {
         this.avatarUrl = avatarUrl;
         this.horoscope = horoscope;
         this.matchRate = matchRate;
+        this.weChatId = weChatId;
+    }
+
+    public String getWeChatId() {
+        return weChatId;
+    }
+
+    public void setWeChatId(String weChatId) {
+        this.weChatId = weChatId;
     }
 
     public String getUserId() { return userId; }

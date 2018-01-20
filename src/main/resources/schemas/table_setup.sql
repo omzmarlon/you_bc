@@ -20,7 +20,7 @@ CREATE TABLE ubc_student_verification (
 CREATE TABLE user_profile (
   user_id VARCHAR(100) CHARACTER SET utf8 PRIMARY KEY,
   age INT,
-  sex INT,
+  sex INT, # 用户的性别，值为1时是男性，值为2时是女性
   wechatId VARCHAR(100) CHARACTER SET utf8,
   username VARCHAR(50) CHARACTER SET utf8,
   horoscope VARCHAR(10),

@@ -8,6 +8,7 @@ import static com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDE
 import static com.youbc.generated.schema.tables.RoommatesProfile.ROOMMATES_PROFILE;
 import static com.youbc.generated.schema.tables.ClassmatesProfile.CLASSMATES_PROFILE;
 import static com.youbc.generated.schema.tables.FriendsProfile.FRIENDS_PROFILE;
+import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 
 import org.jooq.Record1;
 import org.jooq.Result;
@@ -39,6 +40,15 @@ public class UserDAO {
                 .select(CLASSMATES_PROFILE.USER_ID)
                 .from(CLASSMATES_PROFILE)
                 .where(CLASSMATES_PROFILE.USER_ID.eq(userID))
+                .fetchOne();
+        return result != null;
+    }
+
+    public boolean userProfileExists(String userID) {
+        Record1<String> result = dslContext
+                .select(USER_PROFILE.USER_ID)
+                .from(USER_PROFILE)
+                .where(USER_PROFILE.USER_ID.eq(userID))
                 .fetchOne();
         return result != null;
     }
