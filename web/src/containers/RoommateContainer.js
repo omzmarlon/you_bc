@@ -14,6 +14,7 @@ import {
 } from "../actions/mainList/RoommateActions";
 import {PRIMARY_BLUE, SECONDARY_BLUE } from "../styles/constants/colors";
 import MissingProfileInfoModal from "../components/common/modal/MissingProfileInfoModal";
+import {showRoommatesForm} from "../actions/profile/profileUIActions";
 
 class RoommateContainer extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class RoommateContainer extends Component {
         };
         this.onUserSwiped = this.onUserSwiped.bind(this);
         this.genderFilter = this.genderFilter.bind(this);
+        this.missingInfoModalActionHandler = this.missingInfoModalActionHandler.bind(this);
     }
 
     componentDidMount() {
@@ -31,7 +33,7 @@ class RoommateContainer extends Component {
     }
 
     onUserSwiped(index, deltaX) {
-        const { dispatch, hasInfo } = this.props;
+        const { dispatch, hasInfo, genderFilter } = this.props;
         let targetUser = this.props.visibleUsers[index];
         if (!hasInfo) {
             this.setState({showMissingInfoModal: true});
@@ -43,7 +45,7 @@ class RoommateContainer extends Component {
              4. make a new request fetch one more user and add to candidates
              */
             dispatch(updateVisibleUsersAndCandidates(index));
-            dispatch(fetchMoreCandidate(1));
+            dispatch(fetchMoreCandidate(1, genderFilter));
             (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
         }
     }
@@ -51,6 +53,11 @@ class RoommateContainer extends Component {
     genderFilter(event, child) {
         const { dispatch } = this.props;
         dispatch(fetchCandidates(10, child.key));
+    }
+
+    missingInfoModalActionHandler() {
+        const { dispatch } = this.props;
+        dispatch(showRoommatesForm());
     }
 
     render() {
@@ -68,8 +75,8 @@ class RoommateContainer extends Component {
                     />
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}
-                        onClose={() => {this.setState({showMissingInfoModal: false})}}
                         content="您还没有填写找室友相关信息，信息完整后才能继续匹配😊 ! 请填写个人主页中找室友（蓝色部分）信息"
+                        onClick={this.missingInfoModalActionHandler}
                     />
                 </div>
             )
@@ -84,6 +91,7 @@ const mapStateToProps = state => ({
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
     hasInfo: !(state.profile.roommates.values.hometown === ""),
+    genderFilter: state.mainList.genderFilter,
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
     &&

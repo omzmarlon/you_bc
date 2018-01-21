@@ -1,12 +1,11 @@
-package com.youbc.pooling;
+package com.youbc.pooling.roommates;
 
 import com.youbc.database.ProfileDAO;
-import com.youbc.database.UserPoolStrategyDAO;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import com.youbc.models.candidate.BasicCandidate;
-import com.youbc.models.candidate.ClassmateCandidate;
-import com.youbc.models.profile.ClassmatesProfile;
+import com.youbc.models.candidate.RoommateCandidate;
+import com.youbc.models.profile.RoommatesProfile;
 import com.youbc.models.profile.UserProfile;
 import org.springframework.http.HttpStatus;
 
@@ -14,26 +13,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PoolingRandomClassmates implements PoolingStrategy {
-
+public abstract class PoolingRoommates {
     private ProfileDAO profileDAO;
-    private UserPoolStrategyDAO userPoolStrategyDAO;
 
-    public PoolingRandomClassmates(ProfileDAO profileDAO, UserPoolStrategyDAO userPoolStrategyDAO) {
+    public PoolingRoommates(ProfileDAO profileDAO) {
         this.profileDAO = profileDAO;
-        this.userPoolStrategyDAO = userPoolStrategyDAO;
     }
 
-    public Set<BasicCandidate> poolUsers(int amount, Set<String> except) {
-        List<String> candidateIDs = userPoolStrategyDAO.fetchRandomClassmates(amount, except);
+    public Set<BasicCandidate> populateToRoommates(List<String> userIds) {
+
         Set<BasicCandidate> candidates = new HashSet<>();
 
-        for (String id : candidateIDs) {
-            ClassmatesProfile classmatesProfile = profileDAO.fetchClassmatesProfile(id)
+        for (String id : userIds) {
+            RoommatesProfile roommatesProfile = profileDAO.fetchRoommatesProfile(id)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "cannot find user info", "cannot find  module profile info")));
             UserProfile userProfile = profileDAO.fetchUserProfile(id)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "cannot find user info", "cannot find general user profile info")));
-            ClassmateCandidate classmateCandidate = new ClassmateCandidate(
+            RoommateCandidate roommateCandidate = new RoommateCandidate(
                     userProfile.getUserId(),
                     userProfile.getUsername(),
                     userProfile.getAvatarUrl(),
@@ -41,13 +37,12 @@ public class PoolingRandomClassmates implements PoolingStrategy {
                     userProfile.getAge(),
                     userProfile.getHoroscope(),
                     userProfile.getMatchRate(),
-                    classmatesProfile.getMajor(),
-                    "year ?", // todo: add year attribute
-                    classmatesProfile.getCourses(),
-                    classmatesProfile.getMotto(),
-                    classmatesProfile.getTags()
+                    roommatesProfile.getLocation(),
+                    roommatesProfile.getHometown(),
+                    roommatesProfile.getMotto(),
+                    roommatesProfile.getTags()
             );
-            candidates.add(classmateCandidate);
+            candidates.add(roommateCandidate);
         }
         return candidates;
     }

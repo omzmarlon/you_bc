@@ -13,14 +13,14 @@ public class UserPoolManager {
         this.strategies = strategies;
     }
     
-    public Set<BasicCandidate> poolUsers(Integer amount) {
+    public Set<BasicCandidate> poolUsers(String userId, Integer amount, String gender) {
         Set<BasicCandidate> result = new HashSet<>();
         Set<String> except = new HashSet<>();
         Integer leftover = 0;
 
         for (WeightedStrategy s: strategies) {
             int amt = (int)Math.round(amount * s.getWeight()) + leftover;
-            Set<BasicCandidate> newUsers = s.getPoolingStrategy().poolUsers(amt, except);
+            Set<BasicCandidate> newUsers = s.getPoolingStrategy().poolUsers(userId, amt, genderDataTypeConverter(gender), except);
             leftover = (amt - newUsers.size())>0 ? (amt - newUsers.size()) : 0;
             result.addAll(newUsers);
             for (BasicCandidate user : result) {
@@ -31,12 +31,16 @@ public class UserPoolManager {
         return result;
     }
 
-//    public void addStrategy(WeightedStrategy strategy) {
-//
-//    }
-//
-//    public boolean removeStrategy() {
-//
-//    }
-
+    private Integer genderDataTypeConverter(String gender) {
+        switch (gender) {
+            case "male":
+                return 1;
+            case "female":
+                return 2;
+            case "mix":
+                return 0;
+            default:
+                return 0;
+        }
+    }
 }
