@@ -4,15 +4,16 @@ public class UserProfile {
 
     private String userId;
     private String username;
-    private int age;
-    private int sex;
+    private Integer age;
+    private Integer sex;
     private String avatarUrl;
     private String horoscope;
     private double matchRate;
+    private String weChatId;
 
     public UserProfile () {}
 
-    public UserProfile (String userId, String username, int age, int sex, String avatarUrl, String horoscope, double matchRate) {
+    public UserProfile (String userId, String weChatId, String username, Integer age, Integer sex, String avatarUrl, String horoscope, double matchRate) {
         this.userId = userId;
         this.username = username;
         this.age = age;
@@ -20,6 +21,15 @@ public class UserProfile {
         this.avatarUrl = avatarUrl;
         this.horoscope = horoscope;
         this.matchRate = matchRate;
+        this.weChatId = weChatId;
+    }
+
+    public String getWeChatId() {
+        return weChatId;
+    }
+
+    public void setWeChatId(String weChatId) {
+        this.weChatId = weChatId;
     }
 
     public String getUserId() { return userId; }
@@ -33,19 +43,19 @@ public class UserProfile {
         this.username = username;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

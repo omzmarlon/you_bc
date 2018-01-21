@@ -4,10 +4,11 @@ import org.jooq.DSLContext;
 import static com.youbc.generated.schema.tables.User.USER;
 import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 import static com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
-import static com.youbc.generated.schema.tables.UbcStudentVerification.UBC_STUDENT_VERIFICATION;
+import static com.youbc.generated.schema.tables.StudentVerification.STUDENT_VERIFICATION;
 import static com.youbc.generated.schema.tables.RoommatesProfile.ROOMMATES_PROFILE;
 import static com.youbc.generated.schema.tables.ClassmatesProfile.CLASSMATES_PROFILE;
 import static com.youbc.generated.schema.tables.FriendsProfile.FRIENDS_PROFILE;
+import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 
 import org.jooq.Record1;
 import org.jooq.Result;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
 
-    public DSLContext dslContext;
+    private DSLContext dslContext;
 
     @Autowired
     public UserDAO(DSLContext dslContext) {
@@ -43,6 +44,15 @@ public class UserDAO {
         return result != null;
     }
 
+    public boolean userProfileExists(String userID) {
+        Record1<String> result = dslContext
+                .select(USER_PROFILE.USER_ID)
+                .from(USER_PROFILE)
+                .where(USER_PROFILE.USER_ID.eq(userID))
+                .fetchOne();
+        return result != null;
+    }
+
     public boolean friendsProfileExists(String userID) {
         Record1<String> result = dslContext
                 .select(FRIENDS_PROFILE.USER_ID)
@@ -62,9 +72,9 @@ public class UserDAO {
         return result != null;
     }
 
-    public void buildNewUser(String userID, String imageUrl) {
+    public void buildNewUser(String userID, String imageUrl, String username, String sex) {
         initUser(userID);
-        initUserProfile(userID);
+        initUserProfile(userID, username, sex);
         initUserProfileImage(userID, imageUrl);
         initStudentVerification(userID);
         initClassmatesProfile(userID);
@@ -80,9 +90,17 @@ public class UserDAO {
                 .execute();
     }
 
-    public void initUserProfile(String userID) {
+    public void initUserProfile(String userID, String username, String sex) {
+        Integer sexInt = null;
+        if (sex.equals("1")) {
+            sexInt = 1;
+        } else if (sex.equals("2")) {
+            sexInt = 2;
+        }
         dslContext.insertInto(USER_PROFILE)
                 .set(USER_PROFILE.USER_ID, userID)
+                .set(USER_PROFILE.USERNAME, username)
+                .set(USER_PROFILE.SEX, sexInt)
                 .set(USER_PROFILE.TIME_CREATED, DSL.currentTimestamp())
                 .execute();
     }
@@ -97,10 +115,10 @@ public class UserDAO {
 
     public void initStudentVerification(String userID) {
         dslContext
-                .insertInto(UBC_STUDENT_VERIFICATION)
-                .set(UBC_STUDENT_VERIFICATION.USER_ID, userID)
-                .set(UBC_STUDENT_VERIFICATION.APPROVED, (byte)0)
-                .set(UBC_STUDENT_VERIFICATION.TIME_CREATED, DSL.currentTimestamp())
+                .insertInto(STUDENT_VERIFICATION)
+                .set(STUDENT_VERIFICATION.USER_ID, userID)
+                .set(STUDENT_VERIFICATION.APPROVED, (byte)0)
+                .set(STUDENT_VERIFICATION.TIME_CREATED, DSL.currentTimestamp())
                 .execute();
     }
 

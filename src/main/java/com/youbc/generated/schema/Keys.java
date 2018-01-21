@@ -27,7 +27,7 @@ import com.youbc.generated.schema.tables.RoommatesLocations;
 import com.youbc.generated.schema.tables.RoommatesProfile;
 import com.youbc.generated.schema.tables.RoommatesProfileTags;
 import com.youbc.generated.schema.tables.RoommatesTags;
-import com.youbc.generated.schema.tables.UbcStudentVerification;
+import com.youbc.generated.schema.tables.StudentVerification;
 import com.youbc.generated.schema.tables.User;
 import com.youbc.generated.schema.tables.UserProfile;
 import com.youbc.generated.schema.tables.records.ClassmatesCoursesRecord;
@@ -53,7 +53,7 @@ import com.youbc.generated.schema.tables.records.RoommatesLocationsRecord;
 import com.youbc.generated.schema.tables.records.RoommatesProfileRecord;
 import com.youbc.generated.schema.tables.records.RoommatesProfileTagsRecord;
 import com.youbc.generated.schema.tables.records.RoommatesTagsRecord;
-import com.youbc.generated.schema.tables.records.UbcStudentVerificationRecord;
+import com.youbc.generated.schema.tables.records.StudentVerificationRecord;
 import com.youbc.generated.schema.tables.records.UserProfileRecord;
 import com.youbc.generated.schema.tables.records.UserRecord;
 
@@ -112,7 +112,7 @@ public class Keys {
     public static final UniqueKey<RoommatesProfileRecord> KEY_ROOMMATES_PROFILE_PRIMARY = UniqueKeys0.KEY_ROOMMATES_PROFILE_PRIMARY;
     public static final UniqueKey<RoommatesProfileTagsRecord> KEY_ROOMMATES_PROFILE_TAGS_PRIMARY = UniqueKeys0.KEY_ROOMMATES_PROFILE_TAGS_PRIMARY;
     public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_PRIMARY = UniqueKeys0.KEY_ROOMMATES_TAGS_PRIMARY;
-    public static final UniqueKey<UbcStudentVerificationRecord> KEY_UBC_STUDENT_VERIFICATION_PRIMARY = UniqueKeys0.KEY_UBC_STUDENT_VERIFICATION_PRIMARY;
+    public static final UniqueKey<StudentVerificationRecord> KEY_STUDENT_VERIFICATION_PRIMARY = UniqueKeys0.KEY_STUDENT_VERIFICATION_PRIMARY;
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
     public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_PRIMARY = UniqueKeys0.KEY_USER_PROFILE_PRIMARY;
 
@@ -149,7 +149,7 @@ public class Keys {
     public static final ForeignKey<RoommatesProfileRecord, RoommatesHometownRecord> ROOMMATES_PROFILE_IBFK_3 = ForeignKeys0.ROOMMATES_PROFILE_IBFK_3;
     public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesProfileRecord> ROOMMATES_PROFILE_TAGS_IBFK_1 = ForeignKeys0.ROOMMATES_PROFILE_TAGS_IBFK_1;
     public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesTagsRecord> ROOMMATES_PROFILE_TAGS_IBFK_2 = ForeignKeys0.ROOMMATES_PROFILE_TAGS_IBFK_2;
-    public static final ForeignKey<UbcStudentVerificationRecord, UserRecord> UBC_STUDENT_VERIFICATION_IBFK_1 = ForeignKeys0.UBC_STUDENT_VERIFICATION_IBFK_1;
+    public static final ForeignKey<StudentVerificationRecord, UserRecord> STUDENT_VERIFICATION_IBFK_1 = ForeignKeys0.STUDENT_VERIFICATION_IBFK_1;
     public static final ForeignKey<UserProfileRecord, UserRecord> USER_PROFILE_IBFK_1 = ForeignKeys0.USER_PROFILE_IBFK_1;
 
     // -------------------------------------------------------------------------
@@ -184,7 +184,7 @@ public class Keys {
         public static final UniqueKey<RoommatesProfileRecord> KEY_ROOMMATES_PROFILE_PRIMARY = createUniqueKey(RoommatesProfile.ROOMMATES_PROFILE, "KEY_roommates_profile_PRIMARY", RoommatesProfile.ROOMMATES_PROFILE.USER_ID);
         public static final UniqueKey<RoommatesProfileTagsRecord> KEY_ROOMMATES_PROFILE_TAGS_PRIMARY = createUniqueKey(RoommatesProfileTags.ROOMMATES_PROFILE_TAGS, "KEY_roommates_profile_tags_PRIMARY", RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.USER_ID, RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.TAG);
         public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_PRIMARY = createUniqueKey(RoommatesTags.ROOMMATES_TAGS, "KEY_roommates_tags_PRIMARY", RoommatesTags.ROOMMATES_TAGS.TAG);
-        public static final UniqueKey<UbcStudentVerificationRecord> KEY_UBC_STUDENT_VERIFICATION_PRIMARY = createUniqueKey(UbcStudentVerification.UBC_STUDENT_VERIFICATION, "KEY_ubc_student_verification_PRIMARY", UbcStudentVerification.UBC_STUDENT_VERIFICATION.USER_ID);
+        public static final UniqueKey<StudentVerificationRecord> KEY_STUDENT_VERIFICATION_PRIMARY = createUniqueKey(StudentVerification.STUDENT_VERIFICATION, "KEY_student_verification_PRIMARY", StudentVerification.STUDENT_VERIFICATION.USER_ID);
         public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = createUniqueKey(User.USER, "KEY_user_PRIMARY", User.USER.USER_ID);
         public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_PRIMARY = createUniqueKey(UserProfile.USER_PROFILE, "KEY_user_profile_PRIMARY", UserProfile.USER_PROFILE.USER_ID);
     }
@@ -219,7 +219,7 @@ public class Keys {
         public static final ForeignKey<RoommatesProfileRecord, RoommatesHometownRecord> ROOMMATES_PROFILE_IBFK_3 = createForeignKey(com.youbc.generated.schema.Keys.KEY_ROOMMATES_HOMETOWN_PRIMARY, RoommatesProfile.ROOMMATES_PROFILE, "roommates_profile_ibfk_3", RoommatesProfile.ROOMMATES_PROFILE.HOMETOWN);
         public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesProfileRecord> ROOMMATES_PROFILE_TAGS_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_ROOMMATES_PROFILE_PRIMARY, RoommatesProfileTags.ROOMMATES_PROFILE_TAGS, "roommates_profile_tags_ibfk_1", RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.USER_ID);
         public static final ForeignKey<RoommatesProfileTagsRecord, RoommatesTagsRecord> ROOMMATES_PROFILE_TAGS_IBFK_2 = createForeignKey(com.youbc.generated.schema.Keys.KEY_ROOMMATES_TAGS_PRIMARY, RoommatesProfileTags.ROOMMATES_PROFILE_TAGS, "roommates_profile_tags_ibfk_2", RoommatesProfileTags.ROOMMATES_PROFILE_TAGS.TAG);
-        public static final ForeignKey<UbcStudentVerificationRecord, UserRecord> UBC_STUDENT_VERIFICATION_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_USER_PRIMARY, UbcStudentVerification.UBC_STUDENT_VERIFICATION, "ubc_student_verification_ibfk_1", UbcStudentVerification.UBC_STUDENT_VERIFICATION.USER_ID);
+        public static final ForeignKey<StudentVerificationRecord, UserRecord> STUDENT_VERIFICATION_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_USER_PRIMARY, StudentVerification.STUDENT_VERIFICATION, "student_verification_ibfk_1", StudentVerification.STUDENT_VERIFICATION.USER_ID);
         public static final ForeignKey<UserProfileRecord, UserRecord> USER_PROFILE_IBFK_1 = createForeignKey(com.youbc.generated.schema.Keys.KEY_USER_PRIMARY, UserProfile.USER_PROFILE, "user_profile_ibfk_1", UserProfile.USER_PROFILE.USER_ID);
     }
 }

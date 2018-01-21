@@ -23,11 +23,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile implements Serializable {
 
-    private static final long serialVersionUID = -263882477;
+    private static final long serialVersionUID = -615698274;
 
     private final String    userId;
     private final Integer   age;
     private final Integer   sex;
+    private final String    wechatid;
+    private final String    username;
     private final String    horoscope;
     private final Timestamp timeCreated;
 
@@ -35,6 +37,8 @@ public class UserProfile implements Serializable {
         this.userId = value.userId;
         this.age = value.age;
         this.sex = value.sex;
+        this.wechatid = value.wechatid;
+        this.username = value.username;
         this.horoscope = value.horoscope;
         this.timeCreated = value.timeCreated;
     }
@@ -43,12 +47,16 @@ public class UserProfile implements Serializable {
         String    userId,
         Integer   age,
         Integer   sex,
+        String    wechatid,
+        String    username,
         String    horoscope,
         Timestamp timeCreated
     ) {
         this.userId = userId;
         this.age = age;
         this.sex = sex;
+        this.wechatid = wechatid;
+        this.username = username;
         this.horoscope = horoscope;
         this.timeCreated = timeCreated;
     }
@@ -63,6 +71,14 @@ public class UserProfile implements Serializable {
 
     public Integer getSex() {
         return this.sex;
+    }
+
+    public String getWechatid() {
+        return this.wechatid;
+    }
+
+    public String getUsername() {
+        return this.username;
     }
 
     public String getHoroscope() {
@@ -80,6 +96,8 @@ public class UserProfile implements Serializable {
         sb.append(userId);
         sb.append(", ").append(age);
         sb.append(", ").append(sex);
+        sb.append(", ").append(wechatid);
+        sb.append(", ").append(username);
         sb.append(", ").append(horoscope);
         sb.append(", ").append(timeCreated);
 

@@ -3,7 +3,10 @@ import {
     RECEIVE_PERSONAL_INFO, RECEIVE_ROOMMATES_INFO
 } from "../actionTypes";
 import axios from 'axios';
-import {CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, requestUrl, ROOMMATES_PROFILE_API} from "../../constants/api";
+import {
+    CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, PERSONAL_PROFILE_API, requestUrl,
+    ROOMMATES_PROFILE_API
+} from "../../constants/api";
 import {showInfoBar} from "../global/globalActions";
 
 
@@ -54,7 +57,6 @@ export const fetchRoommatesInfo = () => dispatch => {
 export const receiveFriendsInfo = (friends) => ({type: RECEIVE_FRIENDS_INFO, friends});
 
 export const fetchFriendsInfo = () => dispatch => {
-    // TODO: connect with backend API
     axios.get(requestUrl(FRIENDS_PROFILE_API), {withCredentials: true})
         .then( response => {
             dispatch(receiveFriendsInfo({
@@ -62,7 +64,7 @@ export const fetchFriendsInfo = () => dispatch => {
                 relationship: response.data.relationship? response.data.relationship: '',
                 motto: response.data.motto? response.data.motto: '',
                 tags: response.data.tags,
-            }))
+            }));
         }).catch( err => {
         // TODO: centralize error handling
         dispatch(showInfoBar("获取找X友信息失败"));
@@ -76,22 +78,31 @@ export const fetchFriendsInfo = () => dispatch => {
 export const receivePersonalInfo = (personal) => ({type: RECEIVE_PERSONAL_INFO, personal});
 
 export const fetchPersonalInfo = () => dispatch => {
-    // TODO: connect with backend API
-    return Promise.resolve({
-        values: {
-            avatar: 'https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4',
-            age: 0,
-            constellation: ''
-        },
-        options: {
-            constellationOptions: [
-                "天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"
-            ]
-        }
-    }).then(
-        response => dispatch(receivePersonalInfo(response)),
-        err => console.log('implement certain error handling')
-    );
+    axios.get(requestUrl(PERSONAL_PROFILE_API), {withCredentials: true})
+        .then(response => {
+            let sex = '';
+            if (response.data.sex) {
+                if (response.data.sex === 1) {
+                    sex = '男';
+                } else if (response.data.sex === 2) {
+                    sex = '女';
+                }
+            }
+            dispatch(receivePersonalInfo({
+                avatar: response.data.avatarUrl? response.data.avatarUrl: '',
+                age: response.data.horoscope? response.data.age: 0,
+                constellation: response.data.horoscope? response.data.horoscope: '',
+                username: response.data.username? response.data.username: '',
+                sex: sex,
+                weChatId: response.data.weChatId? response.data.weChatId: '',
+            }));
+        }, err => {
+            // TODO: centralize error handling
+            dispatch(showInfoBar("获取找个人信息失败"));
+            if (err.response.data.error) {
+                console.log(err.response.data.error);
+            }
+        });
 };
 
 export const receiveMatchedUsers = (matchedUsers) => ({type: RECEIVE_MATCHED_USERS, matchedUsers});

@@ -3,8 +3,6 @@ export const INCREMENT = 'INCREMENT';
 /************************ global actions ************************/
 export const SHOW_INFO_BAR = 'SHOW_INFO_BAR';
 export const HIDE_INFO_BAR = 'HIDE_INFO_BAR';
-export const UPDATE_WECHAT_ID = 'UPDATE_WECHAT_ID';
-export const UPDATE_USERNAME = 'UPDATE_WECHAT_ID';
 
 /************************ profile actions ************************/
 // receiving
@@ -28,6 +26,7 @@ export const UPDATE_FRIENDS_VALUES = 'UPDATE_FRIENDS_VALUES';
 export const UPDATE_ROOMMATES_VALUES = 'UPDATE_ROOMMATES';
 export const UPDATE_PERSONAL_VALUES = 'UPDATE_PERSONAL_VALUES';
 export const UPDATE_AVATAR = 'UPDATE_AVATAR';
+export const UPDATE_WECHAT_ID = 'UPDATE_WECHAT_ID';
 // UI Actions
 // profile panels
 export const SHOW_PROFILE_MAIN = 'SHOW_PROFILE_MAIN';

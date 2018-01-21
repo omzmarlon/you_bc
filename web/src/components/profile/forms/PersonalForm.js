@@ -12,14 +12,20 @@ import AccountIcon from 'material-ui/svg-icons/action/account-circle';
 import WeChatIcon from "../../common/svg/WeChatIcon";
 import AgeIcon from 'material-ui/svg-icons/social/cake';
 import ConstellationIcon from 'material-ui/svg-icons/image/brightness-3';
+import MixGenderIcon from "../../common/svg/MixGenderIcon";
 //colors
 import {PRIMARY_GREEN} from "../../../styles/constants/colors";
+
+const sexOptions = ['男', '女'];
 
 class PersonalForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            username: '',
+            sex: '',
+
             weChatId: '',
             age: 0,
             constellation: '',
@@ -44,7 +50,9 @@ class PersonalForm extends React.Component {
         this.setState({
             weChatId: this.props.weChatId,
             age: this.props.personal.age,
-            constellation: this.props.personal.constellation
+            constellation: this.props.personal.constellation,
+            username: this.props.personal.username,
+            sex: this.props.personal.sex,
         });
     }
 
@@ -52,9 +60,21 @@ class PersonalForm extends React.Component {
         this.setState({weChatId: newValue})
     }
 
+    onUsernameChangeHandler(event, newValue) {
+        this.setState({
+            username: newValue
+        });
+    }
+
     onAgeChangeHandler(event, newValue) {
         this.setState({
             age: Number.parseInt(newValue)
+        });
+    }
+
+    onSexChangeHandler(event, menuItem, index) {
+        this.setState({
+            sex: sexOptions[index]
         });
     }
 
@@ -66,7 +86,12 @@ class PersonalForm extends React.Component {
 
     onDoneHandler() {
         if (this.state.weChatId && this.state.age && this.state.constellation) {
-            this.props.onDone(this.state);
+            this.props.onDone({
+                age: this.state.age,
+                constellation: this.state.constellation,
+                username: this.state.username,
+                sex: this.state.sex,
+            });
             this.props.onWeChatIdDone(this.state.weChatId);
             this.props.onClose();
         } else {
@@ -93,6 +118,22 @@ class PersonalForm extends React.Component {
                                errorText={this.showError(this.state.weChatId)}
                     />
                 }
+                <TextInput inputIcon={<AccountIcon color={PRIMARY_GREEN}/>}
+                           label={'昵称'}
+                           onChange={this.onUsernameChangeHandler.bind(this)}
+                           value={this.state.username}
+                           errorText={this.showError(this.state.username)}
+                />
+                <MenuInput inputIcon={<MixGenderIcon color={PRIMARY_GREEN}/>}
+                           label={'性别'}
+                           values={this.state.sex}
+                           onChange={this.onSexChangeHandler.bind(this)}
+                           options={sexOptions}
+                           textColor={'white'}
+                           tagDisplay={false}
+                           multiple={false}
+                           errorText={this.showError(this.state.sex)}
+                />
                 <TextInput inputIcon={<AgeIcon color={PRIMARY_GREEN} />}
                            label={'年龄'}
                            onChange={this.onAgeChangeHandler}
@@ -121,7 +162,9 @@ PersonalForm.propTypes = {
     // form values:
     personal: PropTypes.shape({
         age: PropTypes.number,
-        constellation: PropTypes.string
+        constellation: PropTypes.string,
+        username: PropTypes.string,
+        sex: PropTypes.string,
     }).isRequired,
     //options
     personalOptions: PropTypes.shape({

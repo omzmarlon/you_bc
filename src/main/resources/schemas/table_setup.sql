@@ -5,10 +5,11 @@ CREATE TABLE user (
 );
 
 # user verification table
-CREATE TABLE ubc_student_verification (
+CREATE TABLE student_verification (
   user_id VARCHAR(100) CHARACTER SET utf8 PRIMARY KEY,
   approved BOOLEAN NOT NULL,
   email VARCHAR(50) CHARACTER SET utf8,
+  emailVerificationCode VARCHAR(100) CHARACTER SET utf8,
   studentID_image_url TEXT,
   location_lat DECIMAL(11, 8),
   location_lon DECIMAL(11, 8),
@@ -20,7 +21,9 @@ CREATE TABLE ubc_student_verification (
 CREATE TABLE user_profile (
   user_id VARCHAR(100) CHARACTER SET utf8 PRIMARY KEY,
   age INT,
-  sex INT,
+  sex INT, # 用户的性别，值为1时是男性，值为2时是女性
+  wechatId VARCHAR(100) CHARACTER SET utf8,
+  username VARCHAR(50) CHARACTER SET utf8,
   horoscope VARCHAR(10),
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE

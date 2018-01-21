@@ -26,7 +26,6 @@ import com.youbc.models.profile.FriendsProfile;
 import com.youbc.models.profile.RoommatesProfile;
 import com.youbc.models.profile.UserProfile;
 import org.jooq.*;
-import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,29 +45,31 @@ public class ProfileDAO {
     }
 
     public Optional<UserProfile> fetchUserProfile(String userId) {
-        Record4<Integer, Integer, String, String> profile = dslContext
+        Record7<String, String, String, Integer, Integer, String, String> profile = dslContext
                 .select(
+                        USER_PROFILE.USER_ID,
+                        USER_PROFILE.WECHATID,
+                        USER_PROFILE.USERNAME,
                         USER_PROFILE.AGE,
                         USER_PROFILE.SEX,
-                        USER_PROFILE.HOROSCOPE,
-                        PROFILE_IMAGE.THUMBNAIL_IMAGE_URL
+                        PROFILE_IMAGE.THUMBNAIL_IMAGE_URL,
+                        USER_PROFILE.HOROSCOPE
                 )
                 .from(USER_PROFILE, PROFILE_IMAGE)
-                .where(
-                        USER_PROFILE.USER_ID.eq(userId)
-                        .and(PROFILE_IMAGE.USER_ID.eq(userId))
-                )
+                .where(USER_PROFILE.USER_ID.eq(userId).and(PROFILE_IMAGE.USER_ID.eq(userId)))
                 .fetchOne();
         return (profile == null) ?
                 Optional.empty() :
                 Optional.of(
                         new UserProfile(
-                                "name?", // todo: add name attribute
-                                profile.value1(),
-                                profile.value2(),
-                                profile.value4(),
-                                profile.value3(),
-                                0.8     // todo: add matchRate attribute
+                                profile.get(USER_PROFILE.USER_ID),
+                                profile.get(USER_PROFILE.WECHATID),
+                                profile.get(USER_PROFILE.USERNAME),
+                                profile.get(USER_PROFILE.AGE),
+                                profile.get(USER_PROFILE.SEX),
+                                profile.get(PROFILE_IMAGE.THUMBNAIL_IMAGE_URL),
+                                profile.get(USER_PROFILE.HOROSCOPE),
+                                0
                         )
                 );
     }
@@ -245,6 +246,20 @@ public class ProfileDAO {
                 .intoSet(FRIENDS_TAGS.TAG);
     }
 
+    public void fillPersonalProfile(String userID, String username, Integer age, Integer sex, String horoscope) {
+        // wechatId and avatar url are updated separately
+        if (!userDAO.userProfileExists(userID)) {
+            userDAO.initUserProfile(userID, username, String.valueOf(sex));
+        }
+        dslContext.update(USER_PROFILE)
+                .set(USER_PROFILE.USERNAME, username)
+                .set(USER_PROFILE.SEX, sex)
+                .set(USER_PROFILE.HOROSCOPE, horoscope)
+                .set(USER_PROFILE.AGE, age)
+                .where(USER_PROFILE.USER_ID.eq(userID))
+                .execute();
+    }
+
     public void fillClassmatesProfile(String userID, String major, Set<String> courses, String motto, Set<String> tags) {
         if (!userDAO.classmatesProfileExists(userID)) {
             userDAO.initClassmatesProfile(userID);
@@ -252,6 +267,7 @@ public class ProfileDAO {
         dslContext.update(CLASSMATES_PROFILE)
                 .set(CLASSMATES_PROFILE.MAJOR, major)
                 .set(CLASSMATES_PROFILE.MOTTO, motto)
+                .where(CLASSMATES_PROFILE.USER_ID.eq(userID))
                 .execute();
 
         dslContext.delete(CLASSMATES_PROFILE_COURSES)
@@ -283,6 +299,7 @@ public class ProfileDAO {
                 .set(ROOMMATES_PROFILE.LOCATION, location)
                 .set(ROOMMATES_PROFILE.HOMETOWN, hometown)
                 .set(ROOMMATES_PROFILE.MOTTO, motto)
+                .where(ROOMMATES_PROFILE.USER_ID.eq(userID))
                 .execute();
         dslContext.delete(ROOMMATES_PROFILE_TAGS)
                 .where(ROOMMATES_PROFILE_TAGS.USER_ID.eq(userID))
@@ -303,6 +320,7 @@ public class ProfileDAO {
                 .set(FRIENDS_PROFILE.FACULTY, faculty)
                 .set(FRIENDS_PROFILE.RELATIONSHIP, relationship)
                 .set(FRIENDS_PROFILE.MOTTO, motto)
+                .where(FRIENDS_PROFILE.USER_ID.eq(userID))
                 .execute();
         dslContext.delete(FRIENDS_PROFILE_TAGS)
                 .where(FRIENDS_PROFILE_TAGS.USER_ID.eq(userID))
@@ -313,6 +331,28 @@ public class ProfileDAO {
                         .set(FRIENDS_PROFILE_TAGS.TAG, tag)
                         .execute()
         );
+    }
+
+    public void updateProfileImageUrl(String userID, String imageUrl) {
+        dslContext.delete(PROFILE_IMAGE)
+                .where(PROFILE_IMAGE.USER_ID.eq(userID))
+                .execute();
+        dslContext.insertInto(PROFILE_IMAGE)
+                .set(PROFILE_IMAGE.ORIGINAL_IMAGE_URL, imageUrl)
+                .set(PROFILE_IMAGE.THUMBNAIL_IMAGE_URL, imageUrl)
+                .set(PROFILE_IMAGE.USER_ID, userID)
+                .execute();
+    }
+
+    public void updateWechatId(String userID, String wechatId) {
+        if (!userDAO.userProfileExists(userID)) {
+            // TODO: don't use null here
+            userDAO.initUserProfile(userID, null, null);
+        }
+        dslContext.update(USER_PROFILE)
+                .set(USER_PROFILE.WECHATID, wechatId)
+                .where(USER_PROFILE.USER_ID.eq(userID))
+                .execute();
     }
 
 }

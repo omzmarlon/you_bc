@@ -3,9 +3,11 @@ package com.youbc.controllers.protected_api;
 import com.youbc.database.ProfileDAO;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
+import com.youbc.generated.schema.tables.User;
 import com.youbc.models.profile.ClassmatesProfile;
 import com.youbc.models.profile.FriendsProfile;
 import com.youbc.models.profile.RoommatesProfile;
+import com.youbc.models.profile.UserProfile;
 import com.youbc.securities.services.CookieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,6 +61,44 @@ public class ProfileController {
                                 new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "Friends Profile Not Found")
                         )
                 );
+    }
+
+    @RequestMapping(path = "/api/profile/user", method = RequestMethod.GET)
+    public UserProfile getUserProfile(HttpServletRequest request) {
+        return profileDAO
+                .fetchUserProfile(cookieService.getAuthenticatedUserId(request))
+                .orElseThrow(
+                        () -> new YouBCException(
+                                new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "User Profile Not Found")
+                        )
+                );
+    }
+
+    @RequestMapping(path = "/api/profile/user", method = RequestMethod.PUT)
+    public String updateUserProfile(HttpServletRequest request, @RequestBody UserProfile userProfile) {
+        String userID = cookieService.getAuthenticatedUserId(request);
+        profileDAO.fillPersonalProfile(
+                userID,
+                userProfile.getUsername(),
+                userProfile.getAge(),
+                userProfile.getSex(),
+                userProfile.getHoroscope()
+        );
+        return userID;
+    }
+
+    @RequestMapping(path = "/api/profile/avatar", method = RequestMethod.PUT, consumes = "text/plain")
+    public String updateAvatarUrl(HttpServletRequest request, @RequestBody String avatarUrl) {
+        String userID = cookieService.getAuthenticatedUserId(request);
+        profileDAO.updateProfileImageUrl(userID, avatarUrl);
+        return userID;
+    }
+
+    @RequestMapping(path = "/api/profile/wechatId", method = RequestMethod.PUT, consumes = "text/plain")
+    public String updateWechatId(HttpServletRequest request, @RequestBody String wechatId) {
+        String userID = cookieService.getAuthenticatedUserId(request);
+        profileDAO.updateWechatId(userID, wechatId);
+        return userID;
     }
 
     @RequestMapping(path = "/api/profile/friends", method = RequestMethod.PUT)
