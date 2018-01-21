@@ -2,12 +2,16 @@ import * as ActionTypes from "../actionTypes";
 import axios from 'axios';
 import {LOGIN_API, requestUrl} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
+import {fetchVerification} from "./verificationActions";
 
 export const fetchAuthToken = code => dispatch => {
+
     dispatch(fetchAuthTokenRequest());
     axios.get(requestUrl(LOGIN_API)+`?auth=${code}`, {withCredentials: true})
         .then((response) => {
             dispatch(fetchAuthTokenComplete(200, "OK"));
+            // TODO: verification shouldn't be here
+            dispatch(fetchVerification());
         })
         .catch((err) => {
             dispatch(fetchAuthTokenComplete(401, err.response.data.message));

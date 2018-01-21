@@ -80,11 +80,10 @@ public class VerificationDAO {
             return new StudentVerification(
                     isApproved,
                     verification.get(STUDENT_VERIFICATION.EMAIL),
-                    verification.get(STUDENT_VERIFICATION.EMAILVERIFICATIONCODE),
                     verification.get(STUDENT_VERIFICATION.STUDENTID_IMAGE_URL) != null
             );
         } else {
-            return new StudentVerification(false, null, null, false);
+            return new StudentVerification(false, null, false);
         }
     }
 

@@ -44,3 +44,11 @@ export const WECHATID_API = "/api/profile/wechatId";
 // image upload
 export const UPLOAD_IMAGE_API = "/api/profileStorage/image";
 export const UPLOAD_IMAGE_EDIT_API = "/api/profileStorage/imageEdit";
+
+
+//Verification API
+export const VERIFICATION_INFO_API = "/api/verification/info";
+export const LOCATION_VERIFICATION_API = "/api/verification/location";
+export const STUDENT_CARD_VERIFICATION_API = "/api/verification/studentCard";
+export const EMAIL_VERIFICATION_API = "/api/verification/email";
+export const VERIFY_EMAIL_CODE_API = "/api/verification/emailCode";

@@ -3,16 +3,14 @@ package com.youbc.models.verification;
 public class StudentVerification {
     private Boolean approved;
     private String email;
-    private String emailVerificationCode;
     private Boolean studentCardUploaded;
 
 
     public StudentVerification() {}
 
-    public StudentVerification(Boolean approved, String email, String emailVerificationCode, Boolean studentCardUploaded) {
+    public StudentVerification(Boolean approved, String email, Boolean studentCardUploaded) {
         this.approved = approved;
         this.email = email;
-        this.emailVerificationCode = emailVerificationCode;
         this.studentCardUploaded = studentCardUploaded;
     }
 
@@ -38,13 +36,5 @@ public class StudentVerification {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEmailVerificationCode() {
-        return emailVerificationCode;
-    }
-
-    public void setEmailVerificationCode(String emailVerificationCode) {
-        this.emailVerificationCode = emailVerificationCode;
     }
 }

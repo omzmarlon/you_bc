@@ -4,6 +4,7 @@ import {
 } from "../../actions/actionTypes";
 
 const initial = {
+    // TODO: do we need so many booleans?
     isLocationVerified: false,
     isStudentCardVerified: false,
     studentCardUrl: '', // TODO: not needed if we don't want to display student card in frontend
