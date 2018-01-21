@@ -52,3 +52,8 @@ export const LOCATION_VERIFICATION_API = "/api/verification/location";
 export const STUDENT_CARD_VERIFICATION_API = "/api/verification/studentCard";
 export const EMAIL_VERIFICATION_API = "/api/verification/email";
 export const VERIFY_EMAIL_CODE_API = "/api/verification/emailCode";
+
+// mainList API
+export const FETCH_CLASSMATES_API = "/api/classmates";
+export const FETCH_FRIENDS_API = "/api/friends";
+export const FETCH_ROOMMATES_API = "/api/roommates";

@@ -37,7 +37,7 @@ public class UserPoolManager {
                 return 1;
             case "female":
                 return 2;
-            case "mixed":
+            case "mix":
                 return 0;
             default:
                 return 0;

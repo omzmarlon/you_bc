@@ -26,8 +26,8 @@ public class ClassmatesController {
         this.cookieService = cookieService;
         // init userPoolManager
         ArrayList<WeightedStrategy> strategies = new ArrayList<>();
-        strategies.add(new WeightedStrategy(poolingRandomClassmates, 0.3));
-        strategies.add(new WeightedStrategy(poolingByLikesClassmates, 0.7));
+        strategies.add(new WeightedStrategy(poolingRandomClassmates, 0.7));
+        strategies.add(new WeightedStrategy(poolingByLikesClassmates, 0.3));
         userPoolManager = new UserPoolManager(strategies);
     }
 
@@ -37,7 +37,7 @@ public class ClassmatesController {
         String gender = request.getParameter("gender");
         String userID = cookieService.getAuthenticatedUserId(request);
         if (amount <= 0) throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "missing parameter", "\'amount\' value is missing in the query string"));
-        if (gender == null) gender = "mixed";
+        if (gender == null) gender = "mix";
         return userPoolManager.poolUsers(userID, amount, gender);
     }
 
