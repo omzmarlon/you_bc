@@ -33,7 +33,7 @@ class RoommateContainer extends Component {
     }
 
     onUserSwiped(index, deltaX) {
-        const { dispatch, hasInfo } = this.props;
+        const { dispatch, hasInfo, genderFilter } = this.props;
         let targetUser = this.props.visibleUsers[index];
         if (!hasInfo) {
             this.setState({showMissingInfoModal: true});
@@ -45,7 +45,7 @@ class RoommateContainer extends Component {
              4. make a new request fetch one more user and add to candidates
              */
             dispatch(updateVisibleUsersAndCandidates(index));
-            dispatch(fetchMoreCandidate(1));
+            dispatch(fetchMoreCandidate(1, genderFilter));
             (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
         }
     }
@@ -91,6 +91,7 @@ const mapStateToProps = state => ({
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
     hasInfo: !(state.profile.roommates.values.hometown === ""),
+    genderFilter: state.mainList.genderFilter,
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
     &&

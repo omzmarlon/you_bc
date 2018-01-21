@@ -57,7 +57,7 @@ export const fetchMoreCandidate = (quantity, gender) => dispatch => {
             },
             // todo: error handling
             error => {
-
+                dispatch(fetchCandidatesFailure());
             }
         )
 };

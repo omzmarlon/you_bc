@@ -2,92 +2,8 @@
 
 import * as ActionTypes from '../actionTypes';
 import {showInfoBar} from "../global/globalActions";
-// assets
-import avatar1 from '../../../public/images/us_03.png'
-import avatar2 from '../../../public/images/us_06.png'
-import avatar3 from '../../../public/images/us_08.png'
-import avatar4 from '../../../public/images/us_10.png'
-import avatar5 from '../../../public/images/us_12.png'
-
-const mockAPICall = quantity => {
-    return new Promise((fulfill, reject) => {
-        setTimeout(() => {
-            if (quantity === 1) {
-                fulfill({
-                    mockData: [
-                        // {
-                        //     avatar: avatar5,
-                        //     name: '北京烤鸭',
-                        //     gender: 'female',
-                        //     age: 20,
-                        //     constellation: '处女座',
-                        //     address: 'Vancouver',
-                        //     country: '中国',
-                        //     city: '重庆',
-                        //     motto: '人生就是不停的吃吃喝喝',
-                        //     hobbies: ['跑步', '音乐', '登山']
-                        // }
-                    ]
-                });
-            } else {
-                fulfill({
-                    mockData: [
-                        {
-                            avatar: avatar4,
-                            name: '红烧肉',
-                            gender: 'female',
-                            age: 20,
-                            constellation: '处女座',
-                            address: 'Vancouver',
-                            country: '中国',
-                            city: '重庆',
-                            motto: '人生就是不停的吃吃喝喝',
-                            hobbies: ['跑步', '音乐', '登山']
-                        },
-                        {
-                            avatar: avatar1,
-                            name: '驴打滚',
-                            gender: 'female',
-                            age: 23,
-                            constellation: '天蝎座',
-                            matchRate: 0.8,
-                            address: 'West Vancouver',
-                            country: '中国',
-                            city: '华西村',
-                            motto: '人生就是不停的吃吃喝喝',
-                            hobbies: ['跑步', '音乐', '登山']
-                        },
-                        {
-                            avatar: avatar2,
-                            name: '艾窝窝',
-                            gender: 'male',
-                            age: 23,
-                            constellation: '天蝎座',
-                            address: 'Richmond',
-                            country: '中国',
-                            city: '北京',
-                            motto: '人生就是不停的吃吃喝喝',
-                            hobbies: ['跑步', '音乐', '登山']
-                        },
-                        {
-                            avatar: avatar3,
-                            name: '麻花',
-                            gender: 'male',
-                            age: 23,
-                            constellation: '天蝎座',
-                            matchRate: 0.8,
-                            address: 'UBC',
-                            country: '中国',
-                            city: '三里屯',
-                            motto: '人生就是不停的吃吃喝喝',
-                            hobbies: ['跑步', '音乐', '登山']
-                        }
-                    ]
-                });
-            }
-        }, 500);
-    });
-};
+import axios from 'axios';
+import {FETCH_ROOMMATES_API, requestUrl} from "../../constants/api";
 
 const mockPostAPI = () => {
     return new Promise((fulfill, reject) => {
@@ -102,10 +18,12 @@ const mockPostAPI = () => {
  */
 export const fetchCandidates = (quantity, gender = 'mix') => dispatch => {
     dispatch(fetchCandidatesRequest(gender));
-    mockAPICall(quantity, gender)
+    let url = requestUrl(FETCH_ROOMMATES_API) + `?amount=${quantity}&gender=${gender}`;
+    axios.get(url, {withCredentials: true})
         .then(
             response => {
-                dispatch(fetchCandidatesSuccess(response.mockData));
+                let candidates = response.data.map(populateRoommateData);
+                dispatch(fetchCandidatesSuccess(candidates));
                 dispatch(initVisibleUsers());
             },
             // todo: error handling
@@ -126,16 +44,22 @@ const fetchCandidatesFailure = () => ({ type: ActionTypes.FETCH_CANDIDATES_FAILU
  * fetch one more user (Async Action)
  * @param quantity
  */
-export const fetchMoreCandidate = (quantity) => dispatch => {
-    mockAPICall(quantity)
+export const fetchMoreCandidate = (quantity, gender) => dispatch => {
+    let url = requestUrl(FETCH_ROOMMATES_API) + `?amount=${quantity}&gender=${gender}`;
+    axios.get(url, {withCredentials: true})
         .then(
-            response => dispatch(fetchCandidatesSuccess(response.mockData)),
+            response => {
+                let candidates = response.data.map(populateRoommateData);
+                dispatch(receiveMoreCandidates(candidates))
+            },
             // todo: error handling
             error => {
                 dispatch(fetchCandidatesFailure());
             }
         )
 };
+
+const receiveMoreCandidates = candidates => ({ type: ActionTypes.RECEIVE_MORE_CANDIDATES, candidates });
 
 /**
  * like candidate (Not action)
@@ -171,3 +95,35 @@ export const updateVisibleUsersAndCandidates = (index) => ({ type: ActionTypes.U
  * initialize the three visible users (Sync Action)
  */
 const initVisibleUsers = () => ({ type: ActionTypes.INITIALIZE_VISIBLE_USERS });
+
+/**
+ * helper function (populate data to fit in front end data structure)
+ * @param responseJson
+ * @returns {{avatar: *, name, gender: string, age: (number|*), constellation: (string|string|*|string), matchRate: *, address, country: (string|*), city: (string|*), motto, hobbies}}
+ */
+const populateRoommateData = (responseJson) => {
+    let gender = '';
+    switch (responseJson.sex) {
+        case 1:
+            gender = 'male';
+            break;
+        case 2:
+            gender = 'female';
+            break;
+        default:
+            gender = null;
+    }
+    return {
+        avatar: responseJson.avatarUrl,
+        name: responseJson.name,
+        gender: gender,
+        age: responseJson.age,
+        constellation: responseJson.constellation,
+        matchRate: responseJson.matchRate + 0.01, // todo: UI doesn't work with 0
+        address: responseJson.location,
+        country: responseJson.hometown,
+        city: responseJson.hometown,
+        motto: responseJson.motto,
+        hobbies: responseJson.tags
+    }
+};
