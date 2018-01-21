@@ -22,8 +22,8 @@ public class PoolingRandomClassmates extends PoolingClassmates implements Poolin
         this.userPoolStrategyDAO = userPoolStrategyDAO;
     }
 
-    public Set<BasicCandidate> poolUsers(int amount, Set<String> except) {
-        List<String> candidateIDs = userPoolStrategyDAO.fetchRandomClassmates(amount, except);
+    public Set<BasicCandidate> poolUsers(String userId, Integer amount, Integer gender, Set<String> except) {
+        List<String> candidateIDs = userPoolStrategyDAO.fetchRandomClassmates(userId, amount, gender, except);
         return populateToClassmates(candidateIDs);
     }
 }
