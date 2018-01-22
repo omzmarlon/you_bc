@@ -8,4 +8,10 @@ public class Endpoints {
     public final static String CLASSMATE_CANDIDATES = "/api/classmates";
     public final static String FRIEND_CANDIDATES = "/api/friends";
     public final static String ROOMMATE_CANDIDATES = "/api/roommates";
+    public final static String LIKE_CLASSMATES = "/api/classmates/{user_id}/likes";
+    public final static String DISLIKE_CLASSMATES = "/api/classmates/{user_id}/dislikes";
+    public final static String LIKE_FRIENDS = "/api/friends/{user_id}/likes";
+    public final static String DISLIKE_FRIENDS = "/api/friends/{user_id}/dislikes";
+    public final static String LIKE_ROOMMATES = "/api/roommates/{user_id}/likes";
+    public final static String DISLIKE_ROOMMATES = "/api/roommates/{user_id}/dislikes";
 }
