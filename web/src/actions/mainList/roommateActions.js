@@ -116,6 +116,7 @@ const populateRoommateData = (responseJson) => {
             gender = null;
     }
     return {
+        userId: responseJson.userId,
         avatar: responseJson.avatarUrl,
         name: responseJson.name,
         gender: gender,
