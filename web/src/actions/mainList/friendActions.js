@@ -116,7 +116,7 @@ const populateFriendData = (responseJson) => {
             gender = null;
     }
     return {
-        userId: userId,
+        userId: responseJson.userId,
         avatar: responseJson.avatarUrl,
         name: responseJson.name,
         gender: gender,

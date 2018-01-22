@@ -14,4 +14,5 @@ public class Endpoints {
     public final static String DISLIKE_FRIENDS = "/api/friends/{user_id}/dislikes";
     public final static String LIKE_ROOMMATES = "/api/roommates/{user_id}/likes";
     public final static String DISLIKE_ROOMMATES = "/api/roommates/{user_id}/dislikes";
+    public final static String MATCHED_USERS = "/api/profile/matchedUsers";
 }
