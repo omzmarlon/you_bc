@@ -111,16 +111,15 @@ export const receiveMatchedUsers = (matchedUsers) => ({type: RECEIVE_MATCHED_USE
 export const fetchMatchedUsers = () => dispatch => {
     axios.get(requestUrl(MATCHED_USERS_API), {withCredentials: true}).then(
         response => {
-            dispatch(receiveMatchedUsers(
-                {
-                    avatarURL: response.data.avatarURL,
-                    username: response.data.name,
-                    weChatId: response.data.weChatId,
-                    matchedAtClassmates: response.data.matchedAtClassmates,
-                    matchedAtRoommates: response.data.matchedAtRoommates,
-                    matchedAtFriends: response.data.matchedAtFriends,
-                }
-            ));
+            let users = response.data.map(data => ({
+                avatarURL: data.avatarURL,
+                username: data.name,
+                weChatId: data.weChatId,
+                matchedAtClassmates: data.matchedAtClassmates,
+                matchedAtRoommates: data.matchedAtRoommates,
+                matchedAtFriends: data.matchedAtFriends
+            }));
+            dispatch(receiveMatchedUsers(users));
         },
         err => {
             // TODO: centralize error handling
