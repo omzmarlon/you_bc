@@ -30,7 +30,9 @@ class AuthFacade extends Component {
     }
 
     componentDidMount() {
-        this.login();
+        if (!this.props.isAuthenticated) {
+            this.login();
+        }
     }
 
     render() {
