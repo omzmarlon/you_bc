@@ -2,7 +2,6 @@ package com.youbc.controllers.protected_api;
 
 import com.youbc.database.MatchedUsersDAO;
 import com.youbc.database.ProfileDAO;
-import com.youbc.database.UserDAO;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import com.youbc.models.MatchedUser;
@@ -38,10 +37,10 @@ public class MatchedUsersController {
         Set<MatchedUser> response = new HashSet<>();
         String userId = cookieService.getAuthenticatedUserId(request);
         Set<String> matchedUsers = matchedUsersDAO.fetchAllMatchedUsers(userId);
-        UserProfile userProfile = profileDAO.fetchUserProfile(userId)
-                .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "no user found", "no user found")));
 
         for(String theOther : matchedUsers) {
+            UserProfile userProfile = profileDAO.fetchUserProfile(theOther)
+                    .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "no user found", "no user found")));
             response.add(new MatchedUser(
                     userProfile.getAvatarUrl(),
                     userProfile.getUsername(),
