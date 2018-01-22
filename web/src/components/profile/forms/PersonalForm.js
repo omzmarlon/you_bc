@@ -112,10 +112,10 @@ class PersonalForm extends React.Component {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'form-input-field'}
                                inputIcon={<WeChatIcon color={PRIMARY_GREEN} />}
-                               label={'微信号'}
+                               label={'微信号(必填)'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
-                               errorText={this.showError(this.state.weChatId)}
+                               errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
                     />
                 }
                 <TextInput inputIcon={<AccountIcon color={PRIMARY_GREEN}/>}

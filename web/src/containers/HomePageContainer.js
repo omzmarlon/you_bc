@@ -1,6 +1,7 @@
 'use strict';
 // libs
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 // styles
 import './HomePageContainer.less';
@@ -20,6 +21,10 @@ import WaveIcon from "../components/common/svg/WaveIcon";
 import CannonIcon from "../components/common/svg/CannonIcon";
 import BasketballIcon from "../components/common/svg/BasketballIcon";
 import FoodIcon from "../components/common/svg/FoodIcon";
+import {
+    fetchClassmatesInfo, fetchFriendsInfo, fetchMatchedUsers, fetchPersonalInfo,
+    fetchRoommatesInfo
+} from "../actions/profile/profileFetchActions";
 
 const rollingIconStyle = {
     color: PRIMARY_WHITE,
@@ -37,6 +42,18 @@ const friendRollingIcon = [
 ];
 
 class HomePageContainer extends Component {
+
+    componentDidMount() {
+        const { store } = this.context;
+        // todo: call these so that users info are fetch(instead of waiting until going to profile page)
+        // todo: but do we need a loading component?
+        store.dispatch(fetchClassmatesInfo());
+        store.dispatch(fetchFriendsInfo());
+        store.dispatch(fetchRoommatesInfo());
+        store.dispatch(fetchPersonalInfo());
+        store.dispatch(fetchMatchedUsers());
+    }
+
     render() {
         const friendDisplayName = (
             <div className="friend-display-name">
@@ -64,5 +81,9 @@ class HomePageContainer extends Component {
         )
     }
 }
+
+HomePageContainer.contextTypes = {
+    store: PropTypes.object
+};
 
 export default HomePageContainer;

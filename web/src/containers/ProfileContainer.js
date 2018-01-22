@@ -44,6 +44,12 @@ class ProfileContainer extends React.Component {
         store.dispatch(fetchFriendsTags());
     }
 
+    onTabMatching() {
+        const { store } = this.context;
+        this.props.onTabMatching();
+        store.dispatch(fetchMatchedUsers());
+    }
+
     render() {
         if (this.props.grantAccess) {
             return (
@@ -52,7 +58,7 @@ class ProfileContainer extends React.Component {
                     <div className={'profile-container'} style={{overflow: 'scroll', height: '100%'}}>
                         { this.props.panelIndex === 0 && <ProfileMain /> }
                         { this.props.panelIndex === 1 && <MatchingList /> }
-                        <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.props.onTabMatching} />
+                        <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.onTabMatching.bind(this)} />
                     </div>
                 </div>
             );

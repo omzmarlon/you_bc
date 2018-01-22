@@ -25,7 +25,7 @@ export const fetchClassmatesInfo = () => dispatch => {
             }))
         }).catch( err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("未填写找课友信息"));
+            //dispatch(showInfoBar("未填写找课友信息"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -46,7 +46,7 @@ export const fetchRoommatesInfo = () => dispatch => {
             }))
         }).catch( err => {
         // TODO: centralize error handling
-            dispatch(showInfoBar("未填写找室友信息"));
+            //dispatch(showInfoBar("未填写找室友信息"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -67,7 +67,7 @@ export const fetchFriendsInfo = () => dispatch => {
             }));
         }).catch( err => {
         // TODO: centralize error handling
-        dispatch(showInfoBar("未填写找X友信息"));
+        //dispatch(showInfoBar("未填写找X友信息"));
         if (err.response.data.error) {
             console.log(err.response.data.error);
         }
