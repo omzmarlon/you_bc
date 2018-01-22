@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import {PRIMARY_GREEN} from "../../../styles/constants/colors";
 //icons
 import FaceIcon from 'material-ui/svg-icons/action/face';
-import Progress from 'material-ui/CircularProgress';
 //components
 import ModalForm from "../../common/form/ModalForm";
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import Progress from 'material-ui/CircularProgress';
 // redux
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';

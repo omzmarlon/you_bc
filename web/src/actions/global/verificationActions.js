@@ -4,7 +4,7 @@ import {
 } from "../actionTypes";
 
 import axios from 'axios';
-import {requestUrl, VERIFICATION_INFO_API} from "../../constants/api";
+import {LOCATION_VERIFICATION_API, requestUrl, VERIFICATION_INFO_API} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 
 export const receiveVerification = (verification) => ({type: RECEIVE_VERIFICATION, verification});
@@ -47,9 +47,17 @@ export const updateEmail = (email) => ({type: UPDATE_EMAIL, email});
 export const verifyLocation = () => ({type: VERIFY_LOCATION});
 
 export const postVerifyLocation = () => dispatch => {
-    return Promise.resolve().then(
-        res => dispatch(verifyLocation()),
-        err => console.log('implement certain error handling')
+    axios.post(requestUrl(LOCATION_VERIFICATION_API), {}, {withCredentials: true}).then(
+        response => {
+            dispatch(verifyLocation());
+        },
+        err => {
+            // TODO: centralize error handling
+            dispatch(showInfoBar("认证地点失败, 请回到UBC后重新登陆"));
+            if (err.response.data.error) {
+                console.log(err.response.data.error);
+            }
+        }
     );
 };
 
