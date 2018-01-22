@@ -24,7 +24,7 @@ CREATE TABLE user_profile (
   sex INT, # 用户的性别，值为1时是男性，值为2时是女性
   wechatId VARCHAR(100) CHARACTER SET utf8,
   username VARCHAR(50) CHARACTER SET utf8,
-  horoscope VARCHAR(10),
+  horoscope VARCHAR(10) CHARACTER SET utf8,
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );

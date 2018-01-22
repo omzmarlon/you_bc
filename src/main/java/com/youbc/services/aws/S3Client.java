@@ -21,7 +21,8 @@ public class S3Client {
 
     public S3Client(String s3EndpointUrl, String accessKey, String secretKey, String bucketName) {
         this.bucketName = bucketName;
-        this.bucketFullUrl = "http://" + this.bucketName + "." + s3EndpointUrl;
+        //TODO make protocol configurable
+        this.bucketFullUrl = "https://" + this.bucketName + "." + s3EndpointUrl;
         this.amazonS3 = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
     }
 
