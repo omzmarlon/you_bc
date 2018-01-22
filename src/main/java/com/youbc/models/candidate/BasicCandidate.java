@@ -4,14 +4,14 @@ public abstract class BasicCandidate {
     private String userId;
     private String name;
     private String avatarUrl;
-    private int sex;
-    private int age;
+    private Integer sex;
+    private Integer age;
     private String horoscope;
     private double matchRate;
 
     public BasicCandidate() {}
 
-    public BasicCandidate(String userId, String name, String avatarUrl, int sex, int age, String horoscope, double matchRate) {
+    public BasicCandidate(String userId, String name, String avatarUrl, Integer sex, Integer age, String horoscope, double matchRate) {
         this.userId = userId;
         this.name = name;
         this.avatarUrl = avatarUrl;
@@ -31,11 +31,11 @@ public abstract class BasicCandidate {
         return avatarUrl;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
