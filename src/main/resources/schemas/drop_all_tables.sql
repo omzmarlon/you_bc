@@ -22,5 +22,5 @@ DROP TABLE roommates_hometown;
 DROP TABLE roommates_locations;
 DROP TABLE profile_image;
 DROP TABLE user_profile;
-DROP TABLE ubc_student_verification;
+DROP TABLE student_verification;
 DROP TABLE user;

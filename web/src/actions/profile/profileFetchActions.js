@@ -4,7 +4,7 @@ import {
 } from "../actionTypes";
 import axios from 'axios';
 import {
-    CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, PERSONAL_PROFILE_API, requestUrl,
+    CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, MATCHED_USERS_API, PERSONAL_PROFILE_API, requestUrl,
     ROOMMATES_PROFILE_API
 } from "../../constants/api";
 import {showInfoBar} from "../global/globalActions";
@@ -25,7 +25,7 @@ export const fetchClassmatesInfo = () => dispatch => {
             }))
         }).catch( err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("获取找课友信息失败"));
+            dispatch(showInfoBar("未填写找课友信息"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -46,7 +46,7 @@ export const fetchRoommatesInfo = () => dispatch => {
             }))
         }).catch( err => {
         // TODO: centralize error handling
-            dispatch(showInfoBar("获取找室友信息失败"));
+            dispatch(showInfoBar("未填写找室友信息"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -67,7 +67,7 @@ export const fetchFriendsInfo = () => dispatch => {
             }));
         }).catch( err => {
         // TODO: centralize error handling
-        dispatch(showInfoBar("获取找X友信息失败"));
+        dispatch(showInfoBar("未填写找X友信息"));
         if (err.response.data.error) {
             console.log(err.response.data.error);
         }
@@ -109,27 +109,26 @@ export const receiveMatchedUsers = (matchedUsers) => ({type: RECEIVE_MATCHED_USE
 
 // fetch matched users
 export const fetchMatchedUsers = () => dispatch => {
-    // TODO: connect with backend API
-    return Promise.resolve([
-        {
-            avatarURL: 'https://avatars0.githubusercontent.com/u/13238492?s=400&u=7716e4db99ffa98e20544d42520538a0a1f9cb79&v=4',
-            username: 'omzmarlon',
-            weChatId: 'omzmarlon',
-            matchedAtClassmates: true,
-            matchedAtRoommates: false,
-            matchedAtFriends: true,
+    axios.get(requestUrl(MATCHED_USERS_API), {withCredentials: true}).then(
+        response => {
+            dispatch(receiveMatchedUsers(
+                {
+                    avatarURL: response.data.avatarURL,
+                    username: response.data.name,
+                    weChatId: response.data.weChatId,
+                    matchedAtClassmates: response.data.matchedAtClassmates,
+                    matchedAtRoommates: response.data.matchedAtRoommates,
+                    matchedAtFriends: response.data.matchedAtFriends,
+                }
+            ));
         },
-        {
-            avatarURL: 'https://avatars3.githubusercontent.com/u/15700985?s=460&v=4',
-            username: 'tomyang',
-            weChatId: 'studentom',
-            matchedAtClassmates: true,
-            matchedAtRoommates: true,
-            matchedAtFriends: true,
+        err => {
+            // TODO: centralize error handling
+            dispatch(showInfoBar("获取已匹配信息失败"));
+            if (err.response.data.error) {
+                console.log(err.response.data.error);
+            }
         }
-    ]).then(
-        response => dispatch(receiveMatchedUsers(response)),
-        err => console.log('implement certain error handling')
     );
 };
 

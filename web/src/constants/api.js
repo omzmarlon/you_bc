@@ -40,6 +40,7 @@ export const FRIENDS_PROFILE_API = "/api/profile/friends";
 export const PERSONAL_PROFILE_API = "/api/profile/user";
 export const AVATAR_API = "/api/profile/avatar";
 export const WECHATID_API = "/api/profile/wechatId";
+export const MATCHED_USERS_API = "/api/profile/matchedUsers";
 
 // image upload
 export const UPLOAD_IMAGE_API = "/api/profileStorage/image";
