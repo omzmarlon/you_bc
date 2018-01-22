@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,5 +39,15 @@ public class DemoController {
     @RequestMapping(path = "/exception")
     public String testException() {
         throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "demo", "demo exception"));
+    }
+
+    @RequestMapping(path = "/testVoid", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void testReturnNoting() {
+        if (false) {
+            System.out.println("success");
+        } else {
+            throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "demo", "demo exception"));
+        }
     }
 }

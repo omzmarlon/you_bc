@@ -6,7 +6,7 @@
 import * as ActionTypes from '../actionTypes';
 import {showInfoBar} from "../global/globalActions";
 import axios from 'axios';
-import {FETCH_CLASSMATES_API, requestUrl} from "../../constants/api";
+import {DISLIKE_CLASSMATES_API, FETCH_CLASSMATES_API, LIKE_CLASSMATES_API, requestUrl} from "../../constants/api";
 
 const mockPostAPI = () => {
     return new Promise((fulfill, reject) => {
@@ -66,25 +66,27 @@ const receiveMoreCandidates = candidates => ({ type: ActionTypes.RECEIVE_MORE_CA
 
 /**
  * like candidate (Not action)
- * @param user
+ * @param userId
  */
-export const likeCandidate = (user) => {
-    mockPostAPI()
+export const likeCandidate = (userId) => {
+    let url = requestUrl(LIKE_CLASSMATES_API(userId));
+    axios.post(url, {}, {withCredentials: true})
         .then(
-            res => console.log(res),
-            error => showInfoBar(error)
+            response => console.log("liked!"),
+            error => showInfoBar(error.message)
         )
 };
 
 /**
  * dislike candidate (Not action)
- * @param user
+ * @param userId
  */
-export const dislikeCandidate = (user) => {
-    mockPostAPI()
+export const dislikeCandidate = (userId) => {
+    let url = requestUrl(DISLIKE_CLASSMATES_API(userId));
+    axios.post(url, {}, {withCredentials: true})
         .then(
-            res => console.log("dis" + res),
-            error => showInfoBar(error)
+            response => console.log("dislike!"),
+            error => showInfoBar(error.message)
         )
 };
 
@@ -117,6 +119,7 @@ const populateClassmateData = (responseJson) => {
             gender = null;
     }
     return {
+        userId: responseJson.userId,
         avatar: responseJson.avatarUrl,
         name: responseJson.name,
         gender: gender,

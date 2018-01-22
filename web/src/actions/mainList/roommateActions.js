@@ -1,9 +1,14 @@
+/**
+ * fetch data (Async Action)
+ * @param quantity
+ * @param gender (default = mix)
+ */
 'use strict';
 
 import * as ActionTypes from '../actionTypes';
 import {showInfoBar} from "../global/globalActions";
 import axios from 'axios';
-import {FETCH_ROOMMATES_API, requestUrl} from "../../constants/api";
+import {DISLIKE_ROOMMATES_API, FETCH_ROOMMATES_API, LIKE_ROOMMATES_API, requestUrl} from "../../constants/api";
 
 const mockPostAPI = () => {
     return new Promise((fulfill, reject) => {
@@ -11,11 +16,6 @@ const mockPostAPI = () => {
     });
 };
 
-/**
- * fetch data (Async Action)
- * @param quantity
- * @param gender (default = mix)
- */
 export const fetchCandidates = (quantity, gender = 'mix') => dispatch => {
     dispatch(fetchCandidatesRequest(gender));
     let url = requestUrl(FETCH_ROOMMATES_API) + `?amount=${quantity}&gender=${gender}`;
@@ -63,25 +63,27 @@ const receiveMoreCandidates = candidates => ({ type: ActionTypes.RECEIVE_MORE_CA
 
 /**
  * like candidate (Not action)
- * @param user
+ * @param userId
  */
-export const likeCandidate = (user) => {
-    mockPostAPI()
+export const likeCandidate = (userId) => {
+    let url = requestUrl(LIKE_ROOMMATES_API(userId));
+    axios.post(url, {}, {withCredentials: true})
         .then(
-            res => console.log(res),
-            error => showInfoBar(error)
+            response => console.log("Liked!"),
+            error => showInfoBar(error.message)
         )
 };
 
 /**
  * dislike candidate (Not action)
- * @param user
+ * @param userId
  */
-export const dislikeCandidate = (user) => {
-    mockPostAPI()
+export const dislikeCandidate = (userId) => {
+    let url = requestUrl(DISLIKE_ROOMMATES_API(userId));
+    axios.post(url, {}, {withCredentials: true})
         .then(
-            res => console.log("dis" + res),
-            error => showInfoBar(error)
+            response => console.log("disliked!"),
+            error => showInfoBar(error.message)
         )
 };
 
@@ -114,6 +116,7 @@ const populateRoommateData = (responseJson) => {
             gender = null;
     }
     return {
+        userId: responseJson.userId,
         avatar: responseJson.avatarUrl,
         name: responseJson.name,
         gender: gender,

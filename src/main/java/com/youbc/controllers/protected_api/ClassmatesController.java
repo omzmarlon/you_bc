@@ -1,5 +1,6 @@
 package com.youbc.controllers.protected_api;
 
+import com.youbc.database.LikeAndDislikeDao;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import com.youbc.models.candidate.BasicCandidate;
@@ -21,9 +22,16 @@ public class ClassmatesController {
 
     private UserPoolManager userPoolManager;
     private CookieService cookieService;
+    private LikeAndDislikeDao likeAndDislikeDao;
 
-    public ClassmatesController(CookieService cookieService, PoolingRandomClassmates poolingRandomClassmates, PoolingByLikesClassmates poolingByLikesClassmates) {
+    public ClassmatesController(
+            CookieService cookieService,
+            PoolingRandomClassmates poolingRandomClassmates,
+            PoolingByLikesClassmates poolingByLikesClassmates,
+            LikeAndDislikeDao likeAndDislikeDao
+    ) {
         this.cookieService = cookieService;
+        this.likeAndDislikeDao = likeAndDislikeDao;
         // init userPoolManager
         ArrayList<WeightedStrategy> strategies = new ArrayList<>();
         strategies.add(new WeightedStrategy(poolingRandomClassmates, 0.7));
@@ -41,4 +49,17 @@ public class ClassmatesController {
         return userPoolManager.poolUsers(userID, amount, gender);
     }
 
+    @RequestMapping(path = Endpoints.LIKE_CLASSMATES, method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void postLikeClassmates(HttpServletRequest request, @PathVariable("user_id") String likee) {
+        String liker = cookieService.getAuthenticatedUserId(request);
+        likeAndDislikeDao.classmatesLike(liker, likee);
+    }
+
+    @RequestMapping(path = Endpoints.DISLIKE_CLASSMATES, method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void postDislikeClassmates(HttpServletRequest request, @PathVariable("user_id") String dislikee) {
+        String disliker = cookieService.getAuthenticatedUserId(request);
+        likeAndDislikeDao.classmatesDislike(disliker, dislikee);
+    }
 }

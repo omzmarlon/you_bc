@@ -47,7 +47,7 @@ class ClassmateContainer extends Component {
              */
             dispatch(updateVisibleUsersAndCandidates(index));
             dispatch(fetchMoreCandidate(1, genderFilter));
-            (deltaX < 0) ? likeCandidate(targetUser) : dislikeCandidate(targetUser);
+            (deltaX < 0) ? likeCandidate(targetUser.userId) : dislikeCandidate(targetUser.userId);
         }
     }
 
