@@ -81,7 +81,10 @@ class MainListTemplate extends Component {
 }
 
 MainListTemplate.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element
+    ]).isRequired,
     themeColor: PropTypes.string.isRequired,
     subThemeColor: PropTypes.string.isRequired,
     userList: PropTypes.arrayOf(PropTypes.object).isRequired,

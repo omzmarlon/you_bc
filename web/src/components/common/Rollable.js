@@ -38,7 +38,7 @@ class Rollable extends Component {
     render() {
         let style = classNames('rollable-container', {[this.props.className]: true});
         return (
-            <div className={style} style={{width: this.props.width, height: this.props.height}}>
+            <div className={style} style={{...this.props.style, width: 36, height: 36}}>
                 <TransitionGroup>
                     <CSSTransition key={this.state.currentIndex} classNames="roller" timeout={800}>
                         <div>{this.props.rollingItems[this.state.currentIndex]}</div>
@@ -50,17 +50,15 @@ class Rollable extends Component {
 }
 
 Rollable.propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
     className: PropTypes.string,
+    style: PropTypes.object,
     rollingItems: PropTypes.arrayOf(PropTypes.element).isRequired,
     rollingInterval: PropTypes.number.isRequired
 };
 
 Rollable.defaultProps = {
-    width: 36,
-    height: 36,
-    className: ''
+    className: '',
+    style: {}
 };
 
 export default Rollable;

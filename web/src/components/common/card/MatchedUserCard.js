@@ -55,7 +55,7 @@ class MatchedUserCard extends React.Component {
                             }
                             {
                                 this.props.matchedAtFriends &&
-                                <Tag classNames={'--tag'} text={'找_友'} bkgColor={PRIMARY_YELLOW} textColor={SECONDARY_YELLOW}/>
+                                <Tag classNames={'--tag'} text={'找朋友'} bkgColor={PRIMARY_YELLOW} textColor={SECONDARY_YELLOW}/>
                             }
                             {
                                 this.props.matchedAtRoommates &&

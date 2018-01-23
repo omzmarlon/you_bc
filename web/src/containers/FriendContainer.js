@@ -16,6 +16,20 @@ import {
 import { PRIMARY_YELLOW, SECONDARY_YELLOW } from "../styles/constants/colors";
 import MissingProfileInfoModal from "../components/common/modal/MissingProfileInfoModal";
 import {showFriendsForm} from "../actions/profile/profileUIActions";
+import Rollable from "../components/common/Rollable";
+import {friendRollingIcon} from "../constants/RollingIcons";
+
+const friendTitle = (
+    <div className="friend-display-name">
+        <span>找</span>
+        <Rollable
+            style={{margin: "5px 0 0"}}
+            rollingInterval={2000}
+            rollingItems={friendRollingIcon(30)}
+        />
+        <span>友</span>
+    </div>
+);
 
 class FriendContainer extends Component {
     constructor(props) {
@@ -67,7 +81,7 @@ class FriendContainer extends Component {
                 <div>
                     <LoadingModal show={this.props.isFetching}/>
                     <MainListTemplate
-                        title="找X友"
+                        title={friendTitle}
                         themeColor={PRIMARY_YELLOW}
                         subThemeColor={SECONDARY_YELLOW}
                         userList={this.props.visibleUsers}

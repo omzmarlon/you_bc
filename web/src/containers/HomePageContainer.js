@@ -1,45 +1,27 @@
 'use strict';
 // libs
-import React, {Component} from 'react'
-import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 // styles
-import './HomePageContainer.less';
+import "./HomePageContainer.less";
 import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_WHITE, PRIMARY_YELLOW} from "../styles/constants/colors";
-import {defaultIconSize} from '../styles/material/iconStyles';
+import {defaultIconSize} from "../styles/material/iconStyles";
 // components
 import Block from "../components/homePage/Block";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Profile from 'material-ui/svg-icons/action/account-circle';
-import Rollable from '../components/common/Rollable';
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import Profile from "material-ui/svg-icons/action/account-circle";
+import Rollable from "../components/common/Rollable";
 // constants
-import {TO_CLASSMATES, TO_FRIENDS, TO_ROOMMATES, TO_PROFILE} from "../constants/api";
-//assets
-import ChickenIcon from "../components/common/svg/ChickenIcon";
-import CatIcon from "../components/common/svg/CatIcon";
-import WaveIcon from "../components/common/svg/WaveIcon";
-import CannonIcon from "../components/common/svg/CannonIcon";
-import BasketballIcon from "../components/common/svg/BasketballIcon";
-import FoodIcon from "../components/common/svg/FoodIcon";
+import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
 import {
-    fetchClassmatesInfo, fetchFriendsInfo, fetchMatchedUsers, fetchPersonalInfo,
+    fetchClassmatesInfo,
+    fetchFriendsInfo,
+    fetchMatchedUsers,
+    fetchPersonalInfo,
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
-
-const rollingIconStyle = {
-    color: PRIMARY_WHITE,
-    width: 40,
-    height: 40
-};
-
-const friendRollingIcon = [
-    <ChickenIcon style={rollingIconStyle}/>,
-    <CatIcon style={rollingIconStyle}/>,
-    <WaveIcon style={rollingIconStyle}/>,
-    <CannonIcon style={rollingIconStyle}/>,
-    <BasketballIcon style={rollingIconStyle}/>,
-    <FoodIcon style={rollingIconStyle}/>
-];
+import {friendRollingIcon} from "../constants/RollingIcons";
 
 class HomePageContainer extends Component {
 
@@ -60,7 +42,7 @@ class HomePageContainer extends Component {
                 <span>找</span>
                 <Rollable
                     rollingInterval={1000}
-                    rollingItems={friendRollingIcon}
+                    rollingItems={friendRollingIcon(40)}
                 />
                 <span>友</span>
             </div>
