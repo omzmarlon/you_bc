@@ -23,10 +23,10 @@ public class AWSBeans {
     @Bean
     public S3Client s3Client() {
         return new S3Client(
-                env.getProperty(EnvProperties.S3_ENDPOINT_URL),
                 env.getProperty(EnvProperties.S3_ACCESS_KEY),
                 env.getProperty(EnvProperties.S3_SECRET_KEY),
-                env.getProperty(EnvProperties.S3_BUCKET_NAME)
+                env.getProperty(EnvProperties.S3_BUCKET_NAME),
+                env.getProperty(EnvProperties.S3_PROTOCOL)
         );
     }
 }
