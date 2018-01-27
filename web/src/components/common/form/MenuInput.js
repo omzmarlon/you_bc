@@ -1,34 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //components
-import InfoRow from "../InfoRow";
-import Divider from 'material-ui/Divider';
-import MenuItem from 'material-ui/MenuItem';
-import Tag from "../Tag";
-import IconButton from 'material-ui/IconButton';
-import Menu from 'material-ui/Menu';
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
-//icons
-import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
-//styles
-import "./MenuInput.less";
-import {formSize} from '../../../styles/material/formStyles';
-
-const menuItemStyle = {
-    display: 'flex',
-    alignItems: 'center'
-};
+import DialogMenu from "../menus/DialogMenu";
+import MenuInputField from "./MenuInputField";
 
 class MenuInput extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             showModal: false
         };
-        this.onClickMenuButton = this.onClickMenuButton.bind(this);
-        this.menuDialogHelper = this.menuDialogHelper.bind(this);
     }
 
     // handlers
@@ -36,117 +17,30 @@ class MenuInput extends React.Component {
         this.setState({showModal: !this.state.showModal});
     }
 
-    // static component helpers
-    static menuItems(options) {
-        return options.map(
-            (c, index) => <MenuItem style={menuItemStyle} key={index} value={c} primaryText={c} />
-        );
-    }
-
-    static chosenValueComponent(value, index, showTag, bkgColor, textColor) {
-        if (showTag) {
-            return (
-                <Tag classNames={'menu-input-value'}
-                     text={value} key={index}
-                     bkgColor={bkgColor}
-                     textColor={textColor}/>
-            )
-        } else {
-            return (
-                <span className={'menu-input-value'} key={index}>
-                    {value}
-                </span>
-            );
-        }
-    }
-
-    static inputFieldContent(emptyValueChecker, hintLabel, values, tagDisplay, bkgColor, textColor) {
-        const flattenValues = [].concat.apply([], [values]); // in case props.values is a single string
-        return (
-            emptyValueChecker(values) ?
-                <div className={'menu-label'}>
-                    {hintLabel}
-                </div>:
-                <div className={'menu-input-values'}>
-                    {flattenValues.map(
-                        (v, index) => MenuInput.chosenValueComponent(v, index, tagDisplay, bkgColor, textColor)
-                    )}
-                </div>
-        );
-    }
-
-    static getEmptyValueChecker(isMultiple) {
-        return (
-            isMultiple ?
-                ((values) => values.length === 0 || values === undefined || values === null):
-                ((values) => values === '' || values === undefined || values === null)
-        );
-    }
-
-    // instance component helper
-    menuDialogHelper() {
-        return (
-            <Dialog
-                open={this.state.showModal}
-                actions={[
-                    <RaisedButton
-                        onClick={this.onClickMenuButton}
-                        backgroundColor={this.props.tagColor}
-                        fullWidth={true}
-                    >
-                        确定
-                    </RaisedButton>
-                ]}
-                autoScrollBodyContent={true}
-                contentStyle={formSize}
-            >
-                <Menu value={this.props.values}
-                      multiple={this.props.multiple}
-                      onItemClick={this.props.onChange}
-                >
-                    {MenuInput.menuItems(this.props.options)}
-                </Menu>
-            </Dialog>
-        );
-    }
 
     render() {
         return (
-            <InfoRow
-                className={`menu-input-container ${this.props.classNames}`}
-                leftElement={this.props.inputIcon}
-                rightElement={
-                    <div className={'menu-container'}
-                         onClick={this.onClickMenuButton}
-                    >
-                        <div className={'menu-content'}>
-                            {/*display selected choices*/}
-                            {
-                                MenuInput.inputFieldContent(
-                                    MenuInput.getEmptyValueChecker(this.props.multiple),
-                                    this.props.label,
-                                    this.props.values,
-                                    this.props.tagDisplay,
-                                    this.props.tagColor,
-                                    this.props.textColor
-                                )
-                            }
-                            {/*button to open modal menu*/}
-                            <IconButton
-                                className={'menu-input-button'}
-                                onClick={this.onClickMenuButton}
-                            >
-                                <ArrowRightIcon/>
-                            </IconButton>
-                        </div>
-                        <Divider/>
-                        {
-                            this.props.errorText && <span className={"error-text"}>必填</span>
-                        }
-                        {this.menuDialogHelper()}
-                    </div>
-                }
-            />
+            <div>
+                <MenuInputField classNames={this.props.classNames}
+                                inputIcon={this.props.inputIcon}
+                                label={this.props.label}
+                                multiple={this.props.multiple}
+                                values={this.props.values}
+                                textColor={this.props.textColor}
+                                tagDisplay={this.props.tagDisplay}
+                                tagColor={this.props.tagColor}
+                                errorText={this.props.errorText}
+                                onClick={this.onClickMenuButton.bind(this)}
+                />
+                <DialogMenu showMenu={this.state.showModal}
+                            onDone={this.onClickMenuButton.bind(this)}
+                            buttonColor={this.props.tagColor}
+                            values={this.props.values}
+                            onItemClick={this.props.onChange}
+                            multiple={this.props.multiple}
+                            options={this.props.options}
+                />
+            </div>
         );
     }
 }
@@ -159,7 +53,7 @@ MenuInput.propTypes = {
         PropTypes.arrayOf(PropTypes.string),
         PropTypes.string
     ]).isRequired,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired, // when chosen menu item change
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     textColor: PropTypes.string.isRequired,
     tagDisplay: PropTypes.bool.isRequired,
