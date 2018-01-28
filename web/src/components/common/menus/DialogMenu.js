@@ -56,7 +56,7 @@ DialogMenu.propTypes = {
         PropTypes.string
     ]).isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onItemClick: PropTypes.func.isRequired,
+    onItemClick: PropTypes.func.isRequired, // signature onCoursesChange(event, menuItem, index)
     multiple: PropTypes.bool.isRequired
 };
 

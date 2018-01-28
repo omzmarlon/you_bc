@@ -130,6 +130,7 @@ class PersonalForm extends React.Component {
                            onChange={this.onSexChangeHandler.bind(this)}
                            options={sexOptions}
                            textColor={'white'}
+                           tagColor={PRIMARY_GREEN}
                            tagDisplay={false}
                            multiple={false}
                            errorText={this.showError(this.state.sex)}

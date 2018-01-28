@@ -186,7 +186,7 @@ public class ProfileDAO {
         return dslContext
                 .select(CLASSMATES_COURSES.COURSE)
                 .from(CLASSMATES_COURSES)
-                .where(CLASSMATES_MAJOR.MAJOR.contains(filter))
+                .where(CLASSMATES_COURSES.COURSE.contains(filter))
                 .fetch()
                 .intoSet(CLASSMATES_COURSES.COURSE);
     }

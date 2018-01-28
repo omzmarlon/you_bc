@@ -15,7 +15,11 @@ import CourseIcon from "../../common/svg/CourseIcon";
 import MottoIcon from "../../common/svg/MottoIcon";
 import TagIcon from "../../common/svg/TagIcon";
 //colors
-import {PRIMARY_RED} from "../../../styles/constants/colors";
+import {PRIMARY_RED, SECONDARY_RED} from "../../../styles/constants/colors";
+import SearchableMenuInput from "../../common/form/SearchableMenuInput";
+import {fetchCourses} from "../../../actions/profile/profileMenuOptionsFetchActions";
+import {getCourseOptions} from "../../../requests/profileOptionRequests";
+import {showInfoBar} from "../../../actions/global/globalActions";
 
 class ClassmatesForm extends React.Component {
 
@@ -29,7 +33,9 @@ class ClassmatesForm extends React.Component {
             courses: [],
             motto: '',
             tags: [],
-            showError: false
+            showError: false,
+            coursesOptions: [],
+            loadingCourseOptions: false
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -66,15 +72,32 @@ class ClassmatesForm extends React.Component {
         this.setState({major: this.props.classmates.options.majorOptions[index]});
     }
 
-    onCoursesChange(event, menuItem, index) {
-        const ind = this.state.courses.indexOf(this.props.classmates.options.coursesOptions[index]);
+    onCourseSearchChange(newValue) {
+        const { store } = this.context;
+        this.setState({loadingCourseOptions: true});
+        getCourseOptions(newValue)
+            .finally(() => this.setState({loadingCourseOptions: false}))
+            .then(response => {
+                this.setState({coursesOptions: response.data});
+            })
+            .catch(err => {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取课程选项失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+    }
+
+    onCoursesChange(option) {
+        const ind = this.state.courses.indexOf(option);
         if (ind === -1) {
             // TODO: factor out common code to enforce max 3
             // can only choose max 3
             if (this.state.courses.length <3) {
-                this.setState({courses: [...this.state.courses, this.props.classmates.options.coursesOptions[index]]});
+                this.setState({courses: [...this.state.courses, option]});
             } else {
-                this.setState({courses: [this.state.courses[1], this.state.courses[2], this.props.classmates.options.coursesOptions[index]]});
+                this.setState({courses: [this.state.courses[1], this.state.courses[2], option]});
             }
         } else {
             const courses = this.state.courses;
@@ -106,8 +129,14 @@ class ClassmatesForm extends React.Component {
 
     onDoneHandler() {
         if (this.state.weChatId && this.state.major && this.state.courses.length && this.state.motto && this.state.tags.length) {
-            this.props.onDone(this.state);
+            this.props.onDone({
+                major: this.state.major,
+                courses: this.state.courses,
+                motto: this.state.motto,
+                tags: this.state.tags,
+            });
             this.props.onWeChatIdDone(this.state.weChatId);
+            this.setState({coursesOptions: []});
             this.props.onClose();
         } else {
             this.setState({showError: true});
@@ -145,17 +174,20 @@ class ClassmatesForm extends React.Component {
                            multiple={false}
                            errorText={this.showError(this.state.major)}
                 />
-                <MenuInput classNames={'form-input-field'}
-                           inputIcon={<CourseIcon color={PRIMARY_RED}/>}
-                           label={'课程'}
-                           values={this.state.courses}
-                           onChange={this.onCoursesChange}
-                           options={this.props.classmates.options.coursesOptions}
-                           textColor={'white'}
-                           tagColor={PRIMARY_RED}
-                           tagDisplay={false}
-                           multiple={true}
-                           errorText={this.showError(this.state.courses)}
+                <SearchableMenuInput classNames={'form-input-field'}
+                                     inputIcon={<CourseIcon color={PRIMARY_RED}/>}
+                                     label={'课程'}
+                                     values={this.state.courses}
+                                     onChange={this.onCoursesChange}
+                                     handleSearchChange={this.onCourseSearchChange.bind(this)}
+                                     options={this.state.coursesOptions}
+                                     textColor={'white'}
+                                     chipColor={SECONDARY_RED}
+                                     tagColor={PRIMARY_RED}
+                                     tagDisplay={false}
+                                     multiple={true}
+                                     loadingOptions={this.state.loadingCourseOptions}
+                                     errorText={this.showError(this.state.courses)}
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_RED}/>}
@@ -205,6 +237,10 @@ ClassmatesForm.propTypes = {
     showWeChatInput: PropTypes.bool.isRequired,
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
+};
+
+ClassmatesForm.contextTypes = {
+    store: PropTypes.object
 };
 
 export default ClassmatesForm;

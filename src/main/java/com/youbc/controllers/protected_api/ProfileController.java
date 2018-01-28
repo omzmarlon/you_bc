@@ -153,7 +153,7 @@ public class ProfileController {
 
     @RequestMapping(path = "/api/profile/courses", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Set<String> getCourses(@RequestParam("data") String filter) {
+    public Set<String> getCourses(@RequestParam("filter") String filter) {
         return  profileDAO.getCourses(filter);
     }
 
