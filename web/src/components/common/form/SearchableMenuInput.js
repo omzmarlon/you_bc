@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 //components
-import DialogMenu from "../menus/DialogMenu";
+import SearchableDialogMenu from "../menus/SearchableDialogMenu";
 import MenuInputField from "./MenuInputField";
 
-class MenuInput extends React.Component {
+class SearchableMenuInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +16,6 @@ class MenuInput extends React.Component {
     onClickMenuButton() {
         this.setState({showModal: !this.state.showModal});
     }
-
 
     render() {
         return (
@@ -32,20 +31,24 @@ class MenuInput extends React.Component {
                                 errorText={this.props.errorText}
                                 onClick={this.onClickMenuButton.bind(this)}
                 />
-                <DialogMenu showMenu={this.state.showModal}
-                            onDone={this.onClickMenuButton.bind(this)}
-                            buttonColor={this.props.tagColor}
-                            values={this.props.values}
-                            onItemClick={this.props.onChange}
-                            multiple={this.props.multiple}
-                            options={this.props.options}
+
+                <SearchableDialogMenu handleSearchChange={this.props.handleSearchChange}
+                                      showMenu={this.state.showModal}
+                                      onDone={this.onClickMenuButton.bind(this)}
+                                      buttonColor={this.props.tagColor}
+                                      chipColor={this.props.chipColor}
+                                      values={this.props.values}
+                                      onChoiceChange={this.props.onChange}
+                                      multiple={this.props.multiple}
+                                      options={this.props.options}
+                                      loadingOptions={this.props.loadingOptions}
                 />
             </div>
         );
     }
 }
 
-MenuInput.propTypes = {
+SearchableMenuInput.propTypes = {
     classNames: PropTypes.string,
     inputIcon: PropTypes.element.isRequired,
     label: PropTypes.string.isRequired,
@@ -54,12 +57,20 @@ MenuInput.propTypes = {
         PropTypes.string
     ]).isRequired,
     onChange: PropTypes.func.isRequired, // when chosen menu item change
+    handleSearchChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     textColor: PropTypes.string.isRequired,
+    chipColor: PropTypes.string.isRequired,
     tagDisplay: PropTypes.bool.isRequired,
     multiple: PropTypes.bool.isRequired,
     tagColor: PropTypes.string,
-    errorText: PropTypes.string
+    errorText: PropTypes.string,
+    loadingOptions: PropTypes.bool.isRequired
 };
 
-export default MenuInput;
+SearchableMenuInput.defaultProps = {
+    loadingOptions: false
+};
+
+
+export default SearchableMenuInput;

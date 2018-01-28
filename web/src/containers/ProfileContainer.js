@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component {
         store.dispatch(fetchMatchedUsers());
         // TODO: may be move all these into forms
         store.dispatch(fetchMajors());
-        store.dispatch(fetchCourses());
+        //store.dispatch(fetchCourses()); // fetch courses requires search filter don't call it here
         store.dispatch(fetchClassmatesTags());
         store.dispatch(fetchLocationOptions());
         store.dispatch(fetchHometownOptions());

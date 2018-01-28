@@ -182,10 +182,11 @@ public class ProfileDAO {
                 .intoSet(CLASSMATES_MAJOR.MAJOR);
     }
 
-    public Set<String> getCourses() {
+    public Set<String> getCourses(String filter) {
         return dslContext
                 .select(CLASSMATES_COURSES.COURSE)
                 .from(CLASSMATES_COURSES)
+                .where(CLASSMATES_COURSES.COURSE.contains(filter))
                 .fetch()
                 .intoSet(CLASSMATES_COURSES.COURSE);
     }

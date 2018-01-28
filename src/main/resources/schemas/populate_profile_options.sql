@@ -7,6 +7,9 @@ INSERT INTO classmates_major VALUE ('COMM');
 # courses
 INSERT INTO classmates_courses VALUE ('MATH 307');
 INSERT INTO classmates_courses VALUE ('MATH 302');
+INSERT INTO classmates_courses VALUE ('ECON 101');
+INSERT INTO classmates_courses VALUE ('ECON 102');
+INSERT INTO classmates_courses VALUE ('MATH 104');
 
 # classmates tags
 INSERT INTO classmates_tags VALUE ('自习');

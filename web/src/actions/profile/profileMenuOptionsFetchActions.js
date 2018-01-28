@@ -38,8 +38,8 @@ export const fetchMajors = () => dispatch => {
         });
 };
 
-export const fetchCourses = () => dispatch => {
-    return axios.get(requestUrl(COURSES_OPTIONS_API), {withCredentials: true})
+export const fetchCourses = (filter) => dispatch => {
+    return axios.get(requestUrl(`${COURSES_OPTIONS_API}?filter=${filter?filter:''}`), {withCredentials: true})
         .then(res => {
             dispatch(receiveCoursesOptions(res.data))
         })

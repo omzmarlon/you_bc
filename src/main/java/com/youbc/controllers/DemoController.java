@@ -1,22 +1,27 @@
 package com.youbc.controllers;
 
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.youbc.database.UserDAO;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
+import com.youbc.services.aws.S3Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 public class DemoController {
     private UserDAO userDAO;
+    private S3Client s3Client;
+
 
     @Autowired
-    public DemoController(UserDAO userDAO) {
+    public DemoController(UserDAO userDAO, S3Client s3Client) {
         this.userDAO = userDAO;
+        this.s3Client = s3Client;
     }
 
     @RequestMapping(path = "/demoJooq", method = RequestMethod.GET)
@@ -49,5 +54,10 @@ public class DemoController {
         } else {
             throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "demo", "demo exception"));
         }
+    }
+
+    @PostMapping("/demoImage")
+    public String uploadImage(@RequestPart(value = "image") MultipartFile file) throws IOException {
+        return this.s3Client.uploadImage(file, "demo", "demoFolder", CannedAccessControlList.PublicRead);
     }
 }
