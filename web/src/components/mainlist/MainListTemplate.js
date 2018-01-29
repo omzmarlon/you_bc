@@ -8,7 +8,8 @@ import MainListHeader from './MainListHeader'
 import SearchResultCard from '../../components/common/card/SearchResultCard'
 import Slidable from '../../components/common/Slidable'
 import {
-    AddressInfo, CourseInfo, FacultyInfo, HobbyInfo, HometownInfo, MajorInfo, MottoInfo, RelationshipInfo,
+    AddressInfo, CourseInfo, FacultyInfo, HobbyInfo, HometownInfo, LifeHabit, MajorInfo, MottoInfo, RelationshipInfo,
+    SelfDescription,
     StudyAbilityInfo,
     StudyRequirementInfo,
 } from './ContentLists';
@@ -63,6 +64,8 @@ class MainListTemplate extends Component {
                                                         (user.studyAbility && <StudyAbilityInfo color={this.props.themeColor} studyAbility={user.studyAbility}/>),
                                                         (user.requirements && <StudyRequirementInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} requirements={user.requirements}/>),
                                                         (user.motto && <MottoInfo color={this.props.themeColor} motto={user.motto}/>),
+                                                        (user.selfDescription && <SelfDescription color={this.props.themeColor} description={user.selfDescription}/>),
+                                                        (user.lifeHabits && <LifeHabit color={this.props.themeColor} secondColor={this.props.subThemeColor} habits={user.lifeHabits}/>),
                                                         (user.hobbies && <HobbyInfo hobbies={user.hobbies} color={this.props.themeColor} secondColor={this.props.subThemeColor}/>)
                                                     ]}
                                                 />
