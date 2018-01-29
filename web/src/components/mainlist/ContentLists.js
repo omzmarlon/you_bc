@@ -72,7 +72,7 @@ export const StudyAbilityInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<MottoIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>自我描述:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>能力:</span>}
             />
         }
         rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility}/>}
@@ -110,7 +110,12 @@ StudyRequirementInfo.propTypes = {
 // roommates
 export const AddressInfo = (props) => (
     <InfoRow
-        leftElement={<LocationIcon style={{color: props.color, height: 16, width: 14}}/>}
+        leftElement={
+            <InfoRow
+                leftElement={<LocationIcon style={{color: props.color, height: 16, width: 14}}/>}
+                rightElement={<span style={{paddingLeft: 3}}>地点:</span>}
+            />
+        }
         rightElement={<span style={{paddingLeft: 8}}>{props.address}</span>}
     />
 );
@@ -121,7 +126,12 @@ AddressInfo.propTypes = {
 
 export const HometownInfo = (props) => (
     <InfoRow
-        leftElement={<HometownIcon style={{...iconStyle, ...{color: props.color}}} />}
+        leftElement={
+            <InfoRow
+                leftElement={<HometownIcon style={{...iconStyle, ...{color: props.color}}} />}
+                rightElement={<span style={{paddingLeft: 3}}>家乡:</span>}
+            />
+        }
         rightElement={<span style={{paddingLeft: 8}}>{props.country} {props.city}</span>}
     />
 );
@@ -131,6 +141,7 @@ HometownInfo.propTypes = {
     color: PropTypes.string.isRequired
 };
 
+// Friends Motto
 export const MottoInfo = (props) => (
     <InfoRow
         leftElement={
@@ -139,7 +150,7 @@ export const MottoInfo = (props) => (
                     <MottoIcon style={{...iconStyle, ...{color: props.color}}} />
                 }
                 rightElement={
-                    <span style={{paddingLeft: 3}}>一句话</span>
+                    <span style={{paddingLeft: 3}}>一句话:</span>
                 }
             />
         }
@@ -151,6 +162,30 @@ MottoInfo.propTypes = {
     motto: PropTypes.string.isRequired
 };
 
+// Roommates self-description
+export const SelfDescription = (props) => (
+    <InfoRow
+        leftElement={
+            <InfoRow
+                leftElement={
+                    <MottoIcon style={{...iconStyle, ...{color: props.color}}} />
+                }
+                rightElement={
+                    <span style={{paddingLeft: 3}}>自我描述:</span>
+                }
+            />
+        }
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.description} maxLength={6}/>}
+    />
+);
+
+SelfDescription.propTypes = {
+    color: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
+};
+
+
+// friends hobby
 export const HobbyInfo = (props) => (
     <InfoRow
         leftElement={
@@ -174,6 +209,32 @@ HobbyInfo.propTypes = {
     secondColor: PropTypes.string.isRequired,
     hobbies: PropTypes.arrayOf(PropTypes.string).isRequired
 };
+
+// roommates life habit
+export const LifeHabit = (props) => (
+    <InfoRow
+        leftElement={
+            <InfoRow
+                leftElement={<TagIcon style={{...iconStyle, ...{color: props.color}}}/>}
+                rightElement={<span style={{paddingLeft: 3}}>生活习惯:</span>}
+            />
+        }
+        rightElement={
+            <span className="content-list-item-tags">
+                {props.hobbies.map(habit =>
+                    <div key={habit} className="--tag">
+                        <Tag text={habit} bkgColor={props.secondColor} textColor={props.color} />
+                    </div>)}
+            </span>
+        }
+    />
+);
+LifeHabit.propTypes = {
+    color: PropTypes.string.isRequired,
+    secondColor: PropTypes.string.isRequired,
+    habits: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
 
 // friends
 export const FacultyInfo = (props) => (

@@ -100,7 +100,7 @@ const ProfileMain = (props) => (
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.classmates.values.motto} />
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_RED}/>} text={'兴趣'}/>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_RED}/>} text={'一起'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
@@ -127,7 +127,7 @@ const ProfileMain = (props) => (
                         rightElement: <span style={rightElementSpaceApart}>{props.friends.values.relationship}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_YELLOW}/>} text={'自我描述'}/>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_YELLOW}/>} text={'个性签名'}/>,
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.friends.values.motto} />
                     },
                     {
@@ -162,7 +162,7 @@ const ProfileMain = (props) => (
                         rightElement: <TruncateText style={rightElementSpaceApart} text={props.roommates.values.motto} />
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_BLUE}/>} text={'兴趣'}/>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_BLUE}/>} text={'生活习惯'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
