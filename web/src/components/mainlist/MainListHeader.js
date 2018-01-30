@@ -58,7 +58,10 @@ const MainListHeader = (props) => (
 );
 
 MainListHeader.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element
+    ]).isRequired,
     color: PropTypes.string.isRequired,
     genderFilter: PropTypes.func.isRequired
 };

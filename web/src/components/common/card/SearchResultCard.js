@@ -40,8 +40,8 @@ SearchResultCard.propTypes = {
     avatar: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     gender: PropTypes.oneOf(['male', 'female']).isRequired,
-    age: PropTypes.number.isRequired,
-    constellation: PropTypes.string.isRequired,
+    age: PropTypes.number,
+    constellation: PropTypes.string,
     matchRate: PropTypes.number,
     matchRateColor: PropTypes.string,
     contentList: PropTypes.arrayOf(PropTypes.element).isRequired

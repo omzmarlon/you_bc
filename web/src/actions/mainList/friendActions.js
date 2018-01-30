@@ -122,7 +122,7 @@ const populateFriendData = (responseJson) => {
         gender: gender,
         age: responseJson.age,
         constellation: responseJson.constellation,
-        matchRate: responseJson.matchRate + 0.01, // todo: UI doesn't work with 0
+        matchRate: responseJson.matchRate,
         faculty: responseJson.faculty,
         relationship: responseJson.relationship,
         motto: responseJson.motto,

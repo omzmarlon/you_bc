@@ -221,7 +221,7 @@ export const LifeHabit = (props) => (
         }
         rightElement={
             <span className="content-list-item-tags">
-                {props.hobbies.map(habit =>
+                {props.habits.map(habit =>
                     <div key={habit} className="--tag">
                         <Tag text={habit} bkgColor={props.secondColor} textColor={props.color} />
                     </div>)}

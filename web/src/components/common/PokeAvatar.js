@@ -29,7 +29,7 @@ const PokeAvatar = (props) => {
                 <span>{props.info.age}</span>
                 <span className='poke-avatar-constellation'>{props.info.constellation}</span>
             </div>}
-            {props.matchRate && <div className="poke-avatar-matchRate" style={{color: props.matchRateColor}}>
+            {(props.matchRate !== 0) && <div className="poke-avatar-matchRate" style={{color: props.matchRateColor}}>
                 契合度 {props.matchRate * 100} %
             </div>}
         </div>

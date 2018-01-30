@@ -125,7 +125,7 @@ const populateClassmateData = (responseJson) => {
         gender: gender,
         age: responseJson.age,
         constellation: responseJson.constellation,
-        matchRate: responseJson.matchRate + 0.01, // todo: UI doesn't work with 0
+        matchRate: responseJson.matchRate,
         major: responseJson.major,
         year: responseJson.year,
         courses: responseJson.courses,

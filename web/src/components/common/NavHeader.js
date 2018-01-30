@@ -42,7 +42,10 @@ class NavHeader extends React.Component {
 }
 
 NavHeader.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element
+    ]).isRequired,
     iconRight: PropTypes.element,
     color: PropTypes.string.isRequired,
     onClickGoBack: PropTypes.func,
