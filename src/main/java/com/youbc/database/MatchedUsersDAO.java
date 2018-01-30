@@ -27,12 +27,14 @@ public class MatchedUsersDAO {
                 .select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKER.eq(userId))
+                .orderBy(CLASSMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(CLASSMATES_LIKES.LIKEE);
 
         Set<String> classmateLikers = dslContext
                 .select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKEE.eq(userId))
+                .orderBy(CLASSMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(CLASSMATES_LIKES.LIKER);
         classmates.retainAll(classmateLikers);
 
@@ -40,12 +42,14 @@ public class MatchedUsersDAO {
                 .select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKER.eq(userId))
+                .orderBy(FRIENDS_LIKES.TIME_CREATED.desc())
                 .fetchSet(FRIENDS_LIKES.LIKEE);
 
         Set<String> friendLikers = dslContext
                 .select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKEE.eq(userId))
+                .orderBy(FRIENDS_LIKES.TIME_CREATED.desc())
                 .fetchSet(FRIENDS_LIKES.LIKER);
         friends.retainAll(friendLikers);
 
@@ -53,12 +57,14 @@ public class MatchedUsersDAO {
                 .select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKER.eq(userId))
+                .orderBy(ROOMMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(ROOMMATES_LIKES.LIKEE);
 
         Set<String> roommateLikers = dslContext
                 .select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKEE.eq(userId))
+                .orderBy(ROOMMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(ROOMMATES_LIKES.LIKER);
         roommates.retainAll(roommateLikers);
 

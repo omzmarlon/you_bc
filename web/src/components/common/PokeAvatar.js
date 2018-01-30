@@ -51,7 +51,8 @@ PokeAvatar.propTypes = {
 
 PokeAvatar.defaultProps = {
     className: '',
-    matchRateColor: PRIMARY_RED
+    matchRateColor: PRIMARY_RED,
+    matchRate: 0
 };
 
 export default PokeAvatar;

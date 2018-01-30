@@ -75,7 +75,7 @@ export const StudyAbilityInfo = (props) => (
                 rightElement={<span style={{paddingLeft: 3}}>能力:</span>}
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility} maxLength={7}/>}
     />
 );
 StudyAbilityInfo.propTypes = {
@@ -257,7 +257,7 @@ export const FacultyInfo = (props) => (
 FacultyInfo.propTypes = {
     color: PropTypes.string.isRequired,
     faculty: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired
+    year: PropTypes.string
 };
 
 export const RelationshipInfo = (props) => (
