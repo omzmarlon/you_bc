@@ -90,7 +90,7 @@ class FriendContainer extends Component {
                     />
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}
-                        content="您还没有填写相关个人信息，信息完整后才能继续匹配😊 ! 请填写个人主页中黄色部分信息"
+                        content="您还没有填写相关个人信息，信息完整后才能继续匹配 😊"
                         onClick={this.missingInfoModalActionHandler}
                     />
                 </div>

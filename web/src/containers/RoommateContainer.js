@@ -75,7 +75,7 @@ class RoommateContainer extends Component {
                     />
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}
-                        content="您还没有填写找室友相关信息，信息完整后才能继续匹配😊 ! 请填写个人主页中找室友（蓝色部分）信息"
+                        content="您还没有填写找室友相关信息，信息完整后才能继续匹配 😊"
                         onClick={this.missingInfoModalActionHandler}
                     />
                 </div>
