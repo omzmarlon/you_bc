@@ -76,13 +76,14 @@ class ClassmatesForm extends React.Component {
         const { store } = this.context;
         this.setState({loadingCourseOptions: true});
         getCourseOptions(newValue)
-            .finally(() => this.setState({loadingCourseOptions: false}))
             .then(response => {
                 this.setState({coursesOptions: response.data});
+                this.setState({loadingCourseOptions: false});
             })
             .catch(err => {
                 // TODO: centralize error handling
                 store.dispatch(showInfoBar("获取课程选项失败"));
+                this.setState({loadingCourseOptions: false})
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }

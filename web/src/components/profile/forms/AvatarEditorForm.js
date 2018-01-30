@@ -52,10 +52,15 @@ class AvatarEditorForm extends React.Component {
                 this.setState({isUploading: true});
                 uploadImageHelper(requestUrl(UPLOAD_IMAGE_EDIT_API), formData)
                     .then(
-                        response => this.setState({editAvatarUrl: response.data}),
-                        err => this.rejectAvatarEdit('选取图片失败')
-                    )
-                    .finally(() => this.setState({isUploading: false}));
+                        response => {
+                            this.setState({editAvatarUrl: response.data});
+                            this.setState({isUploading: false})
+                        },
+                        err => {
+                            this.rejectAvatarEdit('选取图片失败');
+                            this.setState({isUploading: false})
+                        }
+                    );
             }
         } else {
             this.rejectAvatarEdit('同学须至少上传一张图片噢');
@@ -71,13 +76,17 @@ class AvatarEditorForm extends React.Component {
                 this.setState({isUploading: true});
                 uploadImageHelper(requestUrl(UPLOAD_IMAGE_API), formData)
                     .then(
-                        response => this.props.onDone(response.data),
-                        err => this.rejectAvatarEdit('上传图片失败')
-                    )
-                    .finally(() => {
-                        this.setState({isUploading: false});
-                        this.onCloseHandler();
-                    });
+                        response => {
+                            this.props.onDone(response.data);
+                            this.setState({isUploading: false});
+                            this.onCloseHandler();
+                        },
+                        err => {
+                            this.rejectAvatarEdit('上传图片失败');
+                            this.setState({isUploading: false});
+                            this.onCloseHandler();
+                        }
+                    );
             } else {
                 this.rejectAvatarEdit("编辑图片失败😢");
             }
