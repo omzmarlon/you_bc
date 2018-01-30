@@ -126,7 +126,7 @@ const populateRoommateData = (responseJson) => {
         address: responseJson.location,
         country: responseJson.hometown,
         city: responseJson.hometown,
-        motto: responseJson.motto,
-        hobbies: responseJson.tags
+        selfDescription: responseJson.motto,
+        lifeHabits: responseJson.tags
     }
 };

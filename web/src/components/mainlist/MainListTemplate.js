@@ -63,9 +63,9 @@ class MainListTemplate extends Component {
                                                         (user.relationship && <RelationshipInfo color={this.props.themeColor} relationship={user.relationship}/>),
                                                         (user.studyAbility && <StudyAbilityInfo color={this.props.themeColor} studyAbility={user.studyAbility}/>),
                                                         (user.requirements && <StudyRequirementInfo color={this.props.themeColor} secondColor={this.props.subThemeColor} requirements={user.requirements}/>),
-                                                        (user.motto && <MottoInfo color={this.props.themeColor} motto={user.motto}/>),
-                                                        (user.selfDescription && <SelfDescription color={this.props.themeColor} description={user.selfDescription}/>),
-                                                        (user.lifeHabits && <LifeHabit color={this.props.themeColor} secondColor={this.props.subThemeColor} habits={user.lifeHabits}/>),
+                                                        (user.motto && <MottoInfo color={this.props.themeColor} motto={user.motto}/>), // friends
+                                                        (user.selfDescription && <SelfDescription color={this.props.themeColor} description={user.selfDescription}/>), // roommates
+                                                        (user.lifeHabits && <LifeHabit color={this.props.themeColor} secondColor={this.props.subThemeColor} habits={user.lifeHabits}/>), // roommates
                                                         (user.hobbies && <HobbyInfo hobbies={user.hobbies} color={this.props.themeColor} secondColor={this.props.subThemeColor}/>)
                                                     ]}
                                                 />
