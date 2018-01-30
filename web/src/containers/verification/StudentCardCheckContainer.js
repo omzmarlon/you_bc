@@ -71,10 +71,13 @@ class StudentCardCheckContainer extends Component {
                     // TODO: should we dispatch fetch verification actions here?
                     this.setState({studentCardUploaded: true});
                     this.props.showInfoBar("学生卡上传成功！");
+                    this.setState({isLoading: false})
                 },
-                err => this.props.showInfoBar('上传图片失败')
+                err => {
+                    this.props.showInfoBar('上传图片失败');
+                    this.setState({isLoading: false})
+                }
             )
-            .finally(() => this.setState({isLoading: false}));
     }
 
     mainContentDisplayHelper() {
