@@ -28,11 +28,11 @@ class TruncateText extends Component {
             const firstLine = this.props.text.substring(0, this.props.maxLength);
             visibleText = `${firstLine}...`;
         }
-        let Arrow = this.state.expanded ?  <DropUpIcon/> : <DropDownIcon/>;
+        // let Arrow = this.state.expanded ?  <DropUpIcon/> : <DropDownIcon/>;
         return (
             <div style={this.props.style} className="truncate-text" onClick={this.clickHandler}>
                 <div style={this.props.textStyle}>{visibleText}</div>
-                {expandable &&  Arrow}
+                {/*{expandable &&  Arrow}*/}
             </div>
         );
     }
