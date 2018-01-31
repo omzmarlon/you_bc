@@ -2,8 +2,6 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import DropDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import DropUpIcon from 'material-ui/svg-icons/navigation/arrow-drop-up';
 import './TruncateText.less';
 
 class TruncateText extends Component {
@@ -28,11 +26,9 @@ class TruncateText extends Component {
             const firstLine = this.props.text.substring(0, this.props.maxLength);
             visibleText = `${firstLine}...`;
         }
-        // let Arrow = this.state.expanded ?  <DropUpIcon/> : <DropDownIcon/>;
         return (
             <div style={this.props.style} className="truncate-text" onClick={this.clickHandler}>
                 <div style={this.props.textStyle}>{visibleText}</div>
-                {/*{expandable &&  Arrow}*/}
             </div>
         );
     }
@@ -46,7 +42,7 @@ TruncateText.propTypes = {
 };
 
 TruncateText.defaultProps = {
-    maxLength: 11,
+    maxLength: 20,
     style: {},
     textStyle: {}
 };
