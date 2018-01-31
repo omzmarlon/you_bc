@@ -4,26 +4,29 @@ import InfoRow from "../InfoRow";
 import TextField from 'material-ui/TextField';
 import "./TextInput.less";
 
-const TextInput = (props) => {
-    return (
-        <InfoRow
-            className={`text-input ${props.classNames}`}
-            leftElement={props.inputIcon}
-            rightElement={
-                <TextField
-                    // 1.keep some space from left-icon. 2. input text font size
-                    style={{marginLeft: 15}}
-                    hintText={props.label}
-                    fullWidth={true}
-                    errorText={props.errorText}
-                    onChange={props.onChange}
-                    value={props.value}
-                    type={props.type}
-                />
-            }
-        />
-    );
-};
+class TextInput extends React.Component {
+    render() {
+        return (
+            <InfoRow
+                className={`text-input ${this.props.classNames}`}
+                leftElement={this.props.inputIcon}
+                rightElement={
+                    <TextField
+                        // 1.keep some space from left-icon. 2. input text font size
+                        style={{marginLeft: 15}}
+                        hintText={this.props.label}
+                        fullWidth={true}
+                        errorText={this.props.errorText}
+                        onChange={this.props.onChange}
+                        value={this.props.value}
+                        type={this.props.type}
+                        onFocus={this.props.onFocus}
+                    />
+                }
+            />
+        );
+    }
+}
 
 TextInput.propTypes = {
     classNames: PropTypes.string,
@@ -33,6 +36,7 @@ TextInput.propTypes = {
     value: PropTypes.any.isRequired,
     errorText: PropTypes.string,
     type: PropTypes.string,
+    onFocus: PropTypes.func
 };
 
 export default TextInput
