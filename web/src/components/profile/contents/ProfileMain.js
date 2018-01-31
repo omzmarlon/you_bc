@@ -98,7 +98,7 @@ const ProfileMain = (props) => (
                     },
                     {
                         leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_RED}/>} text={'能力'}/>,
-                        rightElement: <TruncateText style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}} text={props.classmates.values.motto || "未填写"} />
+                        rightElement: <TruncateText style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}} text={props.classmates.values.motto || "未填写"} maxLength={22}/>
                     },
                     {
                         leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_RED}/>} text={'一起'}/>,
@@ -130,7 +130,7 @@ const ProfileMain = (props) => (
                     },
                     {
                         leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_YELLOW}/>} text={'个性签名'}/>,
-                        rightElement: <TruncateText style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}} text={props.friends.values.motto || "未填写"} />
+                        rightElement: <TruncateText style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}} text={props.friends.values.motto || "未填写"} maxLength={22}/>
                     },
                     {
                         leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_YELLOW}/>} text={'兴趣'}/>,
@@ -167,7 +167,7 @@ const ProfileMain = (props) => (
                     },
                     {
                         leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_BLUE}/>} text={'自我描述'}/>,
-                        rightElement: <TruncateText style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}} text={props.roommates.values.motto || "未填写"} />
+                        rightElement: <TruncateText style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}} text={props.roommates.values.motto || "未填写"} maxLength={22}/>
                     },
                     {
                         leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_BLUE}/>} text={'生活习惯'}/>,
