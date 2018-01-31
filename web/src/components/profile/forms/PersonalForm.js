@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 //components
 import ModalForm from "../../common/form/ModalForm";
 import TextInput from "../../common/form/TextInput";
@@ -25,7 +26,6 @@ class PersonalForm extends React.Component {
         this.state = {
             username: '',
             sex: '',
-
             weChatId: '',
             age: 0,
             constellation: '',
@@ -99,6 +99,22 @@ class PersonalForm extends React.Component {
         }
     }
 
+    scrollToUsernameInput() {
+        const elementOnFocus = ReactDOM.findDOMNode(this.refs.usernameInput);
+        if (elementOnFocus && elementOnFocus.scrollIntoView) {
+            // needs delay because the scroll may happen before screen squeeze
+            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        }
+    }
+
+    scrollToAgeInput() {
+        const elementOnFocus = ReactDOM.findDOMNode(this.refs.ageInput);
+        if (elementOnFocus && elementOnFocus.scrollIntoView) {
+            // needs delay because the scroll may happen before screen squeeze
+            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        }
+    }
+
     render() {
         return (
             <ModalForm showForm={this.props.showForm}
@@ -123,6 +139,8 @@ class PersonalForm extends React.Component {
                            onChange={this.onUsernameChangeHandler.bind(this)}
                            value={this.state.username}
                            errorText={this.showError(this.state.username)}
+                           ref='usernameInput'
+                           onFocus={this.scrollToUsernameInput.bind(this)}
                 />
                 <MenuInput inputIcon={<MixGenderIcon color={PRIMARY_GREEN}/>}
                            label={'性别'}
@@ -141,6 +159,8 @@ class PersonalForm extends React.Component {
                            value={this.state.age}
                            type={'number'}
                            errorText={this.showError(this.state.age)}
+                           ref='ageInput'
+                           onFocus={this.scrollToAgeInput.bind(this)}
                 />
                 <MenuInput inputIcon={<ConstellationIcon color={PRIMARY_GREEN} />}
                            label={'星座'}

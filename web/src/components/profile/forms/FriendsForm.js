@@ -101,13 +101,11 @@ class FriendsForm extends React.Component {
         }
     }
 
-    scrollToFocusedElement() {
-        console.log('hey');
+    scrollToMottoInput() {
         const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
-        console.log(elementOnFocus);
-        if (elementOnFocus) {
+        if (elementOnFocus && elementOnFocus.scrollIntoView) {
+            // needs delay because the scroll may happen before screen squeeze
             setTimeout(() => elementOnFocus.scrollIntoView(), 500);
-            console.log("scrolled");
         }
     }
 
@@ -128,7 +126,6 @@ class FriendsForm extends React.Component {
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
                                errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
-                               ref='wechatInput'
                     />
                 }
                 <MenuInput inputIcon={<FacultyIcon/>}
@@ -160,7 +157,7 @@ class FriendsForm extends React.Component {
                            value={this.state.motto}
                            errorText={this.showError(this.state.motto)}
                            ref='mottoInput'
-                           onFocus={this.scrollToFocusedElement.bind(this)}
+                           onFocus={this.scrollToMottoInput.bind(this)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_YELLOW}/>}

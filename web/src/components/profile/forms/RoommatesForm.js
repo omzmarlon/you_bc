@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 //components
 import ModalForm from "../../common/form/ModalForm";
 import TextInput from "../../common/form/TextInput";
@@ -100,6 +101,14 @@ class RoommatesForm extends React.Component {
         }
     }
 
+    scrollToMottoInput() {
+        const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
+        if (elementOnFocus && elementOnFocus.scrollIntoView) {
+            // needs delay because the scroll may happen before screen squeeze
+            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        }
+    }
+
     render() {
         return (
             <ModalForm
@@ -150,6 +159,8 @@ class RoommatesForm extends React.Component {
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.showError(this.state.motto)}
+                           ref='mottoInput'
+                           onFocus={this.scrollToMottoInput.bind(this)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_BLUE}/>}
