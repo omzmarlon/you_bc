@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 //components
 import ModalForm from "../../common/form/ModalForm";
@@ -26,7 +27,8 @@ class FriendsForm extends React.Component {
             relationship: '',
             motto: '',
             tags: [],
-            showError: false
+            showError: false,
+            elementOnFocus: ''
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -90,11 +92,22 @@ class FriendsForm extends React.Component {
 
     onDoneHandler() {
         if (this.state.weChatId && this.state.faculty && this.state.relationship && this.state.motto && this.state.tags.length) {
+            // TODO: don't throw the entire state in
             this.props.onDone(this.state);
             this.props.onWeChatIdDone(this.state.weChatId);
             this.props.onClose();
         } else {
             this.setState({showError: true});
+        }
+    }
+
+    scrollToFocusedElement() {
+        console.log('hey');
+        const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
+        console.log(elementOnFocus);
+        if (elementOnFocus) {
+            elementOnFocus.scrollIntoView();
+            console.log("scrolled");
         }
     }
 
@@ -115,6 +128,7 @@ class FriendsForm extends React.Component {
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
                                errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
+                               ref='wechatInput'
                     />
                 }
                 <MenuInput inputIcon={<FacultyIcon/>}
@@ -145,6 +159,8 @@ class FriendsForm extends React.Component {
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.showError(this.state.motto)}
+                           ref='mottoInput'
+                           onFocus={this.scrollToFocusedElement.bind(this)}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_YELLOW}/>}
