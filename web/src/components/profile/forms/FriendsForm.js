@@ -116,7 +116,7 @@ class FriendsForm extends React.Component {
                        onDone={this.onDoneHandler}
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon/>}
-                       titleText={'找_友信息'}
+                       titleText={'找朋友信息'}
             >
                 {
                     this.props.showWeChatInput &&
