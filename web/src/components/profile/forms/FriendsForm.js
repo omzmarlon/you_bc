@@ -106,7 +106,7 @@ class FriendsForm extends React.Component {
         const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
         console.log(elementOnFocus);
         if (elementOnFocus) {
-            elementOnFocus.scrollIntoView();
+            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
             console.log("scrolled");
         }
     }
