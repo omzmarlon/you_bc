@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './TruncateText.less';
+import {Dialog} from "material-ui";
 
 class TruncateText extends Component {
     constructor(props) {
@@ -18,17 +19,16 @@ class TruncateText extends Component {
     }
 
     render() {
-        let visibleText = null;
         let expandable = this.props.text.length > this.props.maxLength;
-        if (this.state.expanded || !expandable) {
-            visibleText = this.props.text;
-        } else {
-            const firstLine = this.props.text.substring(0, this.props.maxLength);
-            visibleText = `${firstLine}...`;
-        }
+        const firstLine = this.props.text.substring(0, this.props.maxLength);
+        let visibleText = expandable ? `${firstLine}...` : this.props.text;
+        console.log(this.props.text.length);
         return (
             <div style={this.props.style} className="truncate-text" onClick={this.clickHandler}>
                 <div style={this.props.textStyle}>{visibleText}</div>
+                <Dialog open={expandable && this.state.expanded} title="个性签名" onRequestClose={this.clickHandler}>
+                    {this.props.text}
+                </Dialog>
             </div>
         );
     }
@@ -42,7 +42,7 @@ TruncateText.propTypes = {
 };
 
 TruncateText.defaultProps = {
-    maxLength: 20,
+    maxLength: 10,
     style: {},
     textStyle: {}
 };

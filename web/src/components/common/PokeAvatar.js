@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
+import TruncateText from "./TruncateText";
 const classNames = require('classnames');
 // assets
 import MaleIcon from './svg/MaleIcon';
@@ -17,7 +18,10 @@ const PokeAvatar = (props) => {
     return (
         <div className={rootClassName}>
             <Avatar style={{height: 64, width: 64}} src={props.img}/>
-            {props.name && <div className='poke-avatar-name'>{props.name}</div>}
+            {props.name &&
+            <div className='poke-avatar-name'>
+                <TruncateText text={props.name} style={{justifyContent: 'center'}}/>
+            </div>}
             {props.info && <div className='poke-avatar-info'>
                 <span className='poke-avatar-gender-icon'>
                     {
