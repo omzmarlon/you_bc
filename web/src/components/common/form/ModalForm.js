@@ -6,14 +6,34 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 //styles
-import {formSize} from "../../../styles/material/formStyles";
 import "./ModalForm.less";
 //icons
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
+const modalFormStyles = {
+    dialogRoot: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: 0
+    },
+    dialogContent: {
+        position: "relative",
+        width: "90vw",
+        transform: "",
+    },
+    dialogBody: {
+        paddingBottom: 0
+    }
+};
+
 const ModalForm = (props) => (
     <Dialog
-        contentStyle={formSize}
+        contentStyle={ modalFormStyles.dialogContent }
+        bodyStyle={ modalFormStyles.dialogBody }
+        style={ modalFormStyles.dialogRoot }
+        repositionOnUpdate={ false }
+        autoScrollBodyContent={true}
         open={props.showForm}
         actions={[
             <RaisedButton
