@@ -1,10 +1,11 @@
 package com.youbc.models;
 
-public class MatchedUser {
+public class MatchedUser implements Comparable<MatchedUser>{
 
     private String avatarURL;
     private String name;
     private String weChatId;
+    private long matchedTime;
     private boolean matchedAtClassmates;
     private boolean matchedAtFriends;
     private boolean matchedAtRoommates;
@@ -15,6 +16,7 @@ public class MatchedUser {
             String avatarURL,
             String name,
             String weChatId,
+            long matchedTime,
             boolean matchedAtClassmates,
             boolean matchedAtFriends,
             boolean matchedAtRoommates
@@ -22,6 +24,7 @@ public class MatchedUser {
         this.avatarURL = avatarURL;
         this.name = name;
         this.weChatId = weChatId;
+        this.matchedTime = matchedTime;
         this.matchedAtClassmates = matchedAtClassmates;
         this.matchedAtFriends = matchedAtFriends;
         this.matchedAtRoommates = matchedAtRoommates;
@@ -51,6 +54,10 @@ public class MatchedUser {
         this.weChatId = weChatId;
     }
 
+    public long getMatchedTime() { return matchedTime; }
+
+    public void setMatchedTime(long matchedTime) { this.matchedTime = matchedTime; }
+
     public boolean isMatchedAtClassmates() {
         return matchedAtClassmates;
     }
@@ -73,5 +80,9 @@ public class MatchedUser {
 
     public void setMatchedAtRoommates(boolean matchedAtRoommates) {
         this.matchedAtRoommates = matchedAtRoommates;
+    }
+
+    public int compareTo(MatchedUser user) {
+        return Math.toIntExact(user.getMatchedTime() - this.matchedTime);
     }
 }

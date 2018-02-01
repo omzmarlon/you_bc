@@ -6,6 +6,9 @@ import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static com.youbc.generated.schema.tables.ClassmatesLikes.CLASSMATES_LIKES;
@@ -27,14 +30,12 @@ public class MatchedUsersDAO {
                 .select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKER.eq(userId))
-                .orderBy(CLASSMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(CLASSMATES_LIKES.LIKEE);
 
         Set<String> classmateLikers = dslContext
                 .select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKEE.eq(userId))
-                .orderBy(CLASSMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(CLASSMATES_LIKES.LIKER);
         classmates.retainAll(classmateLikers);
 
@@ -42,7 +43,6 @@ public class MatchedUsersDAO {
                 .select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKER.eq(userId))
-                .orderBy(FRIENDS_LIKES.TIME_CREATED.desc())
                 .fetchSet(FRIENDS_LIKES.LIKEE);
 
         Set<String> friendLikers = dslContext
@@ -57,20 +57,53 @@ public class MatchedUsersDAO {
                 .select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKER.eq(userId))
-                .orderBy(ROOMMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(ROOMMATES_LIKES.LIKEE);
 
         Set<String> roommateLikers = dslContext
                 .select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKEE.eq(userId))
-                .orderBy(ROOMMATES_LIKES.TIME_CREATED.desc())
                 .fetchSet(ROOMMATES_LIKES.LIKER);
         roommates.retainAll(roommateLikers);
 
         classmates.addAll(friends);
         classmates.addAll(roommates);
         return classmates;
+    }
+
+    public long getLatestLikeTime(String self, String theOther) {
+        List<Timestamp> classmateTimes = dslContext
+                .select()
+                .from(CLASSMATES_LIKES)
+                .where((CLASSMATES_LIKES.LIKEE.eq(self).and(CLASSMATES_LIKES.LIKER.eq(theOther)))
+                        .or(CLASSMATES_LIKES.LIKEE.eq(theOther).and(CLASSMATES_LIKES.LIKER.eq(self))))
+                .fetch(CLASSMATES_LIKES.TIME_CREATED);
+        List<Timestamp> roommateTimes = dslContext
+                .select()
+                .from(ROOMMATES_LIKES)
+                .where((ROOMMATES_LIKES.LIKEE.eq(theOther).and(ROOMMATES_LIKES.LIKER.eq(self)))
+                        .or(ROOMMATES_LIKES.LIKEE.eq(self).and(ROOMMATES_LIKES.LIKER.eq(theOther))))
+                .fetch(ROOMMATES_LIKES.TIME_CREATED);
+        List<Timestamp> friendTimes = dslContext
+                .select()
+                .from(FRIENDS_LIKES)
+                .where((FRIENDS_LIKES.LIKEE.eq(theOther).and(FRIENDS_LIKES.LIKER.eq(self)))
+                        .or(FRIENDS_LIKES.LIKEE.eq(self).and(FRIENDS_LIKES.LIKER.eq(theOther))))
+                .fetch(FRIENDS_LIKES.TIME_CREATED);
+
+        List<Timestamp> result = new ArrayList<>();
+        result.addAll(classmateTimes);
+        result.addAll(roommateTimes);
+        result.addAll(friendTimes);
+
+        long latestTime = 0;
+        for(Timestamp val : result) {
+            long time = val.getTime();
+            if (time > latestTime) {
+                latestTime = time;
+            }
+        }
+        return latestTime;
     }
 
     public boolean matchedAtClassmates(String self, String theOther) {

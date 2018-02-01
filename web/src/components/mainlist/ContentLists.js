@@ -75,7 +75,7 @@ export const StudyAbilityInfo = (props) => (
                 rightElement={<span style={{paddingLeft: 3}}>能力:</span>}
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility} modalTitle={"学习能力"}/>}
     />
 );
 StudyAbilityInfo.propTypes = {
@@ -154,7 +154,7 @@ export const MottoInfo = (props) => (
                 }
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto} modalTitle="个性签名"/>}
     />
 );
 MottoInfo.propTypes = {
@@ -175,7 +175,7 @@ export const SelfDescription = (props) => (
                 }
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.description}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.description} modalTitle="自我描述"/>}
     />
 );
 

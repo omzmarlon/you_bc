@@ -22,11 +22,10 @@ class TruncateText extends Component {
         let expandable = this.props.text.length > this.props.maxLength;
         const firstLine = this.props.text.substring(0, this.props.maxLength);
         let visibleText = expandable ? `${firstLine}...` : this.props.text;
-        console.log(this.props.text.length);
         return (
             <div style={this.props.style} className="truncate-text" onClick={this.clickHandler}>
                 <div style={this.props.textStyle}>{visibleText}</div>
-                <Dialog open={expandable && this.state.expanded} title="个性签名" onRequestClose={this.clickHandler}>
+                <Dialog open={expandable && this.state.expanded} title={this.props.modalTitle} onRequestClose={this.clickHandler}>
                     {this.props.text}
                 </Dialog>
             </div>
@@ -38,7 +37,8 @@ TruncateText.propTypes = {
     text: PropTypes.string.isRequired,
     maxLength: PropTypes.number,
     style: PropTypes.object,
-    textStyle: PropTypes.object
+    textStyle: PropTypes.object,
+    modalTitle: PropTypes.string.isRequired
 };
 
 TruncateText.defaultProps = {

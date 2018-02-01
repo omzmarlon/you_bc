@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @RestController
 public class MatchedUsersController {
@@ -26,7 +26,11 @@ public class MatchedUsersController {
     private ProfileDAO profileDAO;
 
     @Autowired
-    public MatchedUsersController(CookieService cookieService, MatchedUsersDAO matchedUsersDAO, ProfileDAO profileDAO) {
+    public MatchedUsersController(
+            CookieService cookieService,
+            MatchedUsersDAO matchedUsersDAO,
+            ProfileDAO profileDAO
+    ) {
         this.cookieService = cookieService;
         this.matchedUsersDAO = matchedUsersDAO;
         this.profileDAO = profileDAO;
@@ -34,7 +38,7 @@ public class MatchedUsersController {
 
     @RequestMapping(path = Endpoints.MATCHED_USERS, method = RequestMethod.GET)
     public Set<MatchedUser> getAllMatchedUsers(HttpServletRequest request) {
-        Set<MatchedUser> response = new HashSet<>();
+        Set<MatchedUser> response = new TreeSet<>();
         String userId = cookieService.getAuthenticatedUserId(request);
         Set<String> matchedUsers = matchedUsersDAO.fetchAllMatchedUsers(userId);
 
@@ -45,6 +49,7 @@ public class MatchedUsersController {
                     userProfile.getAvatarUrl(),
                     userProfile.getUsername(),
                     userProfile.getWeChatId(),
+                    matchedUsersDAO.getLatestLikeTime(userId, theOther),
                     matchedUsersDAO.matchedAtClassmates(userId, theOther),
                     matchedUsersDAO.matchedAtFriends(userId, theOther),
                     matchedUsersDAO.matchedAtRoommates(userId, theOther)

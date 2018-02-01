@@ -20,7 +20,7 @@ const PokeAvatar = (props) => {
             <Avatar style={{height: 64, width: 64}} src={props.img}/>
             {props.name &&
             <div className='poke-avatar-name'>
-                <TruncateText text={props.name} style={{justifyContent: 'center'}}/>
+                <TruncateText text={props.name} style={{justifyContent: 'center'}} modalTitle="用户名"/>
             </div>}
             {props.info && <div className='poke-avatar-info'>
                 <span className='poke-avatar-gender-icon'>
