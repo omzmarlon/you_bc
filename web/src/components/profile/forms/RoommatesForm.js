@@ -118,6 +118,7 @@ class RoommatesForm extends React.Component {
                 onClose={this.props.onClose}
                 titleIcon={<AccountIcon />}
                 titleText={'找室友信息'}
+                forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&

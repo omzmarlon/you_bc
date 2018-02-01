@@ -23,7 +23,6 @@ const modalFormStyles = {
         transform: "",
     },
     dialogBody: {
-        minHeight: '40vh',
         paddingBottom: 0
     }
 };
@@ -31,11 +30,11 @@ const modalFormStyles = {
 const ModalForm = (props) => (
     <Dialog
         contentStyle={ modalFormStyles.dialogContent }
-        bodyStyle={ modalFormStyles.dialogBody }
+        bodyStyle={ {...modalFormStyles.dialogBody, ...(props.forceMinHeight?{minHeight: '40vh'}:{})} }
         style={ modalFormStyles.dialogRoot }
         repositionOnUpdate={ false }
         autoScrollBodyContent={true}
-        autoDetectWindowHeight={false}
+        autoDetectWindowHeight={!props.forceMinHeight}
         open={props.showForm}
         actions={[
             <RaisedButton
@@ -68,7 +67,8 @@ ModalForm.propTypes = {
     onDone: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     titleIcon: PropTypes.element.isRequired,
-    titleText: PropTypes.string.isRequired
+    titleText: PropTypes.string.isRequired,
+    forceMinHeight: PropTypes.bool
 };
 
 export default ModalForm;
