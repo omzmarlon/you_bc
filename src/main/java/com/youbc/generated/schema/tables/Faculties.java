@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Faculties extends TableImpl<FacultiesRecord> {
 
-    private static final long serialVersionUID = 659604354;
+    private static final long serialVersionUID = 1146603816;
 
     /**
      * The reference instance of <code>poke_you_bc.faculties</code>
@@ -50,9 +51,14 @@ public class Faculties extends TableImpl<FacultiesRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.faculties.id</code>.
+     */
+    public final TableField<FacultiesRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.faculties.faculty</code>.
      */
-    public final TableField<FacultiesRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<FacultiesRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.faculties</code> table reference
@@ -88,6 +94,14 @@ public class Faculties extends TableImpl<FacultiesRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<FacultiesRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_FACULTIES;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<FacultiesRecord> getPrimaryKey() {
         return Keys.KEY_FACULTIES_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class Faculties extends TableImpl<FacultiesRecord> {
      */
     @Override
     public List<UniqueKey<FacultiesRecord>> getKeys() {
-        return Arrays.<UniqueKey<FacultiesRecord>>asList(Keys.KEY_FACULTIES_PRIMARY);
+        return Arrays.<UniqueKey<FacultiesRecord>>asList(Keys.KEY_FACULTIES_PRIMARY, Keys.KEY_FACULTIES_FACULTY);
     }
 
     /**

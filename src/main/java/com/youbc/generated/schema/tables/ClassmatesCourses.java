@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
 
-    private static final long serialVersionUID = -914182412;
+    private static final long serialVersionUID = -1738514694;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_courses</code>
@@ -50,9 +51,14 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.classmates_courses.id</code>.
+     */
+    public final TableField<ClassmatesCoursesRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.classmates_courses.course</code>.
      */
-    public final TableField<ClassmatesCoursesRecord, String> COURSE = createField("course", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<ClassmatesCoursesRecord, String> COURSE = createField("course", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.classmates_courses</code> table reference
@@ -88,6 +94,14 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<ClassmatesCoursesRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_CLASSMATES_COURSES;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<ClassmatesCoursesRecord> getPrimaryKey() {
         return Keys.KEY_CLASSMATES_COURSES_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
      */
     @Override
     public List<UniqueKey<ClassmatesCoursesRecord>> getKeys() {
-        return Arrays.<UniqueKey<ClassmatesCoursesRecord>>asList(Keys.KEY_CLASSMATES_COURSES_PRIMARY);
+        return Arrays.<UniqueKey<ClassmatesCoursesRecord>>asList(Keys.KEY_CLASSMATES_COURSES_PRIMARY, Keys.KEY_CLASSMATES_COURSES_COURSE);
     }
 
     /**

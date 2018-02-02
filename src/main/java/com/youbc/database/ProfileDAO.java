@@ -25,7 +25,9 @@ import com.youbc.models.profile.ClassmatesProfile;
 import com.youbc.models.profile.FriendsProfile;
 import com.youbc.models.profile.RoommatesProfile;
 import com.youbc.models.profile.UserProfile;
+import com.youbc.utilities.YouBCUtils;
 import org.jooq.*;
+import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -186,7 +188,7 @@ public class ProfileDAO {
         return dslContext
                 .select(CLASSMATES_COURSES.COURSE)
                 .from(CLASSMATES_COURSES)
-                .where(CLASSMATES_COURSES.COURSE.contains(filter))
+                .where(DSL.upper(CLASSMATES_COURSES.COURSE).contains(filter.toUpperCase()))
                 .fetch()
                 .intoSet(CLASSMATES_COURSES.COURSE);
     }

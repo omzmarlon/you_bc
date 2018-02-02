@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsTags extends TableImpl<FriendsTagsRecord> {
 
-    private static final long serialVersionUID = 800530865;
+    private static final long serialVersionUID = 1137758524;
 
     /**
      * The reference instance of <code>poke_you_bc.friends_tags</code>
@@ -50,9 +51,14 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.friends_tags.id</code>.
+     */
+    public final TableField<FriendsTagsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.friends_tags.tag</code>.
      */
-    public final TableField<FriendsTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<FriendsTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.friends_tags</code> table reference
@@ -88,6 +94,14 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<FriendsTagsRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_FRIENDS_TAGS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<FriendsTagsRecord> getPrimaryKey() {
         return Keys.KEY_FRIENDS_TAGS_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
      */
     @Override
     public List<UniqueKey<FriendsTagsRecord>> getKeys() {
-        return Arrays.<UniqueKey<FriendsTagsRecord>>asList(Keys.KEY_FRIENDS_TAGS_PRIMARY);
+        return Arrays.<UniqueKey<FriendsTagsRecord>>asList(Keys.KEY_FRIENDS_TAGS_PRIMARY, Keys.KEY_FRIENDS_TAGS_TAG);
     }
 
     /**

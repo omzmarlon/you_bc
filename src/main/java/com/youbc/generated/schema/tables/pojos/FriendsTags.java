@@ -22,18 +22,26 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsTags implements Serializable {
 
-    private static final long serialVersionUID = -1271546668;
+    private static final long serialVersionUID = -555291729;
 
-    private final String tag;
+    private final Integer id;
+    private final String  tag;
 
     public FriendsTags(FriendsTags value) {
+        this.id = value.id;
         this.tag = value.tag;
     }
 
     public FriendsTags(
-        String tag
+        Integer id,
+        String  tag
     ) {
+        this.id = id;
         this.tag = tag;
+    }
+
+    public Integer getId() {
+        return this.id;
     }
 
     public String getTag() {
@@ -44,7 +52,8 @@ public class FriendsTags implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("FriendsTags (");
 
-        sb.append(tag);
+        sb.append(id);
+        sb.append(", ").append(tag);
 
         sb.append(")");
         return sb.toString();

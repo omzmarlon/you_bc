@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
 
-    private static final long serialVersionUID = 2062732457;
+    private static final long serialVersionUID = -88445582;
 
     /**
      * The reference instance of <code>poke_you_bc.roommates_tags</code>
@@ -50,9 +51,14 @@ public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.roommates_tags.id</code>.
+     */
+    public final TableField<RoommatesTagsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.roommates_tags.tag</code>.
      */
-    public final TableField<RoommatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<RoommatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.roommates_tags</code> table reference
@@ -88,6 +94,14 @@ public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<RoommatesTagsRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_ROOMMATES_TAGS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<RoommatesTagsRecord> getPrimaryKey() {
         return Keys.KEY_ROOMMATES_TAGS_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
      */
     @Override
     public List<UniqueKey<RoommatesTagsRecord>> getKeys() {
-        return Arrays.<UniqueKey<RoommatesTagsRecord>>asList(Keys.KEY_ROOMMATES_TAGS_PRIMARY);
+        return Arrays.<UniqueKey<RoommatesTagsRecord>>asList(Keys.KEY_ROOMMATES_TAGS_PRIMARY, Keys.KEY_ROOMMATES_TAGS_TAG);
     }
 
     /**
