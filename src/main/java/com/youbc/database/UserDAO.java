@@ -77,9 +77,6 @@ public class UserDAO {
         initUserProfile(userID, username, sex);
         initUserProfileImage(userID, imageUrl);
         initStudentVerification(userID);
-//        initClassmatesProfile(userID);
-//        initRoommateProfile(userID);
-//        initFriendsProfile(userID);
     }
 
     public void initUser(String userID) {
