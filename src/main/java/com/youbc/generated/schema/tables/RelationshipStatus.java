@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
 
-    private static final long serialVersionUID = 475754993;
+    private static final long serialVersionUID = 1520490844;
 
     /**
      * The reference instance of <code>poke_you_bc.relationship_status</code>
@@ -50,9 +51,14 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.relationship_status.id</code>.
+     */
+    public final TableField<RelationshipStatusRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.relationship_status.relationship</code>.
      */
-    public final TableField<RelationshipStatusRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<RelationshipStatusRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.relationship_status</code> table reference
@@ -88,6 +94,14 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<RelationshipStatusRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_RELATIONSHIP_STATUS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<RelationshipStatusRecord> getPrimaryKey() {
         return Keys.KEY_RELATIONSHIP_STATUS_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
      */
     @Override
     public List<UniqueKey<RelationshipStatusRecord>> getKeys() {
-        return Arrays.<UniqueKey<RelationshipStatusRecord>>asList(Keys.KEY_RELATIONSHIP_STATUS_PRIMARY);
+        return Arrays.<UniqueKey<RelationshipStatusRecord>>asList(Keys.KEY_RELATIONSHIP_STATUS_PRIMARY, Keys.KEY_RELATIONSHIP_STATUS_RELATIONSHIP);
     }
 
     /**

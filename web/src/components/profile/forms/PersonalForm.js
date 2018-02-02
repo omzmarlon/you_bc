@@ -123,6 +123,7 @@ class PersonalForm extends React.Component {
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon />}
                        titleText={'个人信息'}
+                       forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&

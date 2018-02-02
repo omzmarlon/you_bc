@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
 
-    private static final long serialVersionUID = 1825097444;
+    private static final long serialVersionUID = 384108235;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_major</code>
@@ -50,9 +51,14 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.classmates_major.id</code>.
+     */
+    public final TableField<ClassmatesMajorRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.classmates_major.major</code>.
      */
-    public final TableField<ClassmatesMajorRecord, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<ClassmatesMajorRecord, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.classmates_major</code> table reference
@@ -88,6 +94,14 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<ClassmatesMajorRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_CLASSMATES_MAJOR;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<ClassmatesMajorRecord> getPrimaryKey() {
         return Keys.KEY_CLASSMATES_MAJOR_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
      */
     @Override
     public List<UniqueKey<ClassmatesMajorRecord>> getKeys() {
-        return Arrays.<UniqueKey<ClassmatesMajorRecord>>asList(Keys.KEY_CLASSMATES_MAJOR_PRIMARY);
+        return Arrays.<UniqueKey<ClassmatesMajorRecord>>asList(Keys.KEY_CLASSMATES_MAJOR_PRIMARY, Keys.KEY_CLASSMATES_MAJOR_MAJOR);
     }
 
     /**

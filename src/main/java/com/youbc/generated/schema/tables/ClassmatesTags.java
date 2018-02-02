@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
 
-    private static final long serialVersionUID = -77054463;
+    private static final long serialVersionUID = 40004467;
 
     /**
      * The reference instance of <code>poke_you_bc.classmates_tags</code>
@@ -50,9 +51,14 @@ public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.classmates_tags.id</code>.
+     */
+    public final TableField<ClassmatesTagsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.classmates_tags.tag</code>.
      */
-    public final TableField<ClassmatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<ClassmatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.classmates_tags</code> table reference
@@ -88,6 +94,14 @@ public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<ClassmatesTagsRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_CLASSMATES_TAGS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<ClassmatesTagsRecord> getPrimaryKey() {
         return Keys.KEY_CLASSMATES_TAGS_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class ClassmatesTags extends TableImpl<ClassmatesTagsRecord> {
      */
     @Override
     public List<UniqueKey<ClassmatesTagsRecord>> getKeys() {
-        return Arrays.<UniqueKey<ClassmatesTagsRecord>>asList(Keys.KEY_CLASSMATES_TAGS_PRIMARY);
+        return Arrays.<UniqueKey<ClassmatesTagsRecord>>asList(Keys.KEY_CLASSMATES_TAGS_PRIMARY, Keys.KEY_CLASSMATES_TAGS_TAG);
     }
 
     /**

@@ -117,6 +117,7 @@ class FriendsForm extends React.Component {
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon/>}
                        titleText={'找朋友信息'}
+                       forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&

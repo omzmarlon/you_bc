@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
 
-    private static final long serialVersionUID = -769834782;
+    private static final long serialVersionUID = -1214811084;
 
     /**
      * The reference instance of <code>poke_you_bc.roommates_hometown</code>
@@ -50,9 +51,14 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
     }
 
     /**
+     * The column <code>poke_you_bc.roommates_hometown.id</code>.
+     */
+    public final TableField<RoommatesHometownRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>poke_you_bc.roommates_hometown.hometown</code>.
      */
-    public final TableField<RoommatesHometownRecord, String> HOMETOWN = createField("hometown", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
+    public final TableField<RoommatesHometownRecord, String> HOMETOWN = createField("hometown", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
      * Create a <code>poke_you_bc.roommates_hometown</code> table reference
@@ -88,6 +94,14 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<RoommatesHometownRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_ROOMMATES_HOMETOWN;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<RoommatesHometownRecord> getPrimaryKey() {
         return Keys.KEY_ROOMMATES_HOMETOWN_PRIMARY;
     }
@@ -97,7 +111,7 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
      */
     @Override
     public List<UniqueKey<RoommatesHometownRecord>> getKeys() {
-        return Arrays.<UniqueKey<RoommatesHometownRecord>>asList(Keys.KEY_ROOMMATES_HOMETOWN_PRIMARY);
+        return Arrays.<UniqueKey<RoommatesHometownRecord>>asList(Keys.KEY_ROOMMATES_HOMETOWN_PRIMARY, Keys.KEY_ROOMMATES_HOMETOWN_HOMETOWN);
     }
 
     /**

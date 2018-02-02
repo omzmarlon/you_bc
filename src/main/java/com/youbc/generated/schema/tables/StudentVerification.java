@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentVerification extends TableImpl<StudentVerificationRecord> {
 
-    private static final long serialVersionUID = -226695993;
+    private static final long serialVersionUID = -1792089815;
 
     /**
      * The reference instance of <code>poke_you_bc.student_verification</code>
@@ -135,7 +135,7 @@ public class StudentVerification extends TableImpl<StudentVerificationRecord> {
      */
     @Override
     public List<UniqueKey<StudentVerificationRecord>> getKeys() {
-        return Arrays.<UniqueKey<StudentVerificationRecord>>asList(Keys.KEY_STUDENT_VERIFICATION_PRIMARY);
+        return Arrays.<UniqueKey<StudentVerificationRecord>>asList(Keys.KEY_STUDENT_VERIFICATION_PRIMARY, Keys.KEY_STUDENT_VERIFICATION_EMAIL);
     }
 
     /**

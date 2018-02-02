@@ -161,6 +161,7 @@ class ClassmatesForm extends React.Component {
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon/>}
                        titleText={'找课友信息'}
+                       forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&
