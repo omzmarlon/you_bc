@@ -16,7 +16,7 @@ const InfoBar = (props) => {
 };
 
 InfoBar.propTypes = {
-    msg: PropTypes.string.isRequired,
+    msg: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     show: PropTypes.bool.isRequired
 };
 
