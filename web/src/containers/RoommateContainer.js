@@ -20,7 +20,8 @@ class RoommateContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showMissingInfoModal: false
+            showMissingInfoModal: false,
+            shouldCardGoBack: false
         };
         this.onUserSwiped = this.onUserSwiped.bind(this);
         this.genderFilter = this.genderFilter.bind(this);
@@ -36,7 +37,7 @@ class RoommateContainer extends Component {
         const { dispatch, hasInfo, genderFilter } = this.props;
         let targetUser = this.props.visibleUsers[index];
         if (!hasInfo) {
-            this.setState({showMissingInfoModal: true});
+            this.setState({showMissingInfoModal: true, shouldCardGoBack: true});
         } else {
             /*
              1. remove swiped user from visibleUsers
@@ -58,6 +59,7 @@ class RoommateContainer extends Component {
     missingInfoModalActionHandler() {
         const { dispatch } = this.props;
         dispatch(showRoommatesForm());
+        this.setState({showMissingInfoModal: false, shouldCardGoBack: false});
     }
 
     render() {
@@ -72,6 +74,7 @@ class RoommateContainer extends Component {
                         userList={this.props.visibleUsers}
                         onUserSwiped={this.onUserSwiped}
                         genderFilter={this.genderFilter}
+                        shouldCardGoBack={this.state.shouldCardGoBack}
                     />
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}

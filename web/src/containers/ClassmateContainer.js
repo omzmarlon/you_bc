@@ -21,7 +21,8 @@ class ClassmateContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showMissingInfoModal: false
+            showMissingInfoModal: false,
+            showCardGoBack: false
         };
         this.onUserSwiped = this.onUserSwiped.bind(this);
         this.genderFilter = this.genderFilter.bind(this);
@@ -37,7 +38,7 @@ class ClassmateContainer extends Component {
         const { dispatch, hasInfo, genderFilter } = this.props;
         let targetUser = this.props.visibleUsers[index];
         if (!hasInfo) {
-            this.setState({showMissingInfoModal: true});
+            this.setState({showMissingInfoModal: true, shouldCardGoBack: true});
         } else {
             /*
              1. remove swiped user from visibleUsers
@@ -59,6 +60,7 @@ class ClassmateContainer extends Component {
     missingInfoModalActionHandler() {
         const { dispatch } = this.props;
         dispatch(showClassMatesForm());
+        this.setState({showMissingInfoModal: false, shouldGoBack: false});
     }
 
     render() {
@@ -72,6 +74,7 @@ class ClassmateContainer extends Component {
                         userList={this.props.visibleUsers}
                         onUserSwiped={this.onUserSwiped}
                         genderFilter={this.genderFilter}
+                        shouldCardGoBack={this.state.shouldCardGoBack}
                     />
                     <LoadingModal show={this.props.isFetching}/>
                     <MissingProfileInfoModal

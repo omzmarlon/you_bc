@@ -18,6 +18,7 @@ import HappyFaceImg from '../../components/common/svg/HappyFaceImg'
 import CryFaceImg from '../../components/common/svg/CryFaceImg'
 // styles
 import './MainListTemplate.less'
+import FormGroup from "../profile/contents/FormGroup";
 
 const CardTransition = ({ children, ...props }) => (
     <CSSTransition
@@ -41,6 +42,7 @@ class MainListTemplate extends Component {
                                 <div className="main-list-row-wrapper">
 
                                     <Slidable
+                                        shouldGoBack={this.props.shouldCardGoBack}
                                         onFullSwipe={deltaX => this.props.onUserSwiped(index, deltaX)}
                                         element={
                                             <div className="main-list-card-list-item">
@@ -78,6 +80,7 @@ class MainListTemplate extends Component {
                     )}
                 </TransitionGroup>
                 {this.props.userList.length === 0 && <div className="no-more-user">已没有更多</div>}
+                <FormGroup/>
             </div>
         )
     }
@@ -92,7 +95,8 @@ MainListTemplate.propTypes = {
     subThemeColor: PropTypes.string.isRequired,
     userList: PropTypes.arrayOf(PropTypes.object).isRequired,
     onUserSwiped: PropTypes.func.isRequired,
-    genderFilter: PropTypes.func.isRequired
+    genderFilter: PropTypes.func.isRequired,
+    shouldCardGoBack: PropTypes.bool
 };
 
 export default MainListTemplate;

@@ -17,6 +17,12 @@ class Slidable extends React.Component {
         this.swipedHandler = this.swipedHandler.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.shouldGoBack) {
+            this.setState({swipeDelta: 0, animate: true});
+        }
+    }
+
     swipingHandler(e, deltaX) {
         this.setState({
             swipeDelta: `${-deltaX}px`,
@@ -53,6 +59,7 @@ class Slidable extends React.Component {
 
 
 Slidable.propTypes = {
+    shouldGoBack: PropTypes.bool,
     element: PropTypes.element.isRequired,
     threshold: PropTypes.number, // min pixels moved to consider a swipe as a full swipe
     onFullSwipe: PropTypes.func // called when a non-trivial swipe occurred
@@ -60,7 +67,8 @@ Slidable.propTypes = {
 
 Slidable.defaultProps = {
     threshold: 100,
-    onFullSwipe: () => {}
+    onFullSwipe: () => {},
+    shouldGoBack: false
 };
 
 export default Slidable;
