@@ -17,6 +17,8 @@ import MottoIcon from "../../common/svg/MottoIcon";
 import TagIcon from "../../common/svg/TagIcon";
 //colors
 import {PRIMARY_BLUE} from "../../../styles/constants/colors";
+import {getHometownOptions, getLocationsOptions, getRoommatesTags} from "../../../requests/profileOptionRequests";
+import {showInfoBar} from "../../../actions/global/globalActions";
 
 class RoommatesForm extends React.Component {
     constructor(props) {
@@ -24,12 +26,18 @@ class RoommatesForm extends React.Component {
         // onDoneHandler also need to change
         super(props);
         this.state = {
+            //values
             weChatId: '',
             location: '',
             hometown: '',
             motto: '',
             tags: [],
-            showError: false
+            //error
+            showError: false,
+            //options
+            locationOptions: [],
+            hometownOptions: [],
+            tagsOptions: []
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -49,6 +57,7 @@ class RoommatesForm extends React.Component {
     }
 
     componentWillReceiveProps() {
+        const { store } = this.context;
         this.setState({
             weChatId: this.props.weChatId,
             location: this.props.roommates.values.location,
@@ -56,6 +65,42 @@ class RoommatesForm extends React.Component {
             motto: this.props.roommates.values.motto,
             tags: this.props.roommates.values.tags,
         });
+        getLocationsOptions()
+            .then(response => {
+                this.setState({locationOptions: response.data});
+            })
+            .catch(err => {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取找室友地点失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+        getHometownOptions()
+            .then(response => {
+                this.setState({hometownOptions: response.data});
+            })
+            .catch(err => {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取家乡信息失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+        getRoommatesTags()
+            .then(response => {
+                this.setState({
+                    tagsOptions: response.data
+                });
+            })
+            .catch(err=> {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取找室友标签失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+
     }
 
     onWeChatIdChange(event, newValue) {
@@ -135,7 +180,7 @@ class RoommatesForm extends React.Component {
                            label={'地点'}
                            values={this.state.location}
                            onChange={this.onLocationChange}
-                           options={this.props.roommates.options.locationOptions}
+                           options={this.state.locationOptions}
                            textColor={'white'}
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
@@ -147,7 +192,7 @@ class RoommatesForm extends React.Component {
                            label={'家乡'}
                            values={this.state.hometown}
                            onChange={this.onHometownChange}
-                           options={this.props.roommates.options.hometownOptions}
+                           options={this.state.hometownOptions}
                            textColor={'white'}
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
@@ -168,7 +213,7 @@ class RoommatesForm extends React.Component {
                            label={'标签'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
-                           options={this.props.roommates.options.tagsOptions}
+                           options={this.state.tagsOptions}
                            tagColor={PRIMARY_BLUE}
                            textColor={'white'}
                            tagDisplay={true}
@@ -189,11 +234,6 @@ RoommatesForm.propTypes = {
             hometown: PropTypes.string.isRequired,
             motto: PropTypes.string.isRequired,
             tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-        }).isRequired,
-        options: PropTypes.shape({
-            locationOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-            hometownOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-            tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
         }).isRequired
     }).isRequired,
 
@@ -204,6 +244,10 @@ RoommatesForm.propTypes = {
     showWeChatInput: PropTypes.bool.isRequired,
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
+};
+
+RoommatesForm.contextTypes = {
+    store: PropTypes.object
 };
 
 export default RoommatesForm;

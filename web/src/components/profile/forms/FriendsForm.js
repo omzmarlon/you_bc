@@ -15,6 +15,8 @@ import FacultyIcon from "../../common/svg/FacultyIcon";
 import RelationshipIcon from "../../common/svg/RelationshipIcon";
 //colors
 import {PRIMARY_YELLOW} from "../../../styles/constants/colors";
+import {getFacultyOptions, getFriendsTags, getRelationshipOptions} from "../../../requests/profileOptionRequests";
+import {showInfoBar} from "../../../actions/global/globalActions";
 
 class FriendsForm extends React.Component {
     constructor(props) {
@@ -22,13 +24,18 @@ class FriendsForm extends React.Component {
         // onDoneHandler also need to change
         super(props);
         this.state = {
+            //values
             weChatId: '',
             faculty: '',
             relationship: '',
             motto: '',
             tags: [],
+            // errors
             showError: false,
-            elementOnFocus: ''
+            // options
+            facultyOptions: [],
+            relationshipOptions: [],
+            tagsOptions: []
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -48,6 +55,7 @@ class FriendsForm extends React.Component {
     }
 
     componentWillReceiveProps() {
+        const { store } = this.context;
         this.setState({
             weChatId: this.props.weChatId,
             faculty: this.props.friends.values.faculty,
@@ -55,6 +63,37 @@ class FriendsForm extends React.Component {
             motto: this.props.friends.values.motto,
             tags: this.props.friends.values.tags
         });
+        getFacultyOptions()
+            .then(response => {
+                this.setState({facultyOptions: response.data});
+            })
+            .catch(err=> {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取学院信息失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+        getRelationshipOptions()
+            .then(response => {
+                this.setState({relationshipOptions: response.data});
+            })
+            .catch(err=> {
+                store.dispatch(showInfoBar("获取情感选项失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+        getFriendsTags()
+            .then(response => {
+                this.setState({tagsOptions: response.data});
+            })
+            .catch(err=> {
+                store.dispatch(showInfoBar("获取情感选项失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
     }
 
     onWeChatIdChange(event, newValue) {
@@ -133,7 +172,7 @@ class FriendsForm extends React.Component {
                            label={'学院'}
                            values={this.state.faculty}
                            onChange={this.onFacultyChange}
-                           options={this.props.friends.options.facultyOptions}
+                           options={this.state.facultyOptions}
                            tagColor={PRIMARY_YELLOW}
                            textColor={'white'}
                            tagDisplay={false}
@@ -144,7 +183,7 @@ class FriendsForm extends React.Component {
                            label={'情感状况'}
                            values={this.state.relationship}
                            onChange={this.onRelationshipChange}
-                           options={this.props.friends.options.relationshipOptions}
+                           options={this.state.relationshipOptions}
                            tagColor={PRIMARY_YELLOW}
                            textColor={'white'}
                            tagDisplay={false}
@@ -165,7 +204,7 @@ class FriendsForm extends React.Component {
                            label={'标签'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
-                           options={this.props.friends.options.tagsOptions}
+                           options={this.state.tagsOptions}
                            tagColor={PRIMARY_YELLOW}
                            textColor={'white'}
                            tagDisplay={true}
@@ -186,11 +225,6 @@ FriendsForm.propTypes = {
             relationship: PropTypes.string.isRequired,
             motto: PropTypes.string.isRequired,
             tags: PropTypes.arrayOf(PropTypes.string).isRequired
-        }).isRequired,
-        options: PropTypes.shape({
-            facultyOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-            relationshipOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-            tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
         }).isRequired
     }).isRequired,
 
@@ -201,6 +235,10 @@ FriendsForm.propTypes = {
     showWeChatInput: PropTypes.bool.isRequired,
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
+};
+
+FriendsForm.contextTypes = {
+    store: PropTypes.object
 };
 
 export default FriendsForm;

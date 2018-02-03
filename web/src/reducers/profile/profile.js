@@ -17,11 +17,6 @@ const initialState = {
             courses: [],
             motto: '',
             tags: [],
-        },
-        options: {
-            majorOptions: [],
-            coursesOptions: [],
-            tagsOptions: []
         }
     },
     roommates: {
@@ -30,11 +25,6 @@ const initialState = {
             hometown: '',
             motto: '',
             tags: [],
-        },
-        options: {
-            locationOptions: [],
-            hometownOptions: [],
-            tagsOptions: [],
         }
     },
     friends: {
@@ -43,11 +33,6 @@ const initialState = {
             relationship: '',
             motto: '',
             tags: [],
-        },
-        options: {
-            facultyOptions: [],
-            relationshipOptions: [],
-            tagsOptions: [],
         }
     },
     personal: {
@@ -59,9 +44,6 @@ const initialState = {
             // these are updated separately
             avatar: '',
             weChatId: ''
-        },
-        options: {
-            constellationOptions: ["天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"]
         }
     },
     matchedUsers: [],
@@ -119,97 +101,6 @@ const profile = (state = initialState, action) => {
                         avatar: action.avatar,
                     },
                     options: state.personal.options
-                }
-            };
-        // menu options
-        case RECEIVE_MAJORS_OPTIONS:
-            return {...state,
-                classmates: {
-                    values: {...state.classmates.values},
-                    options: {
-                        ...state.classmates.options,
-                        majorOptions: action.majorOptions,
-                    }
-                }
-            };
-        case RECEIVE_COURSES_OPTIONS:
-            return {...state,
-                classmates: {
-                    values: {...state.classmates.values},
-                    options: {
-                        ...state.classmates.options,
-                        coursesOptions: action.coursesOptions,
-                    }
-                }
-            };
-        case RECEIVE_CLASSMATES_TAGS:
-            return {...state,
-                classmates: {
-                    values: {...state.classmates.values},
-                    options: {
-                        ...state.classmates.options,
-                        tagsOptions: action.classmatesTags
-                    }
-                }
-            };
-        case RECEIVE_LOCATIONS_OPTIONS:
-            return {...state,
-                roommates: {
-                    values: {...state.roommates.values},
-                    options: {
-                        ...state.roommates.options,
-                        locationOptions: action.locationOptions
-                    }
-                }
-            };
-        case RECEIVE_HOMETOWNS_OPTIONS:
-            return {...state,
-                roommates: {
-                    values: {...state.roommates.values},
-                    options: {
-                        ...state.roommates.options,
-                        hometownOptions: action.hometownOptions,
-                    }
-                }
-            };
-        case RECEIVE_ROOMMATE_TAGS:
-            return {...state,
-                roommates: {
-                    values: {...state.roommates.values},
-                    options: {
-                        ...state.roommates.options,
-                        tagsOptions: action.roommatesTags
-                    }
-                }
-            };
-        case RECEIVE_FACULTIES_OPTIONS:
-            return {...state,
-                friends: {
-                    values: {...state.friends.values},
-                    options: {
-                        ...state.friends.options,
-                        facultyOptions: action.facultyOptions,
-                    }
-                }
-            };
-        case RECEIVE_RELATIONSHIP_STATUSES_OPTIONS:
-            return {...state,
-                friends: {
-                    values: {...state.friends.values},
-                    options: {
-                        ...state.friends.options,
-                        relationshipOptions: action.relationshipOptions,
-                    }
-                }
-            };
-        case RECEIVE_FRIENDS_TAGS:
-            return {...state,
-                friends: {
-                    values: {...state.friends.values},
-                    options: {
-                        ...state.friends.options,
-                        tagsOptions: action.friendsTags
-                    }
                 }
             };
         default:

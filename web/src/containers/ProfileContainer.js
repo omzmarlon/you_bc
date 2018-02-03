@@ -18,10 +18,6 @@ import {
     fetchClassmatesInfo, fetchFriendsInfo, fetchMatchedUsers, fetchPersonalInfo,
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
-import {
-    fetchClassmatesTags, fetchCourses, fetchFaculties, fetchFriendsTags, fetchHometownOptions, fetchLocationOptions,
-    fetchMajors, fetchRelationship, fetchRoommatesTags
-} from "../actions/profile/profileMenuOptionsFetchActions";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -32,16 +28,6 @@ class ProfileContainer extends React.Component {
         store.dispatch(fetchRoommatesInfo());
         store.dispatch(fetchPersonalInfo());
         store.dispatch(fetchMatchedUsers());
-        // TODO: may be move all these into forms
-        store.dispatch(fetchMajors());
-        //store.dispatch(fetchCourses()); // fetch courses requires search filter don't call it here
-        store.dispatch(fetchClassmatesTags());
-        store.dispatch(fetchLocationOptions());
-        store.dispatch(fetchHometownOptions());
-        store.dispatch(fetchRoommatesTags());
-        store.dispatch(fetchFaculties());
-        store.dispatch(fetchRelationship());
-        store.dispatch(fetchFriendsTags());
     }
 
     onTabMatching() {
