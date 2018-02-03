@@ -94,7 +94,7 @@ const mapStateToProps = state => ({
     isFetching: state.mainList.isFetching,
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
-    hasInfo: !(state.profile.classmates.values.major === ""),
+    hasInfo: !(state.profile.classmates.major === ""),
     genderFilter: state.mainList.genderFilter,
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)

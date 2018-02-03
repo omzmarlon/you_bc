@@ -18,6 +18,7 @@ import MixGenderIcon from "../../common/svg/MixGenderIcon";
 import {PRIMARY_GREEN} from "../../../styles/constants/colors";
 
 const sexOptions = ['男', '女'];
+const horoscopeOptions = ["天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"];
 
 class PersonalForm extends React.Component {
     constructor(props) {
@@ -80,7 +81,7 @@ class PersonalForm extends React.Component {
 
     onConstellationChangeHandler(event, menuItem, index) {
         this.setState({
-            constellation: this.props.personalOptions.constellationOptions[index]
+            constellation: horoscopeOptions[index]
         });
     }
 
@@ -167,7 +168,7 @@ class PersonalForm extends React.Component {
                            label={'星座'}
                            values={this.state.constellation}
                            onChange={this.onConstellationChangeHandler}
-                           options={this.props.personalOptions.constellationOptions}
+                           options={horoscopeOptions}
                            textColor={'white'}
                            tagColor={PRIMARY_GREEN}
                            tagDisplay={false}
@@ -187,10 +188,6 @@ PersonalForm.propTypes = {
         constellation: PropTypes.string,
         username: PropTypes.string,
         sex: PropTypes.string,
-    }).isRequired,
-    //options
-    personalOptions: PropTypes.shape({
-        constellationOptions: PropTypes.arrayOf(PropTypes.string)
     }).isRequired,
     // on done/cancel
     onDone: PropTypes.func.isRequired,

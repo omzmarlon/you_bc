@@ -18,8 +18,7 @@ import TagIcon from "../../common/svg/TagIcon";
 //colors
 import {PRIMARY_RED, SECONDARY_RED} from "../../../styles/constants/colors";
 import SearchableMenuInput from "../../common/form/SearchableMenuInput";
-import {fetchCourses} from "../../../actions/profile/profileMenuOptionsFetchActions";
-import {getCourseOptions} from "../../../requests/profileOptionRequests";
+import {getClassmatesTags, getCourseOptions, getMajorOptions} from "../../../requests/profileOptionRequests";
 import {showInfoBar} from "../../../actions/global/globalActions";
 
 class ClassmatesForm extends React.Component {
@@ -29,14 +28,20 @@ class ClassmatesForm extends React.Component {
         // onDoneHandler also need to change
         super(props);
         this.state = {
+            loadingCourseOptions: false,
+            //values
             weChatId: '',
             major: '',
             courses: [],
             motto: '',
             tags: [],
+            //error
             showError: false,
+            // options
             coursesOptions: [],
-            loadingCourseOptions: false
+            majorOptions: [],
+            tagsOptions: [],
+
         };
         this.onWeChatIdChange = this.onWeChatIdChange.bind(this);
         this.onDoneHandler = this.onDoneHandler.bind(this);
@@ -56,13 +61,37 @@ class ClassmatesForm extends React.Component {
     }
 
     componentWillReceiveProps() {
+        const { store } = this.context;
         this.setState({
             weChatId: this.props.weChatId,
-            major: this.props.classmates.values.major,
-            courses: this.props.classmates.values.courses,
-            motto: this.props.classmates.values.motto,
-            tags: this.props.classmates.values.tags
+            major: this.props.classmates.major,
+            courses: this.props.classmates.courses,
+            motto: this.props.classmates.motto,
+            tags: this.props.classmates.tags
         });
+        getMajorOptions()
+            .then(response => {
+                this.setState({majorOptions: response.data});
+            })
+            .catch(err => {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取专业选项失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+        getClassmatesTags()
+            .then(res => {
+                this.setState({tagsOptions: res.data});
+            })
+            .catch(err => {
+                // TODO: centralize error handling
+                store.dispatch(showInfoBar("获取找课友标签失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            });
+
     }
 
     onWeChatIdChange(event, newValue) {
@@ -70,7 +99,7 @@ class ClassmatesForm extends React.Component {
     }
 
     onMajorChange(event, menuItem, index) {
-        this.setState({major: this.props.classmates.options.majorOptions[index]});
+        this.setState({major: this.state.majorOptions[index]});
     }
 
     onCourseSearchChange(newValue) {
@@ -84,7 +113,7 @@ class ClassmatesForm extends React.Component {
             .catch(err => {
                 // TODO: centralize error handling
                 store.dispatch(showInfoBar("获取课程选项失败"));
-                this.setState({loadingCourseOptions: false})
+                this.setState({loadingCourseOptions: false});
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -113,14 +142,14 @@ class ClassmatesForm extends React.Component {
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.props.classmates.options.tagsOptions[index]);
+        const ind = this.state.tags.indexOf(this.state.tagsOptions[index]);
         if (ind === -1) {
             // TODO: factor out common code to enforce max 3
             // can only choose max 3
             if (this.state.tags.length <3) {
-                this.setState({tags: [...this.state.tags, this.props.classmates.options.tagsOptions[index]]});
+                this.setState({tags: [...this.state.tags, this.state.tagsOptions[index]]});
             } else {
-                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.props.classmates.options.tagsOptions[index]]});
+                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.state.tagsOptions[index]]});
             }
         } else {
             const tags = this.state.tags;
@@ -178,7 +207,7 @@ class ClassmatesForm extends React.Component {
                            label={'专业'}
                            values={this.state.major}
                            onChange={this.onMajorChange}
-                           options={this.props.classmates.options.majorOptions}
+                           options={this.state.majorOptions}
                            textColor={'white'}
                            tagDisplay={false}
                            tagColor={PRIMARY_RED}
@@ -214,7 +243,7 @@ class ClassmatesForm extends React.Component {
                            label={'标签'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
-                           options={this.props.classmates.options.tagsOptions}
+                           options={this.state.tagsOptions}
                            tagColor={PRIMARY_RED}
                            textColor={'white'}
                            tagDisplay={true}
@@ -230,17 +259,10 @@ ClassmatesForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
     // form values/options:
     classmates: PropTypes.shape({
-        values: PropTypes.shape({
-            major: PropTypes.string.isRequired,
-            courses: PropTypes.arrayOf(PropTypes.string).isRequired,
-            motto: PropTypes.string.isRequired,
-            tags: PropTypes.arrayOf(PropTypes.string).isRequired
-        }).isRequired,
-        options: PropTypes.shape({
-            majorOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-            coursesOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-            tagsOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-        }).isRequired
+        major: PropTypes.string.isRequired,
+        courses: PropTypes.arrayOf(PropTypes.string).isRequired,
+        motto: PropTypes.string.isRequired,
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired,
 
     // on done/cancel

@@ -93,7 +93,7 @@ const mapStateToProps = state => ({
     isFetching: state.mainList.isFetching,
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
-    hasInfo: !(state.profile.roommates.values.hometown === ""),
+    hasInfo: !(state.profile.roommates.hometown === ""),
     genderFilter: state.mainList.genderFilter,
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)

@@ -39,7 +39,7 @@ AvatarBar.propTypes = {
 };
 
 const mapStateToProps = (states, ownProps) => ({
-    avatar: states.profile.personal.values.avatar
+    avatar: states.profile.personal.avatar
 });
 
 const mapDispatchToProps = (dispatch) => (
