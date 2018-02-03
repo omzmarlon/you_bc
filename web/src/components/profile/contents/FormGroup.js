@@ -23,33 +23,33 @@ const FormGroup = (props) => (
                         classmates={props.classmates}
                         onDone={props.onClassmatesUpdate}
                         onClose={props.closeClassmatesEdit}
-                        showWeChatInput={!props.personal.values.weChatId}
-                        weChatId={props.personal.values.weChatId}
+                        showWeChatInput={!props.personal.weChatId}
+                        weChatId={props.personal.weChatId}
                         onWeChatIdDone={props.onWeChatIdDone}
         />
         <FriendsForm showForm={props.showFriendsForm}
                      friends={props.friends}
                      onDone={props.onFriendsUpdate}
                      onClose={props.closeFriendsEdit}
-                     showWeChatInput={!props.personal.values.weChatId}
-                     weChatId={props.personal.values.weChatId}
+                     showWeChatInput={!props.personal.weChatId}
+                     weChatId={props.personal.weChatId}
                      onWeChatIdDone={props.onWeChatIdDone}
         />
         <RoommatesForm showForm={props.showRoommatesForm}
                        roommates={props.roommates}
                        onDone={props.onRoommatesUpdate}
                        onClose={props.closeRoommatesEdit}
-                       showWeChatInput={!props.personal.values.weChatId}
-                       weChatId={props.personal.values.weChatId}
+                       showWeChatInput={!props.personal.weChatId}
+                       weChatId={props.personal.weChatId}
                        onWeChatIdDone={props.onWeChatIdDone}
         />
         <PersonalForm showForm={props.showPersonalForm}
                       onDone={props.onPersonalUpdate}
                       onClose={props.closePersonalEdit}
-                      personal={props.personal.values}
+                      personal={props.personal}
                       personalOptions={props.personal.options}
-                      showWeChatInput={!props.personal.values.weChatId}
-                      weChatId={props.personal.values.weChatId}
+                      showWeChatInput={!props.personal.weChatId}
+                      weChatId={props.personal.weChatId}
                       onWeChatIdDone={props.onWeChatIdDone}
         />
     </div>

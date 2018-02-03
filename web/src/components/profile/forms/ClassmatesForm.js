@@ -64,10 +64,10 @@ class ClassmatesForm extends React.Component {
         const { store } = this.context;
         this.setState({
             weChatId: this.props.weChatId,
-            major: this.props.classmates.values.major,
-            courses: this.props.classmates.values.courses,
-            motto: this.props.classmates.values.motto,
-            tags: this.props.classmates.values.tags
+            major: this.props.classmates.major,
+            courses: this.props.classmates.courses,
+            motto: this.props.classmates.motto,
+            tags: this.props.classmates.tags
         });
         getMajorOptions()
             .then(response => {
@@ -99,7 +99,7 @@ class ClassmatesForm extends React.Component {
     }
 
     onMajorChange(event, menuItem, index) {
-        this.setState({major: this.props.classmates.options.majorOptions[index]});
+        this.setState({major: this.state.majorOptions[index]});
     }
 
     onCourseSearchChange(newValue) {
@@ -142,14 +142,14 @@ class ClassmatesForm extends React.Component {
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.props.classmates.options.tagsOptions[index]);
+        const ind = this.state.tags.indexOf(this.state.tagsOptions[index]);
         if (ind === -1) {
             // TODO: factor out common code to enforce max 3
             // can only choose max 3
             if (this.state.tags.length <3) {
-                this.setState({tags: [...this.state.tags, this.props.classmates.options.tagsOptions[index]]});
+                this.setState({tags: [...this.state.tags, this.state.tagsOptions[index]]});
             } else {
-                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.props.classmates.options.tagsOptions[index]]});
+                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.state.tagsOptions[index]]});
             }
         } else {
             const tags = this.state.tags;
@@ -259,12 +259,10 @@ ClassmatesForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
     // form values/options:
     classmates: PropTypes.shape({
-        values: PropTypes.shape({
-            major: PropTypes.string.isRequired,
-            courses: PropTypes.arrayOf(PropTypes.string).isRequired,
-            motto: PropTypes.string.isRequired,
-            tags: PropTypes.arrayOf(PropTypes.string).isRequired
-        }).isRequired
+        major: PropTypes.string.isRequired,
+        courses: PropTypes.arrayOf(PropTypes.string).isRequired,
+        motto: PropTypes.string.isRequired,
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired,
 
     // on done/cancel

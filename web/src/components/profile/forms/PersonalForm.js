@@ -81,7 +81,7 @@ class PersonalForm extends React.Component {
 
     onConstellationChangeHandler(event, menuItem, index) {
         this.setState({
-            constellation: this.props.personalOptions.constellationOptions[index]
+            constellation: horoscopeOptions[index]
         });
     }
 

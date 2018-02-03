@@ -60,10 +60,10 @@ class RoommatesForm extends React.Component {
         const { store } = this.context;
         this.setState({
             weChatId: this.props.weChatId,
-            location: this.props.roommates.values.location,
-            hometown: this.props.roommates.values.hometown,
-            motto: this.props.roommates.values.motto,
-            tags: this.props.roommates.values.tags,
+            location: this.props.roommates.location,
+            hometown: this.props.roommates.hometown,
+            motto: this.props.roommates.motto,
+            tags: this.props.roommates.tags,
         });
         getLocationsOptions()
             .then(response => {
@@ -108,11 +108,11 @@ class RoommatesForm extends React.Component {
     }
 
     onLocationChange(event, menuItem, index) {
-        this.setState({location: this.props.roommates.options.locationOptions[index]})
+        this.setState({location: this.state.locationOptions[index]})
     }
 
     onHometownChange(event, menuItem, index) {
-        this.setState({hometown: this.props.roommates.options.hometownOptions[index]})
+        this.setState({hometown: this.state.hometownOptions[index]})
     }
 
     onMottoChange(event, newValue) {
@@ -120,14 +120,14 @@ class RoommatesForm extends React.Component {
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.props.roommates.options.tagsOptions[index]);
+        const ind = this.state.tags.indexOf(this.state.tagsOptions[index]);
         if (ind === -1) {
             // TODO: factor out common code to enforce max 3
             // can only choose max 3
             if (this.state.tags.length <3) {
-                this.setState({tags: [...this.state.tags, this.props.roommates.options.tagsOptions[index]]});
+                this.setState({tags: [...this.state.tags, this.state.tagsOptions[index]]});
             } else {
-                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.props.roommates.options.tagsOptions[index]]});
+                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.state.tagsOptions[index]]});
             }
         } else {
             const tags = this.state.tags;
@@ -229,12 +229,10 @@ RoommatesForm.propTypes = {
     showForm: PropTypes.bool.isRequired,
     // form values/options:
     roommates: PropTypes.shape({
-        values: PropTypes.shape({
-            location: PropTypes.string.isRequired,
-            hometown: PropTypes.string.isRequired,
-            motto: PropTypes.string.isRequired,
-            tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-        }).isRequired
+        location: PropTypes.string.isRequired,
+        hometown: PropTypes.string.isRequired,
+        motto: PropTypes.string.isRequired,
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
 
     // on done/cancel
