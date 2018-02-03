@@ -45,6 +45,7 @@ class Slidable extends React.Component {
             <Swipeable
                 onSwiping={this.swipingHandler}
                 onSwiped={this.swipedHandler}
+                preventDefaultTouchmoveEvent={true}
                 stopPropagation={true}
             >
                 <div style={{transform: `translateX(${this.state.swipeDelta})`}}
