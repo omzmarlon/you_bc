@@ -32,6 +32,10 @@ export const DialogMenu = (props) => (
         <Menu value={props.values}
               multiple={props.multiple}
               onItemClick={props.onItemClick}
+              selectedMenuItemStyle={{
+                  backgroundColor: 'rgb(128, 128, 128)',
+                  color: 'white'
+              }}
         >
             {
                 props.options.map(
