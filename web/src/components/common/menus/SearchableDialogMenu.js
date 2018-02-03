@@ -70,12 +70,16 @@ class SearchableDialogMenu extends React.Component {
 
                 {
                     this.props.options.length !== 0 &&
-                    <Paper zDepth={1} className={'courses-found-container'}>
+                    <div className={'courses-found-container'}>
                         {
                             this.props.loadingOptions?
                                 <Progress style={{margin: '10px auto'}}/>:
                                 <Menu value={this.props.values}
                                       multiple={this.props.multiple}
+                                      selectedMenuItemStyle={{
+                                          backgroundColor: 'rgb(128, 128, 128)',
+                                          color: 'white'
+                                      }}
                                 >
                                     {
                                         this.props.options.map(
@@ -90,7 +94,7 @@ class SearchableDialogMenu extends React.Component {
                                     }
                                 </Menu>
                         }
-                    </Paper>
+                    </div>
                 }
 
             </Dialog>
