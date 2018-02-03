@@ -42,13 +42,10 @@ class SearchableDialogMenu extends React.Component {
                 autoScrollBodyContent={true}
                 contentStyle={{...formSize, ...menuStyle}}
             >
-                <SearchBar handleSearchChange={this.props.handleSearchChange}/>
-
                 <Paper zDepth={1}
                        className={'chosen-courses-container'}
                 >
-                    <div className={'searchable-dialog-title'}>已选课程:</div>
-                    <Divider/>
+                    <div className={'searchable-dialog-title'}>我的课程:</div>
                     <div className={'chosen-courses'}>
                         {
                             this.props.multiple?
@@ -69,29 +66,32 @@ class SearchableDialogMenu extends React.Component {
                         }
                     </div>
                 </Paper>
-                <Paper zDepth={1} className={'courses-found-container'}>
-                    <div className={'searchable-dialog-title'}>搜索到的课程：</div>
-                    <Divider/>
-                    {
-                        this.props.loadingOptions?
-                            <Progress style={{margin: '10px auto'}}/>:
-                            <Menu value={this.props.values}
-                                  multiple={this.props.multiple}
-                            >
-                                {
-                                    this.props.options.map(
-                                        (c, index) =>
-                                            <MenuItem onClick={() => this.props.onChoiceChange(c)}
-                                                      style={menuItemStyle}
-                                                      key={index}
-                                                      value={c}
-                                                      primaryText={c}
-                                            />
-                                    )
-                                }
-                            </Menu>
-                    }
-                </Paper>
+                <SearchBar handleSearchChange={this.props.handleSearchChange}/>
+
+                {
+                    this.props.options.length !== 0 &&
+                    <Paper zDepth={1} className={'courses-found-container'}>
+                        {
+                            this.props.loadingOptions?
+                                <Progress style={{margin: '10px auto'}}/>:
+                                <Menu value={this.props.values}
+                                      multiple={this.props.multiple}
+                                >
+                                    {
+                                        this.props.options.map(
+                                            (c, index) =>
+                                                <MenuItem onClick={() => this.props.onChoiceChange(c)}
+                                                          style={menuItemStyle}
+                                                          key={index}
+                                                          value={c}
+                                                          primaryText={c}
+                                                />
+                                        )
+                                    }
+                                </Menu>
+                        }
+                    </Paper>
+                }
 
             </Dialog>
         );
