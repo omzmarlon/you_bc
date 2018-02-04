@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 //styles
-import {formSize} from '../../../styles/material/formStyles';
+import {modalStyles} from "../../../styles/constants/modal";
 
 
 const menuItemStyle = {
@@ -16,6 +16,10 @@ const menuItemStyle = {
 
 export const DialogMenu = (props) => (
     <Dialog
+        contentStyle={ modalStyles.dialogContent }
+        bodyStyle={ modalStyles.dialogBody }
+        style={ modalStyles.dialogRoot }
+        repositionOnUpdate={ false }
         open={props.showMenu}
         actions={[
             <RaisedButton
@@ -27,7 +31,6 @@ export const DialogMenu = (props) => (
             </RaisedButton>
         ]}
         autoScrollBodyContent={true}
-        contentStyle={formSize}
     >
         <Menu value={props.values}
               multiple={props.multiple}
