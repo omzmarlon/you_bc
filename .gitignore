@@ -10,7 +10,7 @@ target
 node_modules
 npm-debug.log
 /.gradle
-/build
+build
 /out
 /src/main/resources/public
 
