@@ -9,11 +9,10 @@ import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Progress from 'material-ui/CircularProgress';
-
-//styles
-import {formSize} from '../../../styles/material/formStyles';
-import "./SearchableDialogMenu.less";
 import SearchBar from "../form/SearchBar";
+//styles
+import "./SearchableDialogMenu.less";
+import {modalStyles} from "../../../styles/constants/modal";
 
 const menuStyle = {
     display: 'flex',
@@ -29,6 +28,10 @@ class SearchableDialogMenu extends React.Component {
     render() {
         return (
             <Dialog
+                contentStyle={{ ...modalStyles.dialogContent, ...menuStyle }}
+                bodyStyle={ modalStyles.dialogBody }
+                style={ modalStyles.dialogRoot }
+                repositionOnUpdate={ false }
                 open={this.props.showMenu}
                 actions={[
                     <RaisedButton
@@ -40,7 +43,6 @@ class SearchableDialogMenu extends React.Component {
                     </RaisedButton>
                 ]}
                 autoScrollBodyContent={true}
-                contentStyle={{...formSize, ...menuStyle}}
             >
                 <Paper zDepth={1}
                        className={'chosen-courses-container'}

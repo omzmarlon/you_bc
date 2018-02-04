@@ -4,14 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-const dist = '../../src/main/resources/public';
+const dist = './build';
 
 module.exports = {
     entry: [
         './src/index.js'
     ],
     output: {
-        path: helpers.root('..', 'src', 'main', 'resources', 'public'),
+        path: helpers.root('.', 'build'),
         filename: 'bundle.js'
     },
     module: {

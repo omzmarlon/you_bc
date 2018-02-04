@@ -7,31 +7,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 //styles
 import "./ModalForm.less";
+import {modalStyles} from "../../../styles/constants/modal";
 //icons
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
-const modalFormStyles = {
-    dialogRoot: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingTop: 0
-    },
-    dialogContent: {
-        position: "relative",
-        width: "90vw",
-        transform: "",
-    },
-    dialogBody: {
-        paddingBottom: 0
-    }
-};
-
 const ModalForm = (props) => (
     <Dialog
-        contentStyle={ modalFormStyles.dialogContent }
-        bodyStyle={ {...modalFormStyles.dialogBody, ...(props.forceMinHeight?{minHeight: '40vh'}:{})} }
-        style={ modalFormStyles.dialogRoot }
+        contentStyle={ modalStyles.dialogContent }
+        bodyStyle={ {...modalStyles.dialogBody, ...(props.forceMinHeight?{minHeight: '40vh'}:{})} }
+        style={ modalStyles.dialogRoot }
         repositionOnUpdate={ false }
         autoScrollBodyContent={true}
         autoDetectWindowHeight={!props.forceMinHeight}
