@@ -5,13 +5,12 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 // styles
 import "./HomePageContainer.less";
-import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_WHITE, PRIMARY_YELLOW} from "../styles/constants/colors";
+import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW} from "../styles/constants/colors";
 import {defaultIconSize} from "../styles/material/iconStyles";
 // components
 import Block from "../components/homePage/Block";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import Profile from "material-ui/svg-icons/action/account-circle";
-import Rollable from "../components/common/Rollable";
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
 import {
@@ -21,7 +20,7 @@ import {
     fetchPersonalInfo,
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
-import {friendRollingIcon} from "../constants/RollingIcons";
+import RollingEmoji from "../components/common/RollingEmoji";
 
 class HomePageContainer extends Component {
 
@@ -37,21 +36,11 @@ class HomePageContainer extends Component {
     }
 
     render() {
-        const friendDisplayName = (
-            <div className="friend-display-name">
-                <span>找</span>
-                <Rollable
-                    rollingInterval={1000}
-                    rollingItems={friendRollingIcon(40)}
-                />
-                <span>友</span>
-            </div>
-        );
 
         return(
             <div className="home-page">
                 <Block className="classmate-block" path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_RED}/>
-                <Block className="friend-block" path={TO_FRIENDS} displayName={friendDisplayName} color={PRIMARY_YELLOW}/>
+                <Block className="friend-block" path={TO_FRIENDS} displayName={<RollingEmoji/>} color={PRIMARY_YELLOW}/>
                 <Block className="roommate-block" path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_BLUE}/>
                 <Link to={TO_PROFILE}>
                     <FloatingActionButton className={'profile-button'}>

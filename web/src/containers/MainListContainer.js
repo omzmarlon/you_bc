@@ -1,23 +1,24 @@
 'use strict';
 // libs
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import { connect }  from 'react-redux'
 // component
 import MainListTemplate from "../components/mainlist/MainListTemplate";
 import LoadingModal from "../components/common/modal/LoadingModal";
 import MissingProfileInfoModal from "../components/common/modal/MissingProfileInfoModal";
 import { Redirect } from "react-router-dom";
-// styles
-import { PRIMARY_RED, SECONDARY_RED } from '../styles/constants/colors'
+import {showClassMatesForm, showFriendsForm, showRoommatesForm} from "../actions/profile/profileUIActions";
 // actions
 import {
     dislikeCandidate,
     fetchCandidates, fetchMoreCandidate, likeCandidate,
     updateVisibleUsersAndCandidates
-} from "../actions/mainList/classmateActions";
-import {showClassMatesForm} from "../actions/profile/profileUIActions";
+} from "../actions/mainList/mainListActions";
+//constants
+import {FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API} from "../constants/api";
 
-class ClassmateContainer extends Component {
+class MainListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,12 +31,12 @@ class ClassmateContainer extends Component {
     }
 
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch(fetchCandidates(10));
+        const { dispatch, fetchAPI } = this.props;
+        dispatch(fetchCandidates(fetchAPI, 10));
     }
 
     onUserSwiped(index, deltaX) {
-        const { dispatch, hasInfo, genderFilter } = this.props;
+        const { dispatch, hasInfo, genderFilter, fetchAPI, dislikeAPI, likeAPI } = this.props;
         let targetUser = this.props.visibleUsers[index];
         if (!hasInfo) {
             this.setState({showMissingInfoModal: true, shouldCardGoBack: true});
@@ -47,19 +48,28 @@ class ClassmateContainer extends Component {
              4. make a new request fetch one more user and add to candidates
              */
             dispatch(updateVisibleUsersAndCandidates(index));
-            dispatch(fetchMoreCandidate(1, genderFilter));
-            (deltaX < 0) ? likeCandidate(targetUser.userId) : dislikeCandidate(targetUser.userId);
+            dispatch(fetchMoreCandidate(fetchAPI, 1, genderFilter));
+            (deltaX < 0) ? likeCandidate(likeAPI(targetUser.userId)) : dislikeCandidate(dislikeAPI(targetUser.userId));
         }
     }
 
     genderFilter(event, child) {
-        const { dispatch } = this.props;
-        dispatch(fetchCandidates(10, child.key));
+        const { dispatch, fetchAPI } = this.props;
+        dispatch(fetchCandidates(fetchAPI, 10, child.key));
     }
 
     missingInfoModalActionHandler() {
-        const { dispatch } = this.props;
-        dispatch(showClassMatesForm());
+        const { dispatch, fetchAPI } = this.props;
+        switch (fetchAPI) {
+            case FETCH_CLASSMATES_API:
+                dispatch(showClassMatesForm());
+                break;
+            case FETCH_ROOMMATES_API:
+                dispatch(showRoommatesForm());
+                break;
+            case FETCH_FRIENDS_API:
+                dispatch(showFriendsForm());
+        }
         this.setState({showMissingInfoModal: false, shouldGoBack: false});
     }
 
@@ -68,9 +78,9 @@ class ClassmateContainer extends Component {
             return(
                 <div>
                     <MainListTemplate
-                        title="找课友"
-                        themeColor={PRIMARY_RED}
-                        subThemeColor={SECONDARY_RED}
+                        title={this.props.title}
+                        themeColor={this.props.themeColor}
+                        subThemeColor={this.props.subThemeColor}
                         userList={this.props.visibleUsers}
                         onUserSwiped={this.onUserSwiped}
                         genderFilter={this.genderFilter}
@@ -79,7 +89,7 @@ class ClassmateContainer extends Component {
                     <LoadingModal show={this.props.isFetching}/>
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}
-                        content="您还没有填写找课友相关信息，信息完整后才能继续匹配 😊"
+                        content="您还没有填写相关信息，信息完整后才能继续匹配 😊"
                         onClick={this.missingInfoModalActionHandler}
                     />
                 </div>
@@ -90,11 +100,33 @@ class ClassmateContainer extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+MainListContainer.propTypes = {
+    fetchAPI: PropTypes.string.isRequired,
+    likeAPI: PropTypes.func.isRequired,
+    dislikeAPI: PropTypes.func.isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    themeColor: PropTypes.string.isRequired,
+    subThemeColor: PropTypes.string.isRequired
+};
+
+const hasInfoHelper = (api, profileState) => {
+    switch (api) {
+        case FETCH_CLASSMATES_API:
+            return !(profileState.classmates.major === "");
+        case FETCH_ROOMMATES_API:
+            return !(profileState.roommates.hometown === "");
+        case FETCH_FRIENDS_API:
+            return !(profileState.friends.faculty === "");
+        default:
+            return false;
+    }
+};
+
+const mapStateToProps = (state, ownProps) => ({
     isFetching: state.mainList.isFetching,
     candidates: state.mainList.candidates,
     visibleUsers: state.mainList.visibleUsers,
-    hasInfo: !(state.profile.classmates.major === ""),
+    hasInfo: hasInfoHelper(ownProps.fetchAPI, state.profile),
     genderFilter: state.mainList.genderFilter,
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
@@ -102,4 +134,4 @@ const mapStateToProps = state => ({
     state.authentication.authStatusCode===200
 });
 
-export default connect(mapStateToProps)(ClassmateContainer);
+export default connect(mapStateToProps)(MainListContainer);
