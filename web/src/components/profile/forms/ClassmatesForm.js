@@ -65,9 +65,9 @@ class ClassmatesForm extends React.Component {
         this.setState({
             weChatId: this.props.weChatId,
             major: this.props.classmates.major,
-            courses: this.props.classmates.courses,
+            courses: this.props.classmates.courses.slice(0), // make a copy. otherwise we are directly changing store
             motto: this.props.classmates.motto,
-            tags: this.props.classmates.tags
+            tags: this.props.classmates.tags.slice(0), // make a copy. otherwise we are directly changing store
         });
         getMajorOptions()
             .then(response => {

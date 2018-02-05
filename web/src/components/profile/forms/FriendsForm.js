@@ -61,7 +61,7 @@ class FriendsForm extends React.Component {
             faculty: this.props.friends.faculty,
             relationship: this.props.friends.relationship,
             motto: this.props.friends.motto,
-            tags: this.props.friends.tags
+            tags: this.props.friends.tags.slice(0), // make a copy. otherwise we are directly changing store
         });
         getFacultyOptions()
             .then(response => {

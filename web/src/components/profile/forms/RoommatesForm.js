@@ -63,7 +63,7 @@ class RoommatesForm extends React.Component {
             location: this.props.roommates.location,
             hometown: this.props.roommates.hometown,
             motto: this.props.roommates.motto,
-            tags: this.props.roommates.tags,
+            tags: this.props.roommates.tags.slice(0), // make a copy. otherwise we are directly changing store
         });
         getLocationsOptions()
             .then(response => {
