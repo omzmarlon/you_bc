@@ -34,7 +34,12 @@ class MainListTemplate extends Component {
     render() {
         return(
             <div className="main-list-container">
-                <MainListHeader title={this.props.title} color={this.props.themeColor} genderFilter={this.props.genderFilter}/>
+                <MainListHeader
+                    title={this.props.title}
+                    color={this.props.themeColor}
+                    genderFilter={this.props.genderFilter}
+                    seleted={this.props.currentGender}
+                />
                 <TransitionGroup className="main-list-card-list">
                     {this.props.userList.map(
                         (user, index) => (
@@ -96,7 +101,8 @@ MainListTemplate.propTypes = {
     userList: PropTypes.arrayOf(PropTypes.object).isRequired,
     onUserSwiped: PropTypes.func.isRequired,
     genderFilter: PropTypes.func.isRequired,
-    shouldCardGoBack: PropTypes.bool
+    shouldCardGoBack: PropTypes.bool,
+    currentGender: PropTypes.string.isRequired
 };
 
 export default MainListTemplate;

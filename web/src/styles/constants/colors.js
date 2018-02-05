@@ -4,6 +4,7 @@ export const PRIMARY_YELLOW = '#ffbb00';
 export const PRIMARY_GREEN = '#429488';
 export const PRIMARY_WHITE = '#ffffff';
 export const GENERAL_TEXT = '#7B7E7E';
+export const LIGHT_GREY = '#EAEFEF';
 
 export const SECONDARY_RED = '#fcefeb';
 export const SECONDARY_BLUE = '#edf5fd';

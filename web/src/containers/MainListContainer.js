@@ -23,7 +23,8 @@ class MainListContainer extends Component {
         super(props);
         this.state = {
             showMissingInfoModal: false,
-            showCardGoBack: false
+            showCardGoBack: false,
+            currentGender: 'mix'
         };
         this.onUserSwiped = this.onUserSwiped.bind(this);
         this.genderFilter = this.genderFilter.bind(this);
@@ -56,6 +57,7 @@ class MainListContainer extends Component {
     genderFilter(event, child) {
         const { dispatch, fetchAPI } = this.props;
         dispatch(fetchCandidates(fetchAPI, 10, child.key));
+        this.setState({currentGender: child.key});
     }
 
     missingInfoModalActionHandler() {
@@ -85,6 +87,7 @@ class MainListContainer extends Component {
                         onUserSwiped={this.onUserSwiped}
                         genderFilter={this.genderFilter}
                         shouldCardGoBack={this.state.shouldCardGoBack}
+                        currentGender={this.state.currentGender}
                     />
                     <LoadingModal show={this.props.isFetching}/>
                     <MissingProfileInfoModal

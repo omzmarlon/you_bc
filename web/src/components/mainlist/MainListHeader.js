@@ -11,7 +11,7 @@ import FemaleIcon from '../../components/common/svg/FemaleIcon';
 import MaleIcon from '../../components/common/svg/MaleIcon';
 import MixGenderIcon from '../../components/common/svg/MixGenderIcon';
 import FilterIcon from "../common/svg/FilterIcon";
-import {PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE} from "../../styles/constants/colors";
+import {PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE, LIGHT_GREY} from "../../styles/constants/colors";
 import InfoRow from "../common/InfoRow";
 
 const MainListHeader = (props) => (
@@ -27,6 +27,7 @@ const MainListHeader = (props) => (
             >
                 <MenuItem
                     key="male"
+                    style={props.seleted === "male" ? {backgroundColor: LIGHT_GREY}: {}}
                     primaryText={
                         <InfoRow
                             leftElement={<MaleIcon color={PRIMARY_BLUE}/>}
@@ -36,6 +37,7 @@ const MainListHeader = (props) => (
                 />
                 <MenuItem
                     key="female"
+                    style={props.seleted === "female" ? {backgroundColor: LIGHT_GREY}: {}}
                     primaryText={
                         <InfoRow
                             leftElement={<FemaleIcon color={PRIMARY_RED}/>}
@@ -45,6 +47,7 @@ const MainListHeader = (props) => (
                 />
                 <MenuItem
                     key="mix"
+                    style={props.seleted === "mix" ? {backgroundColor: LIGHT_GREY}: {}}
                     primaryText={
                         <InfoRow
                             leftElement={<MixGenderIcon color={PRIMARY_GREEN}/>}
@@ -63,7 +66,8 @@ MainListHeader.propTypes = {
         PropTypes.element
     ]).isRequired,
     color: PropTypes.string.isRequired,
-    genderFilter: PropTypes.func.isRequired
+    genderFilter: PropTypes.func.isRequired,
+    seleted: PropTypes.string.isRequired
 };
 
 export default MainListHeader;
