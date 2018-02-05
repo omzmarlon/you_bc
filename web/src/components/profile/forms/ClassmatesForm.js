@@ -65,9 +65,9 @@ class ClassmatesForm extends React.Component {
         this.setState({
             weChatId: this.props.weChatId,
             major: this.props.classmates.major,
-            courses: this.props.classmates.courses,
+            courses: this.props.classmates.courses.slice(0), // make a copy. otherwise we are directly changing store
             motto: this.props.classmates.motto,
-            tags: this.props.classmates.tags
+            tags: this.props.classmates.tags.slice(0), // make a copy. otherwise we are directly changing store
         });
         getMajorOptions()
             .then(response => {
@@ -103,21 +103,23 @@ class ClassmatesForm extends React.Component {
     }
 
     onCourseSearchChange(newValue) {
-        const { store } = this.context;
-        this.setState({loadingCourseOptions: true});
-        getCourseOptions(newValue)
-            .then(response => {
-                this.setState({coursesOptions: response.data});
-                this.setState({loadingCourseOptions: false});
-            })
-            .catch(err => {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取课程选项失败"));
-                this.setState({loadingCourseOptions: false});
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
-            });
+        if (newValue) {
+            const { store } = this.context;
+            this.setState({loadingCourseOptions: true});
+            getCourseOptions(newValue)
+                .then(response => {
+                    this.setState({coursesOptions: response.data});
+                    this.setState({loadingCourseOptions: false});
+                })
+                .catch(err => {
+                    // TODO: centralize error handling
+                    store.dispatch(showInfoBar("获取课程选项失败"));
+                    this.setState({loadingCourseOptions: false});
+                    if (err.response.data.error) {
+                        console.log(err.response.data.error);
+                    }
+                });
+        }
     }
 
     onCoursesChange(option) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 // components
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -7,7 +8,6 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
 import Progress from 'material-ui/CircularProgress';
 import SearchBar from "../form/SearchBar";
 //styles
@@ -25,6 +25,15 @@ const menuItemStyle = {
 };
 
 class SearchableDialogMenu extends React.Component {
+
+    scrollToSearchInput() {
+        const elementOnFocus = ReactDOM.findDOMNode(this.refs.searchBar);
+        if (elementOnFocus && elementOnFocus.scrollIntoView) {
+            // needs delay because the scroll may happen before screen squeeze
+            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        }
+    }
+
     render() {
         return (
             <Dialog
@@ -68,7 +77,11 @@ class SearchableDialogMenu extends React.Component {
                         }
                     </div>
                 </Paper>
-                <SearchBar handleSearchChange={this.props.handleSearchChange}/>
+                <SearchBar
+                    ref='searchBar'
+                    handleSearchChange={this.props.handleSearchChange}
+                    onFocus={this.scrollToSearchInput.bind(this)}
+                />
 
                 {
                     this.props.options.length !== 0 &&

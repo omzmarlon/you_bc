@@ -31,6 +31,7 @@ class SearchBar extends React.Component {
                        onChange={this.onSearchChange.bind(this)}
                        value={this.state.searchText}
                        type={'text'}
+                       onFocus={this.props.onFocus}
             />
         );
     }
@@ -40,6 +41,7 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
     handleSearchChange: PropTypes.func.isRequired,
     delay: PropTypes.number.isRequired,
+    onFocus: PropTypes.func
 };
 
 SearchBar.defaultProps = {
