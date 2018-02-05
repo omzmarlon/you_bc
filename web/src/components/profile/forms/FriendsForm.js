@@ -234,7 +234,7 @@ FriendsForm.propTypes = {
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
 };
-
+//TODO: use connect instead
 FriendsForm.contextTypes = {
     store: PropTypes.object
 };

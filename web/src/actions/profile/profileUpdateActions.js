@@ -66,7 +66,10 @@ export const updatePersonalValuesRequest = (personalValues) => dispatch => {
     };
     axios.put(requestUrl(PERSONAL_PROFILE_API), requestBody, {withCredentials: true})
         .then(
-            response => dispatch(updatePersonalValues(personalValues)),
+            response => {
+                dispatch(updatePersonalValues(personalValues));
+                dispatch(showInfoBar("更新个人信息成功"));
+            },
             err => {
                 // TODO: centralize error handling
                 dispatch(showInfoBar("更新个人信息失败"));
@@ -81,6 +84,7 @@ export const updateClassmatesValuesRequest = (classmatesValues) => dispatch => {
     axios.put(requestUrl(CLASSMATES_PROFILE_API), classmatesValues, {withCredentials: true})
         .then(response => {
             dispatch(updateClassmatesValues(classmatesValues));
+            dispatch(showInfoBar("更新找课友信息成功"));
         })
         .catch(err => {
             // TODO: centralize error handling
@@ -94,6 +98,7 @@ export const updateFriendsValuesRequest = (friendsValues) => dispatch => {
     axios.put(requestUrl(FRIENDS_PROFILE_API), friendsValues, {withCredentials: true})
         .then(response => {
             dispatch(updateFriendsValues(friendsValues));
+            dispatch(showInfoBar("更新找朋友信息成功"));
         })
         .catch(err => {
             // TODO: centralize error handling
@@ -107,6 +112,7 @@ export const updateRoommatesValuesRequest = (roommatesValues) => dispatch => {
     axios.put(requestUrl(ROOMMATES_PROFILE_API), roommatesValues, {withCredentials: true})
         .then(response => {
             dispatch(updateRoommatesValues(roommatesValues));
+            dispatch(showInfoBar("更新找室友信息成功"));
         })
         .catch(err => {
             // TODO: centralize error handling

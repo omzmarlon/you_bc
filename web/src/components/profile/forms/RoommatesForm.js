@@ -243,7 +243,7 @@ RoommatesForm.propTypes = {
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
 };
-
+//TODO: use connect instead
 RoommatesForm.contextTypes = {
     store: PropTypes.object
 };

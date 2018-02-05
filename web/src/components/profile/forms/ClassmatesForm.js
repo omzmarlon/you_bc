@@ -276,6 +276,7 @@ ClassmatesForm.propTypes = {
     onWeChatIdDone: PropTypes.func
 };
 
+//TODO: use connect instead
 ClassmatesForm.contextTypes = {
     store: PropTypes.object
 };
