@@ -14,7 +14,8 @@ export const modalStyles = {
     },
 
     dialogContentIOS: {
-        width: "90vw"
+        width: '90vw',
+        maxWidth: 'none'
     },
     dialogBody: {
         paddingBottom: 0

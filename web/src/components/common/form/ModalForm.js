@@ -15,10 +15,10 @@ import {isIOS} from "../../../utils/Util";
 const ModalForm = (props) => (
     <Dialog
         contentStyle={
-            isIOS()? {}: modalStyles.dialogContent
+            isIOS()? modalStyles.dialogContentIOS: modalStyles.dialogContent
         }
         bodyStyle={
-            isIOS()? modalStyles.dialogContentIOS:
+            isIOS()? {}:
                 {...modalStyles.dialogBody, ...(props.forceMinHeight?{minHeight: '40vh'}:{})}
         }
         style={
@@ -33,6 +33,7 @@ const ModalForm = (props) => (
                 onClick={props.onDone}
                 backgroundColor={props.confirmButtonColor}
                 fullWidth={true}
+                disabled={props.disableConfirmButton}
             >
                 确定
             </RaisedButton>
@@ -60,7 +61,8 @@ ModalForm.propTypes = {
     onClose: PropTypes.func.isRequired,
     titleIcon: PropTypes.element.isRequired,
     titleText: PropTypes.string.isRequired,
-    forceMinHeight: PropTypes.bool
+    forceMinHeight: PropTypes.bool,
+    disableConfirmButton: PropTypes.bool
 };
 
 export default ModalForm;

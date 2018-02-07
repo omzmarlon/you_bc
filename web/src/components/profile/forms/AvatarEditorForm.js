@@ -106,6 +106,9 @@ class AvatarEditorForm extends React.Component {
                 onClose={this.onCloseHandler.bind(this)}
                 titleIcon={<FaceIcon/>}
                 titleText={'上传新头像'}
+                disableConfirmButton={
+                    !this.state.editAvatarUrl || this.state.isUploading
+                }
             >
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <input type="file" onChange={this.handleChooseImage.bind(this)}/>
