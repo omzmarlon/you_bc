@@ -1,3 +1,4 @@
+// TODO: refactor on the usage of this function
 export function isIOS() {
 
     const iDevices = [

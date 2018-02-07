@@ -40,10 +40,17 @@ class SearchableDialogMenu extends React.Component {
     render() {
         return (
             <Dialog
-                contentStyle={{ ...modalStyles.dialogContent, ...menuStyle }}
-                bodyStyle={ modalStyles.dialogBody }
-                style={ modalStyles.dialogRoot }
-                repositionOnUpdate={ false }
+                contentStyle={
+                    isIOS()? {}: { ...modalStyles.dialogContent, ...menuStyle }
+                }
+                bodyStyle={
+                    isIOS()? modalStyles.dialogContentIOS: modalStyles.dialogBody
+                }
+                style={
+                    isIOS()? {}: modalStyles.dialogRoot
+                }
+                repositionOnUpdate={ isIOS() }
+
                 open={this.props.showMenu}
                 actions={[
                     <RaisedButton
