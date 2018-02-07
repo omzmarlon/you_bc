@@ -10,15 +10,23 @@ import "./ModalForm.less";
 import {modalStyles} from "../../../styles/constants/modal";
 //icons
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
+import {isIOS} from "../../../utils/Util";
 
 const ModalForm = (props) => (
     <Dialog
-        contentStyle={ modalStyles.dialogContent }
-        bodyStyle={ {...modalStyles.dialogBody, ...(props.forceMinHeight?{minHeight: '40vh'}:{})} }
-        style={ modalStyles.dialogRoot }
-        repositionOnUpdate={ false }
+        contentStyle={
+            isIOS()? {}: modalStyles.dialogContent
+        }
+        bodyStyle={
+            isIOS()? modalStyles.dialogContentIOS:
+                {...modalStyles.dialogBody, ...(props.forceMinHeight?{minHeight: '40vh'}:{})}
+        }
+        style={
+            isIOS()? {}: modalStyles.dialogRoot
+        }
+        repositionOnUpdate={ isIOS() }
         autoScrollBodyContent={true}
-        autoDetectWindowHeight={!props.forceMinHeight}
+        autoDetectWindowHeight={!props.forceMinHeight && !isIOS()}
         open={props.showForm}
         actions={[
             <RaisedButton
