@@ -68,28 +68,34 @@ class AvatarEditorForm extends React.Component {
     }
 
     onDoneHandler() {
-        this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-            if (blob) {
-                let formData = new FormData();
-                formData.append("image", blob);
-                this.setState({isUploading: true});
-                uploadImageHelper(requestUrl(UPLOAD_IMAGE_API), formData)
-                    .then(
-                        response => {
-                            this.props.onDone(response.data);
-                            this.setState({isUploading: false});
-                            this.onCloseHandler();
-                        },
-                        err => {
-                            this.rejectAvatarEdit('上传图片失败');
-                            this.setState({isUploading: false});
-                            this.onCloseHandler();
-                        }
-                    );
-            } else {
-                this.rejectAvatarEdit("编辑图片失败😢");
-            }
-        });
+        this.setState({isUploading: true});
+        const canvas = this.refs.cropper.getCroppedCanvas();
+
+        if (canvas.toBlob) {
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    let formData = new FormData();
+                    formData.append("image", blob);
+                    uploadImageHelper(requestUrl(UPLOAD_IMAGE_API), formData)
+                        .then(
+                            response => {
+                                this.props.onDone(response.data);
+                                this.setState({isUploading: false});
+                                this.onCloseHandler();
+                            },
+                            err => {
+                                this.setState({isUploading: false});
+                                this.rejectAvatarEdit('上传图片失败');
+                            }
+                        );
+                } else {
+                    this.rejectAvatarEdit("图片上传失败😢");
+                }
+            });
+        } else {
+            this.setState({isUploading: false});
+            this.rejectAvatarEdit("同学的浏览器暂不支持图片上传😢");
+        }
     }
 
     onCloseHandler() {
