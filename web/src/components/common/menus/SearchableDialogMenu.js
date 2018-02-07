@@ -13,6 +13,7 @@ import SearchBar from "../form/SearchBar";
 //styles
 import "./SearchableDialogMenu.less";
 import {modalStyles} from "../../../styles/constants/modal";
+import {isIOS} from "../../../utils/Util";
 
 const menuStyle = {
     display: 'flex',
@@ -27,10 +28,12 @@ const menuItemStyle = {
 class SearchableDialogMenu extends React.Component {
 
     scrollToSearchInput() {
-        const elementOnFocus = ReactDOM.findDOMNode(this.refs.searchBar);
-        if (elementOnFocus && elementOnFocus.scrollIntoView) {
-            // needs delay because the scroll may happen before screen squeeze
-            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        if (!isIOS()) {
+            const elementOnFocus = ReactDOM.findDOMNode(this.refs.searchBar);
+            if (elementOnFocus && elementOnFocus.scrollIntoView) {
+                // needs delay because the scroll may happen before screen squeeze
+                setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+            }
         }
     }
 

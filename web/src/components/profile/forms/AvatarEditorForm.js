@@ -69,7 +69,6 @@ class AvatarEditorForm extends React.Component {
 
     onDoneHandler() {
         this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
-            console.log(blob);
             if (blob) {
                 let formData = new FormData();
                 formData.append("image", blob);

@@ -20,6 +20,7 @@ import {PRIMARY_RED, SECONDARY_RED} from "../../../styles/constants/colors";
 import SearchableMenuInput from "../../common/form/SearchableMenuInput";
 import {getClassmatesTags, getCourseOptions, getMajorOptions} from "../../../requests/profileOptionRequests";
 import {showInfoBar} from "../../../actions/global/globalActions";
+import {isIOS} from "../../../utils/Util";
 
 class ClassmatesForm extends React.Component {
 
@@ -177,10 +178,12 @@ class ClassmatesForm extends React.Component {
     }
 
     scrollToMottoInput() {
-        const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
-        if (elementOnFocus && elementOnFocus.scrollIntoView) {
-            // needs delay because the scroll may happen before screen squeeze
-            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        if (!isIOS()) {
+            const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
+            if (elementOnFocus && elementOnFocus.scrollIntoView) {
+                // needs delay because the scroll may happen before screen squeeze
+                setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+            }
         }
     }
 
@@ -276,6 +279,7 @@ ClassmatesForm.propTypes = {
     onWeChatIdDone: PropTypes.func
 };
 
+//TODO: use connect instead
 ClassmatesForm.contextTypes = {
     store: PropTypes.object
 };

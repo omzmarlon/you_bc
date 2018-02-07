@@ -17,6 +17,7 @@ import RelationshipIcon from "../../common/svg/RelationshipIcon";
 import {PRIMARY_YELLOW} from "../../../styles/constants/colors";
 import {getFacultyOptions, getFriendsTags, getRelationshipOptions} from "../../../requests/profileOptionRequests";
 import {showInfoBar} from "../../../actions/global/globalActions";
+import {isIOS} from "../../../utils/Util";
 
 class FriendsForm extends React.Component {
     constructor(props) {
@@ -141,10 +142,12 @@ class FriendsForm extends React.Component {
     }
 
     scrollToMottoInput() {
-        const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
-        if (elementOnFocus && elementOnFocus.scrollIntoView) {
-            // needs delay because the scroll may happen before screen squeeze
-            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        if (!isIOS()) {
+            const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
+            if (elementOnFocus && elementOnFocus.scrollIntoView) {
+                // needs delay because the scroll may happen before screen squeeze
+                setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+            }
         }
     }
 
@@ -234,7 +237,7 @@ FriendsForm.propTypes = {
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
 };
-
+//TODO: use connect instead
 FriendsForm.contextTypes = {
     store: PropTypes.object
 };
