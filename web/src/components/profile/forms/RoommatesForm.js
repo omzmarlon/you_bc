@@ -19,6 +19,7 @@ import TagIcon from "../../common/svg/TagIcon";
 import {PRIMARY_BLUE} from "../../../styles/constants/colors";
 import {getHometownOptions, getLocationsOptions, getRoommatesTags} from "../../../requests/profileOptionRequests";
 import {showInfoBar} from "../../../actions/global/globalActions";
+import {isIOS} from "../../../utils/Util";
 
 class RoommatesForm extends React.Component {
     constructor(props) {
@@ -147,10 +148,12 @@ class RoommatesForm extends React.Component {
     }
 
     scrollToMottoInput() {
-        const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
-        if (elementOnFocus && elementOnFocus.scrollIntoView) {
-            // needs delay because the scroll may happen before screen squeeze
-            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        if (!isIOS()) {
+            const elementOnFocus = ReactDOM.findDOMNode(this.refs.mottoInput);
+            if (elementOnFocus && elementOnFocus.scrollIntoView) {
+                // needs delay because the scroll may happen before screen squeeze
+                setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+            }
         }
     }
 

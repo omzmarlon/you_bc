@@ -16,6 +16,7 @@ import ConstellationIcon from 'material-ui/svg-icons/image/brightness-3';
 import MixGenderIcon from "../../common/svg/MixGenderIcon";
 //colors
 import {PRIMARY_GREEN} from "../../../styles/constants/colors";
+import {isIOS} from "../../../utils/Util";
 
 const sexOptions = ['男', '女'];
 const horoscopeOptions = ["天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"];
@@ -101,18 +102,22 @@ class PersonalForm extends React.Component {
     }
 
     scrollToUsernameInput() {
-        const elementOnFocus = ReactDOM.findDOMNode(this.refs.usernameInput);
-        if (elementOnFocus && elementOnFocus.scrollIntoView) {
-            // needs delay because the scroll may happen before screen squeeze
-            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        if (!isIOS()) {
+            const elementOnFocus = ReactDOM.findDOMNode(this.refs.usernameInput);
+            if (elementOnFocus && elementOnFocus.scrollIntoView) {
+                // needs delay because the scroll may happen before screen squeeze
+                setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+            }
         }
     }
 
     scrollToAgeInput() {
-        const elementOnFocus = ReactDOM.findDOMNode(this.refs.ageInput);
-        if (elementOnFocus && elementOnFocus.scrollIntoView) {
-            // needs delay because the scroll may happen before screen squeeze
-            setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+        if (!isIOS()) {
+            const elementOnFocus = ReactDOM.findDOMNode(this.refs.ageInput);
+            if (elementOnFocus && elementOnFocus.scrollIntoView) {
+                // needs delay because the scroll may happen before screen squeeze
+                setTimeout(() => elementOnFocus.scrollIntoView(), 500);
+            }
         }
     }
 
