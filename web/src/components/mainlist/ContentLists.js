@@ -15,8 +15,8 @@ import MottoIcon from "../common/svg/MottoIcon";
 import FacultyIcon from "../common/svg/FacultyIcon";
 import RelationshipIcon from "../common/svg/RelationshipIcon";
 
-import './ContentLists.less';
 import TagIcon from "../common/svg/TagIcon";
+import TruncateTags from "../common/TruncateTags";
 
 const iconStyle = {
     width: 15,
@@ -52,12 +52,7 @@ export const CourseInfo = (props) => (
             />
         }
         rightElement={
-            <span className="content-list-item-tags">
-                {props.courses.map(course =>
-                    <div key={course} className="--tag">
-                        <Tag text={course} bkgColor={props.secondColor} textColor={props.color}/>
-                    </div>)}
-            </span>
+            <TruncateTags modalTitle="课程" tags={props.courses} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -92,12 +87,7 @@ export const StudyRequirementInfo = (props) => (
             />
         }
         rightElement={
-            <span className="content-list-item-tags">
-                {props.requirements.map(req =>
-                    <div key={req} className="--tag">
-                        <Tag text={req} bkgColor={props.secondColor} textColor={props.color} />
-                    </div>)}
-            </span>
+            <TruncateTags modalTitle="一起" tags={props.requirements} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -195,12 +185,7 @@ export const HobbyInfo = (props) => (
             />
         }
         rightElement={
-            <span className="content-list-item-tags">
-                {props.hobbies.map(hobby =>
-                    <div key={hobby} className="--tag">
-                        <Tag text={hobby} bkgColor={props.secondColor} textColor={props.color} />
-                    </div>)}
-            </span>
+            <TruncateTags modalTitle="兴趣" tags={props.hobbies} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -220,12 +205,7 @@ export const LifeHabit = (props) => (
             />
         }
         rightElement={
-            <span className="content-list-item-tags">
-                {props.habits.map(habit =>
-                    <div key={habit} className="--tag">
-                        <Tag text={habit} bkgColor={props.secondColor} textColor={props.color} />
-                    </div>)}
-            </span>
+            <TruncateTags modalTitle="生活习惯" tags={props.habits} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
