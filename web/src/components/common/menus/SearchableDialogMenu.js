@@ -41,10 +41,10 @@ class SearchableDialogMenu extends React.Component {
         return (
             <Dialog
                 contentStyle={
-                    isIOS()? {}: { ...modalStyles.dialogContent, ...menuStyle }
+                    isIOS()? { ...modalStyles.dialogContentIOS, ...menuStyle }: { ...modalStyles.dialogContent, ...menuStyle }
                 }
                 bodyStyle={
-                    isIOS()? modalStyles.dialogContentIOS: modalStyles.dialogBody
+                    isIOS()? {}: modalStyles.dialogBody
                 }
                 style={
                     isIOS()? {}: modalStyles.dialogRoot
