@@ -5,6 +5,7 @@ import com.youbc.error_handling.YouBCException;
 import com.youbc.models.WeChatUser;
 import com.youbc.securities.services.JWTTokenService;
 import com.youbc.services.wechat.WeChatOAuthService;
+import com.youbc.services.wechat.WeChatService;
 import com.youbc.utilities.Endpoints;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -27,11 +28,18 @@ public class LoginController {
     private JWTTokenService tokenService;
     private WeChatOAuthService weChatOAuthService;
     private UserDAO userDAO;
+    private WeChatService weChatService;
 
-    public LoginController(JWTTokenService tokenService, WeChatOAuthService weChatOAuthService, UserDAO userDAO) {
+    public LoginController(
+            JWTTokenService tokenService,
+            WeChatOAuthService weChatOAuthService,
+            UserDAO userDAO,
+            WeChatService weChatService
+    ) {
         this.tokenService = tokenService;
         this.weChatOAuthService = weChatOAuthService;
         this.userDAO = userDAO;
+        this.weChatService = weChatService;
     }
 
     @RequestMapping(value = Endpoints.WECHAT_OAUTH, method = RequestMethod.GET)
@@ -53,7 +61,7 @@ public class LoginController {
             if (!userDAO.userExists(weChatUser.getOpenid())) {
                 userDAO.buildNewUser(
                         weChatUser.getOpenid(),
-                        weChatUser.getHeadimgurl(),
+                        weChatService.migrateProfileImage(weChatUser.getHeadimgurl()),
                         weChatUser.getNickname(),
                         weChatUser.getSex()
                 );
