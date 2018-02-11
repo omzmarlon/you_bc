@@ -4,12 +4,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -30,7 +32,7 @@ public class S3Client {
                               String s3Folder,
                               CannedAccessControlList accessControl
     ) throws IOException {
-        return uploadMultipartFile(
+        return uploadFile(
                 multipartFile,
                 (key, file) ->
                         amazonS3.putObject(new PutObjectRequest(bucketName, key, file)
@@ -40,17 +42,46 @@ public class S3Client {
         );
     }
 
-    public String uploadMultipartFile(MultipartFile multipartFile,
-                                      S3Uploader s3Uploader,
-                                      String fileNamePrefix,
-                                      String folderName
+    public String uploadImage(InputStream inputStream,
+                              long contentLength,
+                              String fileNamePrefix,
+                              String s3Folder,
+                              CannedAccessControlList accessControl
+    ) throws IOException {
+        return uploadFile(
+                inputStream,
+                (key, stream) -> {
+                    ObjectMetadata metadata = new ObjectMetadata();
+                    metadata.setContentLength(contentLength);
+                    amazonS3.putObject(new PutObjectRequest(bucketName, key, stream, metadata)
+                            .withCannedAcl(accessControl));
+                },
+                fileNamePrefix,
+                s3Folder
+        );
+    }
+
+    private String uploadFile(MultipartFile multipartFile,
+                              S3FileUploader s3FileUploader,
+                              String fileNamePrefix,
+                              String folderName
     ) throws IOException {
         String key = folderName + "/" + generateFilename(fileNamePrefix);
         File file = convertMultiPartToFile(multipartFile);
-        s3Uploader.upload(key, file);
+        s3FileUploader.upload(key, file);
         file.delete();
         return this.bucketFullUrl + "/" + key;
 
+    }
+
+    private String uploadFile(InputStream inputStream,
+                              S3InputStreamUploader s3InputStreamUploader,
+                              String fileNamePrefix,
+                              String folderName
+    ) throws IOException {
+        String key = folderName + "/" + generateFilename(fileNamePrefix);
+        s3InputStreamUploader.upload(key, inputStream);
+        return this.bucketFullUrl + "/" + key;
     }
 
     private File convertMultiPartToFile(MultipartFile multipartFile) throws IOException {
