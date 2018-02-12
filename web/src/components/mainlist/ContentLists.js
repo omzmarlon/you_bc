@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import InfoRow from '../common/InfoRow';
 import MajorIcon from "../common/svg/MajorIcon";
-import Tag from "../common/Tag";
 import TruncateText from "../common/TruncateText";
 
 import CourseIcon from "../common/svg/CourseIcon";

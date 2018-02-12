@@ -5,6 +5,7 @@ import com.youbc.database.ProfileDAO;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import com.youbc.models.MatchedUser;
+import com.youbc.models.MatchedUserResponse;
 import com.youbc.models.profile.UserProfile;
 import com.youbc.securities.services.CookieService;
 import com.youbc.utilities.Endpoints;
@@ -37,15 +38,16 @@ public class MatchedUsersController {
     }
 
     @RequestMapping(path = Endpoints.MATCHED_USERS, method = RequestMethod.GET)
-    public Set<MatchedUser> getAllMatchedUsers(HttpServletRequest request) {
-        Set<MatchedUser> response = new TreeSet<>();
+    public MatchedUserResponse getAllMatchedUsers(HttpServletRequest request) {
+        Set<MatchedUser> matchedUsers = new TreeSet<>();
         String userId = cookieService.getAuthenticatedUserId(request);
-        Set<String> matchedUsers = matchedUsersDAO.fetchAllMatchedUsers(userId);
-
-        for(String theOther : matchedUsers) {
+        Set<String> matchedUserIds = matchedUsersDAO.fetchAllMatchedUsers(userId);
+        Integer matchCount = matchedUsersDAO.fetchMatchCount(userId);
+        // construct matchedUsers set
+        for(String theOther : matchedUserIds) {
             UserProfile userProfile = profileDAO.fetchUserProfile(theOther)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "no user found", "no user found")));
-            response.add(new MatchedUser(
+            matchedUsers.add(new MatchedUser(
                     userProfile.getAvatarUrl(),
                     userProfile.getUsername(),
                     userProfile.getWeChatId(),
@@ -55,7 +57,10 @@ public class MatchedUsersController {
                     matchedUsersDAO.matchedAtRoommates(userId, theOther)
             ));
         }
-
-        return response;
+        // get number of new matches the user missed
+        Integer newMatch = matchedUserIds.size() - matchCount;
+        // update new total match counts
+        matchedUsersDAO.updateMatchCount(userId, matchedUserIds.size());
+        return new MatchedUserResponse(newMatch, matchedUsers);
     }
 }

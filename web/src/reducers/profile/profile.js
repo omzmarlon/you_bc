@@ -35,6 +35,7 @@ const initialState = {
         weChatId: ''
     },
     matchedUsers: [],
+    newMatch: 0,
 
     // survey...
 };
@@ -50,7 +51,7 @@ const profile = (state = initialState, action) => {
         case RECEIVE_PERSONAL_INFO:
             return {...state, personal: action.personal};
         case RECEIVE_MATCHED_USERS:
-            return {...state, matchedUsers: action.matchedUsers};
+            return {...state, matchedUsers: action.matchedUsers, newMatch: action.newMatch};
         case UPDATE_CLASSMATES_VALUES:
             return {...state, classmates: action.classmatesValues};
         case UPDATE_ROOMMATES_VALUES:

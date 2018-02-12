@@ -21,19 +21,19 @@ import {
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        const { store } = this.context;
+        const { dispatch } = this.props;
         // todo: wrap these into a PromiseAll OR keep them separate but have multiple isFetching
-        store.dispatch(fetchClassmatesInfo());
-        store.dispatch(fetchFriendsInfo());
-        store.dispatch(fetchRoommatesInfo());
-        store.dispatch(fetchPersonalInfo());
-        store.dispatch(fetchMatchedUsers());
+        dispatch(fetchClassmatesInfo());
+        dispatch(fetchFriendsInfo());
+        dispatch(fetchRoommatesInfo());
+        dispatch(fetchPersonalInfo());
+        dispatch(fetchMatchedUsers());
     }
 
     onTabMatching() {
-        const { store } = this.context;
+        const { dispatch } = this.props;
         this.props.onTabMatching();
-        store.dispatch(fetchMatchedUsers());
+        dispatch(fetchMatchedUsers());
     }
 
     render() {
@@ -60,10 +60,6 @@ ProfileContainer.propTypes = {
     //actions
     onTabMain: PropTypes.func.isRequired,
     onTabMatching: PropTypes.func.isRequired
-};
-
-ProfileContainer.contextTypes = {
-    store: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({
