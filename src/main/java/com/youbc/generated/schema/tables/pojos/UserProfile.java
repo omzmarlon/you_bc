@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile implements Serializable {
 
-    private static final long serialVersionUID = -615698274;
+    private static final long serialVersionUID = -1670154866;
 
     private final String    userId;
     private final Integer   age;
@@ -31,6 +31,7 @@ public class UserProfile implements Serializable {
     private final String    wechatid;
     private final String    username;
     private final String    horoscope;
+    private final Integer   matchcount;
     private final Timestamp timeCreated;
 
     public UserProfile(UserProfile value) {
@@ -40,6 +41,7 @@ public class UserProfile implements Serializable {
         this.wechatid = value.wechatid;
         this.username = value.username;
         this.horoscope = value.horoscope;
+        this.matchcount = value.matchcount;
         this.timeCreated = value.timeCreated;
     }
 
@@ -50,6 +52,7 @@ public class UserProfile implements Serializable {
         String    wechatid,
         String    username,
         String    horoscope,
+        Integer   matchcount,
         Timestamp timeCreated
     ) {
         this.userId = userId;
@@ -58,6 +61,7 @@ public class UserProfile implements Serializable {
         this.wechatid = wechatid;
         this.username = username;
         this.horoscope = horoscope;
+        this.matchcount = matchcount;
         this.timeCreated = timeCreated;
     }
 
@@ -85,6 +89,10 @@ public class UserProfile implements Serializable {
         return this.horoscope;
     }
 
+    public Integer getMatchcount() {
+        return this.matchcount;
+    }
+
     public Timestamp getTimeCreated() {
         return this.timeCreated;
     }
@@ -99,6 +107,7 @@ public class UserProfile implements Serializable {
         sb.append(", ").append(wechatid);
         sb.append(", ").append(username);
         sb.append(", ").append(horoscope);
+        sb.append(", ").append(matchcount);
         sb.append(", ").append(timeCreated);
 
         sb.append(")");
