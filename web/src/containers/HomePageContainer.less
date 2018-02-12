@@ -1,5 +1,6 @@
-@import "../styles/constants/fonts";
-@import "../styles/constants/icon";
+@import (reference) "../styles/constants/fonts";
+@import (reference) "../styles/constants/icon";
+@import (reference) "../styles/constants/colors";
 
 @skewScale: 8deg;
 
@@ -58,6 +59,8 @@
         font-size: @small;
         height: 22px !important;
         line-height: 16px !important;
+        color: @generalText !important;
+        transform: translateY(-25%);
       }
     }
   }

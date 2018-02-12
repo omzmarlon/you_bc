@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
 import { connect }  from 'react-redux';
 // styles
 import "./HomePageContainer.less";
-import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW} from "../styles/constants/colors";
+import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_WHITE, PRIMARY_YELLOW, SECONDARY_BLUE} from "../styles/constants/colors";
 import {defaultIconSize} from "../styles/material/iconStyles";
 // components
 import Block from "../components/homePage/Block";
 import FloatingActionButton from "material-ui/FloatingActionButton";
-import Profile from "material-ui/svg-icons/action/account-circle";
+import Logo from "../../public/images/youbc-logo.png";
 import Badge from "material-ui/Badge";
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
@@ -50,13 +50,13 @@ class HomePageContainer extends Component {
                                    secondary={true}
                                    style={{position: 'fixed', bottom: '10%', right: '4%'}}
                             >
-                                <FloatingActionButton className={'profile-button'}>
-                                    <Profile style={defaultIconSize} />
+                                <FloatingActionButton className={'profile-button'} backgroundColor={SECONDARY_BLUE}>
+                                    <img src={Logo} style={{width: '13vw', height: '16vw'}}/>
                                     <span className={'to-profile-label'}>个人主页</span>
                                 </FloatingActionButton>
                             </Badge> :
-                            <FloatingActionButton className={'profile-button'}>
-                                <Profile style={defaultIconSize} />
+                            <FloatingActionButton className={'profile-button'} backgroundColor={SECONDARY_BLUE}>
+                                <img src={Logo} style={{width: '13vw', height: '16vw'}}/>
                                 <span className={'to-profile-label'}>个人主页</span>
                             </FloatingActionButton>
                     }
