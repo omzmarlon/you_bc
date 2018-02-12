@@ -109,27 +109,19 @@ export const receiveMatchedUsers = (matchedUsers, newMatch) => ({type: RECEIVE_M
 
 // fetch matched users
 
-// response: {
-//     data: {
-//         newMatches: int,
-//         matchedUsers: []
-//     }
-// }
 export const fetchMatchedUsers = () => dispatch => {
     // workaround: add newMatch; update store through receiveMatchedUsers() action
     axios.get(requestUrl(MATCHED_USERS_API), {withCredentials: true}).then(
         response => {
-            // let newMatch = response.data.newMatch;
-            // let users = response.data.users.map(data => ({
-            //     avatarURL: data.avatarURL,
-            //     username: data.name,
-            //     weChatId: data.weChatId,
-            //     matchedAtClassmates: data.matchedAtClassmates,
-            //     matchedAtRoommates: data.matchedAtRoommates,
-            //     matchedAtFriends: data.matchedAtFriends
-            // }));
-            let newMatch = 3;
-            let users = [];
+            let newMatch = response.data.newMatch;
+            let users = response.data.matchedUsers.map(data => ({
+                avatarURL: data.avatarURL,
+                username: data.name,
+                weChatId: data.weChatId,
+                matchedAtClassmates: data.matchedAtClassmates,
+                matchedAtRoommates: data.matchedAtRoommates,
+                matchedAtFriends: data.matchedAtFriends
+            }));
             dispatch(receiveMatchedUsers(users, newMatch));
         },
         err => {
