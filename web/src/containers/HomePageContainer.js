@@ -2,16 +2,15 @@
 // libs
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import { connect }  from 'react-redux';
+import {connect} from "react-redux";
 // styles
 import "./HomePageContainer.less";
-import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_WHITE, PRIMARY_YELLOW, SECONDARY_BLUE} from "../styles/constants/colors";
-import {defaultIconSize} from "../styles/material/iconStyles";
+import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW} from "../styles/constants/colors";
 // components
 import Block from "../components/homePage/Block";
 import FloatingActionButton from "material-ui/FloatingActionButton";
-import Logo from "../../public/images/youbc-logo.png";
 import Badge from "material-ui/Badge";
+import Profile from "material-ui/svg-icons/action/account-circle";
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
 import {
@@ -22,6 +21,14 @@ import {
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
 import RollingEmoji from "../components/common/RollingEmoji";
+import {defaultIconSize} from "../styles/material/iconStyles";
+
+const ProfileButton = () => (
+    <FloatingActionButton className={'profile-button'}>
+        <Profile style={defaultIconSize} />
+        <span className={'to-profile-label'}>个人主页</span>
+    </FloatingActionButton>
+);
 
 class HomePageContainer extends Component {
 
@@ -37,7 +44,6 @@ class HomePageContainer extends Component {
     }
 
     render() {
-
         return(
             <div className="home-page">
                 <Block className="classmate-block" path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_RED}/>
@@ -50,15 +56,9 @@ class HomePageContainer extends Component {
                                    secondary={true}
                                    style={{position: 'fixed', bottom: '10%', right: '4%'}}
                             >
-                                <FloatingActionButton className={'profile-button'} backgroundColor={SECONDARY_BLUE}>
-                                    <img src={Logo} style={{width: '13vw', height: '16vw'}}/>
-                                    <span className={'to-profile-label'}>个人主页</span>
-                                </FloatingActionButton>
+                                <ProfileButton/>
                             </Badge> :
-                            <FloatingActionButton className={'profile-button'} backgroundColor={SECONDARY_BLUE}>
-                                <img src={Logo} style={{width: '13vw', height: '16vw'}}/>
-                                <span className={'to-profile-label'}>个人主页</span>
-                            </FloatingActionButton>
+                            <ProfileButton/>
                     }
                 </Link>
             </div>
