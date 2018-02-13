@@ -24,7 +24,7 @@ CREATE TABLE user_profile (
   sex INT, # 用户的性别，值为1时是男性，值为2时是女性
   wechatId VARCHAR(100),
   username VARCHAR(50) CHARACTER SET utf8mb4,
-  horoscope VARCHAR(10),
+  horoscope VARCHAR(10) CHARACTER SET utf8mb4,
   matchCount INT, # workaround for new_match_notification: this is to record the number of matchedUsers the user saw last time
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
