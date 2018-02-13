@@ -25,6 +25,7 @@ CREATE TABLE user_profile (
   wechatId VARCHAR(100),
   username VARCHAR(50) CHARACTER SET utf8mb4,
   horoscope VARCHAR(10),
+  matchCount INT, # workaround for new_match_notification: this is to record the number of matchedUsers the user saw last time
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );

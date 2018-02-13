@@ -1,39 +1,40 @@
 'use strict';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 // components
-import ProfileTabBar from '../components/profile/ProfileTabBar';
-import ProfileNavHeader from '../components/profile/ProfileNavHeader';
-import { Redirect } from "react-router-dom";
+import ProfileTabBar from "../components/profile/ProfileTabBar";
+import ProfileNavHeader from "../components/profile/ProfileNavHeader";
+import {Redirect} from "react-router-dom";
 //styles
-import './ProfileContainer.less';
+import "./ProfileContainer.less";
 // icons
 import ProfileMain from "../components/profile/contents/ProfileMain";
 import MatchingList from "../components/profile/contents/MatchingList";
 // redux
-import { connect }  from 'react-redux'
-import { bindActionCreators } from 'redux';
-import {showMatchingList, showProfileMain} from '../actions/profile/profileUIActions';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {showMatchingList, showProfileMain} from "../actions/profile/profileUIActions";
 import {
-    fetchClassmatesInfo, fetchFriendsInfo, fetchMatchedUsers, fetchPersonalInfo,
+    fetchClassmatesInfo,
+    fetchFriendsInfo,
+    fetchMatchedUsers,
+    fetchPersonalInfo,
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        const { store } = this.context;
         // todo: wrap these into a PromiseAll OR keep them separate but have multiple isFetching
-        store.dispatch(fetchClassmatesInfo());
-        store.dispatch(fetchFriendsInfo());
-        store.dispatch(fetchRoommatesInfo());
-        store.dispatch(fetchPersonalInfo());
-        store.dispatch(fetchMatchedUsers());
+        this.props.fetchClassmatesInfo();
+        this.props.fetchFriendsInfo();
+        this.props.fetchRoommatesInfo();
+        this.props.fetchPersonalInfo();
+        this.props.fetchMatchedUsers();
     }
 
     onTabMatching() {
-        const { store } = this.context;
         this.props.onTabMatching();
-        store.dispatch(fetchMatchedUsers());
+        this.props.fetchMatchedUsers();
     }
 
     render() {
@@ -62,10 +63,6 @@ ProfileContainer.propTypes = {
     onTabMatching: PropTypes.func.isRequired
 };
 
-ProfileContainer.contextTypes = {
-    store: PropTypes.object
-};
-
 const mapStateToProps = (state, ownProps) => ({
     panelIndex: state.profileUI.panelIndex,
     grantAccess:
@@ -77,7 +74,12 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         onTabMain: showProfileMain,
-        onTabMatching: showMatchingList
+        onTabMatching: showMatchingList,
+        fetchClassmatesInfo,
+        fetchFriendsInfo,
+        fetchRoommatesInfo,
+        fetchPersonalInfo,
+        fetchMatchedUsers
     }, dispatch);
 };
 

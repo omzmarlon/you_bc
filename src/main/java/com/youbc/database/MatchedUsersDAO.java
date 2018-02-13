@@ -14,14 +14,17 @@ import java.util.Set;
 import static com.youbc.generated.schema.tables.ClassmatesLikes.CLASSMATES_LIKES;
 import static com.youbc.generated.schema.tables.FriendsLikes.FRIENDS_LIKES;
 import static com.youbc.generated.schema.tables.RoommatesLikes.ROOMMATES_LIKES;
+import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 
 @Component
 public class MatchedUsersDAO {
 
     private DSLContext dslContext;
+    private UserDAO userDAO;
 
     @Autowired
-    public MatchedUsersDAO(DSLContext dslContext) {
+    public MatchedUsersDAO(DSLContext dslContext, UserDAO userDAO) {
+        this.userDAO = userDAO;
         this.dslContext = dslContext;
     }
 
@@ -134,5 +137,25 @@ public class MatchedUsersDAO {
                 .and(ROOMMATES_LIKES.LIKER.eq(self))
                 .fetch();
         return result.isNotEmpty();
+    }
+
+    // workaround: add fetchMatchCount() and updateMatchCount()
+    public Integer fetchMatchCount(String userId) {
+        Integer matchCount =  dslContext
+                .select()
+                .from(USER_PROFILE)
+                .where(USER_PROFILE.USER_ID.eq(userId))
+                .fetchOne(USER_PROFILE.MATCHCOUNT);
+        if (matchCount == null) return 0;
+        return matchCount;
+    }
+
+    public void updateMatchCount(String userId, Integer newMatchCount) {
+        if (userDAO.userProfileExists(userId)) {
+            dslContext.update(USER_PROFILE)
+                    .set(USER_PROFILE.MATCHCOUNT, newMatchCount)
+                    .where(USER_PROFILE.USER_ID.eq(userId))
+                    .execute();
+        }
     }
 }
