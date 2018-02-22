@@ -108,7 +108,7 @@ class StudentCardCheckContainer extends Component {
                                 同学你的学生卡已经成功上传, 我们会尽快审核
                             </p>:
                             <p className="content">
-                                为了确认用户 <span className="highlight">UBC学生身份</span> ，需要上传同学的学生卡
+                                为了确认用户 <span className="highlight">UBC学生身份</span> ，需要上传你的学生卡
                             </p>
                     }
                     {

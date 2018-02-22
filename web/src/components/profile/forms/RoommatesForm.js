@@ -204,12 +204,16 @@ class RoommatesForm extends React.Component {
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_BLUE}/>}
-                           label={'一句话'}
+                           label={'自我描述'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.showError(this.state.motto)}
                            ref='mottoInput'
                            onFocus={this.scrollToMottoInput.bind(this)}
+                           rows={1}
+                           rowsMax={4}
+                           multiLine={true}
+                           wordLimit={100}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_BLUE}/>}
