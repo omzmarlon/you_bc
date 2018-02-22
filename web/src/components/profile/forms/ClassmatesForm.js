@@ -236,12 +236,16 @@ class ClassmatesForm extends React.Component {
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_RED}/>}
-                           label={'一句话'}
+                           label={'能力'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.showError(this.state.motto)}
                            ref='mottoInput'
                            onFocus={this.scrollToMottoInput.bind(this)}
+                           rows={1}
+                           rowsMax={4}
+                           multiLine={true}
+                           wordLimit={100}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_RED}/>}
