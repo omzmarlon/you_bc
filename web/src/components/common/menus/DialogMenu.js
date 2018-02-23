@@ -36,31 +36,36 @@ export const DialogMenu = (props) => (
                 确定
             </RaisedButton>
         ]}
-        autoScrollBodyContent={true}
+        autoScrollBodyContent={false}
     >
-        <Menu value={props.values}
-              multiple={props.multiple}
-              onItemClick={props.onItemClick}
-              selectedMenuItemStyle={{
-                  backgroundColor: 'rgb(128, 128, 128)',
-                  color: 'white'
-              }}
-              style={{width: '100%'}}
-              width={'1%'} //Have to set this for 100% width to work. seems to be a bug from material-ui
-              menuItemStyle={{width: '100%'}}
-              autoWidth={false}
-        >
-            {
-                props.options.map(
-                    (c, index) =>
-                        <MenuItem style={menuItemStyle}
-                                  key={index}
-                                  value={c}
-                                  primaryText={c}
-                        />
-                )
-            }
-        </Menu>
+        <div style={{
+            maxHeight: '50vh',
+            overflowY: 'scroll'
+        }}>
+            <Menu value={props.values}
+                  multiple={props.multiple}
+                  onItemClick={props.onItemClick}
+                  selectedMenuItemStyle={{
+                      backgroundColor: 'rgb(128, 128, 128)',
+                      color: 'white'
+                  }}
+                  style={{width: '100%'}}
+                  width={'1%'} //Have to set this for 100% width to work. seems to be a bug from material-ui
+                  menuItemStyle={{width: '100%'}}
+                  autoWidth={false}
+            >
+                {
+                    props.options.map(
+                        (c, index) =>
+                            <MenuItem style={menuItemStyle}
+                                      key={index}
+                                      value={c}
+                                      primaryText={c}
+                            />
+                    )
+                }
+            </Menu>
+        </div>
         <span style={errorTextStyle}>{props.errorText}</span>
     </Dialog>
 );

@@ -19,7 +19,8 @@ import TagIcon from "../../common/svg/TagIcon";
 import {PRIMARY_BLUE} from "../../../styles/constants/colors";
 import {getHometownOptions, getLocationsOptions, getRoommatesTags} from "../../../requests/profileOptionRequests";
 import {showInfoBar} from "../../../actions/global/globalActions";
-import {isIOS} from "../../../utils/Util";
+import {chooseItems, isIOS} from "../../../utils/Util";
+import {ExceedMaxItemsError} from "../../../utils/Errors";
 
 class RoommatesForm extends React.Component {
     constructor(props) {
@@ -34,7 +35,11 @@ class RoommatesForm extends React.Component {
             motto: '',
             tags: [],
             //error
-            showError: false,
+            //error
+            locationError: '',
+            hometownError: '',
+            mottoError: '',
+            tagsError: '',
             //options
             locationOptions: [],
             hometownOptions: [],
@@ -46,15 +51,6 @@ class RoommatesForm extends React.Component {
         this.onHometownChange = this.onHometownChange.bind(this);
         this.onMottoChange = this.onMottoChange.bind(this);
         this.onTagChange = this.onTagChange.bind(this);
-        this.showError = this.showError.bind(this);
-    }
-
-    showError(field) {
-        if (this.state.showError) {
-            return field.length?'':'必填';
-        } else {
-            return "";
-        }
     }
 
     componentWillReceiveProps() {
@@ -109,31 +105,33 @@ class RoommatesForm extends React.Component {
     }
 
     onLocationChange(event, menuItem, index) {
+        this.setState({locationError: ''});
         this.setState({location: this.state.locationOptions[index]})
     }
 
     onHometownChange(event, menuItem, index) {
+        this.setState({hometownError: ''});
         this.setState({hometown: this.state.hometownOptions[index]})
     }
 
     onMottoChange(event, newValue) {
+        this.setState({mottoError: ''});
         this.setState({motto: newValue})
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.state.tagsOptions[index]);
-        if (ind === -1) {
-            // TODO: factor out common code to enforce max 3
-            // can only choose max 3
-            if (this.state.tags.length <3) {
-                this.setState({tags: [...this.state.tags, this.state.tagsOptions[index]]});
+        const tagLimit = 5;
+        try {
+            this.setState({
+                tags: chooseItems(this.state.tagsOptions[index], this.state.tags, tagLimit)
+            });
+            this.setState({tagsError: ''});
+        } catch (e) {
+            if (e instanceof ExceedMaxItemsError) {
+                this.setState({tagsError: `最多可选${tagLimit}个`});
             } else {
-                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.state.tagsOptions[index]]});
+                throw e; // let others bubble up
             }
-        } else {
-            const tags = this.state.tags;
-            tags.splice(ind, 1);
-            this.setState({tags: tags});
         }
     }
 
@@ -143,7 +141,12 @@ class RoommatesForm extends React.Component {
             this.props.onWeChatIdDone(this.state.weChatId);
             this.props.onClose();
         } else {
-            this.setState({showError: true});
+            this.setState({
+                locationError: this.state.location?'':'必填',
+                hometownError: this.state.hometown?'':'必填',
+                mottoError: this.state.motto?'':'必填',
+                tagsError: this.state.tags.length?'':'必填',
+            });
         }
     }
 
@@ -188,7 +191,7 @@ class RoommatesForm extends React.Component {
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
                            multiple={false}
-                           errorText={this.showError(this.state.location)}
+                           errorText={this.state.locationError}
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<HometownIcon color={PRIMARY_BLUE}/>}
@@ -200,14 +203,14 @@ class RoommatesForm extends React.Component {
                            tagDisplay={false}
                            tagColor={PRIMARY_BLUE}
                            multiple={false}
-                           errorText={this.showError(this.state.hometown)}
+                           errorText={this.state.hometownError}
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_BLUE}/>}
                            label={'自我描述'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
-                           errorText={this.showError(this.state.motto)}
+                           errorText={this.state.mottoError}
                            ref='mottoInput'
                            onFocus={this.scrollToMottoInput.bind(this)}
                            rows={1}
@@ -225,7 +228,7 @@ class RoommatesForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={true}
                            multiple={true}
-                           errorText={this.showError(this.state.tags)}
+                           errorText={this.state.tagsError}
                 />
             </ModalForm>
         )

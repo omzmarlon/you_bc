@@ -112,7 +112,10 @@ class SearchableDialogMenu extends React.Component {
                                           backgroundColor: 'rgb(128, 128, 128)',
                                           color: 'white'
                                       }}
-                                      style={{width: '100%'}}
+                                      style={{
+                                          width: '100%',
+                                          marginBottom: 30
+                                      }}
                                       width={'1%'} //Have to set this for 100% width to work. seems to be a bug from material-ui
                                       menuItemStyle={{width: '100%'}}
                                       autoWidth={false}
