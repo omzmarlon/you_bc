@@ -42,6 +42,7 @@ class SearchableMenuInput extends React.Component {
                                       multiple={this.props.multiple}
                                       options={this.props.options}
                                       loadingOptions={this.props.loadingOptions}
+                                      errorText={this.props.errorText}
                 />
             </div>
         );

@@ -25,6 +25,12 @@ const menuItemStyle = {
     alignItems: 'center'
 };
 
+const errorTextStyle = {
+    fontSize: 12,
+    color: 'rgb(244, 67, 54)',
+    marginLeft: 17
+};
+
 class SearchableDialogMenu extends React.Component {
 
     scrollToSearchInput() {
@@ -61,7 +67,7 @@ class SearchableDialogMenu extends React.Component {
                         确定
                     </RaisedButton>
                 ]}
-                autoScrollBodyContent={true}
+                autoScrollBodyContent={false}
             >
                 <Paper zDepth={1}
                        className={'chosen-courses-container'}
@@ -86,6 +92,7 @@ class SearchableDialogMenu extends React.Component {
                                 </Chip>
                         }
                     </div>
+                    <span style={errorTextStyle}>{this.props.errorText}</span>
                 </Paper>
                 <SearchBar
                     ref='searchBar'
@@ -105,6 +112,10 @@ class SearchableDialogMenu extends React.Component {
                                           backgroundColor: 'rgb(128, 128, 128)',
                                           color: 'white'
                                       }}
+                                      style={{width: '100%'}}
+                                      width={'1%'} //Have to set this for 100% width to work. seems to be a bug from material-ui
+                                      menuItemStyle={{width: '100%'}}
+                                      autoWidth={false}
                                 >
                                     {
                                         this.props.options.map(
@@ -141,7 +152,8 @@ SearchableDialogMenu.propTypes = {
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     onChoiceChange: PropTypes.func.isRequired, // signature onChoiceChange(choice)
     multiple: PropTypes.bool.isRequired,
-    loadingOptions: PropTypes.bool.isRequired
+    loadingOptions: PropTypes.bool.isRequired,
+    errorText: PropTypes.string
 };
 
 SearchableDialogMenu.defaultProps = {

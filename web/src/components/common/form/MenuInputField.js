@@ -86,7 +86,8 @@ class MenuInputField extends React.Component {
                         </div>
                         <Divider/>
                         {
-                            this.props.errorText && <span className={"error-text"}>必填</span>
+                            this.props.errorText &&
+                            <span className={"error-text"}>{this.props.errorText}</span>
                         }
                     </div>
                 }
