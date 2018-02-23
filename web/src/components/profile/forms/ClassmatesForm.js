@@ -120,7 +120,7 @@ class ClassmatesForm extends React.Component {
     }
 
     onCoursesChange(option) {
-        const courseLimit = 10;
+        const courseLimit = 6;
         try {
             this.setState({
                 courses: chooseItems(option, this.state.courses, courseLimit)
