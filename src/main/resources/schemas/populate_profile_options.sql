@@ -10,6 +10,9 @@ INSERT INTO classmates_courses(course) VALUE ('MATH 302');
 INSERT INTO classmates_courses(course) VALUE ('ECON 101');
 INSERT INTO classmates_courses(course) VALUE ('ECON 102');
 INSERT INTO classmates_courses(course) VALUE ('MATH 104');
+INSERT INTO classmates_courses(course) VALUE ('MATH 105');
+INSERT INTO classmates_courses(course) VALUE ('MATH 221');
+INSERT INTO classmates_courses(course) VALUE ('MATH 101');
 
 # classmates tags
 INSERT INTO classmates_tags(tag) VALUE ('自习');

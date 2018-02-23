@@ -20,7 +20,8 @@ import {PRIMARY_RED, SECONDARY_RED} from "../../../styles/constants/colors";
 import SearchableMenuInput from "../../common/form/SearchableMenuInput";
 import {getClassmatesTags, getCourseOptions, getMajorOptions} from "../../../requests/profileOptionRequests";
 import {showInfoBar} from "../../../actions/global/globalActions";
-import {isIOS} from "../../../utils/Util";
+import {chooseItems, isIOS} from "../../../utils/Util";
+import {ExceedMaxItemsError} from "../../../utils/Errors";
 
 class ClassmatesForm extends React.Component {
 
@@ -37,7 +38,10 @@ class ClassmatesForm extends React.Component {
             motto: '',
             tags: [],
             //error
-            showError: false,
+            majorError: '',
+            coursesError: '',
+            mottoError: '',
+            tagsError: '',
             // options
             coursesOptions: [],
             majorOptions: [],
@@ -50,15 +54,6 @@ class ClassmatesForm extends React.Component {
         this.onCoursesChange = this.onCoursesChange.bind(this);
         this.onMottoChange = this.onMottoChange.bind(this);
         this.onTagChange = this.onTagChange.bind(this);
-        this.showError = this.showError.bind(this);
-    }
-
-    showError(field) {
-        if (this.state.showError) {
-            return field.length?'':'必填';
-        } else {
-            return "";
-        }
     }
 
     componentWillReceiveProps() {
@@ -100,6 +95,7 @@ class ClassmatesForm extends React.Component {
     }
 
     onMajorChange(event, menuItem, index) {
+        this.setState({majorError: ''});
         this.setState({major: this.state.majorOptions[index]});
     }
 
@@ -124,40 +120,39 @@ class ClassmatesForm extends React.Component {
     }
 
     onCoursesChange(option) {
-        const ind = this.state.courses.indexOf(option);
-        if (ind === -1) {
-            // TODO: factor out common code to enforce max 3
-            // can only choose max 3
-            if (this.state.courses.length <3) {
-                this.setState({courses: [...this.state.courses, option]});
+        const courseLimit = 5;
+        try {
+            this.setState({
+                courses: chooseItems(option, this.state.courses, courseLimit)
+            });
+            this.setState({coursesError: ''});
+        } catch (e) {
+            if (e instanceof ExceedMaxItemsError) {
+                this.setState({coursesError: `最多可选${courseLimit}个`});
             } else {
-                this.setState({courses: [this.state.courses[1], this.state.courses[2], option]});
+                throw e; // let others bubble up
             }
-        } else {
-            const courses = this.state.courses;
-            courses.splice(ind, 1);
-            this.setState({courses: courses});
         }
     }
 
     onMottoChange(event, newValue) {
+        this.setState({mottoError: ''});
         this.setState({motto: newValue})
     }
 
     onTagChange(event, menuItem, index) {
-        const ind = this.state.tags.indexOf(this.state.tagsOptions[index]);
-        if (ind === -1) {
-            // TODO: factor out common code to enforce max 3
-            // can only choose max 3
-            if (this.state.tags.length <3) {
-                this.setState({tags: [...this.state.tags, this.state.tagsOptions[index]]});
+        const tagLimit = 5;
+        try {
+            this.setState({
+                tags: chooseItems(this.state.tagsOptions[index], this.state.tags, tagLimit)
+            });
+            this.setState({tagsError: ''});
+        } catch (e) {
+            if (e instanceof ExceedMaxItemsError) {
+                this.setState({tagsError: `最多可选${tagLimit}个`});
             } else {
-                this.setState({tags: [this.state.tags[1], this.state.tags[2], this.state.tagsOptions[index]]});
+                throw e; // let others bubble up
             }
-        } else {
-            const tags = this.state.tags;
-            tags.splice(ind, 1);
-            this.setState({tags: tags});
         }
     }
 
@@ -173,7 +168,12 @@ class ClassmatesForm extends React.Component {
             this.setState({coursesOptions: []});
             this.props.onClose();
         } else {
-            this.setState({showError: true});
+            this.setState({
+                majorError: this.state.major?'':'必填',
+                coursesError: this.state.courses.length?'':'必填',
+                mottoError: this.state.motto?'':'必填',
+                tagsError: this.state.tags.length?'':'必填',
+            });
         }
     }
 
@@ -217,7 +217,7 @@ class ClassmatesForm extends React.Component {
                            tagDisplay={false}
                            tagColor={PRIMARY_RED}
                            multiple={false}
-                           errorText={this.showError(this.state.major)}
+                           errorText={this.state.majorError}
                 />
                 <SearchableMenuInput classNames={'form-input-field'}
                                      inputIcon={<CourseIcon color={PRIMARY_RED}/>}
@@ -232,14 +232,14 @@ class ClassmatesForm extends React.Component {
                                      tagDisplay={false}
                                      multiple={true}
                                      loadingOptions={this.state.loadingCourseOptions}
-                                     errorText={this.showError(this.state.courses)}
+                                     errorText={this.state.coursesError}
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_RED}/>}
                            label={'能力'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
-                           errorText={this.showError(this.state.motto)}
+                           errorText={this.state.mottoError}
                            ref='mottoInput'
                            onFocus={this.scrollToMottoInput.bind(this)}
                            rows={1}
@@ -257,7 +257,7 @@ class ClassmatesForm extends React.Component {
                            textColor={'white'}
                            tagDisplay={true}
                            multiple={true}
-                           errorText={this.showError(this.state.tags)}
+                           errorText={this.state.tagsError}
                 />
             </ModalForm>
         )

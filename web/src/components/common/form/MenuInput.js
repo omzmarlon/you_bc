@@ -39,6 +39,7 @@ class MenuInput extends React.Component {
                             onItemClick={this.props.onChange}
                             multiple={this.props.multiple}
                             options={this.props.options}
+                            errorText={this.props.errorText}
                 />
             </div>
         );

@@ -14,6 +14,12 @@ const menuItemStyle = {
     alignItems: 'center'
 };
 
+const errorTextStyle = {
+    fontSize: 12,
+    color: 'rgb(244, 67, 54)',
+    marginLeft: 17
+};
+
 export const DialogMenu = (props) => (
     <Dialog
         contentStyle={ modalStyles.dialogContent }
@@ -39,6 +45,10 @@ export const DialogMenu = (props) => (
                   backgroundColor: 'rgb(128, 128, 128)',
                   color: 'white'
               }}
+              style={{width: '100%'}}
+              width={'1%'} //Have to set this for 100% width to work. seems to be a bug from material-ui
+              menuItemStyle={{width: '100%'}}
+              autoWidth={false}
         >
             {
                 props.options.map(
@@ -51,6 +61,7 @@ export const DialogMenu = (props) => (
                 )
             }
         </Menu>
+        <span style={errorTextStyle}>{props.errorText}</span>
     </Dialog>
 );
 
@@ -64,7 +75,8 @@ DialogMenu.propTypes = {
     ]).isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     onItemClick: PropTypes.func.isRequired, // signature onCoursesChange(event, menuItem, index)
-    multiple: PropTypes.bool.isRequired
+    multiple: PropTypes.bool.isRequired,
+    errorText: PropTypes.string
 };
 
 export default DialogMenu;
