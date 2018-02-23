@@ -23,6 +23,12 @@ INSERT INTO classmates_tags(tag) VALUE ('复习');
 INSERT INTO classmates_tags(tag) VALUE ('预习');
 INSERT INTO classmates_tags(tag) VALUE ('读书');
 INSERT INTO classmates_tags(tag) VALUE ('泡图书馆');
+INSERT INTO classmates_tags(tag) VALUE ('泡咖啡厅');
+INSERT INTO classmates_tags(tag) VALUE ('看电影');
+INSERT INTO classmates_tags(tag) VALUE ('看电视剧');
+INSERT INTO classmates_tags(tag) VALUE ('看动画片');
+INSERT INTO classmates_tags(tag) VALUE ('看美妆');
+INSERT INTO classmates_tags(tag) VALUE ('玩游戏');
 
 # location
 INSERT INTO roommates_locations(location) VALUE ('West Vancouver');

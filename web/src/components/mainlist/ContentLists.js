@@ -31,9 +31,9 @@ export const MajorInfo = (props) => (
                 rightElement={<span style={{paddingLeft: 3}}>专业:</span>}
             />
         }
-        rightElement={
-            <span style={{paddingLeft: 8}}>{props.major} {props.year}</span>
-        }
+        rightElement={<span style={{paddingLeft: 8}}>{props.major}</span>}
+        // TODO should have year level
+        // rightElement={<span style={{paddingLeft: 8}}>{props.major} {props.year}</span>}
     />
 );
 MajorInfo.propTypes = {
@@ -121,7 +121,9 @@ export const HometownInfo = (props) => (
                 rightElement={<span style={{paddingLeft: 3}}>家乡:</span>}
             />
         }
-        rightElement={<span style={{paddingLeft: 8}}>{props.country} {props.city}</span>}
+        rightElement={<span style={{paddingLeft: 8}}>{props.city}</span>}
+        // TODO: render both country and city?
+        // rightElement={<span style={{paddingLeft: 8}}>{props.country} {props.city}</span>}
     />
 );
 HometownInfo.propTypes = {
@@ -228,9 +230,9 @@ export const FacultyInfo = (props) => (
                 }
             />
         }
-        rightElement={
-            <span style={{paddingLeft: 8}}>{props.faculty} {props.year}</span>
-        }
+        rightElement={<span style={{paddingLeft: 8}}>{props.faculty}</span>}
+        //TODO: should have year
+        // rightElement={<span style={{paddingLeft: 8}}>{props.faculty} {props.year}</span>}
     />
 );
 FacultyInfo.propTypes = {
