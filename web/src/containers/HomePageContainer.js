@@ -10,7 +10,7 @@ import {PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW} from "../styles/constants/col
 import Block from "../components/homePage/Block";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import Badge from "material-ui/Badge";
-import Profile from "material-ui/svg-icons/action/account-circle";
+import PokeEgg from "../../public/images/poke_egg.png";
 // constants
 import {TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES} from "../constants/api";
 import {
@@ -21,11 +21,10 @@ import {
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
 import RollingEmoji from "../components/common/RollingEmoji";
-import {defaultIconSize} from "../styles/material/iconStyles";
 
 const ProfileButton = () => (
     <FloatingActionButton className={'profile-button'}>
-        <Profile style={defaultIconSize} />
+        <img src={PokeEgg} className="profile-icon"/>
         <span className={'to-profile-label'}>个人主页</span>
     </FloatingActionButton>
 );
