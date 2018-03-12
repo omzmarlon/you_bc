@@ -17,3 +17,8 @@ export const friendRollingIcon = size => ([
     <WaveIcon style={{...rollingIconStyle, width: size, height: size}}/>,
     <FoodIcon style={{...rollingIconStyle, width: size, height: size}}/>
 ]);
+
+export const VerificationCodes = [
+    "poke",
+    "1234"
+];

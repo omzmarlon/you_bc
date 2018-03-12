@@ -53,6 +53,7 @@ export const LOCATION_VERIFICATION_API = "/api/verification/location";
 export const STUDENT_CARD_VERIFICATION_API = "/api/verification/studentCard";
 export const EMAIL_VERIFICATION_API = "/api/verification/email";
 export const VERIFY_EMAIL_CODE_API = "/api/verification/emailCode";
+export const CODE_VERIFICATION_API = "/api/verification/code";
 
 // mainList API
 export const FETCH_CLASSMATES_API = "/api/classmates";

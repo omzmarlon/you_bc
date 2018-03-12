@@ -52,6 +52,7 @@ export const UPDATE_EMAIL = 'UPDATE_EMAIL';
 export const UPDATE_STUDENT_CARD = "UPDATE_STUDENT_CARD";
 export const VERIFY_LOCATION = "VERIFY_LOCATION";
 export const SWITCH_VERIFICATION_METHOD = "SWITCH_VERIFICATION_METHOD";
+export const VERIFY_CODE = "VERIFY_CODE";
 
 /************************ authentication actions ************************/
 export const FETCH_AUTH_TOKEN_REQUEST = 'FETCH_AUTH_TOKEN_REQUEST';
