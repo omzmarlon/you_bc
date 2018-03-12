@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import { connect }  from 'react-redux'
+import CodeCheckContainer from "./verification/CodeCheckContainer";
 const queryStringParser = require('query-string');
 
 import {fetchAuthToken, fetchAuthTokenComplete} from "../actions/global/authenticationActions";
@@ -41,26 +42,28 @@ class AuthFacade extends Component {
             if (isVerified) {
                 return <HomePageContainer/>;
             } else {
-                if (pending !== 'none') {
-                    switch (pending) {
-                        case 'email':
-                            return <EmailCheckContainer/>;
-                        case 'card':
-                            return <StudentCardCheckContainer/>;
-                        case 'none':
-                        default:
-                            return <LocationCheckContainer/>;
-                    }
-                } else {
-                    switch (using) {
-                        case 'email':
-                            return <EmailCheckContainer/>;
-                        case 'card':
-                            return <StudentCardCheckContainer/>;
-                        default:
-                            return <LocationCheckContainer/>;
-                    }
-                }
+                // switch to verification code
+                // if (pending !== 'none') {
+                //     switch (pending) {
+                //         case 'email':
+                //             return <EmailCheckContainer/>;
+                //         case 'card':
+                //             return <StudentCardCheckContainer/>;
+                //         case 'none':
+                //         default:
+                //             return <LocationCheckContainer/>;
+                //     }
+                // } else {
+                //     switch (using) {
+                //         case 'email':
+                //             return <EmailCheckContainer/>;
+                //         case 'card':
+                //             return <StudentCardCheckContainer/>;
+                //         default:
+                //             return <LocationCheckContainer/>;
+                //     }
+                // }
+                return <CodeCheckContainer/>;
             }
         } else {
             return <AuthPage/>;
@@ -70,7 +73,10 @@ class AuthFacade extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.authentication.authStatusCode === 200,
-    isVerified: state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified,
+    isVerified: state.verification.isLocationVerified ||
+                state.verification.isEmailVerified ||
+                state.verification.isStudentCardVerified ||
+                state.verification.isCodeVerified,
     pending: state.verification.pending,
     using: state.verification.using
 });

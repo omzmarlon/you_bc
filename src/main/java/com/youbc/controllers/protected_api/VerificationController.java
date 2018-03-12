@@ -45,7 +45,7 @@ public class VerificationController {
         return this.verificationDAO.fetchStudentVerification(cookieService.getAuthenticatedUserId(request));
     }
 
-    @PostMapping("/api/verification/location")
+    @PostMapping(value = {"/api/verification/code", "/api/verification/location"})
     public StudentVerification verifyLocation(HttpServletRequest request) {
         String userId = cookieService.getAuthenticatedUserId(request);
         verificationDAO.approve(userId);

@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "./RollingEmoji.less";
 import Rollable from "./Rollable";
-import {friendRollingIcon} from "../../constants/RollingIcons";
+import {friendRollingIcon} from "../../constants/misc";
 
 const RollingEmoji = props => (
     <div className="friend-display-name">

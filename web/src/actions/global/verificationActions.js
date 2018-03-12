@@ -1,10 +1,10 @@
 import {
-    RECEIVE_VERIFICATION, SWITCH_VERIFICATION_METHOD, UPDATE_EMAIL, UPDATE_STUDENT_CARD,
+    RECEIVE_VERIFICATION, SWITCH_VERIFICATION_METHOD, UPDATE_EMAIL, UPDATE_STUDENT_CARD, VERIFY_CODE,
     VERIFY_LOCATION
 } from "../actionTypes";
 
 import axios from 'axios';
-import {LOCATION_VERIFICATION_API, requestUrl, VERIFICATION_INFO_API} from "../../constants/api";
+import {CODE_VERIFICATION_API, LOCATION_VERIFICATION_API, requestUrl, VERIFICATION_INFO_API} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 
 export const receiveVerification = (verification) => ({type: RECEIVE_VERIFICATION, verification});
@@ -59,6 +59,24 @@ export const postVerifyLocation = () => dispatch => {
             }
         }
     );
+};
+
+export const verifyCode = () => ({type: VERIFY_CODE});
+
+export const postVerifyCode = () => dispatch => {
+    axios.post(requestUrl(CODE_VERIFICATION_API), {}, {withCredentials: true})
+        .then(
+            response => {
+                dispatch(verifyCode());
+            },
+            err => {
+                // TODO: centralize error handling
+                dispatch(showInfoBar("认证邀请码失败"));
+                if (err.response.data.error) {
+                    console.log(err.response.data.error);
+                }
+            }
+        )
 };
 
 export const switchVerificationMethod = (method) => ({ // one of ['location', 'email', 'card'];
