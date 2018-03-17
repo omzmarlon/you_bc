@@ -19,6 +19,5 @@ export const friendRollingIcon = size => ([
 ]);
 
 export const VerificationCodes = [
-    "poke",
-    "1234"
+    "PK666"
 ];
