@@ -1,0 +1,40 @@
+@import (reference) "../../../styles/constants/colors";
+@import (reference) "../../../styles/constants/fonts";
+
+.match-success-modal-header {
+  position: absolute;
+  top: -30px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  .header-ribbon {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .header-text {
+    position: relative;
+    margin: 0;
+    text-align: center;
+    top: -12vw;
+    color: white;
+    font-size: 4.8vw;
+  }
+}
+
+.match-success-modal-body {
+  padding: 24px;
+  text-align: center;
+  .match-success-modal-text1 {
+    .common-font;
+    span {
+      color: @primaryRed
+    }
+  }
+
+  .match-success-modal-text2 {
+    .common-font;
+    color: @secondaryText;
+    margin: 0;
+  }
+}

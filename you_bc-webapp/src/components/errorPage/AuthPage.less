@@ -1,0 +1,32 @@
+@import (reference) "../../styles/constants/fonts";
+@import (reference) "../../styles/constants/colors";
+
+.auth-page-loading-container {
+  width: 60vw;
+  margin: 50vh auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+  p {
+    .common-font;
+    color: @generalText;
+  }
+}
+
+.auth-page-error-container {
+  .auth-page-loading-container;
+  .error-page-title {
+    display: flex;
+    align-items: flex-end;
+    span {
+      font-size: 60px;
+      font-family: sans-serif;
+    }
+  }
+}
+
+.auth-page-dev-container {
+  text-align: center;
+}
