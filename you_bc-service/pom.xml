@@ -23,40 +23,82 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <spring.version>2.0.1.RELEASE</spring.version>
+        <spring.jdbc.version>5.0.5.RELEASE</spring.jdbc.version>
+
+        <jackson.version>2.9.0</jackson.version>
+
+        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+
+        <mysql.connector.version>8.0.11</mysql.connector.version>
+
+        <jooq.version>3.9.6</jooq.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.1.RELEASE</version>
+            <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
-            <version>2.0.1.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>2.0.1.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>2.0.1.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.0.5.RELEASE</version>
+            <version>${spring.jdbc.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.thymeleaf</groupId>-->
+            <!--<artifactId>thymeleaf</artifactId>-->
+            <!--<version>${thymeleaf.version}</version>-->
+        <!--</dependency>-->
+
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
+            <version>${mysql.connector.version}</version>
         </dependency>
 
         <dependency>
@@ -81,17 +123,17 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
-            <version>3.9.6</version>
+            <version>${jooq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-meta</artifactId>
-            <version>3.9.6</version>
+            <version>${jooq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq-codegen</artifactId>
-            <version>3.9.6</version>
+            <version>${jooq.version}</version>
         </dependency>
         <!--                               -->
 
@@ -130,71 +172,6 @@
 
     <build>
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.9.6</version>
-
-                <executions>
-                    <execution>
-                        <id>jooq code generation</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <jdbc>
-                                <driver>com.mysql.jdbc.Driver</driver>
-                                <url>jdbc:mysql://localhost:3306/poke_you_bc</url>
-                                <user>youbcuser</user>
-                                <password>youbcuser</password>
-
-                            </jdbc>
-
-                            <generator>
-                                <name>org.jooq.util.DefaultGenerator</name>
-                                <strategy>
-                                    <name>org.jooq.util.DefaultGeneratorStrategy</name>
-                                </strategy>
-                                <database>
-                                    <name>org.jooq.util.mysql.MySQLDatabase</name>
-                                    <includes>.*</includes>
-                                    <excludes></excludes>
-                                    <inputSchema>poke_you_bc</inputSchema>
-                                </database>
-
-                                <generate>
-                                    <relations>true</relations>
-                                    <deprecated>false</deprecated>
-                                    <records>true</records>
-                                    <immutablePojos>true</immutablePojos>
-                                    <fluentSetters>true</fluentSetters>
-                                </generate>
-
-                                <target>
-                                    <packageName>com.youbc.generated.schema</packageName>
-                                    <directory>${basedir}/src/main/java</directory>
-                                </target>
-                            </generator>
-
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-
-
             <!--copying web resources-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -242,6 +219,17 @@
             </plugin>
 
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+
             <!--generate final package-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -258,9 +246,89 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>jooqCodeGen</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>properties-maven-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>read-project-properties</goal>
+                                </goals>
+                                <configuration>
+                                    <files>
+                                        <file>${basedir}/src/main/resources/configurations/database.properties</file>
+                                    </files>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
 
+
+                    <plugin>
+                        <groupId>org.jooq</groupId>
+                        <artifactId>jooq-codegen-maven</artifactId>
+                        <version>3.9.6</version>
+
+                        <executions>
+                            <execution>
+                                <id>jooq code generation</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <jdbc>
+                                        <driver>${youbc.db.driver}</driver>
+                                        <url>${youbc.db.url}</url>
+                                        <user>${youbc.db.username}</user>
+                                        <password>${youbc.db.password}</password>
+
+                                    </jdbc>
+
+                                    <generator>
+                                        <name>org.jooq.util.JavaGenerator</name>
+
+                                        <strategy>
+                                            <name>org.jooq.util.DefaultGeneratorStrategy</name>
+                                        </strategy>
+                                        <database>
+                                            <name>org.jooq.util.mysql.MySQLDatabase</name>
+                                            <includes>.*</includes>
+                                            <excludes></excludes>
+                                            <inputSchema>poke_you_bc</inputSchema>
+                                        </database>
+
+                                        <generate>
+                                            <relations>true</relations>
+                                            <deprecated>false</deprecated>
+                                            <records>true</records>
+                                            <immutablePojos>true</immutablePojos>
+                                            <fluentSetters>true</fluentSetters>
+                                        </generate>
+
+                                        <target>
+                                            <packageName>com.youbc.generated.schema</packageName>
+                                            <directory>${basedir}/src/main/java</directory>
+                                        </target>
+                                    </generator>
+
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
