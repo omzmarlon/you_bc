@@ -1,18 +1,19 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 logs
 target
-/.idea
-/.idea_modules
-/.classpath
-/.project
-/.settings
-/RUNNING_PID
+.idea
+.idea_modules
+.classpath
+.project
+.settings
+RUNNING_PID
 node_modules
+node
 npm-debug.log
-/.gradle
+.gradle
 build
-/out
-/src/main/resources/public
+out
+src/main/resources/public
 
 # extra
 *.ipr
