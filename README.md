@@ -10,6 +10,9 @@
 # This will fully package web-app and backend service into a jar
 # No additional installation required except Maven
 mvn clean install
+~~~~
+~~~~
+# Run application
 java -jar you_bc-service/target/youbc-service-1.0.0.jar
 ~~~~
 
