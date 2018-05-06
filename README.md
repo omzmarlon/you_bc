@@ -1,4 +1,4 @@
-# YOU.BC - UBC's first online social network #
+# YOU.BC - Social Network for UBC students #
 
 ### Install Maven:
 1. Download latest binary maven from: https://maven.apache.org/download.cgi  to appropriate directory
