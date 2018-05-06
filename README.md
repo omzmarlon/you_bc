@@ -63,3 +63,8 @@ SET NAMES utf8mb4;
 SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation%';
 ~~~~
 
+
+### Technologies:
+* React.js
+* Spring Framework
+* Maven build tool
