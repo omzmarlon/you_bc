@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class LoginController {
+public class AuthController {
     private UserProfileDAO userDAO;
     private BCryptPasswordEncoder passwordEncoder;
 
-    public LoginController(
+    public AuthController(
             UserProfileDAO userDAO,
             BCryptPasswordEncoder passwordEncoder
     ) {
