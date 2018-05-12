@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.ClassmatesProfileTagsRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesProfileTags extends TableImpl<ClassmatesProfileTagsRecord> {
 
-    private static final long serialVersionUID = 2074255648;
+    private static final long serialVersionUID = 505567510;
 
     /**
-     * The reference instance of <code>poke_you_bc.classmates_profile_tags</code>
+     * The reference instance of <code>you_bc.classmates_profile_tags</code>
      */
     public static final ClassmatesProfileTags CLASSMATES_PROFILE_TAGS = new ClassmatesProfileTags();
 
@@ -51,24 +51,24 @@ public class ClassmatesProfileTags extends TableImpl<ClassmatesProfileTagsRecord
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_profile_tags.user_id</code>.
+     * The column <code>you_bc.classmates_profile_tags.user_id</code>.
      */
-    public final TableField<ClassmatesProfileTagsRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<ClassmatesProfileTagsRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.classmates_profile_tags.tag</code>.
+     * The column <code>you_bc.classmates_profile_tags.tag</code>.
      */
     public final TableField<ClassmatesProfileTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.classmates_profile_tags</code> table reference
+     * Create a <code>you_bc.classmates_profile_tags</code> table reference
      */
     public ClassmatesProfileTags() {
         this("classmates_profile_tags", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.classmates_profile_tags</code> table reference
+     * Create an aliased <code>you_bc.classmates_profile_tags</code> table reference
      */
     public ClassmatesProfileTags(String alias) {
         this(alias, CLASSMATES_PROFILE_TAGS);
@@ -87,7 +87,7 @@ public class ClassmatesProfileTags extends TableImpl<ClassmatesProfileTagsRecord
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

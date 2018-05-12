@@ -1,6 +1,6 @@
-CREATE DATABASE poke_you_bc CHARACTER SET = utf16;
+CREATE DATABASE you_bc CHARACTER SET = utf16;
 
-CREATE USER IF NOT EXISTS 'youbcuser'@'localhost' IDENTIFIED BY 'youbcuser';
-GRANT ALL PRIVILEGES ON poke_you_bc . * TO 'youbcuser'@'localhost';
+CREATE USER IF NOT EXISTS 'youbcuser_eng'@'localhost' IDENTIFIED BY 'youbcuser_eng';
+GRANT ALL PRIVILEGES ON you_bc . * TO 'youbcuser_eng'@'localhost';
 
 SET NAMES utf8mb4;

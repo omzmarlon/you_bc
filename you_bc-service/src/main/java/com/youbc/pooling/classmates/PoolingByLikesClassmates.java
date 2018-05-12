@@ -21,8 +21,8 @@ public class PoolingByLikesClassmates extends PoolingClassmates implements Pooli
         this.userPoolStrategyDAO = userPoolStrategyDAO;
     }
 
-    public Set<BasicCandidate> poolUsers(String userId, Integer amount, Integer gender, Set<String> except) {
-        List<String> candidateIDs = userPoolStrategyDAO.fetchClassmatesByLikes(userId, amount, gender, except);
+    public Set<BasicCandidate> poolUsers(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        List<Integer> candidateIDs = userPoolStrategyDAO.fetchClassmatesByLikes(userId, amount, gender, except);
         return populateToClassmates(candidateIDs);
     }
 }

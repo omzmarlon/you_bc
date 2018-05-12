@@ -45,7 +45,7 @@ public class FriendsController {
             @RequestParam("amount") Integer amount,
             @RequestParam("gender") String gender
     ) {
-        String userID = cookieService.getAuthenticatedUserId(request);
+        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         if (amount <= 0) throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "missing parameter", "\'amount\' value is missing in the query string"));
         if (gender == null) gender = "mix";
         return userPoolManager.poolUsers(userID, amount, gender);
@@ -53,15 +53,15 @@ public class FriendsController {
 
     @RequestMapping(path = Endpoints.LIKE_FRIENDS, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void postLikeFriends(HttpServletRequest request, @PathVariable("user_id") String likee) {
-        String liker = cookieService.getAuthenticatedUserId(request);
+    public void postLikeFriends(HttpServletRequest request, @PathVariable("user_id") Integer likee) {
+        Integer liker = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         likeAndDislikeDao.friendsLike(liker, likee);
     }
 
     @RequestMapping(path = Endpoints.DISLIKE_FRIENDS, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void postDislikeFriends(HttpServletRequest request, @PathVariable("user_id") String dislikee) {
-        String disliker = cookieService.getAuthenticatedUserId(request);
+    public void postDislikeFriends(HttpServletRequest request, @PathVariable("user_id") Integer dislikee) {
+        Integer disliker = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         likeAndDislikeDao.friendsDislike(disliker, dislikee);
     }
 }

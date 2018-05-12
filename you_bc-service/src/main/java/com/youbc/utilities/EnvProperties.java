@@ -15,10 +15,5 @@ public class EnvProperties {
 
     //security
     public static String JWT_SECRET = "jwt.secret";
-    public static String JWT_EXPIRY_SHORT = "jwt.expiry.short";
-    public static String JWT_EXPIRY_LONG = "jwt.expiry.long";
-
-    //WeChat
-    public static String WECHAT_APPID = "wechat.appid";
-    public static String WECHAT_SECRET = "wechat.secret";
+    public static String JWT_EXPIRY = "jwt.expiry";
 }

@@ -9,13 +9,11 @@ public class JWTTokenService {
     //private static final String TOKEN_PREFIX = "Bear ";
 
     private String secret;
-    private long shortExpiryMillis;
-    private long longExpiryMillis;
+    private long expiryMillis;
 
-    public JWTTokenService(String secret, long shortExpiryMillis, long longExpiryMillis) {
+    public JWTTokenService(String secret, long expiryMillis) {
         this.secret = secret;
-        this.shortExpiryMillis = shortExpiryMillis;
-        this.longExpiryMillis = longExpiryMillis;
+        this.expiryMillis = expiryMillis;
     }
 
 
@@ -24,29 +22,21 @@ public class JWTTokenService {
      * @return Some<String> of subject if verification successful, or None if failed
      */
     public Optional<String> verifyToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException {
-        String userID = Jwts.parser()
+        String subject = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-        return userID != null && !(userID.equals(""))? Optional.of(userID) : Optional.empty();
+        return subject != null && !(subject.equals(""))? Optional.of(subject) : Optional.empty();
     }
 
-    /***
-     * @param userID - unique ID in current application to identify a user
-     * @return JWT token
-     */
-    public String generateShortLiveToken(String userID) {
-        return generateToken(userID, shortExpiryMillis);
+    public String generateJWTToken(String subject) {
+        return generateToken(subject, expiryMillis);
     }
 
-    public String generateLongLiveToken(String userID) {
-        return generateToken(userID, longExpiryMillis);
-    }
-
-    private String generateToken(String userID, long expiry) {
+    private String generateToken(String subject, long expiry) {
         return Jwts.builder()
-                .setSubject(userID)
+                .setSubject(subject)
                 .setExpiration(new Date(System.currentTimeMillis()+expiry))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();

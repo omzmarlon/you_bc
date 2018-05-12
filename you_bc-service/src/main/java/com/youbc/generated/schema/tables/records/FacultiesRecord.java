@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FacultiesRecord extends UpdatableRecordImpl<FacultiesRecord> implements Record2<Integer, String> {
 
-    private static final long serialVersionUID = 240260186;
+    private static final long serialVersionUID = 17021006;
 
     /**
-     * Setter for <code>poke_you_bc.faculties.id</code>.
+     * Setter for <code>you_bc.faculties.id</code>.
      */
     public FacultiesRecord setId(Integer value) {
         set(0, value);
@@ -39,14 +39,14 @@ public class FacultiesRecord extends UpdatableRecordImpl<FacultiesRecord> implem
     }
 
     /**
-     * Getter for <code>poke_you_bc.faculties.id</code>.
+     * Getter for <code>you_bc.faculties.id</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>poke_you_bc.faculties.faculty</code>.
+     * Setter for <code>you_bc.faculties.faculty</code>.
      */
     public FacultiesRecord setFaculty(String value) {
         set(1, value);
@@ -54,7 +54,7 @@ public class FacultiesRecord extends UpdatableRecordImpl<FacultiesRecord> implem
     }
 
     /**
-     * Getter for <code>poke_you_bc.faculties.faculty</code>.
+     * Getter for <code>you_bc.faculties.faculty</code>.
      */
     public String getFaculty() {
         return (String) get(1);

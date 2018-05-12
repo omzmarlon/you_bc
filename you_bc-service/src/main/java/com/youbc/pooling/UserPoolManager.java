@@ -13,9 +13,9 @@ public class UserPoolManager {
         this.strategies = strategies;
     }
     
-    public Set<BasicCandidate> poolUsers(String userId, Integer amount, String gender) {
+    public Set<BasicCandidate> poolUsers(Integer userId, Integer amount, String gender) {
         Set<BasicCandidate> result = new HashSet<>();
-        Set<String> except = new HashSet<>();
+        Set<Integer> except = new HashSet<>();
         Integer leftover = 0;
 
         for (WeightedStrategy s: strategies) {

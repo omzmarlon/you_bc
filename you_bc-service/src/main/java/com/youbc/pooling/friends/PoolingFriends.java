@@ -21,11 +21,11 @@ public abstract class PoolingFriends {
         this.profileDAO = profileDAO;
     }
 
-    public Set<BasicCandidate> populateToFriends(List<String> userIds) {
+    public Set<BasicCandidate> populateToFriends(List<Integer> userIds) {
 
         Set<BasicCandidate> candidates = new HashSet<>();
 
-        for (String id : userIds) {
+        for (Integer id : userIds) {
             FriendsProfile friendsProfile = profileDAO.fetchFriendsProfile(id)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "cannot find user info", "cannot find module profile info")));
             UserProfile userProfile = profileDAO.fetchUserProfile(id)

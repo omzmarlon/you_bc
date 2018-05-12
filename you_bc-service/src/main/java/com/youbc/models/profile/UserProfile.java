@@ -2,7 +2,7 @@ package com.youbc.models.profile;
 
 public class UserProfile {
 
-    private String userId;
+    private Integer userId;
     private String username;
     private Integer age;
     private Integer sex;
@@ -13,7 +13,7 @@ public class UserProfile {
 
     public UserProfile () {}
 
-    public UserProfile (String userId, String weChatId, String username, Integer age, Integer sex, String avatarUrl, String horoscope, double matchRate) {
+    public UserProfile (Integer userId, String weChatId, String username, Integer age, Integer sex, String avatarUrl, String horoscope, double matchRate) {
         this.userId = userId;
         this.username = username;
         this.age = age;
@@ -32,9 +32,9 @@ public class UserProfile {
         this.weChatId = weChatId;
     }
 
-    public String getUserId() { return userId; }
+    public Integer getUserId() { return userId; }
 
-    public void setUserId(String userId) { this.userId = userId; }
+    public void setUserId(Integer userId) { this.userId = userId; }
 
 
     public String getUsername() { return username; }

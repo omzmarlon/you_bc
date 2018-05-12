@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesProfile implements Serializable {
 
-    private static final long serialVersionUID = -1111052623;
+    private static final long serialVersionUID = -1742476136;
 
-    private final String    userId;
+    private final Integer   userId;
     private final String    major;
     private final String    motto;
     private final Timestamp timeCreated;
@@ -38,7 +38,7 @@ public class ClassmatesProfile implements Serializable {
     }
 
     public ClassmatesProfile(
-        String    userId,
+        Integer   userId,
         String    major,
         String    motto,
         Timestamp timeCreated
@@ -49,7 +49,7 @@ public class ClassmatesProfile implements Serializable {
         this.timeCreated = timeCreated;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 

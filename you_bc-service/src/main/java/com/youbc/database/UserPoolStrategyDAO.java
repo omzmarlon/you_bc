@@ -30,17 +30,17 @@ public class UserPoolStrategyDAO {
         this.dslContext = dslContext;
     }
 
-    public List<String> fetchRandomClassmates(String userId, Integer amount, Integer gender, Set<String> except) {
-        Set<String> likedUserIds = dslContext.select()
+    public List<Integer> fetchRandomClassmates(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        Set<Integer> likedUserIds = dslContext.select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKER.eq(userId))
                 .fetchSet(CLASSMATES_LIKES.LIKEE);
-        Set<String> dislikedUserIds = dslContext.select()
+        Set<Integer> dislikedUserIds = dslContext.select()
                 .from(CLASSMATES_DISLIKES)
                 .where(CLASSMATES_DISLIKES.DISLIKER.eq(userId))
                 .fetchSet(CLASSMATES_DISLIKES.DISLIKEE);
         if (gender == 0) {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(CLASSMATES_PROFILE.leftJoin(USER_PROFILE).on(CLASSMATES_PROFILE.USER_ID.eq(USER_PROFILE.USER_ID)))
                     .where(CLASSMATES_PROFILE.USER_ID.notEqual(userId))
@@ -51,7 +51,7 @@ public class UserPoolStrategyDAO {
             result.removeAll(dislikedUserIds);
             return result;
         } else {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(CLASSMATES_PROFILE.leftJoin(USER_PROFILE).on(CLASSMATES_PROFILE.USER_ID.eq(USER_PROFILE.USER_ID)))
                     .where(CLASSMATES_PROFILE.USER_ID.notEqual(userId))
@@ -65,17 +65,17 @@ public class UserPoolStrategyDAO {
         }
     }
 
-    public List<String> fetchRandomfriends(String userId, Integer amount, Integer gender, Set<String> except) {
-        Set<String> likedUserIds = dslContext.select()
+    public List<Integer> fetchRandomfriends(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        Set<Integer> likedUserIds = dslContext.select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKER.eq(userId))
                 .fetchSet(FRIENDS_LIKES.LIKEE);
-        Set<String> dislikedUserIds = dslContext.select()
+        Set<Integer> dislikedUserIds = dslContext.select()
                 .from(FRIENDS_DISLIKES)
                 .where(FRIENDS_DISLIKES.DISLIKER.eq(userId))
                 .fetchSet(FRIENDS_DISLIKES.DISLIKEE);
         if (gender == 0) {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(FRIENDS_PROFILE.leftOuterJoin(USER_PROFILE).on(FRIENDS_PROFILE.USER_ID.eq(USER_PROFILE.USER_ID)))
                     .where(FRIENDS_PROFILE.USER_ID.notEqual(userId))
@@ -86,7 +86,7 @@ public class UserPoolStrategyDAO {
             result.removeAll(dislikedUserIds);
             return result;
         } else {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(FRIENDS_PROFILE.leftOuterJoin(USER_PROFILE).on(FRIENDS_PROFILE.USER_ID.eq(USER_PROFILE.USER_ID)))
                     .where(USER_PROFILE.SEX.eq(gender))
@@ -100,17 +100,17 @@ public class UserPoolStrategyDAO {
         }
     }
 
-    public List<String> fetchRandomRoommates(String userId, Integer amount, Integer gender, Set<String> except) {
-        Set<String> likedUserIds = dslContext.select()
+    public List<Integer> fetchRandomRoommates(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        Set<Integer> likedUserIds = dslContext.select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKER.eq(userId))
                 .fetchSet(ROOMMATES_LIKES.LIKEE);
-        Set<String> dislikedUserIds = dslContext.select()
+        Set<Integer> dislikedUserIds = dslContext.select()
                 .from(ROOMMATES_DISLIKES)
                 .where(ROOMMATES_DISLIKES.DISLIKER.eq(userId))
                 .fetchSet(ROOMMATES_DISLIKES.DISLIKEE);
         if (gender == 0) {
-            List<String> result =  dslContext
+            List<Integer> result =  dslContext
                     .select()
                     .from(ROOMMATES_PROFILE.leftOuterJoin(USER_PROFILE).on(ROOMMATES_PROFILE.USER_ID.eq(USER_PROFILE.USER_ID)))
                     .where(ROOMMATES_PROFILE.USER_ID.notEqual(userId))
@@ -121,7 +121,7 @@ public class UserPoolStrategyDAO {
             result.removeAll(dislikedUserIds);
             return result;
         } else {
-            List<String> result =  dslContext
+            List<Integer> result =  dslContext
                     .select()
                     .from(ROOMMATES_PROFILE.leftOuterJoin(USER_PROFILE).on(ROOMMATES_PROFILE.USER_ID.eq(USER_PROFILE.USER_ID)))
                     .where(USER_PROFILE.SEX.eq(gender))
@@ -135,17 +135,17 @@ public class UserPoolStrategyDAO {
         }
     }
 
-    public List<String> fetchClassmatesByLikes(String userId, Integer amount, Integer gender, Set<String> except) {
-        Set<String> likedUserIds = dslContext.select()
+    public List<Integer> fetchClassmatesByLikes(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        Set<Integer> likedUserIds = dslContext.select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKER.eq(userId))
                 .fetchSet(CLASSMATES_LIKES.LIKEE);
-        Set<String> dislikedUserIds = dslContext.select()
+        Set<Integer> dislikedUserIds = dslContext.select()
                 .from(CLASSMATES_DISLIKES)
                 .where(CLASSMATES_DISLIKES.DISLIKER.eq(userId))
                 .fetchSet(CLASSMATES_DISLIKES.DISLIKEE);
         if (gender == 0) {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(CLASSMATES_LIKES.leftOuterJoin(USER_PROFILE).on(CLASSMATES_LIKES.LIKER.eq(USER_PROFILE.USER_ID)))
                     .where(CLASSMATES_LIKES.LIKEE.eq(userId))
@@ -156,7 +156,7 @@ public class UserPoolStrategyDAO {
             result.removeAll(dislikedUserIds);
             return result;
         } else {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(CLASSMATES_LIKES.leftOuterJoin(USER_PROFILE).on(CLASSMATES_LIKES.LIKER.eq(USER_PROFILE.USER_ID)))
                     .where(USER_PROFILE.SEX.eq(gender))
@@ -170,17 +170,17 @@ public class UserPoolStrategyDAO {
         }
     }
 
-    public List<String> fetchFriendsByLikes(String userId, Integer amount, Integer gender, Set<String> except) {
-        Set<String> dislikedUserIds = dslContext.select()
+    public List<Integer> fetchFriendsByLikes(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        Set<Integer> dislikedUserIds = dslContext.select()
                 .from(FRIENDS_DISLIKES)
                 .where(FRIENDS_DISLIKES.DISLIKER.eq(userId))
                 .fetchSet(FRIENDS_DISLIKES.DISLIKEE);
-        Set<String> likedUserIds = dslContext.select()
+        Set<Integer> likedUserIds = dslContext.select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKER.eq(userId))
                 .fetchSet(FRIENDS_LIKES.LIKEE);
         if (gender == 0) {
-            List<String> result =  dslContext
+            List<Integer> result =  dslContext
                     .select()
                     .from(FRIENDS_LIKES.leftOuterJoin(USER_PROFILE).on(FRIENDS_LIKES.LIKER.eq(USER_PROFILE.USER_ID)))
                     .where(FRIENDS_LIKES.LIKEE.eq(userId))
@@ -191,7 +191,7 @@ public class UserPoolStrategyDAO {
             result.removeAll(dislikedUserIds);
             return result;
         } else {
-            List<String> result =  dslContext
+            List<Integer> result =  dslContext
                     .select()
                     .from(FRIENDS_LIKES.leftOuterJoin(USER_PROFILE).on(FRIENDS_LIKES.LIKER.eq(USER_PROFILE.USER_ID)))
                     .where(USER_PROFILE.SEX.eq(gender))
@@ -205,17 +205,17 @@ public class UserPoolStrategyDAO {
         }
     }
 
-    public List<String> fetchRoommatesByLikes(String userId, Integer amount, Integer gender, Set<String> except) {
-        Set<String> likedUserIds = dslContext.select()
+    public List<Integer> fetchRoommatesByLikes(Integer userId, Integer amount, Integer gender, Set<Integer> except) {
+        Set<Integer> likedUserIds = dslContext.select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKER.eq(userId))
                 .fetchSet(ROOMMATES_LIKES.LIKEE);
-        Set<String> dislikedUserIds = dslContext.select()
+        Set<Integer> dislikedUserIds = dslContext.select()
                 .from(ROOMMATES_DISLIKES)
                 .where(ROOMMATES_DISLIKES.DISLIKER.eq(userId))
                 .fetchSet(ROOMMATES_DISLIKES.DISLIKEE);
         if (gender == 0) {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(ROOMMATES_LIKES.leftOuterJoin(USER_PROFILE).on(ROOMMATES_LIKES.LIKER.eq(USER_PROFILE.USER_ID)))
                     .where(ROOMMATES_LIKES.LIKEE.eq(userId))
@@ -226,7 +226,7 @@ public class UserPoolStrategyDAO {
             result.removeAll(dislikedUserIds);
             return result;
         } else {
-            List<String> result = dslContext
+            List<Integer> result = dslContext
                     .select()
                     .from(ROOMMATES_LIKES.leftOuterJoin(USER_PROFILE).on(ROOMMATES_LIKES.LIKER.eq(USER_PROFILE.USER_ID)))
                     .where(USER_PROFILE.SEX.eq(gender))

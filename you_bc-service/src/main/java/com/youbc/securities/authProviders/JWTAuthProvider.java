@@ -1,8 +1,8 @@
-package com.youbc.securities.providers;
+package com.youbc.securities.authProviders;
 
-import com.youbc.database.UserDAO;
+import com.youbc.database.UserProfileDAO;
 import com.youbc.securities.services.JWTTokenService;
-import com.youbc.securities.tokens.JWTAuthenticationToken;
+import com.youbc.securities.tokens.JWTToken;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
@@ -10,43 +10,44 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import static java.util.Collections.emptyList;
 
-/***
- * AuthenticationProvider provides details on how to authenticate
- * This provider will authenticate any requests to protected APIs.
- * This AuthenticationProvider authenticates by calling tokenService to verify token validity
+/**
+ * Provides authentication for requests to protected resources
+ * Checks JWT token in the request
  */
-@Component
-public class JWTAuthenticationProvider implements AuthenticationProvider {
+@Service
+public class JWTAuthProvider implements AuthenticationProvider {
     private JWTTokenService tokenService;
-    private UserDAO userDAO;
+    private UserProfileDAO userDAO;
     @Autowired
-    public JWTAuthenticationProvider(JWTTokenService tokenService, UserDAO userDAO) {
+    public JWTAuthProvider(JWTTokenService tokenService, UserProfileDAO userDAO) {
         this.tokenService = tokenService;
         this.userDAO = userDAO;
     }
 
+    @Override
     public Authentication authenticate(Authentication authentication) {
         try {
             String token = ((String) authentication.getPrincipal());
-            String subjectUserId = tokenService
+            String subjectUsername = tokenService
                     .verifyToken(token)
                     .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Token does not have valid subject"));
-            if (userDAO.userExists(subjectUserId)) {
-                return new UsernamePasswordAuthenticationToken(subjectUserId, null, emptyList());
+            if (userDAO.userExistsByUsername(subjectUsername)) {
+                return new UsernamePasswordAuthenticationToken(subjectUsername, null, emptyList());
             } else {
-                throw new AuthenticationCredentialsNotFoundException("User does not exists");
+                throw new UsernameNotFoundException("User Not Found");
             }
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
-            throw new BadCredentialsException("Invalid JWT", e);
+            throw new BadCredentialsException("Invalid JWT token");
         }
     }
 
     public boolean supports(Class<?> authentication) {
-        return JWTAuthenticationToken.class.isAssignableFrom(authentication);
+        return JWTToken.class.isAssignableFrom(authentication);
     }
 
 }

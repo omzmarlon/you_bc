@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RelationshipStatusRecord extends UpdatableRecordImpl<RelationshipStatusRecord> implements Record2<Integer, String> {
 
-    private static final long serialVersionUID = -422306598;
+    private static final long serialVersionUID = -1152867914;
 
     /**
-     * Setter for <code>poke_you_bc.relationship_status.id</code>.
+     * Setter for <code>you_bc.relationship_status.id</code>.
      */
     public RelationshipStatusRecord setId(Integer value) {
         set(0, value);
@@ -39,14 +39,14 @@ public class RelationshipStatusRecord extends UpdatableRecordImpl<RelationshipSt
     }
 
     /**
-     * Getter for <code>poke_you_bc.relationship_status.id</code>.
+     * Getter for <code>you_bc.relationship_status.id</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>poke_you_bc.relationship_status.relationship</code>.
+     * Setter for <code>you_bc.relationship_status.relationship</code>.
      */
     public RelationshipStatusRecord setRelationship(String value) {
         set(1, value);
@@ -54,7 +54,7 @@ public class RelationshipStatusRecord extends UpdatableRecordImpl<RelationshipSt
     }
 
     /**
-     * Getter for <code>poke_you_bc.relationship_status.relationship</code>.
+     * Getter for <code>you_bc.relationship_status.relationship</code>.
      */
     public String getRelationship() {
         return (String) get(1);

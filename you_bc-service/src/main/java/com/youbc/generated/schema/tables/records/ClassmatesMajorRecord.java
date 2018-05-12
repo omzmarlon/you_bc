@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesMajorRecord extends UpdatableRecordImpl<ClassmatesMajorRecord> implements Record2<Integer, String> {
 
-    private static final long serialVersionUID = 769510025;
+    private static final long serialVersionUID = 662707065;
 
     /**
-     * Setter for <code>poke_you_bc.classmates_major.id</code>.
+     * Setter for <code>you_bc.classmates_major.id</code>.
      */
     public ClassmatesMajorRecord setId(Integer value) {
         set(0, value);
@@ -39,14 +39,14 @@ public class ClassmatesMajorRecord extends UpdatableRecordImpl<ClassmatesMajorRe
     }
 
     /**
-     * Getter for <code>poke_you_bc.classmates_major.id</code>.
+     * Getter for <code>you_bc.classmates_major.id</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>poke_you_bc.classmates_major.major</code>.
+     * Setter for <code>you_bc.classmates_major.major</code>.
      */
     public ClassmatesMajorRecord setMajor(String value) {
         set(1, value);
@@ -54,7 +54,7 @@ public class ClassmatesMajorRecord extends UpdatableRecordImpl<ClassmatesMajorRe
     }
 
     /**
-     * Getter for <code>poke_you_bc.classmates_major.major</code>.
+     * Getter for <code>you_bc.classmates_major.major</code>.
      */
     public String getMajor() {
         return (String) get(1);

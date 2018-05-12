@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.ClassmatesCoursesRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
 
-    private static final long serialVersionUID = 675979135;
+    private static final long serialVersionUID = 2080669533;
 
     /**
-     * The reference instance of <code>poke_you_bc.classmates_courses</code>
+     * The reference instance of <code>you_bc.classmates_courses</code>
      */
     public static final ClassmatesCourses CLASSMATES_COURSES = new ClassmatesCourses();
 
@@ -51,24 +51,24 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_courses.id</code>.
+     * The column <code>you_bc.classmates_courses.id</code>.
      */
     public final TableField<ClassmatesCoursesRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.classmates_courses.course</code>.
+     * The column <code>you_bc.classmates_courses.course</code>.
      */
     public final TableField<ClassmatesCoursesRecord, String> COURSE = createField("course", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.classmates_courses</code> table reference
+     * Create a <code>you_bc.classmates_courses</code> table reference
      */
     public ClassmatesCourses() {
         this("classmates_courses", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.classmates_courses</code> table reference
+     * Create an aliased <code>you_bc.classmates_courses</code> table reference
      */
     public ClassmatesCourses(String alias) {
         this(alias, CLASSMATES_COURSES);
@@ -87,7 +87,7 @@ public class ClassmatesCourses extends TableImpl<ClassmatesCoursesRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

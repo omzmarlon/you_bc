@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfile implements Serializable {
 
-    private static final long serialVersionUID = 711086334;
+    private static final long serialVersionUID = 1834381557;
 
-    private final String    userId;
+    private final Integer   userId;
     private final String    location;
     private final String    hometown;
     private final String    motto;
@@ -40,7 +40,7 @@ public class RoommatesProfile implements Serializable {
     }
 
     public RoommatesProfile(
-        String    userId,
+        Integer   userId,
         String    location,
         String    hometown,
         String    motto,
@@ -53,7 +53,7 @@ public class RoommatesProfile implements Serializable {
         this.timeCreated = timeCreated;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 

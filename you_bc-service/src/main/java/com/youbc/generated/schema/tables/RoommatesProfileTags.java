@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.RoommatesProfileTagsRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfileTags extends TableImpl<RoommatesProfileTagsRecord> {
 
-    private static final long serialVersionUID = -1274619576;
+    private static final long serialVersionUID = 291641040;
 
     /**
-     * The reference instance of <code>poke_you_bc.roommates_profile_tags</code>
+     * The reference instance of <code>you_bc.roommates_profile_tags</code>
      */
     public static final RoommatesProfileTags ROOMMATES_PROFILE_TAGS = new RoommatesProfileTags();
 
@@ -51,24 +51,24 @@ public class RoommatesProfileTags extends TableImpl<RoommatesProfileTagsRecord> 
     }
 
     /**
-     * The column <code>poke_you_bc.roommates_profile_tags.user_id</code>.
+     * The column <code>you_bc.roommates_profile_tags.user_id</code>.
      */
-    public final TableField<RoommatesProfileTagsRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<RoommatesProfileTagsRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile_tags.tag</code>.
+     * The column <code>you_bc.roommates_profile_tags.tag</code>.
      */
     public final TableField<RoommatesProfileTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50).nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.roommates_profile_tags</code> table reference
+     * Create a <code>you_bc.roommates_profile_tags</code> table reference
      */
     public RoommatesProfileTags() {
         this("roommates_profile_tags", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.roommates_profile_tags</code> table reference
+     * Create an aliased <code>you_bc.roommates_profile_tags</code> table reference
      */
     public RoommatesProfileTags(String alias) {
         this(alias, ROOMMATES_PROFILE_TAGS);
@@ -87,7 +87,7 @@ public class RoommatesProfileTags extends TableImpl<RoommatesProfileTagsRecord> 
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

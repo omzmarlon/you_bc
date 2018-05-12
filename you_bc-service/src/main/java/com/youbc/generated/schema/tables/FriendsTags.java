@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.FriendsTagsRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsTags extends TableImpl<FriendsTagsRecord> {
 
-    private static final long serialVersionUID = -953415487;
+    private static final long serialVersionUID = 636502475;
 
     /**
-     * The reference instance of <code>poke_you_bc.friends_tags</code>
+     * The reference instance of <code>you_bc.friends_tags</code>
      */
     public static final FriendsTags FRIENDS_TAGS = new FriendsTags();
 
@@ -51,24 +51,24 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.friends_tags.id</code>.
+     * The column <code>you_bc.friends_tags.id</code>.
      */
     public final TableField<FriendsTagsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_tags.tag</code>.
+     * The column <code>you_bc.friends_tags.tag</code>.
      */
     public final TableField<FriendsTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.friends_tags</code> table reference
+     * Create a <code>you_bc.friends_tags</code> table reference
      */
     public FriendsTags() {
         this("friends_tags", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.friends_tags</code> table reference
+     * Create an aliased <code>you_bc.friends_tags</code> table reference
      */
     public FriendsTags(String alias) {
         this(alias, FRIENDS_TAGS);
@@ -87,7 +87,7 @@ public class FriendsTags extends TableImpl<FriendsTagsRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

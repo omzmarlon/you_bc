@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.FacultiesRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Faculties extends TableImpl<FacultiesRecord> {
 
-    private static final long serialVersionUID = -508450643;
+    private static final long serialVersionUID = 369185133;
 
     /**
-     * The reference instance of <code>poke_you_bc.faculties</code>
+     * The reference instance of <code>you_bc.faculties</code>
      */
     public static final Faculties FACULTIES = new Faculties();
 
@@ -51,24 +51,24 @@ public class Faculties extends TableImpl<FacultiesRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.faculties.id</code>.
+     * The column <code>you_bc.faculties.id</code>.
      */
     public final TableField<FacultiesRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.faculties.faculty</code>.
+     * The column <code>you_bc.faculties.faculty</code>.
      */
     public final TableField<FacultiesRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.faculties</code> table reference
+     * Create a <code>you_bc.faculties</code> table reference
      */
     public Faculties() {
         this("faculties", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.faculties</code> table reference
+     * Create an aliased <code>you_bc.faculties</code> table reference
      */
     public Faculties(String alias) {
         this(alias, FACULTIES);
@@ -87,7 +87,7 @@ public class Faculties extends TableImpl<FacultiesRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

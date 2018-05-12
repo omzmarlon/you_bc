@@ -42,12 +42,16 @@ public class VerificationController {
 
     @GetMapping("/api/verification/info")
     public StudentVerification getVerificationInfo(HttpServletRequest request) {
-        return this.verificationDAO.fetchStudentVerification(cookieService.getAuthenticatedUserId(request));
+        return this
+                .verificationDAO
+                .fetchStudentVerification(
+                        Integer.parseInt(cookieService.getAuthenticatedUserId(request))
+                );
     }
 
     @PostMapping(value = {"/api/verification/code", "/api/verification/location"})
     public StudentVerification verifyLocation(HttpServletRequest request) {
-        String userId = cookieService.getAuthenticatedUserId(request);
+        Integer userId = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         verificationDAO.approve(userId);
         return this.verificationDAO.fetchStudentVerification(userId);
     }
@@ -55,7 +59,7 @@ public class VerificationController {
     @PostMapping("/api/verification/studentCard")
     public StudentVerification uploadStudentCard(HttpServletRequest request,
                                                  @RequestPart(value = "image") MultipartFile file) throws IOException {
-        String userId = cookieService.getAuthenticatedUserId(request);
+        Integer userId = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         String studentCardUrl =  this.s3Client.uploadImage(
                 file,
                 cookieService.getAuthenticatedUserId(request),
@@ -68,7 +72,7 @@ public class VerificationController {
 
     @RequestMapping(path = "/api/verification/email", method = RequestMethod.POST, consumes = "text/plain")
     public StudentVerification postEmail(HttpServletRequest request, @RequestBody String email) {
-        String userId = cookieService.getAuthenticatedUserId(request);
+        Integer userId = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         // make sure email sending successful before persisting email and code to db
         String verificationCode = verificationService.generateVerificationCode().toString();
         verificationService.sendVerificationEmail(email, verificationCode);
@@ -78,7 +82,7 @@ public class VerificationController {
 
     @RequestMapping(path = "/api/verification/emailCode", method = RequestMethod.POST, consumes = "text/plain")
     public StudentVerification verifyEmailCode(HttpServletRequest request, @RequestBody String emailCode) {
-        String userId = cookieService.getAuthenticatedUserId(request);
+        Integer userId = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         String verificationCode = verificationDAO
                 .fetchEmailVerificationCode(userId)
                 .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "Email Code Not Exist", "Email Code Not Exist")));

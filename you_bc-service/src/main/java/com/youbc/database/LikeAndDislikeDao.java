@@ -16,16 +16,16 @@ import static com.youbc.generated.schema.tables.FriendsDislikes.FRIENDS_DISLIKES
 public class LikeAndDislikeDao {
 
     private DSLContext dslContext;
-    private UserDAO userDAO;
+    private UserProfileDAO userDAO;
 
     @Autowired
-    public LikeAndDislikeDao(DSLContext dslContext, UserDAO userDAO) {
+    public LikeAndDislikeDao(DSLContext dslContext, UserProfileDAO userDAO) {
         this.dslContext = dslContext;
         this.userDAO = userDAO;
     }
 
-    public void roommatesLike(String likerId, String likeeId) {
-        if (validateUsersExistance(likerId, likeeId))
+    public void roommatesLike(Integer likerId, Integer likeeId) {
+        if (validateUsersExistence(likerId, likeeId))
             dslContext
                 .insertInto(ROOMMATES_LIKES)
                 .set(ROOMMATES_LIKES.LIKER, likerId)
@@ -34,8 +34,8 @@ public class LikeAndDislikeDao {
                 .execute();
     }
 
-    public void roommatesDislike(String dislikerId, String dislikeeId) {
-        if (validateUsersExistance(dislikerId, dislikeeId))
+    public void roommatesDislike(Integer dislikerId, Integer dislikeeId) {
+        if (validateUsersExistence(dislikerId, dislikeeId))
             dslContext
                 .insertInto(ROOMMATES_DISLIKES)
                 .set(ROOMMATES_DISLIKES.DISLIKER, dislikerId)
@@ -44,8 +44,8 @@ public class LikeAndDislikeDao {
                 .execute();
     }
 
-    public void classmatesLike(String likerId, String likeeId) {
-        if (validateUsersExistance(likerId, likeeId))
+    public void classmatesLike(Integer likerId, Integer likeeId) {
+        if (validateUsersExistence(likerId, likeeId))
             dslContext
                 .insertInto(CLASSMATES_LIKES)
                 .set(CLASSMATES_LIKES.LIKER, likerId)
@@ -54,8 +54,8 @@ public class LikeAndDislikeDao {
                 .execute();
     }
 
-    public void classmatesDislike(String dislikerId, String dislikeeId) {
-        if (validateUsersExistance(dislikerId, dislikeeId))
+    public void classmatesDislike(Integer dislikerId, Integer dislikeeId) {
+        if (validateUsersExistence(dislikerId, dislikeeId))
             dslContext
                 .insertInto(CLASSMATES_DISLIKES)
                 .set(CLASSMATES_DISLIKES.DISLIKER, dislikerId)
@@ -64,8 +64,8 @@ public class LikeAndDislikeDao {
                 .execute();
     }
 
-    public void friendsLike(String likerId, String likeeId) {
-        if (validateUsersExistance(likerId, likeeId))
+    public void friendsLike(Integer likerId, Integer likeeId) {
+        if (validateUsersExistence(likerId, likeeId))
             dslContext
                 .insertInto(FRIENDS_LIKES)
                 .set(FRIENDS_LIKES.LIKER, likerId)
@@ -74,8 +74,8 @@ public class LikeAndDislikeDao {
                 .execute();
     }
 
-    public void friendsDislike(String dislikerId, String dislikeeId) {
-        if (validateUsersExistance(dislikerId, dislikeeId))
+    public void friendsDislike(Integer dislikerId, Integer dislikeeId) {
+        if (validateUsersExistence(dislikerId, dislikeeId))
             dslContext
                 .insertInto(FRIENDS_DISLIKES)
                 .set(FRIENDS_DISLIKES.DISLIKER, dislikerId)
@@ -84,7 +84,7 @@ public class LikeAndDislikeDao {
                 .execute();
     }
 
-    private boolean validateUsersExistance(String id_1, String id_2) {
-        return userDAO.userExists(id_1) && userDAO.userExists(id_2);
+    private boolean validateUsersExistence(Integer id_1, Integer id_2) {
+        return userDAO.userExistsById(id_1) && userDAO.userExistsById(id_2);
     }
 }

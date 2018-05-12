@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesTagsRecord extends UpdatableRecordImpl<RoommatesTagsRecord> implements Record2<Integer, String> {
 
-    private static final long serialVersionUID = 2075764846;
+    private static final long serialVersionUID = 246397702;
 
     /**
-     * Setter for <code>poke_you_bc.roommates_tags.id</code>.
+     * Setter for <code>you_bc.roommates_tags.id</code>.
      */
     public RoommatesTagsRecord setId(Integer value) {
         set(0, value);
@@ -39,14 +39,14 @@ public class RoommatesTagsRecord extends UpdatableRecordImpl<RoommatesTagsRecord
     }
 
     /**
-     * Getter for <code>poke_you_bc.roommates_tags.id</code>.
+     * Getter for <code>you_bc.roommates_tags.id</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>poke_you_bc.roommates_tags.tag</code>.
+     * Setter for <code>you_bc.roommates_tags.tag</code>.
      */
     public RoommatesTagsRecord setTag(String value) {
         set(1, value);
@@ -54,7 +54,7 @@ public class RoommatesTagsRecord extends UpdatableRecordImpl<RoommatesTagsRecord
     }
 
     /**
-     * Getter for <code>poke_you_bc.roommates_tags.tag</code>.
+     * Getter for <code>you_bc.roommates_tags.tag</code>.
      */
     public String getTag() {
         return (String) get(1);

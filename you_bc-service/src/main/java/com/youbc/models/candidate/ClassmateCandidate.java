@@ -13,7 +13,7 @@ public class ClassmateCandidate extends BasicCandidate {
     public ClassmateCandidate() {}
 
     public ClassmateCandidate(
-            String id,
+            Integer id,
             String name,
             String avatarUrl,
             Integer sex,

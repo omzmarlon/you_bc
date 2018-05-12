@@ -1,6 +1,5 @@
 package com.youbc.database;
 
-import static com.youbc.generated.schema.tables.ProfileImage.PROFILE_IMAGE;
 import static com.youbc.generated.schema.tables.RoommatesLocations.ROOMMATES_LOCATIONS;
 import static com.youbc.generated.schema.tables.RoommatesHometown.ROOMMATES_HOMETOWN;
 import static com.youbc.generated.schema.tables.RoommatesTags.ROOMMATES_TAGS;
@@ -25,7 +24,6 @@ import com.youbc.models.profile.ClassmatesProfile;
 import com.youbc.models.profile.FriendsProfile;
 import com.youbc.models.profile.RoommatesProfile;
 import com.youbc.models.profile.UserProfile;
-import com.youbc.utilities.YouBCUtils;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,27 +36,27 @@ import java.util.Set;
 public class ProfileDAO {
 
     private DSLContext dslContext;
-    private UserDAO userDAO;
+    private UserProfileDAO userDAO;
 
     @Autowired
-    public ProfileDAO(DSLContext dslContext, UserDAO userDAO) {
+    public ProfileDAO(DSLContext dslContext, UserProfileDAO userDAO) {
         this.dslContext = dslContext;
         this.userDAO = userDAO;
     }
 
-    public Optional<UserProfile> fetchUserProfile(String userId) {
-        Record7<String, String, String, Integer, Integer, String, String> profile = dslContext
+    public Optional<UserProfile> fetchUserProfile(Integer userId) {
+        Record7<Integer, String, String, Integer, Integer, String, String> profile = dslContext
                 .select(
                         USER_PROFILE.USER_ID,
                         USER_PROFILE.WECHATID,
                         USER_PROFILE.USERNAME,
                         USER_PROFILE.AGE,
                         USER_PROFILE.SEX,
-                        PROFILE_IMAGE.THUMBNAIL_IMAGE_URL,
+                        USER_PROFILE.PROFILE_IMAGE_URL,
                         USER_PROFILE.HOROSCOPE
                 )
-                .from(USER_PROFILE, PROFILE_IMAGE)
-                .where(USER_PROFILE.USER_ID.eq(userId).and(PROFILE_IMAGE.USER_ID.eq(userId)))
+                .from(USER_PROFILE)
+                .where(USER_PROFILE.USER_ID.eq(userId))
                 .fetchOne();
         return (profile == null) ?
                 Optional.empty() :
@@ -69,14 +67,14 @@ public class ProfileDAO {
                                 profile.get(USER_PROFILE.USERNAME),
                                 profile.get(USER_PROFILE.AGE),
                                 profile.get(USER_PROFILE.SEX),
-                                profile.get(PROFILE_IMAGE.THUMBNAIL_IMAGE_URL),
+                                profile.get(USER_PROFILE.PROFILE_IMAGE_URL),
                                 profile.get(USER_PROFILE.HOROSCOPE),
                                 0
                         )
                 );
     }
 
-    public Optional<RoommatesProfile> fetchRoommatesProfile(String userId) {
+    public Optional<RoommatesProfile> fetchRoommatesProfile(Integer userId) {
         Record3<String, String, String> profile = dslContext
                 .select(
                         ROOMMATES_PROFILE.LOCATION,
@@ -110,7 +108,7 @@ public class ProfileDAO {
         }
     }
 
-    public Optional<ClassmatesProfile> fetchClassmatesProfile(String userID) {
+    public Optional<ClassmatesProfile> fetchClassmatesProfile(Integer userID) {
         Record2<String, String> profile = dslContext
                 .select(CLASSMATES_PROFILE.MAJOR, CLASSMATES_PROFILE.MOTTO)
                 .from(CLASSMATES_PROFILE)
@@ -147,7 +145,7 @@ public class ProfileDAO {
         }
     }
 
-    public Optional<FriendsProfile> fetchFriendsProfile(String userId) {
+    public Optional<FriendsProfile> fetchFriendsProfile(Integer userId) {
         Record3<String, String, String> profile = dslContext
                 .select(FRIENDS_PROFILE.FACULTY, FRIENDS_PROFILE.RELATIONSHIP, FRIENDS_PROFILE.MOTTO)
                 .from(FRIENDS_PROFILE)
@@ -249,11 +247,7 @@ public class ProfileDAO {
                 .intoSet(FRIENDS_TAGS.TAG);
     }
 
-    public void fillPersonalProfile(String userID, String username, Integer age, Integer sex, String horoscope) {
-        // wechatId and avatar url are updated separately
-        if (!userDAO.userProfileExists(userID)) {
-            userDAO.initUserProfile(userID, username, String.valueOf(sex));
-        }
+    public void fillPersonalProfile(Integer userID, String username, Integer age, Integer sex, String horoscope) {
         dslContext.update(USER_PROFILE)
                 .set(USER_PROFILE.USERNAME, username)
                 .set(USER_PROFILE.SEX, sex)
@@ -263,7 +257,7 @@ public class ProfileDAO {
                 .execute();
     }
 
-    public void fillClassmatesProfile(String userID, String major, Set<String> courses, String motto, Set<String> tags) {
+    public void fillClassmatesProfile(Integer userID, String major, Set<String> courses, String motto, Set<String> tags) {
         if (!userDAO.classmatesProfileExists(userID)) {
             userDAO.initClassmatesProfile(userID);
         }
@@ -294,7 +288,7 @@ public class ProfileDAO {
         );
     }
 
-    public void fillRoommatesProfile(String userID, String location, String hometown, String motto, Set<String> tags) {
+    public void fillRoommatesProfile(Integer userID, String location, String hometown, String motto, Set<String> tags) {
         if (!userDAO.roommatesProfileExists(userID)) {
             userDAO.initRoommateProfile(userID);
         }
@@ -315,7 +309,7 @@ public class ProfileDAO {
         );
     }
 
-    public void fillFriendsProfile(String userID, String faculty, String relationship, String motto, Set<String> tags) {
+    public void fillFriendsProfile(Integer userID, String faculty, String relationship, String motto, Set<String> tags) {
         if (!userDAO.friendsProfileExists(userID)) {
             userDAO.initFriendsProfile(userID);
         }
@@ -336,22 +330,15 @@ public class ProfileDAO {
         );
     }
 
-    public void updateProfileImageUrl(String userID, String imageUrl) {
-        dslContext.delete(PROFILE_IMAGE)
-                .where(PROFILE_IMAGE.USER_ID.eq(userID))
+    public void updateProfileImageUrl(Integer userID, String imageUrl) {
+        dslContext.update(USER_PROFILE)
+                .set(USER_PROFILE.PROFILE_IMAGE_URL, imageUrl)
+                .where(USER_PROFILE.USER_ID.eq(userID))
                 .execute();
-        dslContext.insertInto(PROFILE_IMAGE)
-                .set(PROFILE_IMAGE.ORIGINAL_IMAGE_URL, imageUrl)
-                .set(PROFILE_IMAGE.THUMBNAIL_IMAGE_URL, imageUrl)
-                .set(PROFILE_IMAGE.USER_ID, userID)
-                .execute();
+
     }
 
-    public void updateWechatId(String userID, String wechatId) {
-        if (!userDAO.userProfileExists(userID)) {
-            // TODO: don't use null here
-            userDAO.initUserProfile(userID, null, null);
-        }
+    public void updateWechatId(Integer userID, String wechatId) {
         dslContext.update(USER_PROFILE)
                 .set(USER_PROFILE.WECHATID, wechatId)
                 .where(USER_PROFILE.USER_ID.eq(userID))

@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.FriendsProfileRecord;
 
 import java.sql.Timestamp;
@@ -36,10 +36,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsProfile extends TableImpl<FriendsProfileRecord> {
 
-    private static final long serialVersionUID = -1328027429;
+    private static final long serialVersionUID = 2054263727;
 
     /**
-     * The reference instance of <code>poke_you_bc.friends_profile</code>
+     * The reference instance of <code>you_bc.friends_profile</code>
      */
     public static final FriendsProfile FRIENDS_PROFILE = new FriendsProfile();
 
@@ -52,39 +52,39 @@ public class FriendsProfile extends TableImpl<FriendsProfileRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.friends_profile.user_id</code>.
+     * The column <code>you_bc.friends_profile.user_id</code>.
      */
-    public final TableField<FriendsProfileRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<FriendsProfileRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile.faculty</code>.
+     * The column <code>you_bc.friends_profile.faculty</code>.
      */
     public final TableField<FriendsProfileRecord, String> FACULTY = createField("faculty", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile.relationship</code>.
+     * The column <code>you_bc.friends_profile.relationship</code>.
      */
     public final TableField<FriendsProfileRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile.motto</code>.
+     * The column <code>you_bc.friends_profile.motto</code>.
      */
     public final TableField<FriendsProfileRecord, String> MOTTO = createField("motto", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
     /**
-     * The column <code>poke_you_bc.friends_profile.time_created</code>.
+     * The column <code>you_bc.friends_profile.time_created</code>.
      */
     public final TableField<FriendsProfileRecord, Timestamp> TIME_CREATED = createField("time_created", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.friends_profile</code> table reference
+     * Create a <code>you_bc.friends_profile</code> table reference
      */
     public FriendsProfile() {
         this("friends_profile", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.friends_profile</code> table reference
+     * Create an aliased <code>you_bc.friends_profile</code> table reference
      */
     public FriendsProfile(String alias) {
         this(alias, FRIENDS_PROFILE);
@@ -103,7 +103,7 @@ public class FriendsProfile extends TableImpl<FriendsProfileRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**
