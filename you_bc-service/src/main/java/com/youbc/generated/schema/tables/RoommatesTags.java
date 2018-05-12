@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.RoommatesTagsRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
 
-    private static final long serialVersionUID = -439766409;
+    private static final long serialVersionUID = -695973251;
 
     /**
-     * The reference instance of <code>poke_you_bc.roommates_tags</code>
+     * The reference instance of <code>you_bc.roommates_tags</code>
      */
     public static final RoommatesTags ROOMMATES_TAGS = new RoommatesTags();
 
@@ -51,24 +51,24 @@ public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.roommates_tags.id</code>.
+     * The column <code>you_bc.roommates_tags.id</code>.
      */
     public final TableField<RoommatesTagsRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_tags.tag</code>.
+     * The column <code>you_bc.roommates_tags.tag</code>.
      */
     public final TableField<RoommatesTagsRecord, String> TAG = createField("tag", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.roommates_tags</code> table reference
+     * Create a <code>you_bc.roommates_tags</code> table reference
      */
     public RoommatesTags() {
         this("roommates_tags", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.roommates_tags</code> table reference
+     * Create an aliased <code>you_bc.roommates_tags</code> table reference
      */
     public RoommatesTags(String alias) {
         this(alias, ROOMMATES_TAGS);
@@ -87,7 +87,7 @@ public class RoommatesTags extends TableImpl<RoommatesTagsRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

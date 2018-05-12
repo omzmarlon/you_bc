@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.ClassmatesMajorRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
 
-    private static final long serialVersionUID = -1751825328;
+    private static final long serialVersionUID = 2107151614;
 
     /**
-     * The reference instance of <code>poke_you_bc.classmates_major</code>
+     * The reference instance of <code>you_bc.classmates_major</code>
      */
     public static final ClassmatesMajor CLASSMATES_MAJOR = new ClassmatesMajor();
 
@@ -51,24 +51,24 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_major.id</code>.
+     * The column <code>you_bc.classmates_major.id</code>.
      */
     public final TableField<ClassmatesMajorRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.classmates_major.major</code>.
+     * The column <code>you_bc.classmates_major.major</code>.
      */
     public final TableField<ClassmatesMajorRecord, String> MAJOR = createField("major", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.classmates_major</code> table reference
+     * Create a <code>you_bc.classmates_major</code> table reference
      */
     public ClassmatesMajor() {
         this("classmates_major", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.classmates_major</code> table reference
+     * Create an aliased <code>you_bc.classmates_major</code> table reference
      */
     public ClassmatesMajor(String alias) {
         this(alias, CLASSMATES_MAJOR);
@@ -87,7 +87,7 @@ public class ClassmatesMajor extends TableImpl<ClassmatesMajorRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesHometownRecord extends UpdatableRecordImpl<RoommatesHometownRecord> implements Record2<Integer, String> {
 
-    private static final long serialVersionUID = 370854117;
+    private static final long serialVersionUID = 1790886913;
 
     /**
-     * Setter for <code>poke_you_bc.roommates_hometown.id</code>.
+     * Setter for <code>you_bc.roommates_hometown.id</code>.
      */
     public RoommatesHometownRecord setId(Integer value) {
         set(0, value);
@@ -39,14 +39,14 @@ public class RoommatesHometownRecord extends UpdatableRecordImpl<RoommatesHometo
     }
 
     /**
-     * Getter for <code>poke_you_bc.roommates_hometown.id</code>.
+     * Getter for <code>you_bc.roommates_hometown.id</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>poke_you_bc.roommates_hometown.hometown</code>.
+     * Setter for <code>you_bc.roommates_hometown.hometown</code>.
      */
     public RoommatesHometownRecord setHometown(String value) {
         set(1, value);
@@ -54,7 +54,7 @@ public class RoommatesHometownRecord extends UpdatableRecordImpl<RoommatesHometo
     }
 
     /**
-     * Getter for <code>poke_you_bc.roommates_hometown.hometown</code>.
+     * Getter for <code>you_bc.roommates_hometown.hometown</code>.
      */
     public String getHometown() {
         return (String) get(1);

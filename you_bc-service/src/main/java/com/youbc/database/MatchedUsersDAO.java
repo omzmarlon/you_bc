@@ -20,35 +20,35 @@ import static com.youbc.generated.schema.tables.UserProfile.USER_PROFILE;
 public class MatchedUsersDAO {
 
     private DSLContext dslContext;
-    private UserDAO userDAO;
+    private UserProfileDAO userDAO;
 
     @Autowired
-    public MatchedUsersDAO(DSLContext dslContext, UserDAO userDAO) {
+    public MatchedUsersDAO(DSLContext dslContext, UserProfileDAO userDAO) {
         this.userDAO = userDAO;
         this.dslContext = dslContext;
     }
 
-    public Set<String> fetchAllMatchedUsers(String userId) {
-        Set<String> classmates = dslContext
+    public Set<Integer> fetchAllMatchedUsers(Integer userId) {
+        Set<Integer> classmates = dslContext
                 .select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKER.eq(userId))
                 .fetchSet(CLASSMATES_LIKES.LIKEE);
 
-        Set<String> classmateLikers = dslContext
+        Set<Integer> classmateLikers = dslContext
                 .select()
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKEE.eq(userId))
                 .fetchSet(CLASSMATES_LIKES.LIKER);
         classmates.retainAll(classmateLikers);
 
-        Set<String> friends = dslContext
+        Set<Integer> friends = dslContext
                 .select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKER.eq(userId))
                 .fetchSet(FRIENDS_LIKES.LIKEE);
 
-        Set<String> friendLikers = dslContext
+        Set<Integer> friendLikers = dslContext
                 .select()
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKEE.eq(userId))
@@ -56,13 +56,13 @@ public class MatchedUsersDAO {
                 .fetchSet(FRIENDS_LIKES.LIKER);
         friends.retainAll(friendLikers);
 
-        Set<String> roommates = dslContext
+        Set<Integer> roommates = dslContext
                 .select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKER.eq(userId))
                 .fetchSet(ROOMMATES_LIKES.LIKEE);
 
-        Set<String> roommateLikers = dslContext
+        Set<Integer> roommateLikers = dslContext
                 .select()
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKEE.eq(userId))
@@ -74,7 +74,7 @@ public class MatchedUsersDAO {
         return classmates;
     }
 
-    public long getLatestLikeTime(String self, String theOther) {
+    public long getLatestLikeTime(Integer self, Integer theOther) {
         List<Timestamp> classmateTimes = dslContext
                 .select()
                 .from(CLASSMATES_LIKES)
@@ -109,8 +109,8 @@ public class MatchedUsersDAO {
         return latestTime;
     }
 
-    public boolean matchedAtClassmates(String self, String theOther) {
-        Result<Record2<String, String>> result = dslContext
+    public boolean matchedAtClassmates(Integer self, Integer theOther) {
+        Result<Record2<Integer, Integer>> result = dslContext
                 .select(CLASSMATES_LIKES.LIKER, CLASSMATES_LIKES.LIKEE)
                 .from(CLASSMATES_LIKES)
                 .where(CLASSMATES_LIKES.LIKEE.eq(theOther))
@@ -119,8 +119,8 @@ public class MatchedUsersDAO {
         return result.isNotEmpty();
     }
 
-    public boolean matchedAtFriends(String self, String theOther) {
-        Result<Record2<String, String>> result = dslContext
+    public boolean matchedAtFriends(Integer self, Integer theOther) {
+        Result<Record2<Integer, Integer>> result = dslContext
                 .select(FRIENDS_LIKES.LIKER, FRIENDS_LIKES.LIKEE)
                 .from(FRIENDS_LIKES)
                 .where(FRIENDS_LIKES.LIKEE.eq(theOther))
@@ -129,8 +129,8 @@ public class MatchedUsersDAO {
         return result.isNotEmpty();
     }
 
-    public boolean matchedAtRoommates(String self, String theOther) {
-        Result<Record2<String, String>> result = dslContext
+    public boolean matchedAtRoommates(Integer self, Integer theOther) {
+        Result<Record2<Integer, Integer>> result = dslContext
                 .select(ROOMMATES_LIKES.LIKER, ROOMMATES_LIKES.LIKEE)
                 .from(ROOMMATES_LIKES)
                 .where(ROOMMATES_LIKES.LIKEE.eq(theOther))
@@ -140,7 +140,7 @@ public class MatchedUsersDAO {
     }
 
     // workaround: add fetchMatchCount() and updateMatchCount()
-    public Integer fetchMatchCount(String userId) {
+    public Integer fetchMatchCount(Integer userId) {
         Integer matchCount =  dslContext
                 .select()
                 .from(USER_PROFILE)
@@ -150,8 +150,8 @@ public class MatchedUsersDAO {
         return matchCount;
     }
 
-    public void updateMatchCount(String userId, Integer newMatchCount) {
-        if (userDAO.userProfileExists(userId)) {
+    public void updateMatchCount(Integer userId, Integer newMatchCount) {
+        if (userDAO.userExistsById(userId)) {
             dslContext.update(USER_PROFILE)
                     .set(USER_PROFILE.MATCHCOUNT, newMatchCount)
                     .where(USER_PROFILE.USER_ID.eq(userId))

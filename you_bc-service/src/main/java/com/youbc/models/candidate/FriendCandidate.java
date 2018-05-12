@@ -12,7 +12,7 @@ public class FriendCandidate extends BasicCandidate {
     public FriendCandidate() {}
 
     public FriendCandidate(
-            String id,
+            Integer id,
             String name,
             String avatarUrl,
             Integer sex,

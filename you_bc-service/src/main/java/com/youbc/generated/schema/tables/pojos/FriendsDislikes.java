@@ -23,10 +23,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsDislikes implements Serializable {
 
-    private static final long serialVersionUID = 1081064825;
+    private static final long serialVersionUID = 1434873075;
 
-    private final String    disliker;
-    private final String    dislikee;
+    private final Integer   disliker;
+    private final Integer   dislikee;
     private final Timestamp timeCreated;
 
     public FriendsDislikes(FriendsDislikes value) {
@@ -36,8 +36,8 @@ public class FriendsDislikes implements Serializable {
     }
 
     public FriendsDislikes(
-        String    disliker,
-        String    dislikee,
+        Integer   disliker,
+        Integer   dislikee,
         Timestamp timeCreated
     ) {
         this.disliker = disliker;
@@ -45,11 +45,11 @@ public class FriendsDislikes implements Serializable {
         this.timeCreated = timeCreated;
     }
 
-    public String getDisliker() {
+    public Integer getDisliker() {
         return this.disliker;
     }
 
-    public String getDislikee() {
+    public Integer getDislikee() {
         return this.dislikee;
     }
 

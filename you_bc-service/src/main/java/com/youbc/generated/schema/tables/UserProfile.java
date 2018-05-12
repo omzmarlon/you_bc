@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.UserProfileRecord;
 
 import java.sql.Timestamp;
@@ -15,7 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -36,10 +36,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile extends TableImpl<UserProfileRecord> {
 
-    private static final long serialVersionUID = -978505983;
+    private static final long serialVersionUID = 151716453;
 
     /**
-     * The reference instance of <code>poke_you_bc.user_profile</code>
+     * The reference instance of <code>you_bc.user_profile</code>
      */
     public static final UserProfile USER_PROFILE = new UserProfile();
 
@@ -52,54 +52,64 @@ public class UserProfile extends TableImpl<UserProfileRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.user_profile.user_id</code>.
+     * The column <code>you_bc.user_profile.user_id</code>.
      */
-    public final TableField<UserProfileRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<UserProfileRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.user_profile.age</code>.
-     */
-    public final TableField<UserProfileRecord, Integer> AGE = createField("age", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-    /**
-     * The column <code>poke_you_bc.user_profile.sex</code>.
-     */
-    public final TableField<UserProfileRecord, Integer> SEX = createField("sex", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-    /**
-     * The column <code>poke_you_bc.user_profile.wechatId</code>.
-     */
-    public final TableField<UserProfileRecord, String> WECHATID = createField("wechatId", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
-
-    /**
-     * The column <code>poke_you_bc.user_profile.username</code>.
+     * The column <code>you_bc.user_profile.username</code>.
      */
     public final TableField<UserProfileRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.user_profile.horoscope</code>.
+     * The column <code>you_bc.user_profile.password</code>.
+     */
+    public final TableField<UserProfileRecord, String> PASSWORD = createField("password", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+
+    /**
+     * The column <code>you_bc.user_profile.sex</code>.
+     */
+    public final TableField<UserProfileRecord, Integer> SEX = createField("sex", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>you_bc.user_profile.age</code>.
+     */
+    public final TableField<UserProfileRecord, Integer> AGE = createField("age", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>you_bc.user_profile.profile_image_url</code>.
+     */
+    public final TableField<UserProfileRecord, String> PROFILE_IMAGE_URL = createField("profile_image_url", org.jooq.impl.SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>you_bc.user_profile.wechatId</code>.
+     */
+    public final TableField<UserProfileRecord, String> WECHATID = createField("wechatId", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+
+    /**
+     * The column <code>you_bc.user_profile.horoscope</code>.
      */
     public final TableField<UserProfileRecord, String> HOROSCOPE = createField("horoscope", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
 
     /**
-     * The column <code>poke_you_bc.user_profile.matchCount</code>.
+     * The column <code>you_bc.user_profile.matchCount</code>.
      */
     public final TableField<UserProfileRecord, Integer> MATCHCOUNT = createField("matchCount", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>poke_you_bc.user_profile.time_created</code>.
+     * The column <code>you_bc.user_profile.time_created</code>.
      */
     public final TableField<UserProfileRecord, Timestamp> TIME_CREATED = createField("time_created", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.user_profile</code> table reference
+     * Create a <code>you_bc.user_profile</code> table reference
      */
     public UserProfile() {
         this("user_profile", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.user_profile</code> table reference
+     * Create an aliased <code>you_bc.user_profile</code> table reference
      */
     public UserProfile(String alias) {
         this(alias, USER_PROFILE);
@@ -118,7 +128,15 @@ public class UserProfile extends TableImpl<UserProfileRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<UserProfileRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_USER_PROFILE;
     }
 
     /**
@@ -134,15 +152,7 @@ public class UserProfile extends TableImpl<UserProfileRecord> {
      */
     @Override
     public List<UniqueKey<UserProfileRecord>> getKeys() {
-        return Arrays.<UniqueKey<UserProfileRecord>>asList(Keys.KEY_USER_PROFILE_PRIMARY);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<ForeignKey<UserProfileRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<UserProfileRecord, ?>>asList(Keys.USER_PROFILE_IBFK_1);
+        return Arrays.<UniqueKey<UserProfileRecord>>asList(Keys.KEY_USER_PROFILE_PRIMARY, Keys.KEY_USER_PROFILE_USERNAME);
     }
 
     /**

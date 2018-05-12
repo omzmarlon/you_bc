@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.StudentVerificationRecord;
 
 import java.math.BigDecimal;
@@ -37,10 +37,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentVerification extends TableImpl<StudentVerificationRecord> {
 
-    private static final long serialVersionUID = 512329796;
+    private static final long serialVersionUID = -1272581842;
 
     /**
-     * The reference instance of <code>poke_you_bc.student_verification</code>
+     * The reference instance of <code>you_bc.student_verification</code>
      */
     public static final StudentVerification STUDENT_VERIFICATION = new StudentVerification();
 
@@ -53,54 +53,54 @@ public class StudentVerification extends TableImpl<StudentVerificationRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.student_verification.user_id</code>.
+     * The column <code>you_bc.student_verification.user_id</code>.
      */
-    public final TableField<StudentVerificationRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<StudentVerificationRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.approved</code>.
+     * The column <code>you_bc.student_verification.approved</code>.
      */
     public final TableField<StudentVerificationRecord, Byte> APPROVED = createField("approved", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.email</code>.
+     * The column <code>you_bc.student_verification.email</code>.
      */
     public final TableField<StudentVerificationRecord, String> EMAIL = createField("email", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.emailVerificationCode</code>.
+     * The column <code>you_bc.student_verification.emailVerificationCode</code>.
      */
     public final TableField<StudentVerificationRecord, String> EMAILVERIFICATIONCODE = createField("emailVerificationCode", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.studentID_image_url</code>.
+     * The column <code>you_bc.student_verification.studentID_image_url</code>.
      */
     public final TableField<StudentVerificationRecord, String> STUDENTID_IMAGE_URL = createField("studentID_image_url", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.location_lat</code>.
+     * The column <code>you_bc.student_verification.location_lat</code>.
      */
     public final TableField<StudentVerificationRecord, BigDecimal> LOCATION_LAT = createField("location_lat", org.jooq.impl.SQLDataType.DECIMAL.precision(11, 8), this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.location_lon</code>.
+     * The column <code>you_bc.student_verification.location_lon</code>.
      */
     public final TableField<StudentVerificationRecord, BigDecimal> LOCATION_LON = createField("location_lon", org.jooq.impl.SQLDataType.DECIMAL.precision(11, 8), this, "");
 
     /**
-     * The column <code>poke_you_bc.student_verification.time_created</code>.
+     * The column <code>you_bc.student_verification.time_created</code>.
      */
     public final TableField<StudentVerificationRecord, Timestamp> TIME_CREATED = createField("time_created", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.student_verification</code> table reference
+     * Create a <code>you_bc.student_verification</code> table reference
      */
     public StudentVerification() {
         this("student_verification", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.student_verification</code> table reference
+     * Create an aliased <code>you_bc.student_verification</code> table reference
      */
     public StudentVerification(String alias) {
         this(alias, STUDENT_VERIFICATION);
@@ -119,7 +119,7 @@ public class StudentVerification extends TableImpl<StudentVerificationRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

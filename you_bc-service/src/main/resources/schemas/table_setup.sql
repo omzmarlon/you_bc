@@ -1,12 +1,21 @@
-CREATE TABLE user (
-  user_id VARCHAR(100) PRIMARY KEY, # openID given from wechat. Unique inside Official account
-  union_id VARCHAR(100), # UnionID from WeChat
+# user_profile tables
+CREATE TABLE user_profile (
+  user_id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) CHARACTER SET utf8mb4 UNIQUE,
+  password VARCHAR(100),
+  sex INT, # 1 for male, 2 for female
+  age INT,
+  profile_image_url TEXT,
+  wechatId VARCHAR(100), # TODO keep or remove
+  horoscope VARCHAR(10) CHARACTER SET utf8mb4,
+  matchCount INT, # workaround for new_match_notification: this is to record the number of matchedUsers the user saw last time
   time_created DATETIME NOT NULL
 );
 
 # user verification table
+# TODO: keep or remove verification
 CREATE TABLE student_verification (
-  user_id VARCHAR(100) PRIMARY KEY,
+  user_id INT PRIMARY KEY,
   approved BOOLEAN NOT NULL,
   email VARCHAR(50) UNIQUE,
   emailVerificationCode VARCHAR(100),
@@ -14,27 +23,6 @@ CREATE TABLE student_verification (
   location_lat DECIMAL(11, 8),
   location_lon DECIMAL(11, 8),
   time_created DATETIME NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
-);
-
-# user_profile tables
-CREATE TABLE user_profile (
-  user_id VARCHAR(100) PRIMARY KEY,
-  age INT,
-  sex INT, # 用户的性别，值为1时是男性，值为2时是女性
-  wechatId VARCHAR(100),
-  username VARCHAR(50) CHARACTER SET utf8mb4,
-  horoscope VARCHAR(10) CHARACTER SET utf8mb4,
-  matchCount INT, # workaround for new_match_notification: this is to record the number of matchedUsers the user saw last time
-  time_created DATETIME NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
-);
-
-CREATE TABLE profile_image (
-  profile_image_id INT PRIMARY KEY AUTO_INCREMENT,
-  original_image_url TEXT,
-  thumbnail_image_url TEXT,
-  user_id VARCHAR(100),
   FOREIGN KEY (user_id) REFERENCES user_profile(user_id) ON DELETE CASCADE
 );
 
@@ -55,18 +43,18 @@ CREATE TABLE roommates_tags (
 );
 
 CREATE TABLE roommates_profile (
-  user_id VARCHAR(100) PRIMARY KEY,
+  user_id INT PRIMARY KEY,
   location VARCHAR(50) CHARACTER SET utf8mb4,
   hometown VARCHAR(50) CHARACTER SET utf8mb4,
   motto VARCHAR(100) CHARACTER SET utf8mb4,
   time_created DATETIME NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES user_profile(user_id) ON DELETE CASCADE,
   FOREIGN KEY (location) REFERENCES roommates_locations(location) ON DELETE SET NULL,
   FOREIGN KEY (hometown) REFERENCES roommates_hometown(hometown) ON DELETE SET NULL
 );
 
 CREATE TABLE roommates_profile_tags (
-  user_id VARCHAR(100),
+  user_id INT,
   tag VARCHAR(50) CHARACTER SET utf8mb4,
   PRIMARY KEY (user_id, tag),
   FOREIGN KEY (user_id) REFERENCES roommates_profile(user_id) ON DELETE CASCADE,
@@ -90,16 +78,16 @@ CREATE TABLE classmates_tags (
 );
 
 CREATE TABLE classmates_profile (
-  user_id VARCHAR(100) PRIMARY KEY,
+  user_id INT PRIMARY KEY,
   major VARCHAR(50) CHARACTER SET utf8mb4,
   motto VARCHAR(100) CHARACTER SET utf8mb4,
   time_created DATETIME NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES user_profile(user_id) ON DELETE CASCADE,
   FOREIGN KEY (major) REFERENCES classmates_major(major) ON DELETE SET NULL
 );
 
 CREATE TABLE classmates_profile_courses (
-  user_id VARCHAR(100),
+  user_id INT,
   course VARCHAR(50) CHARACTER SET utf8mb4,
   PRIMARY KEY (user_id, course),
   FOREIGN KEY (user_id) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
@@ -107,7 +95,7 @@ CREATE TABLE classmates_profile_courses (
 );
 
 CREATE TABLE classmates_profile_tags (
-  user_id VARCHAR(100),
+  user_id INT,
   tag VARCHAR(50) CHARACTER SET utf8mb4,
   PRIMARY KEY (user_id, tag),
   FOREIGN KEY (user_id) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
@@ -131,18 +119,18 @@ CREATE TABLE friends_tags (
 );
 
 CREATE TABLE friends_profile (
-  user_id VARCHAR(100) PRIMARY KEY,
+  user_id INT PRIMARY KEY,
   faculty VARCHAR(50) CHARACTER SET utf8mb4,
   relationship VARCHAR(50) CHARACTER SET utf8mb4,
   motto VARCHAR(100) CHARACTER SET utf8mb4,
   time_created DATETIME NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES user_profile(user_id) ON DELETE CASCADE,
   FOREIGN KEY (faculty) REFERENCES faculties(faculty) ON DELETE SET NULL,
   FOREIGN KEY (relationship) REFERENCES relationship_status (relationship) ON DELETE SET NULL
 );
 
 CREATE TABLE friends_profile_tags (
-  user_id VARCHAR(100),
+  user_id INT,
   tag VARCHAR(50) CHARACTER SET utf8mb4,
   PRIMARY KEY (user_id, tag),
   FOREIGN KEY (user_id) REFERENCES friends_profile(user_id) ON DELETE CASCADE,
@@ -152,16 +140,16 @@ CREATE TABLE friends_profile_tags (
 
 # Likes & Dislikes
 CREATE TABLE roommates_likes (
-  liker VARCHAR(100),
-  likee VARCHAR(100),
+  liker INT,
+  likee INT,
   time_created DATETIME NOT NULL,
   PRIMARY KEY (liker, likee),
   FOREIGN KEY (liker) REFERENCES roommates_profile(user_id) ON DELETE CASCADE,
   FOREIGN KEY (likee) REFERENCES roommates_profile(user_id) ON DELETE CASCADE
 );
 CREATE TABLE roommates_dislikes (
-  disliker VARCHAR(100),
-  dislikee VARCHAR(100),
+  disliker INT,
+  dislikee INT,
   time_created DATETIME NOT NULL,
   PRIMARY KEY (disliker, dislikee),
   FOREIGN KEY (disliker) REFERENCES roommates_profile(user_id) ON DELETE CASCADE,
@@ -169,16 +157,16 @@ CREATE TABLE roommates_dislikes (
 );
 
 CREATE TABLE classmates_likes(
-  liker VARCHAR(100),
-  likee VARCHAR(100),
+  liker INT,
+  likee INT,
   time_created DATETIME NOT NULL,
   PRIMARY KEY (liker, likee),
   FOREIGN KEY (liker) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
   FOREIGN KEY (likee) REFERENCES classmates_profile(user_id) ON DELETE CASCADE
 );
 CREATE TABLE classmates_dislikes(
-  disliker VARCHAR(100),
-  dislikee VARCHAR(100),
+  disliker INT,
+  dislikee INT,
   time_created DATETIME NOT NULL,
   PRIMARY KEY (disliker, dislikee),
   FOREIGN KEY (disliker) REFERENCES classmates_profile(user_id) ON DELETE CASCADE,
@@ -186,16 +174,16 @@ CREATE TABLE classmates_dislikes(
 );
 
 CREATE TABLE friends_likes (
-  liker VARCHAR(100),
-  likee VARCHAR(100),
+  liker INT,
+  likee INT,
   time_created DATETIME NOT NULL,
   PRIMARY KEY (liker, likee),
   FOREIGN KEY (liker) REFERENCES friends_profile(user_id) ON DELETE CASCADE,
   FOREIGN KEY (likee) REFERENCES friends_profile(user_id) ON DELETE CASCADE
 );
 CREATE TABLE friends_dislikes(
-  disliker VARCHAR(100),
-  dislikee VARCHAR(100),
+  disliker INT,
+  dislikee INT,
   time_created DATETIME NOT NULL,
   PRIMARY KEY (disliker, dislikee),
   FOREIGN KEY (disliker) REFERENCES friends_profile(user_id) ON DELETE CASCADE,

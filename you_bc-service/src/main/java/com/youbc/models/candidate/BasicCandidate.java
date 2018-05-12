@@ -1,7 +1,7 @@
 package com.youbc.models.candidate;
 
 public abstract class BasicCandidate {
-    private String userId;
+    private Integer userId;
     private String name;
     private String avatarUrl;
     private Integer sex;
@@ -11,7 +11,7 @@ public abstract class BasicCandidate {
 
     public BasicCandidate() {}
 
-    public BasicCandidate(String userId, String name, String avatarUrl, Integer sex, Integer age, String horoscope, double matchRate) {
+    public BasicCandidate(Integer userId, String name, String avatarUrl, Integer sex, Integer age, String horoscope, double matchRate) {
         this.userId = userId;
         this.name = name;
         this.avatarUrl = avatarUrl;
@@ -21,7 +21,7 @@ public abstract class BasicCandidate {
         this.matchRate = matchRate;
     }
 
-    public String getUserId() { return userId; }
+    public Integer getUserId() { return userId; }
 
     public String getName() {
         return name;

@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesTagsRecord extends UpdatableRecordImpl<ClassmatesTagsRecord> implements Record2<Integer, String> {
 
-    private static final long serialVersionUID = -367614276;
+    private static final long serialVersionUID = -1591921176;
 
     /**
-     * Setter for <code>poke_you_bc.classmates_tags.id</code>.
+     * Setter for <code>you_bc.classmates_tags.id</code>.
      */
     public ClassmatesTagsRecord setId(Integer value) {
         set(0, value);
@@ -39,14 +39,14 @@ public class ClassmatesTagsRecord extends UpdatableRecordImpl<ClassmatesTagsReco
     }
 
     /**
-     * Getter for <code>poke_you_bc.classmates_tags.id</code>.
+     * Getter for <code>you_bc.classmates_tags.id</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>poke_you_bc.classmates_tags.tag</code>.
+     * Setter for <code>you_bc.classmates_tags.tag</code>.
      */
     public ClassmatesTagsRecord setTag(String value) {
         set(1, value);
@@ -54,7 +54,7 @@ public class ClassmatesTagsRecord extends UpdatableRecordImpl<ClassmatesTagsReco
     }
 
     /**
-     * Getter for <code>poke_you_bc.classmates_tags.tag</code>.
+     * Getter for <code>you_bc.classmates_tags.tag</code>.
      */
     public String getTag() {
         return (String) get(1);

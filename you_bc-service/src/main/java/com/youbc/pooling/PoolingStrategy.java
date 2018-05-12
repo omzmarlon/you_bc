@@ -11,5 +11,5 @@ public interface PoolingStrategy {
      * @param except except these users
      * @return Set of USER_IDs
      */
-    Set<BasicCandidate> poolUsers(String userId, Integer amount, Integer gender, Set<String> except);
+    Set<BasicCandidate> poolUsers(Integer userId, Integer amount, Integer gender, Set<Integer> except);
 }

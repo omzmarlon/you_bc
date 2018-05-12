@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.ClassmatesLikesRecord;
 
 import java.sql.Timestamp;
@@ -36,10 +36,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassmatesLikes extends TableImpl<ClassmatesLikesRecord> {
 
-    private static final long serialVersionUID = 1907401327;
+    private static final long serialVersionUID = 95328379;
 
     /**
-     * The reference instance of <code>poke_you_bc.classmates_likes</code>
+     * The reference instance of <code>you_bc.classmates_likes</code>
      */
     public static final ClassmatesLikes CLASSMATES_LIKES = new ClassmatesLikes();
 
@@ -52,29 +52,29 @@ public class ClassmatesLikes extends TableImpl<ClassmatesLikesRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.classmates_likes.liker</code>.
+     * The column <code>you_bc.classmates_likes.liker</code>.
      */
-    public final TableField<ClassmatesLikesRecord, String> LIKER = createField("liker", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<ClassmatesLikesRecord, Integer> LIKER = createField("liker", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.classmates_likes.likee</code>.
+     * The column <code>you_bc.classmates_likes.likee</code>.
      */
-    public final TableField<ClassmatesLikesRecord, String> LIKEE = createField("likee", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<ClassmatesLikesRecord, Integer> LIKEE = createField("likee", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.classmates_likes.time_created</code>.
+     * The column <code>you_bc.classmates_likes.time_created</code>.
      */
     public final TableField<ClassmatesLikesRecord, Timestamp> TIME_CREATED = createField("time_created", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.classmates_likes</code> table reference
+     * Create a <code>you_bc.classmates_likes</code> table reference
      */
     public ClassmatesLikes() {
         this("classmates_likes", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.classmates_likes</code> table reference
+     * Create an aliased <code>you_bc.classmates_likes</code> table reference
      */
     public ClassmatesLikes(String alias) {
         this(alias, CLASSMATES_LIKES);
@@ -93,7 +93,7 @@ public class ClassmatesLikes extends TableImpl<ClassmatesLikesRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

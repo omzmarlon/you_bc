@@ -64,11 +64,24 @@
             <artifactId>spring-boot-starter-security</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security.oauth</groupId>-->
+            <!--<artifactId>spring-security-oauth2</artifactId>-->
+            <!--<version>2.3.2.RELEASE</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.jdbc.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.data</groupId>-->
+            <!--<artifactId>spring-data-jpa</artifactId>-->
+            <!--<version>2.0.6.RELEASE</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -87,6 +100,18 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>javax.persistence</groupId>-->
+            <!--<artifactId>persistence-api</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate.javax.persistence</groupId>-->
+            <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
+            <!--<version>1.0.0.Final</version>-->
+        <!--</dependency>-->
 
         <!--<dependency>-->
             <!--<groupId>org.thymeleaf</groupId>-->
@@ -166,6 +191,12 @@
             <artifactId>fluent-hc</artifactId>
             <version>${apache.httpcomponent}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>javax</groupId>-->
+            <!--<artifactId>javaee-api</artifactId>-->
+            <!--<version>6.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
@@ -290,7 +321,7 @@
                                     <jdbc>
                                         <driver>${youbc.db.driver}</driver>
                                         <url>${youbc.db.url}</url>
-                                        <user>${youbc.db.username}</user>
+                                        <username>${youbc.db.username}</username>
                                         <password>${youbc.db.password}</password>
 
                                     </jdbc>
@@ -305,7 +336,7 @@
                                             <name>org.jooq.util.mysql.MySQLDatabase</name>
                                             <includes>.*</includes>
                                             <excludes></excludes>
-                                            <inputSchema>poke_you_bc</inputSchema>
+                                            <inputSchema>you_bc</inputSchema>
                                         </database>
 
                                         <generate>
@@ -330,5 +361,12 @@
             </build>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>Java.Net</id>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+    </repositories>
 
 </project>

@@ -24,9 +24,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentVerification implements Serializable {
 
-    private static final long serialVersionUID = -1643638655;
+    private static final long serialVersionUID = 500652334;
 
-    private final String     userId;
+    private final Integer    userId;
     private final Byte       approved;
     private final String     email;
     private final String     emailverificationcode;
@@ -47,7 +47,7 @@ public class StudentVerification implements Serializable {
     }
 
     public StudentVerification(
-        String     userId,
+        Integer    userId,
         Byte       approved,
         String     email,
         String     emailverificationcode,
@@ -66,7 +66,7 @@ public class StudentVerification implements Serializable {
         this.timeCreated = timeCreated;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 

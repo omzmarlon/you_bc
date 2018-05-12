@@ -22,10 +22,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfileTags implements Serializable {
 
-    private static final long serialVersionUID = -717220117;
+    private static final long serialVersionUID = -128541236;
 
-    private final String userId;
-    private final String tag;
+    private final Integer userId;
+    private final String  tag;
 
     public RoommatesProfileTags(RoommatesProfileTags value) {
         this.userId = value.userId;
@@ -33,14 +33,14 @@ public class RoommatesProfileTags implements Serializable {
     }
 
     public RoommatesProfileTags(
-        String userId,
-        String tag
+        Integer userId,
+        String  tag
     ) {
         this.userId = userId;
         this.tag = tag;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 

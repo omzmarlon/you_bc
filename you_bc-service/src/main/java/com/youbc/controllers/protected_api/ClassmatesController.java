@@ -43,7 +43,7 @@ public class ClassmatesController {
     public Set<BasicCandidate> getClassmateCandidates(HttpServletRequest request) {
         Integer amount = Integer.parseInt(request.getParameter("amount"));
         String gender = request.getParameter("gender");
-        String userID = cookieService.getAuthenticatedUserId(request);
+        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         if (amount <= 0) throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "missing parameter", "\'amount\' value is missing in the query string"));
         if (gender == null) gender = "mix";
         return userPoolManager.poolUsers(userID, amount, gender);
@@ -51,15 +51,17 @@ public class ClassmatesController {
 
     @RequestMapping(path = Endpoints.LIKE_CLASSMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void postLikeClassmates(HttpServletRequest request, @PathVariable("user_id") String likee) {
-        String liker = cookieService.getAuthenticatedUserId(request);
+    public void postLikeClassmates(HttpServletRequest request, @PathVariable("user_id")Integer likee) {
+        // TODO: should use json body
+        Integer liker = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         likeAndDislikeDao.classmatesLike(liker, likee);
     }
 
     @RequestMapping(path = Endpoints.DISLIKE_CLASSMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void postDislikeClassmates(HttpServletRequest request, @PathVariable("user_id") String dislikee) {
-        String disliker = cookieService.getAuthenticatedUserId(request);
+    public void postDislikeClassmates(HttpServletRequest request, @PathVariable("user_id") Integer dislikee) {
+        // TODO: should use json body
+        Integer disliker = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
         likeAndDislikeDao.classmatesDislike(disliker, dislikee);
     }
 }

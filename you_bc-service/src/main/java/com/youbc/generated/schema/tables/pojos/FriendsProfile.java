@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FriendsProfile implements Serializable {
 
-    private static final long serialVersionUID = -1735358498;
+    private static final long serialVersionUID = 834639041;
 
-    private final String    userId;
+    private final Integer   userId;
     private final String    faculty;
     private final String    relationship;
     private final String    motto;
@@ -40,7 +40,7 @@ public class FriendsProfile implements Serializable {
     }
 
     public FriendsProfile(
-        String    userId,
+        Integer   userId,
         String    faculty,
         String    relationship,
         String    motto,
@@ -53,7 +53,7 @@ public class FriendsProfile implements Serializable {
         this.timeCreated = timeCreated;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 

@@ -19,14 +19,14 @@ public class VerificationDAO {
         this.dslContext = dslContext;
     }
 
-    public void approve(String userId) {
+    public void approve(Integer userId) {
         dslContext.update(STUDENT_VERIFICATION)
                 .set(STUDENT_VERIFICATION.APPROVED, (byte)1)
                 .where(STUDENT_VERIFICATION.USER_ID.eq(userId))
                 .execute();
     }
 
-    public void persistEmailVerification(String userId, String email, String emailCode) {
+    public void persistEmailVerification(Integer userId, String email, String emailCode) {
         dslContext.update(STUDENT_VERIFICATION)
                 .set(STUDENT_VERIFICATION.EMAIL, email)
                 .set(STUDENT_VERIFICATION.EMAILVERIFICATIONCODE, emailCode)
@@ -34,14 +34,14 @@ public class VerificationDAO {
                 .execute();
     }
 
-    public void persistStudentCardVerification(String userId, String studentCardUrl) {
+    public void persistStudentCardVerification(Integer userId, String studentCardUrl) {
         dslContext.update(STUDENT_VERIFICATION)
                 .set(STUDENT_VERIFICATION.STUDENTID_IMAGE_URL, studentCardUrl)
                 .where(STUDENT_VERIFICATION.USER_ID.eq(userId))
                 .execute();
     }
 
-    public void storeVerificationLocation(String userId, BigDecimal lat, BigDecimal lon) {
+    public void storeVerificationLocation(Integer userId, BigDecimal lat, BigDecimal lon) {
         dslContext.update(STUDENT_VERIFICATION)
                 .set(STUDENT_VERIFICATION.LOCATION_LAT, lat)
                 .set(STUDENT_VERIFICATION.LOCATION_LON, lon)
@@ -49,7 +49,7 @@ public class VerificationDAO {
                 .execute();
     }
 
-    public Optional<String> fetchEmailVerificationCode(String userId) {
+    public Optional<String> fetchEmailVerificationCode(Integer userId) {
         Record1<String> code = dslContext
                 .select(STUDENT_VERIFICATION.EMAILVERIFICATIONCODE)
                 .from(STUDENT_VERIFICATION)
@@ -62,7 +62,7 @@ public class VerificationDAO {
         }
     }
 
-    public StudentVerification fetchStudentVerification(String userId) {
+    public StudentVerification fetchStudentVerification(Integer userId) {
         Record4<Byte, String, String, String> verification = dslContext
                 .select(STUDENT_VERIFICATION.APPROVED,
                         STUDENT_VERIFICATION.EMAIL,

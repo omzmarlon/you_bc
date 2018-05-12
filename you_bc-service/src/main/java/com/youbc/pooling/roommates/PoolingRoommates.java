@@ -20,11 +20,11 @@ public abstract class PoolingRoommates {
         this.profileDAO = profileDAO;
     }
 
-    public Set<BasicCandidate> populateToRoommates(List<String> userIds) {
+    public Set<BasicCandidate> populateToRoommates(List<Integer> userIds) {
 
         Set<BasicCandidate> candidates = new HashSet<>();
 
-        for (String id : userIds) {
+        for (Integer id : userIds) {
             RoommatesProfile roommatesProfile = profileDAO.fetchRoommatesProfile(id)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "cannot find user info", "cannot find  module profile info")));
             UserProfile userProfile = profileDAO.fetchUserProfile(id)

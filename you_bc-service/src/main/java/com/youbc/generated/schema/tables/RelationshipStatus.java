@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.RelationshipStatusRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
 
-    private static final long serialVersionUID = 1940814241;
+    private static final long serialVersionUID = -1021536877;
 
     /**
-     * The reference instance of <code>poke_you_bc.relationship_status</code>
+     * The reference instance of <code>you_bc.relationship_status</code>
      */
     public static final RelationshipStatus RELATIONSHIP_STATUS = new RelationshipStatus();
 
@@ -51,24 +51,24 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.relationship_status.id</code>.
+     * The column <code>you_bc.relationship_status.id</code>.
      */
     public final TableField<RelationshipStatusRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.relationship_status.relationship</code>.
+     * The column <code>you_bc.relationship_status.relationship</code>.
      */
     public final TableField<RelationshipStatusRecord, String> RELATIONSHIP = createField("relationship", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.relationship_status</code> table reference
+     * Create a <code>you_bc.relationship_status</code> table reference
      */
     public RelationshipStatus() {
         this("relationship_status", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.relationship_status</code> table reference
+     * Create an aliased <code>you_bc.relationship_status</code> table reference
      */
     public RelationshipStatus(String alias) {
         this(alias, RELATIONSHIP_STATUS);
@@ -87,7 +87,7 @@ public class RelationshipStatus extends TableImpl<RelationshipStatusRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

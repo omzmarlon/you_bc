@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.RoommatesProfileRecord;
 
 import java.sql.Timestamp;
@@ -36,10 +36,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesProfile extends TableImpl<RoommatesProfileRecord> {
 
-    private static final long serialVersionUID = -1595203353;
+    private static final long serialVersionUID = 912895547;
 
     /**
-     * The reference instance of <code>poke_you_bc.roommates_profile</code>
+     * The reference instance of <code>you_bc.roommates_profile</code>
      */
     public static final RoommatesProfile ROOMMATES_PROFILE = new RoommatesProfile();
 
@@ -52,39 +52,39 @@ public class RoommatesProfile extends TableImpl<RoommatesProfileRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.user_id</code>.
+     * The column <code>you_bc.roommates_profile.user_id</code>.
      */
-    public final TableField<RoommatesProfileRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<RoommatesProfileRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.location</code>.
+     * The column <code>you_bc.roommates_profile.location</code>.
      */
     public final TableField<RoommatesProfileRecord, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.hometown</code>.
+     * The column <code>you_bc.roommates_profile.hometown</code>.
      */
     public final TableField<RoommatesProfileRecord, String> HOMETOWN = createField("hometown", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.motto</code>.
+     * The column <code>you_bc.roommates_profile.motto</code>.
      */
     public final TableField<RoommatesProfileRecord, String> MOTTO = createField("motto", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_profile.time_created</code>.
+     * The column <code>you_bc.roommates_profile.time_created</code>.
      */
     public final TableField<RoommatesProfileRecord, Timestamp> TIME_CREATED = createField("time_created", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
 
     /**
-     * Create a <code>poke_you_bc.roommates_profile</code> table reference
+     * Create a <code>you_bc.roommates_profile</code> table reference
      */
     public RoommatesProfile() {
         this("roommates_profile", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.roommates_profile</code> table reference
+     * Create an aliased <code>you_bc.roommates_profile</code> table reference
      */
     public RoommatesProfile(String alias) {
         this(alias, ROOMMATES_PROFILE);
@@ -103,7 +103,7 @@ public class RoommatesProfile extends TableImpl<RoommatesProfileRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

@@ -1,55 +1,51 @@
 package com.youbc.securities;
 
+import com.youbc.securities.authProviders.JWTAuthProvider;
+import com.youbc.securities.authProviders.LoginAuthProvider;
 import com.youbc.securities.filters.JWTAPIFilter;
-import com.youbc.securities.filters.JWTLoginFilter;
+import com.youbc.securities.filters.UsernamePasswordLoginFilter;
 import com.youbc.securities.handlers.LoginSuccessHandler;
-import com.youbc.securities.providers.JWTAuthenticationProvider;
-import com.youbc.securities.requestmatchers.LoginRequestMatcher;
-import com.youbc.securities.requestmatchers.ProtectedAPIMatcher;
 import com.youbc.securities.services.CookieService;
 import com.youbc.utilities.Endpoints;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by omzmarlon on 2017-09-30.
  */
 
 @EnableWebSecurity
-@Component
-@Configuration
 public class YouBCSecurity extends WebSecurityConfigurerAdapter {
 
-    private JWTAuthenticationProvider jwtAuthenticationProvider;
-    private LoginRequestMatcher loginRequestMatcher;
-    private ProtectedAPIMatcher protectedAPIMatcher;
-    private LoginSuccessHandler successHandler;
+    private LoginAuthProvider loginAuthProvider;
+    private JWTAuthProvider jwtAuthProvider;
+    private LoginSuccessHandler loginSuccessHandler;
     private CookieService cookieService;
+    private YouBCAuthEntryPoint entryPoint;
 
     @Autowired
     public YouBCSecurity(
-            JWTAuthenticationProvider jwtAuthenticationProvider,
-            LoginRequestMatcher loginRequestMatcher,
-            ProtectedAPIMatcher protectedAPIMatcher,
-            LoginSuccessHandler successHandler,
+            LoginAuthProvider loginAuthProvider,
+            YouBCAuthEntryPoint entryPoint,
+            JWTAuthProvider jwtAuthProvider,
+            LoginSuccessHandler loginSuccessHandler,
             CookieService cookieService
     ) {
-        this.jwtAuthenticationProvider = jwtAuthenticationProvider;
-        this.loginRequestMatcher = loginRequestMatcher;
-        this.protectedAPIMatcher = protectedAPIMatcher;
-        this.successHandler = successHandler;
+        this.loginAuthProvider = loginAuthProvider;
+        this.loginSuccessHandler = loginSuccessHandler;
+        this.entryPoint = entryPoint;
+        this.jwtAuthProvider = jwtAuthProvider;
         this.cookieService = cookieService;
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authBuilder) throws Exception {
-        authBuilder.authenticationProvider(jwtAuthenticationProvider);
+    public void configure(AuthenticationManagerBuilder authBuilder) {
+        authBuilder.authenticationProvider(loginAuthProvider);
+        authBuilder.authenticationProvider(jwtAuthProvider);
     }
 
     @Override
@@ -59,16 +55,20 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable()
+                .exceptionHandling()
+                    .authenticationEntryPoint(entryPoint)
+                .and()
                 .authorizeRequests()
-                .antMatchers(Endpoints.PROTECTED_API_PATTERN)
-                .authenticated()
+                    // TODO may be have a frontend login permit all
+                    .antMatchers("/", Endpoints.SIGNUP_ENDPOINT, Endpoints.LOGIN_ENDPOINT).permitAll()
+                    .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(
-                        new JWTLoginFilter(loginRequestMatcher, authenticationManager(), successHandler),
+                        new UsernamePasswordLoginFilter(Endpoints.LOGIN_ENDPOINT, authenticationManager(), loginSuccessHandler),
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .addFilterBefore(
-                        new JWTAPIFilter(protectedAPIMatcher, authenticationManager(), cookieService),
+                        new JWTAPIFilter(Endpoints.PROTECTED_API_PATTERN, authenticationManager(), cookieService),
                         UsernamePasswordAuthenticationFilter.class
                 );
     }

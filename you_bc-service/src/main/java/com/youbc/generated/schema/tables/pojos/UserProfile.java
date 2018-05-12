@@ -23,66 +23,82 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile implements Serializable {
 
-    private static final long serialVersionUID = -215505687;
+    private static final long serialVersionUID = -1423312804;
 
-    private final String    userId;
-    private final Integer   age;
-    private final Integer   sex;
-    private final String    wechatid;
+    private final Integer   userId;
     private final String    username;
+    private final String    password;
+    private final Integer   sex;
+    private final Integer   age;
+    private final String    profileImageUrl;
+    private final String    wechatid;
     private final String    horoscope;
     private final Integer   matchcount;
     private final Timestamp timeCreated;
 
     public UserProfile(UserProfile value) {
         this.userId = value.userId;
-        this.age = value.age;
-        this.sex = value.sex;
-        this.wechatid = value.wechatid;
         this.username = value.username;
+        this.password = value.password;
+        this.sex = value.sex;
+        this.age = value.age;
+        this.profileImageUrl = value.profileImageUrl;
+        this.wechatid = value.wechatid;
         this.horoscope = value.horoscope;
         this.matchcount = value.matchcount;
         this.timeCreated = value.timeCreated;
     }
 
     public UserProfile(
-        String    userId,
-        Integer   age,
-        Integer   sex,
-        String    wechatid,
+        Integer   userId,
         String    username,
+        String    password,
+        Integer   sex,
+        Integer   age,
+        String    profileImageUrl,
+        String    wechatid,
         String    horoscope,
         Integer   matchcount,
         Timestamp timeCreated
     ) {
         this.userId = userId;
-        this.age = age;
-        this.sex = sex;
-        this.wechatid = wechatid;
         this.username = username;
+        this.password = password;
+        this.sex = sex;
+        this.age = age;
+        this.profileImageUrl = profileImageUrl;
+        this.wechatid = wechatid;
         this.horoscope = horoscope;
         this.matchcount = matchcount;
         this.timeCreated = timeCreated;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 
-    public Integer getAge() {
-        return this.age;
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public Integer getSex() {
         return this.sex;
     }
 
-    public String getWechatid() {
-        return this.wechatid;
+    public Integer getAge() {
+        return this.age;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getProfileImageUrl() {
+        return this.profileImageUrl;
+    }
+
+    public String getWechatid() {
+        return this.wechatid;
     }
 
     public String getHoroscope() {
@@ -102,10 +118,12 @@ public class UserProfile implements Serializable {
         StringBuilder sb = new StringBuilder("UserProfile (");
 
         sb.append(userId);
-        sb.append(", ").append(age);
-        sb.append(", ").append(sex);
-        sb.append(", ").append(wechatid);
         sb.append(", ").append(username);
+        sb.append(", ").append(password);
+        sb.append(", ").append(sex);
+        sb.append(", ").append(age);
+        sb.append(", ").append(profileImageUrl);
+        sb.append(", ").append(wechatid);
         sb.append(", ").append(horoscope);
         sb.append(", ").append(matchcount);
         sb.append(", ").append(timeCreated);

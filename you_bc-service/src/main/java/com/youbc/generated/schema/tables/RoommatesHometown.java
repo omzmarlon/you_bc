@@ -5,7 +5,7 @@ package com.youbc.generated.schema.tables;
 
 
 import com.youbc.generated.schema.Keys;
-import com.youbc.generated.schema.PokeYouBc;
+import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.RoommatesHometownRecord;
 
 import java.util.Arrays;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
 
-    private static final long serialVersionUID = -523280455;
+    private static final long serialVersionUID = 1586414887;
 
     /**
-     * The reference instance of <code>poke_you_bc.roommates_hometown</code>
+     * The reference instance of <code>you_bc.roommates_hometown</code>
      */
     public static final RoommatesHometown ROOMMATES_HOMETOWN = new RoommatesHometown();
 
@@ -51,24 +51,24 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
     }
 
     /**
-     * The column <code>poke_you_bc.roommates_hometown.id</code>.
+     * The column <code>you_bc.roommates_hometown.id</code>.
      */
     public final TableField<RoommatesHometownRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>poke_you_bc.roommates_hometown.hometown</code>.
+     * The column <code>you_bc.roommates_hometown.hometown</code>.
      */
     public final TableField<RoommatesHometownRecord, String> HOMETOWN = createField("hometown", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
     /**
-     * Create a <code>poke_you_bc.roommates_hometown</code> table reference
+     * Create a <code>you_bc.roommates_hometown</code> table reference
      */
     public RoommatesHometown() {
         this("roommates_hometown", null);
     }
 
     /**
-     * Create an aliased <code>poke_you_bc.roommates_hometown</code> table reference
+     * Create an aliased <code>you_bc.roommates_hometown</code> table reference
      */
     public RoommatesHometown(String alias) {
         this(alias, ROOMMATES_HOMETOWN);
@@ -87,7 +87,7 @@ public class RoommatesHometown extends TableImpl<RoommatesHometownRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PokeYouBc.POKE_YOU_BC;
+        return YouBc.YOU_BC;
     }
 
     /**

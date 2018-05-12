@@ -40,11 +40,11 @@ public class MatchedUsersController {
     @RequestMapping(path = Endpoints.MATCHED_USERS, method = RequestMethod.GET)
     public MatchedUserResponse getAllMatchedUsers(HttpServletRequest request) {
         Set<MatchedUser> matchedUsers = new TreeSet<>();
-        String userId = cookieService.getAuthenticatedUserId(request);
-        Set<String> matchedUserIds = matchedUsersDAO.fetchAllMatchedUsers(userId);
+        Integer userId = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Set<Integer> matchedUserIds = matchedUsersDAO.fetchAllMatchedUsers(userId);
         Integer matchCount = matchedUsersDAO.fetchMatchCount(userId);
         // construct matchedUsers set
-        for(String theOther : matchedUserIds) {
+        for(Integer theOther : matchedUserIds) {
             UserProfile userProfile = profileDAO.fetchUserProfile(theOther)
                     .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "no user found", "no user found")));
             matchedUsers.add(new MatchedUser(

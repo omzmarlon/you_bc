@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -29,9 +30,13 @@ public class SecurityBeans {
     public JWTTokenService jwtTokenService() {
         return new JWTTokenService(
                 env.getProperty(EnvProperties.JWT_SECRET),
-                env.getProperty(EnvProperties.JWT_EXPIRY_SHORT, Long.class),
-                env.getProperty(EnvProperties.JWT_EXPIRY_LONG, Long.class)
+                env.getProperty(EnvProperties.JWT_EXPIRY, Long.class)
         );
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }
