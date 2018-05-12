@@ -3,6 +3,7 @@ package com.youbc.utilities;
 public class Endpoints {
     public final static String LOGIN_ENDPOINT = "/login";
     public final static String SIGNUP_ENDPOINT = "/register";
+    public final static String HEALTH_ENDPOINT = "/health";
     public final static String WECHAT_OAUTH = "/wechat_oauth";
     // Protected routes
     public final static String PROTECTED_API_PATTERN = "/api/**";

@@ -60,7 +60,7 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     // TODO may be have a frontend login permit all
-                    .antMatchers("/", Endpoints.SIGNUP_ENDPOINT, Endpoints.LOGIN_ENDPOINT).permitAll()
+                    .antMatchers("/", Endpoints.SIGNUP_ENDPOINT, Endpoints.LOGIN_ENDPOINT, Endpoints.HEALTH_ENDPOINT).permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(
