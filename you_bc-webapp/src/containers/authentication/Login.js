@@ -7,22 +7,39 @@ import './Login.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
 import { RaisedButton } from "material-ui";
-import {PRIMARY_GREEN, PRIMARY_WHITE} from "../../styles/constants/colors";
+import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/colors";
 import {REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
+import FacebookIcon from "../../components/common/svg/Facebook";
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            code: "",
+            username: "",
+            password: "",
             checked: true
         };
         this.login = this.login.bind(this);
+        this.facebookAuth = this.facebookAuth.bind(this);
+        this.onUsernameChange = this.onUsernameChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
     }
 
     login() {
-        alert("login!");
+
+    }
+
+    facebookAuth() {
+
+    }
+
+    onUsernameChange(e, val) {
+        this.setState({username: val});
+    }
+
+    onPasswordChange(e, val) {
+        this.setState({password: val});
     }
 
     render() {
@@ -35,17 +52,18 @@ class Login extends Component {
                             id="username"
                             hintText="Username"
                             errorText={this.state.checked ? null : "邀请码不正确，请确认后重试"}
-                            onChange={this.onCodeChange}
-                            value={this.state.code}
+                            onChange={this.onUsernameChange}
+                            value={this.state.username}
                             fullWidth={true}
                         />
                         <TextField
                             id="password"
                             hintText="Password"
                             errorText={this.state.checked ? null : "邀请码不正确，请确认后重试"}
-                            onChange={this.onCodeChange}
-                            value={this.state.code}
+                            onChange={this.onPasswordChange}
+                            value={this.state.password}
                             fullWidth={true}
+                            type="password"
                         />
                     </div>
                     <RaisedButton
@@ -55,9 +73,19 @@ class Login extends Component {
                         style={{marginBottom: 12}}
                         label="Sign in"
                         labelColor={PRIMARY_WHITE}
-                        disabled={this.state.code === ""}
+                        disabled={this.state.username === "" || this.state.password === ""}
                     />
-                    <Link to={REGISTER}>Create Account</Link>
+                    <RaisedButton
+                        onClick={this.facebookAuth}
+                        backgroundColor={FACEBOOK}
+                        fullWidth={true}
+                        style={{marginBottom: 12}}
+                        label="Use Facebook account"
+                        labelColor={PRIMARY_WHITE}
+                        labelStyle={{paddingLeft: 20, fontWeight: 100, fontSize: '3vw'}}
+                        icon={<FacebookIcon/>}
+                    />
+                    <Link to={REGISTER} className="register-link">Create Account</Link>
                 </div>
             </AuthTemplate>
         )

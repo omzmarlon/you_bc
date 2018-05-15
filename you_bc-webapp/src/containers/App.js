@@ -22,6 +22,7 @@ import {
 import RollingEmoji from "../components/common/RollingEmoji";
 import PrivateRoute from "./authentication/PrivateRoute";
 import Login from "./authentication/Login";
+import Register from "./authentication/Register";
 
 const ClassmateContainer = () => (
     <MainListContainer
@@ -61,7 +62,7 @@ class App extends Component {
         return (
             <Switch>
                 <Route exact path={LOGIN} component={Login}/>
-                <Route exact path={REGISTER} component={DemoContainer}/>
+                <Route exact path={REGISTER} component={Register}/>
                 <PrivateRoute exact path='/' component={AuthFacade}/>
                 <PrivateRoute path={TO_CLASSMATES} render={ClassmateContainer}/>
                 <PrivateRoute path={TO_FRIENDS} render={FriendContainer}/>

@@ -10,3 +10,5 @@ export const SECONDARY_RED = '#fcefeb';
 export const SECONDARY_BLUE = '#edf5fd';
 export const SECONDARY_YELLOW = '#fdf8ee';
 export const SECONDARY_GREEN = '#9bf6cf';
+
+export const FACEBOOK = '#3B5998';
