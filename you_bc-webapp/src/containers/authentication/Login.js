@@ -6,11 +6,19 @@ import { connect }  from 'react-redux'
 import './Login.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
-import { RaisedButton } from "material-ui";
+import {CircularProgress, RaisedButton} from "material-ui";
 import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/colors";
 import {REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import FacebookIcon from "../../components/common/svg/Facebook";
+import {loginAction} from "../../actions/global/authenticationActions";
+
+const spinnerStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+};
 
 class Login extends Component {
     constructor(props) {
@@ -18,7 +26,7 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            checked: true
+            signInClicked: false
         };
         this.login = this.login.bind(this);
         this.facebookAuth = this.facebookAuth.bind(this);
@@ -27,11 +35,13 @@ class Login extends Component {
     }
 
     login() {
-
+        let {dispatch} = this.props;
+        dispatch(loginAction(this.state.username, this.state.password));
+        this.setState({signInClicked: true, password: ""});
     }
 
     facebookAuth() {
-
+        // todo: facebook oauth coming later
     }
 
     onUsernameChange(e, val) {
@@ -45,13 +55,16 @@ class Login extends Component {
     render() {
         return (
             <AuthTemplate header="Welcome Back!">
+                {
+                    this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
+                }
                 <div className="login-page-container">
                     <img src={PokeEgg} className="egg-icon"/>
                     <div className="code-input">
                         <TextField
                             id="username"
                             hintText="Username"
-                            errorText={this.state.checked ? null : "邀请码不正确，请确认后重试"}
+                            errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
                             onChange={this.onUsernameChange}
                             value={this.state.username}
                             fullWidth={true}
@@ -59,7 +72,7 @@ class Login extends Component {
                         <TextField
                             id="password"
                             hintText="Password"
-                            errorText={this.state.checked ? null : "邀请码不正确，请确认后重试"}
+                            errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
                             onChange={this.onPasswordChange}
                             value={this.state.password}
                             fullWidth={true}
@@ -92,4 +105,9 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    isAuthenticated: state.authentication.authStatusCode === 200,
+    isAuthenticating: state.authentication.isAuthenticating
+});
+
+export default connect(mapStateToProps)(Login);

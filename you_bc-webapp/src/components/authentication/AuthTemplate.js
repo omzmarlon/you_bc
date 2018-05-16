@@ -12,7 +12,7 @@ const bodyStyle = {
     maxHeight: '85vh',
     width: '90vw',
     margin: 'auto',
-    transform: 'translateY(50%)'
+    transform: 'translateY(42vw)'
 };
 
 class AuthTemplate extends Component {

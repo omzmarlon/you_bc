@@ -57,3 +57,7 @@ export const VERIFY_CODE = "VERIFY_CODE";
 /************************ authentication actions ************************/
 export const FETCH_AUTH_TOKEN_REQUEST = 'FETCH_AUTH_TOKEN_REQUEST';
 export const FETCH_AUTH_TOKEN_COMPLETE = 'FETCH_AUTH_TOKEN_COMPLETE';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_COMPLETE = 'LOGIN_COMPLETE';
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const REGISTER_COMPLETE = 'REGISTER_COMPLETE';

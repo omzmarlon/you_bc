@@ -6,10 +6,19 @@ import { Link } from 'react-router-dom'
 import './Register.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
-import { RaisedButton } from "material-ui";
+import {CircularProgress, RaisedButton} from "material-ui";
 import {LOGIN} from "../../constants/api";
 import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
+import {registerAction} from "../../actions/global/authenticationActions";
+
+const spinnerStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+};
 
 class Register extends Component {
     constructor(props) {
@@ -18,16 +27,19 @@ class Register extends Component {
             username: "",
             password: "",
             confirmPassword: "",
-            checked: true
+            gender: 0
         };
         this.register = this.register.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onGenderChange = this.onGenderChange.bind(this);
         this.onConfirmPasswordChange = this.onConfirmPasswordChange.bind(this);
     }
 
     register() {
-
+        let {dispatch} = this.props;
+        dispatch(registerAction(this.state.username, this.state.password, this.state.gender));
+        this.setState({username: "", password: "", confirmPassword: ""});
     }
 
     onUsernameChange(e, val) {
@@ -38,6 +50,10 @@ class Register extends Component {
         this.setState({password: val});
     }
 
+    onGenderChange(e, val) {
+        this.setState({gender: val});
+    }
+
     onConfirmPasswordChange(e, val) {
         this.setState({confirmPassword: val});
     }
@@ -45,13 +61,25 @@ class Register extends Component {
     render() {
         return (
             <AuthTemplate header="Welcome!">
+                {
+                    this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
+                }
                 <div className="register-page-container">
                     <img src={PokeEgg} className="egg-icon"/>
+                    <RadioButtonGroup
+                        className="gender-radio-btn"
+                        name="gender"
+                        defaultSelected="not_light"
+                        onChange={this.onGenderChange}
+                    >
+                        <RadioButton value={1} label="Male" iconStyle={{marginRight: 5}} />
+                        <RadioButton value={2} label="Female" iconStyle={{marginRight: 5}} />
+                    </RadioButtonGroup>
                     <div className="code-input">
                         <TextField
                             id="username"
                             hintText="Username"
-                            errorText={this.state.checked ? null : "邀请码不正确，请确认后重试"}
+                            errorText={this.props.registerSuccess ? null : "user already exist"}
                             onChange={this.onUsernameChange}
                             value={this.state.username}
                             fullWidth={true}
@@ -59,7 +87,7 @@ class Register extends Component {
                         <TextField
                             id="password"
                             hintText="Password"
-                            errorText={this.state.checked ? null : "邀请码不正确，请确认后重试"}
+                            errorText={this.state.password.length > 3 ? null : "too short! at least 4 characters"}
                             onChange={this.onPasswordChange}
                             value={this.state.password}
                             fullWidth={true}
@@ -70,7 +98,7 @@ class Register extends Component {
                             hintText="Confirm Password"
                             errorText={this.state.password === this.state.confirmPassword ?
                                 null :
-                                "doesn't match!"}
+                                "doesn't match"}
                             onChange={this.onConfirmPasswordChange}
                             value={this.state.confirmPassword}
                             fullWidth={true}
@@ -86,7 +114,8 @@ class Register extends Component {
                         labelColor={PRIMARY_WHITE}
                         disabled={this.state.password !== this.state.confirmPassword ||
                         this.state.password === "" ||
-                        this.state.username === ""}
+                        this.state.username === "" ||
+                        this.state.gender === 0}
                     />
                     <Link to={LOGIN} className="register-link">Back to sign in</Link>
                 </div>
@@ -95,4 +124,9 @@ class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+    registerSuccess: state.authentication.authStatusCode === 200,
+    isAuthenticating: state.authentication.isAuthenticating
+});
+
+export default connect(mapStateToProps)(Register);

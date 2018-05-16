@@ -24,6 +24,7 @@ export function requestUrl(api) {
 }
 
 export const LOGIN_API = "/login";
+export const REGISTER_API = "/register";
 
 // profile options
 export const MAJOR_OPTIONS_API = "/api/profile/majors";
