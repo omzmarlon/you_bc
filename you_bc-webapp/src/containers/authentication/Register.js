@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import { connect }  from 'react-redux'
-import { Link } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import './Register.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
@@ -59,68 +59,73 @@ class Register extends Component {
     }
 
     render() {
-        return (
-            <AuthTemplate header="Welcome!">
-                {
-                    this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
-                }
-                <div className="register-page-container">
-                    <img src={PokeEgg} className="egg-icon"/>
-                    <RadioButtonGroup
-                        className="gender-radio-btn"
-                        name="gender"
-                        defaultSelected="not_light"
-                        onChange={this.onGenderChange}
-                    >
-                        <RadioButton value={1} label="Male" iconStyle={{marginRight: 5}} />
-                        <RadioButton value={2} label="Female" iconStyle={{marginRight: 5}} />
-                    </RadioButtonGroup>
-                    <div className="code-input">
-                        <TextField
-                            id="username"
-                            hintText="Username"
-                            errorText={this.props.registerSuccess ? null : "user already exist"}
-                            onChange={this.onUsernameChange}
-                            value={this.state.username}
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+        if (this.props.registerSuccess) {
+            return <Redirect to={from}/>;
+        } else {
+            return (
+                <AuthTemplate header="Welcome!">
+                    {
+                        this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
+                    }
+                    <div className="register-page-container">
+                        <img src={PokeEgg} className="egg-icon"/>
+                        <RadioButtonGroup
+                            className="gender-radio-btn"
+                            name="gender"
+                            defaultSelected="not_light"
+                            onChange={this.onGenderChange}
+                        >
+                            <RadioButton value={1} label="Male" iconStyle={{marginRight: 5}} />
+                            <RadioButton value={2} label="Female" iconStyle={{marginRight: 5}} />
+                        </RadioButtonGroup>
+                        <div className="code-input">
+                            <TextField
+                                id="username"
+                                hintText="Username"
+                                errorText={this.props.registerSuccess ? null : "user already exist"}
+                                onChange={this.onUsernameChange}
+                                value={this.state.username}
+                                fullWidth={true}
+                            />
+                            <TextField
+                                id="password"
+                                hintText="Password"
+                                errorText={this.state.password.length > 3 ? null : "too short! at least 4 characters"}
+                                onChange={this.onPasswordChange}
+                                value={this.state.password}
+                                fullWidth={true}
+                                type="password"
+                            />
+                            <TextField
+                                id="password2"
+                                hintText="Confirm Password"
+                                errorText={this.state.password === this.state.confirmPassword ?
+                                    null :
+                                    "doesn't match"}
+                                onChange={this.onConfirmPasswordChange}
+                                value={this.state.confirmPassword}
+                                fullWidth={true}
+                                type="password"
+                            />
+                        </div>
+                        <RaisedButton
+                            onClick={this.register}
+                            backgroundColor={PRIMARY_GREEN}
                             fullWidth={true}
+                            style={{marginBottom: 12}}
+                            label="Sign up"
+                            labelColor={PRIMARY_WHITE}
+                            disabled={this.state.password !== this.state.confirmPassword ||
+                            this.state.password === "" ||
+                            this.state.username === "" ||
+                            this.state.gender === 0}
                         />
-                        <TextField
-                            id="password"
-                            hintText="Password"
-                            errorText={this.state.password.length > 3 ? null : "too short! at least 4 characters"}
-                            onChange={this.onPasswordChange}
-                            value={this.state.password}
-                            fullWidth={true}
-                            type="password"
-                        />
-                        <TextField
-                            id="password2"
-                            hintText="Confirm Password"
-                            errorText={this.state.password === this.state.confirmPassword ?
-                                null :
-                                "doesn't match"}
-                            onChange={this.onConfirmPasswordChange}
-                            value={this.state.confirmPassword}
-                            fullWidth={true}
-                            type="password"
-                        />
+                        <Link to={LOGIN} className="register-link">Back to sign in</Link>
                     </div>
-                    <RaisedButton
-                        onClick={this.register}
-                        backgroundColor={PRIMARY_GREEN}
-                        fullWidth={true}
-                        style={{marginBottom: 12}}
-                        label="Sign up"
-                        labelColor={PRIMARY_WHITE}
-                        disabled={this.state.password !== this.state.confirmPassword ||
-                        this.state.password === "" ||
-                        this.state.username === "" ||
-                        this.state.gender === 0}
-                    />
-                    <Link to={LOGIN} className="register-link">Back to sign in</Link>
-                </div>
-            </AuthTemplate>
-        )
+                </AuthTemplate>
+            )
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { connect }  from 'react-redux'
 import './Login.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
@@ -53,55 +53,60 @@ class Login extends Component {
     }
 
     render() {
-        return (
-            <AuthTemplate header="Welcome Back!">
-                {
-                    this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
-                }
-                <div className="login-page-container">
-                    <img src={PokeEgg} className="egg-icon"/>
-                    <div className="code-input">
-                        <TextField
-                            id="username"
-                            hintText="Username"
-                            errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
-                            onChange={this.onUsernameChange}
-                            value={this.state.username}
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+        if (this.props.isAuthenticated) {
+            return <Redirect to={from}/>;
+        } else {
+            return (
+                <AuthTemplate header="Welcome Back!">
+                    {
+                        this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
+                    }
+                    <div className="login-page-container">
+                        <img src={PokeEgg} className="egg-icon"/>
+                        <div className="code-input">
+                            <TextField
+                                id="username"
+                                hintText="Username"
+                                errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
+                                onChange={this.onUsernameChange}
+                                value={this.state.username}
+                                fullWidth={true}
+                            />
+                            <TextField
+                                id="password"
+                                hintText="Password"
+                                errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
+                                onChange={this.onPasswordChange}
+                                value={this.state.password}
+                                fullWidth={true}
+                                type="password"
+                            />
+                        </div>
+                        <RaisedButton
+                            onClick={this.login}
+                            backgroundColor={PRIMARY_GREEN}
                             fullWidth={true}
+                            style={{marginBottom: 12}}
+                            label="Sign in"
+                            labelColor={PRIMARY_WHITE}
+                            disabled={this.state.username === "" || this.state.password === ""}
                         />
-                        <TextField
-                            id="password"
-                            hintText="Password"
-                            errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
-                            onChange={this.onPasswordChange}
-                            value={this.state.password}
+                        <RaisedButton
+                            onClick={this.facebookAuth}
+                            backgroundColor={FACEBOOK}
                             fullWidth={true}
-                            type="password"
+                            style={{marginBottom: 12}}
+                            label="Use Facebook account"
+                            labelColor={PRIMARY_WHITE}
+                            labelStyle={{paddingLeft: 20, fontWeight: 100, fontSize: '3vw'}}
+                            icon={<FacebookIcon/>}
                         />
+                        <Link to={REGISTER} className="register-link">Create Account</Link>
                     </div>
-                    <RaisedButton
-                        onClick={this.login}
-                        backgroundColor={PRIMARY_GREEN}
-                        fullWidth={true}
-                        style={{marginBottom: 12}}
-                        label="Sign in"
-                        labelColor={PRIMARY_WHITE}
-                        disabled={this.state.username === "" || this.state.password === ""}
-                    />
-                    <RaisedButton
-                        onClick={this.facebookAuth}
-                        backgroundColor={FACEBOOK}
-                        fullWidth={true}
-                        style={{marginBottom: 12}}
-                        label="Use Facebook account"
-                        labelColor={PRIMARY_WHITE}
-                        labelStyle={{paddingLeft: 20, fontWeight: 100, fontSize: '3vw'}}
-                        icon={<FacebookIcon/>}
-                    />
-                    <Link to={REGISTER} className="register-link">Create Account</Link>
-                </div>
-            </AuthTemplate>
-        )
+                </AuthTemplate>
+            )
+        }
     }
 }
 
