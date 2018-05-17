@@ -27,7 +27,10 @@ class Register extends Component {
             username: "",
             password: "",
             confirmPassword: "",
-            gender: 0
+            gender: 0,
+            signUpClicked: false,
+            passwordChanged: false,
+            confirmChanged: false
         };
         this.register = this.register.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
@@ -39,7 +42,7 @@ class Register extends Component {
     register() {
         let {dispatch} = this.props;
         dispatch(registerAction(this.state.username, this.state.password, this.state.gender));
-        this.setState({username: "", password: "", confirmPassword: ""});
+        this.setState({username: "", password: "", confirmPassword: "", signInClicked: true});
     }
 
     onUsernameChange(e, val) {
@@ -47,7 +50,7 @@ class Register extends Component {
     }
 
     onPasswordChange(e, val) {
-        this.setState({password: val});
+        this.setState({password: val, passwordChanged: true});
     }
 
     onGenderChange(e, val) {
@@ -55,7 +58,7 @@ class Register extends Component {
     }
 
     onConfirmPasswordChange(e, val) {
-        this.setState({confirmPassword: val});
+        this.setState({confirmPassword: val, confirmChanged: true});
     }
 
     render() {
@@ -83,7 +86,7 @@ class Register extends Component {
                             <TextField
                                 id="username"
                                 hintText="Username"
-                                errorText={this.props.registerSuccess ? null : "user already exist"}
+                                errorText={this.props.registerSuccess || !this.state.signUpClicked ? null : "user already exist"}
                                 onChange={this.onUsernameChange}
                                 value={this.state.username}
                                 fullWidth={true}
@@ -91,7 +94,7 @@ class Register extends Component {
                             <TextField
                                 id="password"
                                 hintText="Password"
-                                errorText={this.state.password.length > 3 ? null : "too short! at least 4 characters"}
+                                errorText={this.state.password.length > 3 || !this.state.passwordChanged ? null : "too short! at least 4 characters"}
                                 onChange={this.onPasswordChange}
                                 value={this.state.password}
                                 fullWidth={true}
@@ -100,7 +103,7 @@ class Register extends Component {
                             <TextField
                                 id="password2"
                                 hintText="Confirm Password"
-                                errorText={this.state.password === this.state.confirmPassword ?
+                                errorText={this.state.password === this.state.confirmPassword || !this.state.confirmChanged ?
                                     null :
                                     "doesn't match"}
                                 onChange={this.onConfirmPasswordChange}

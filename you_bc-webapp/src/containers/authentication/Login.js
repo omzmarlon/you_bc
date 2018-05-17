@@ -92,16 +92,16 @@ class Login extends Component {
                             labelColor={PRIMARY_WHITE}
                             disabled={this.state.username === "" || this.state.password === ""}
                         />
-                        <RaisedButton
-                            onClick={this.facebookAuth}
-                            backgroundColor={FACEBOOK}
-                            fullWidth={true}
-                            style={{marginBottom: 12}}
-                            label="Use Facebook account"
-                            labelColor={PRIMARY_WHITE}
-                            labelStyle={{paddingLeft: 20, fontWeight: 100, fontSize: '3vw'}}
-                            icon={<FacebookIcon/>}
-                        />
+                        {/*<RaisedButton*/}
+                            {/*onClick={this.facebookAuth}*/}
+                            {/*backgroundColor={FACEBOOK}*/}
+                            {/*fullWidth={true}*/}
+                            {/*style={{marginBottom: 12}}*/}
+                            {/*label="Use Facebook account"*/}
+                            {/*labelColor={PRIMARY_WHITE}*/}
+                            {/*labelStyle={{paddingLeft: 20, fontWeight: 100, fontSize: '3vw'}}*/}
+                            {/*icon={<FacebookIcon/>}*/}
+                        {/*/>*/}
                         <Link to={REGISTER} className="register-link">Create Account</Link>
                     </div>
                 </AuthTemplate>
