@@ -14,7 +14,7 @@ const authentication = (state = initial, action) => {
         case ActionTypes.LOGIN_COMPLETE:
         case ActionTypes.REGISTER_COMPLETE:
             return {...state, isAuthenticating: false, authStatusCode: action.statusCode, authMessage: action.message};
-        // old
+        // todo: old, clean up
         case ActionTypes.FETCH_AUTH_TOKEN_REQUEST:
             return {...state, isAuthenticating: true};
         case ActionTypes.FETCH_AUTH_TOKEN_COMPLETE:

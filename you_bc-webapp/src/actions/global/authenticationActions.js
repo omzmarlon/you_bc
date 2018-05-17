@@ -4,7 +4,7 @@ import {LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 import {fetchVerification} from "./verificationActions";
 
-// old
+// todo: old, clean up
 export const fetchAuthToken = code => dispatch => {
 
     dispatch(fetchAuthTokenRequest());
