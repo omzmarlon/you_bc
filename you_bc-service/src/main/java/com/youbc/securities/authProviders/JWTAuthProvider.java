@@ -1,6 +1,8 @@
 package com.youbc.securities.authProviders;
 
 import com.youbc.database.UserProfileDAO;
+import com.youbc.error_handling.YouBCError;
+import com.youbc.error_handling.YouBCException;
 import com.youbc.securities.services.JWTTokenService;
 import com.youbc.securities.tokens.JWTToken;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -8,9 +10,9 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import static java.util.Collections.emptyList;
@@ -35,14 +37,16 @@ public class JWTAuthProvider implements AuthenticationProvider {
             String token = ((String) authentication.getPrincipal());
             String subjectUsername = tokenService
                     .verifyToken(token)
-                    .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Token does not have valid subject"));
+                    .orElseThrow(() ->
+                            new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid token"))
+                    );
             if (userDAO.userExistsByUsername(subjectUsername)) {
                 return new UsernamePasswordAuthenticationToken(subjectUsername, null, emptyList());
             } else {
-                throw new UsernameNotFoundException("User Not Found");
+                throw new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "User not found"));
             }
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
-            throw new BadCredentialsException("Invalid JWT token");
+            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid token"));
         }
     }
 

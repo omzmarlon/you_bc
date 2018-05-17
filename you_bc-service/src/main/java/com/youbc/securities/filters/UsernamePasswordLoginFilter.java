@@ -1,28 +1,26 @@
 package com.youbc.securities.filters;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.youbc.error_handling.YouBCError;
 import com.youbc.error_handling.YouBCException;
 import com.youbc.securities.handlers.LoginSuccessHandler;
 import com.youbc.securities.tokens.LoginToken;
 import com.youbc.utilities.YouBCUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Login filter for user login attempt
  */
 public class UsernamePasswordLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-    private final static String LOGIN_AUTH_PARAM = "auth";
+
 
     public UsernamePasswordLoginFilter(
             String filterUrl,
@@ -37,21 +35,46 @@ public class UsernamePasswordLoginFilter extends AbstractAuthenticationProcessin
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response
-    ) throws AuthenticationException {
-        JsonNode json = YouBCUtils.getJsonFromRequest(request);
-
-        String username;
-        String password;
-
+    ) throws IOException {
         try {
-            username = json.findValue("username").textValue();
-            password = json.findValue("password").textValue();
-
-            return getAuthenticationManager().authenticate(new LoginToken(username, password));
-
-        } catch (NullPointerException e) {
-            throw new AuthenticationCredentialsNotFoundException("Both username & password required", e);
+            LoginRequest loginRequest = YouBCUtils.parseJson(request, LoginRequest.class);
+            return getAuthenticationManager().authenticate(
+                    new LoginToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+        } catch (JsonProcessingException ex) {
+            throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "Bad Request", "Invalid login JSON"));
         }
+    }
+
+}
+
+class LoginRequest {
+    private String username;
+    private String password;
+
+    public LoginRequest() {
+        /* for jackson */
+    }
+
+    public LoginRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

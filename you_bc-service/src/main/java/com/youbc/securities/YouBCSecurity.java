@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * Created by omzmarlon on 2017-09-30.
@@ -25,19 +26,16 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
     private JWTAuthProvider jwtAuthProvider;
     private LoginSuccessHandler loginSuccessHandler;
     private CookieService cookieService;
-    private YouBCAuthEntryPoint entryPoint;
 
     @Autowired
     public YouBCSecurity(
             LoginAuthProvider loginAuthProvider,
-            YouBCAuthEntryPoint entryPoint,
             JWTAuthProvider jwtAuthProvider,
             LoginSuccessHandler loginSuccessHandler,
             CookieService cookieService
     ) {
         this.loginAuthProvider = loginAuthProvider;
         this.loginSuccessHandler = loginSuccessHandler;
-        this.entryPoint = entryPoint;
         this.jwtAuthProvider = jwtAuthProvider;
         this.cookieService = cookieService;
     }
@@ -55,14 +53,12 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable()
-                .exceptionHandling()
-                    .authenticationEntryPoint(entryPoint)
-                .and()
                 .authorizeRequests()
                     // TODO may be have a frontend login permit all
                     .antMatchers("/", Endpoints.SIGNUP_ENDPOINT, Endpoints.LOGIN_ENDPOINT, Endpoints.HEALTH_ENDPOINT).permitAll()
                     .anyRequest().authenticated()
                 .and()
+                .addFilterBefore(new SecurityExceptionHandlerFilter(), CorsFilter.class)
                 .addFilterBefore(
                         new UsernamePasswordLoginFilter(Endpoints.LOGIN_ENDPOINT, authenticationManager(), loginSuccessHandler),
                         UsernamePasswordAuthenticationFilter.class

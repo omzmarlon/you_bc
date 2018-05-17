@@ -1,14 +1,15 @@
 package com.youbc.securities.authProviders;
 
 import com.youbc.database.UserProfileDAO;
+import com.youbc.error_handling.YouBCError;
+import com.youbc.error_handling.YouBCException;
 import com.youbc.securities.tokens.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +40,12 @@ public class LoginAuthProvider implements AuthenticationProvider {
         String passwordCredential = userProfileDAO
                 .getPasswordCredentialByUsername(loginAttemptUsername)
                 .orElseThrow(
-                        () -> new UsernameNotFoundException("User not found")
+                        () -> new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "User not found"))
                 );
         if (passwordEncoder.matches(loginAttemptPassword, passwordCredential)) {
             return new UsernamePasswordAuthenticationToken(loginAttemptUsername, null, emptyList());
         } else {
-            throw new BadCredentialsException("Invalid password");
+            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid email&password"));
         }
     }
 

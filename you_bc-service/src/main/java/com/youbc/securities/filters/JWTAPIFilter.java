@@ -1,8 +1,10 @@
 package com.youbc.securities.filters;
 
+import com.youbc.error_handling.YouBCError;
+import com.youbc.error_handling.YouBCException;
 import com.youbc.securities.services.CookieService;
 import com.youbc.securities.tokens.JWTToken;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -34,7 +36,9 @@ public class JWTAPIFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String jwtToken = cookieService
                 .getAuthenticationCookie(request)
-                .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Auth cookie not found"));
+                .orElseThrow(() -> new YouBCException(
+                        new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid cookie")
+                ));
         return getAuthenticationManager().authenticate(new JWTToken(jwtToken));
     }
 }
