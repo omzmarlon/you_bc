@@ -1,3 +1,7 @@
+/**
+ * todo: no longer in use
+ */
+
 import React, {Component} from 'react';
 import { connect }  from 'react-redux'
 import './AuthPage.less';

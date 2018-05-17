@@ -9,6 +9,8 @@ export const TO_CLASSMATES = "/classmates";
 export const TO_FRIENDS = "/friends";
 export const TO_ROOMMATES = "/roommates";
 export const TO_PROFILE = "/profiles";
+export const LOGIN = "/login";
+export const REGISTER = "/register";
 
 // APIs
 
@@ -22,6 +24,7 @@ export function requestUrl(api) {
 }
 
 export const LOGIN_API = "/login";
+export const REGISTER_API = "/register";
 
 // profile options
 export const MAJOR_OPTIONS_API = "/api/profile/majors";

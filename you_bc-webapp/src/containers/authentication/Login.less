@@ -1,0 +1,29 @@
+@import (reference) "../../styles/constants/fonts";
+@import (reference) "../../styles/constants/colors";
+
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5vw;
+
+  .egg-icon {
+    height: 90px;
+    transform: translateY(-70%);
+  }
+
+  .code-input {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 42px;
+    width: 80%;
+    .code-suffix {
+      .common-font;
+      color: @generalText;
+    }
+  }
+
+  .register-link {
+    font-size: 3.5vw;
+  }
+}

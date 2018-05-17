@@ -25,11 +25,14 @@ class NavHeader extends React.Component {
     render() {
         return (
             <div className={'nav-header'} style={{backgroundColor: this.props.color}}>
-                <div className={"left-action"}>
-                    <IconButton onClick={this.goBack} style={{padding: 6}} iconStyle={{width: 36, height: 36}}>
-                        <BackArrow color={PRIMARY_WHITE} />
-                    </IconButton>
-                </div>
+                {this.props.hideBackArrow ?
+                    <div className={"left-action"}> </div> :
+                    <div className={"left-action"}>
+                        <IconButton onClick={this.goBack} style={{padding: 6}} iconStyle={{width: 36, height: 36}}>
+                            <BackArrow color={PRIMARY_WHITE} />
+                        </IconButton>
+                    </div>
+                }
                 <div className={"header-font header-title"} style={{color: PRIMARY_WHITE}}>
                     {this.props.title}
                 </div>
@@ -49,6 +52,11 @@ NavHeader.propTypes = {
     iconRight: PropTypes.element,
     color: PropTypes.string.isRequired,
     onClickGoBack: PropTypes.func,
+    hideBackArrow: PropTypes.bool
+};
+
+NavHeader.defaultProps = {
+    hideBackArrow: false
 };
 
 export default NavHeader;

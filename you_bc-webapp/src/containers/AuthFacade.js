@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * todo
+ * AuthFacade is no longer used, should be able to deleted, double check!
+ * All the authentication stuff are now handled by PrivateRoute
+ */
+
 import React, {Component} from 'react';
 import { connect }  from 'react-redux'
 import CodeCheckContainer from "./verification/CodeCheckContainer";

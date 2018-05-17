@@ -12,7 +12,7 @@ import {
     DISLIKE_CLASSMATES_API, DISLIKE_FRIENDS_API, DISLIKE_ROOMMATES_API,
     FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API, LIKE_CLASSMATES_API, LIKE_FRIENDS_API,
     LIKE_ROOMMATES_API,
-    TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES
+    TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES, LOGIN, REGISTER
 } from "../constants/api";
 import DemoContainer from "../components/DemoContainer";
 import {
@@ -20,6 +20,10 @@ import {
     SECONDARY_YELLOW
 } from "../styles/constants/colors";
 import RollingEmoji from "../components/common/RollingEmoji";
+import PrivateRoute from "./authentication/PrivateRoute";
+import Login from "./authentication/Login";
+import Register from "./authentication/Register";
+import HomePageContainer from "./HomePageContainer";
 
 const ClassmateContainer = () => (
     <MainListContainer
@@ -58,11 +62,13 @@ class App extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' component={AuthFacade}/>
-                <Route path={TO_CLASSMATES} render={ClassmateContainer}/>
-                <Route path={TO_FRIENDS} render={FriendContainer}/>
-                <Route path={TO_ROOMMATES} render={RoommateContainer}/>
-                <Route path={TO_PROFILE} component={ProfileContainer}/>
+                <Route exact path={LOGIN} component={Login}/>
+                <Route exact path={REGISTER} component={Register}/>
+                <PrivateRoute exact path='/' component={HomePageContainer}/>
+                <PrivateRoute path={TO_CLASSMATES} render={ClassmateContainer}/>
+                <PrivateRoute path={TO_FRIENDS} render={FriendContainer}/>
+                <PrivateRoute path={TO_ROOMMATES} render={RoommateContainer}/>
+                <PrivateRoute path={TO_PROFILE} component={ProfileContainer}/>
                 <Route path='/demo' component={DemoContainer}/>
                 <Route component={NotFound}/>
             </Switch>
