@@ -13,7 +13,7 @@ npm-debug.log
 .gradle
 build
 out
-src/main/resources/public
+you_bc-service/src/main/resources/public
 
 # extra
 *.ipr
