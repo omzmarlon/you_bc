@@ -5,12 +5,12 @@ export const ROOMMATES = "roommates";
 export const PERSONAL = "personal";
 
 // Route Paths
-export const TO_CLASSMATES = "/ca/classmates";
-export const TO_FRIENDS = "/ca/friends";
-export const TO_ROOMMATES = "/ca/roommates";
-export const TO_PROFILE = "/ca/profiles";
-export const LOGIN = "/ca/login";
-export const REGISTER = "/ca/register";
+export const TO_CLASSMATES = "/classmates";
+export const TO_FRIENDS = "/friends";
+export const TO_ROOMMATES = "/roommates";
+export const TO_PROFILE = "/profiles";
+export const LOGIN = "/login";
+export const REGISTER = "/register";
 
 // APIs
 
@@ -23,6 +23,7 @@ export function requestUrl(api) {
     }
 }
 
+// todo: change as per the backend api
 export const LOGIN_API = "/login";
 export const REGISTER_API = "/register";
 
