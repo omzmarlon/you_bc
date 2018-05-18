@@ -55,7 +55,17 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                     // TODO may be have a frontend login permit all
-                    .antMatchers("/", Endpoints.SIGNUP_ENDPOINT, Endpoints.LOGIN_ENDPOINT, Endpoints.HEALTH_ENDPOINT).permitAll()
+                    .antMatchers(
+                            "/",
+                            "/bundle.js",
+                            "/assets/**",
+                            "/favicon.ico",
+                            "/signin",
+                            "/signup",
+                            Endpoints.SIGNUP_ENDPOINT,
+                            Endpoints.LOGIN_ENDPOINT,
+                            Endpoints.HEALTH_ENDPOINT
+                    ).permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new SecurityExceptionHandlerFilter(), CorsFilter.class)

@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WebAppController {
 
-    @RequestMapping(value={"", "/", "/classmates", "/profiles", "/classmates", "/friends", "/roommates"}, method = RequestMethod.GET)
+    @RequestMapping(
+            value={"", "/", "/classmates", "/profiles", "/classmates", "/friends", "/roommates", "/signin", "/signup"},
+            method = RequestMethod.GET
+    )
     public String getClient() {
         return "index.html";
     }
