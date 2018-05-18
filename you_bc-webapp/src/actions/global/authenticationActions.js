@@ -38,8 +38,16 @@ export const loginAction = (username, password) => dispatch => {
                 dispatch(loginComplete(200, 'OK'));
             },
             error => {
+                console.log(error);
+                console.log("inside then!!!");
                 dispatch(loginComplete(401, error.response.data.message));
                 dispatch(showInfoBar(error.response.data.message));
+            }
+        )
+        .catch(
+            error => {
+                console.log(error);
+                console.log("inside catch!!!");
             }
         )
 };
@@ -52,17 +60,25 @@ const loginComplete = (statusCode, message) => (
     }
 );
 
-export const registerAction = (username, password, gender) => dispatch => {
+export const registerAction = (username, password, sex) => dispatch => {
     dispatch(registerRequest());
-    axios.post(requestUrl(REGISTER_API), {username, password, gender})
+    axios.post(requestUrl(REGISTER_API), {username, password, sex})
         .then(
             response => {
                 dispatch(registerComplete(200, 'OK'));
             },
             error => {
                 // todo: confirm the error code and error struct
+                console.log(error);
+                console.log("inside then!!!");
                 dispatch(registerComplete(401, error.response.data.message));
                 dispatch(showInfoBar(error.response.data.message));
+            }
+        )
+        .catch(
+            error => {
+                console.log(error);
+                console.log("inside catch!!!");
             }
         )
 };
