@@ -70,7 +70,6 @@ export const registerAction = (username, password, sex) => dispatch => {
             error => {
                 // todo: confirm the error code and error struct
                 console.log(error);
-                console.log("inside then!!!");
                 dispatch(registerComplete(401, error.response.data.message));
                 dispatch(showInfoBar(error.response.data.message));
             }
