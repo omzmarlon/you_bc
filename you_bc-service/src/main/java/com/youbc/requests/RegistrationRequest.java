@@ -31,4 +31,11 @@ public class RegistrationRequest {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
+
+    @Override
+    public String toString() {
+        // TODO Logging password security issue?
+        return String.format("Username: %s, Password: %s, Sex: %s", username, password, sex);
+    }
 }

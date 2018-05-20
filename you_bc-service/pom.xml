@@ -11,6 +11,9 @@
 
     <artifactId>youbc-service</artifactId>
 
+    <!--TODO: clean up pom-->
+
+
     <properties>
         <jwt.version>0.7.0</jwt.version>
         <jbcrypt.version>0.3m</jbcrypt.version>
@@ -197,6 +200,12 @@
             <!--<artifactId>javaee-api</artifactId>-->
             <!--<version>6.0</version>-->
         <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
 
     </dependencies>
 
