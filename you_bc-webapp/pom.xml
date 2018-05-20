@@ -30,7 +30,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>yarn install</id>
+                        <id>Run: yarn install</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
@@ -40,7 +40,7 @@
                     </execution>
 
                     <execution>
-                        <id>build frontend</id>
+                        <id>Build Frontend</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
