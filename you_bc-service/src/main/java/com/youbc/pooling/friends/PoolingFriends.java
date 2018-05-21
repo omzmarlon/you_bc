@@ -1,8 +1,8 @@
 package com.youbc.pooling.friends;
 
 import com.youbc.database.ProfileDAO;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.models.candidate.BasicCandidate;
 import com.youbc.models.candidate.FriendCandidate;
 import com.youbc.models.profile.FriendsProfile;

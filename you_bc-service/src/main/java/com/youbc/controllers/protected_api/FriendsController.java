@@ -1,8 +1,8 @@
 package com.youbc.controllers.protected_api;
 
 import com.youbc.database.LikeAndDislikeDao;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.models.candidate.BasicCandidate;
 import com.youbc.pooling.UserPoolManager;
 import com.youbc.pooling.WeightedStrategy;

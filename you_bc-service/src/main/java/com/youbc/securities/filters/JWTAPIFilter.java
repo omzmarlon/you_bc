@@ -1,7 +1,7 @@
 package com.youbc.securities.filters;
 
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.securities.services.CookieService;
 import com.youbc.securities.tokens.JWTToken;
 import org.springframework.http.HttpStatus;

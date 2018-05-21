@@ -1,8 +1,6 @@
 package com.youbc.securities.services;
 
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
-import org.springframework.http.HttpStatus;
+import com.youbc.exceptions.YouBCUnAuthorizedRequest;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
@@ -44,9 +42,9 @@ public class CookieService {
         return  jwtTokenService
                 .verifyToken(
                         getAuthenticationCookie(request)
-                                .orElseThrow(() -> new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Not Logged In", "User not logged in")))
+                                .orElseThrow(() -> new YouBCUnAuthorizedRequest("User not logged in"))
                 ).orElseThrow(
-                        () -> new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Invalid token", "Invalid Login token"))
+                        () -> new YouBCUnAuthorizedRequest("Invalid Login token")
                 );
     }
 

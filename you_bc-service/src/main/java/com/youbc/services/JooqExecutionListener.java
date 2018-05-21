@@ -1,7 +1,7 @@
 package com.youbc.services;
 
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import org.jooq.ExecuteContext;
 import org.jooq.impl.DefaultExecuteListener;
 import org.springframework.http.HttpStatus;

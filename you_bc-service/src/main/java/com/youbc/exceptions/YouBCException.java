@@ -1,4 +1,4 @@
-package com.youbc.error_handling;
+package com.youbc.exceptions;
 
 public class YouBCException extends RuntimeException {
 

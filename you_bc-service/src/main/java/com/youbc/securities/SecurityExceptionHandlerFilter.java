@@ -2,8 +2,8 @@ package com.youbc.securities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.AuthenticationException;

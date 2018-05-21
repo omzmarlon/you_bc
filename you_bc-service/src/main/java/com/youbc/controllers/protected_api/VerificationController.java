@@ -2,8 +2,8 @@ package com.youbc.controllers.protected_api;
 
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.youbc.database.VerificationDAO;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.models.verification.StudentVerification;
 import com.youbc.securities.services.CookieService;
 import com.youbc.services.aws.S3Client;

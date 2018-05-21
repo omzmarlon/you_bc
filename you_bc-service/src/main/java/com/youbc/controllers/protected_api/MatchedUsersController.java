@@ -2,8 +2,8 @@ package com.youbc.controllers.protected_api;
 
 import com.youbc.database.MatchedUsersDAO;
 import com.youbc.database.ProfileDAO;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.models.MatchedUser;
 import com.youbc.models.MatchedUserResponse;
 import com.youbc.models.profile.UserProfile;

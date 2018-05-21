@@ -1,8 +1,8 @@
 package com.youbc.securities.authProviders;
 
 import com.youbc.database.UserProfileDAO;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.securities.tokens.LoginToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

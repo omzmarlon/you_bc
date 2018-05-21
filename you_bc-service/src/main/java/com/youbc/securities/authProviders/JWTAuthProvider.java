@@ -1,8 +1,10 @@
 package com.youbc.securities.authProviders;
 
 import com.youbc.database.UserProfileDAO;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
+import com.youbc.exceptions.YouBCNotFoundException;
+import com.youbc.exceptions.YouBCUnAuthorizedRequest;
 import com.youbc.securities.services.JWTTokenService;
 import com.youbc.securities.tokens.JWTToken;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -38,15 +40,15 @@ public class JWTAuthProvider implements AuthenticationProvider {
             String subjectUsername = tokenService
                     .verifyToken(token)
                     .orElseThrow(() ->
-                            new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid token"))
+                            new YouBCUnAuthorizedRequest("Invalid token")
                     );
             if (userDAO.userExistsByUsername(subjectUsername)) {
                 return new UsernamePasswordAuthenticationToken(subjectUsername, null, emptyList());
             } else {
-                throw new YouBCException(new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "User not found"));
+                throw new YouBCNotFoundException("User not found");
             }
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
-            throw new YouBCException(new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid token"));
+            throw new YouBCUnAuthorizedRequest("Invalid token");
         }
     }
 

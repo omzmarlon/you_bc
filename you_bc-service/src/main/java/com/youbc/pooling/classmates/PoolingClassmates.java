@@ -1,8 +1,8 @@
 package com.youbc.pooling.classmates;
 
 import com.youbc.database.ProfileDAO;
-import com.youbc.error_handling.YouBCError;
-import com.youbc.error_handling.YouBCException;
+import com.youbc.exceptions.YouBCError;
+import com.youbc.exceptions.YouBCException;
 import com.youbc.models.candidate.BasicCandidate;
 import com.youbc.models.candidate.ClassmateCandidate;
 import com.youbc.models.profile.ClassmatesProfile;
