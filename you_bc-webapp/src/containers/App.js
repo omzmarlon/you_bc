@@ -13,7 +13,6 @@ import {
     LIKE_ROOMMATES_API,
     TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES, LOGIN, REGISTER
 } from "../constants/api";
-import DemoContainer from "../components/DemoContainer";
 import {
     PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED,
     SECONDARY_YELLOW
