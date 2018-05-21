@@ -12,6 +12,7 @@ import {REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import FacebookIcon from "../../components/common/svg/Facebook";
 import {loginAction} from "../../actions/global/authenticationActions";
+import AuthStatus from '../../utils/AuthStatus';
 
 const spinnerStyle = {
     position: 'absolute',
@@ -110,7 +111,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authentication.authStatusCode === 200,
+    isAuthenticated: state.authentication.authStatusCode === AuthStatus.AUTH_SUCCESS,
 });
 
 export default connect(mapStateToProps)(Login);

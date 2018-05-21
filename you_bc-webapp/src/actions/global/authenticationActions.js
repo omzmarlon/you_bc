@@ -3,6 +3,8 @@ import axios from 'axios';
 import {LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 import {showGlobalSpinner, hideGlobalSpinner} from "../../actions/global/globalActions";
+import {UPDATE_AUTH_STATUS} from "../actionTypes";
+import {FETCHING_AUTH_STATUS} from "../actionTypes";
 
 
 export const loginAction = (username, password) => dispatch => {
@@ -67,3 +69,11 @@ export const registerAction = (username, password, sex) => dispatch => {
             }
         )
 };
+
+export const updateAuthStatus = (username, authStatusCode) => ({
+    type: UPDATE_AUTH_STATUS, username, authStatusCode
+});
+
+export const fetchingAuthStatus = () => ({
+    type: FETCHING_AUTH_STATUS
+});

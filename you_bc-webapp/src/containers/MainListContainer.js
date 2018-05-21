@@ -17,6 +17,7 @@ import {
 } from "../actions/mainList/mainListActions";
 //constants
 import {FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API} from "../constants/api";
+import AuthStatus from '../utils/AuthStatus';
 
 class MainListContainer extends Component {
     constructor(props) {
@@ -134,7 +135,7 @@ const mapStateToProps = (state, ownProps) => ({
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
     &&
-    state.authentication.authStatusCode===200
+    state.authentication.authStatusCode===AuthStatus.AUTH_SUCCESS
 });
 
 export default connect(mapStateToProps)(MainListContainer);

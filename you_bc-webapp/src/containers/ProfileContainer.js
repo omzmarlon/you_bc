@@ -21,6 +21,8 @@ import {
     fetchPersonalInfo,
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
+// utils
+import AuthStatus from '../utils/AuthStatus';
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -68,7 +70,7 @@ const mapStateToProps = (state, ownProps) => ({
     grantAccess:
     (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
     &&
-    state.authentication.authStatusCode===200
+    state.authentication.authStatusCode===AuthStatus.AUTH_SUCCESS
 });
 
 const mapDispatchToProps = (dispatch) => {

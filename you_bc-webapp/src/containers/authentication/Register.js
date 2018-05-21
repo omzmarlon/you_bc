@@ -6,12 +6,13 @@ import {Link, Redirect} from 'react-router-dom'
 import './Register.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
-import {CircularProgress, RaisedButton} from "material-ui";
+import {RaisedButton} from "material-ui";
 import {LOGIN} from "../../constants/api";
 import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
 import {registerAction} from "../../actions/global/authenticationActions";
+import AuthStatus from '../../utils/AuthStatus';
 
 const spinnerStyle = {
     position: 'absolute',
@@ -132,7 +133,7 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-    registerSuccess: state.authentication.authStatusCode === 200,
+    registerSuccess: state.authentication.authStatusCode === AuthStatus.AUTH_SUCCESS,
 });
 
 export default connect(mapStateToProps)(Register);
