@@ -2,7 +2,7 @@ import * as ActionTypes from "../../actions/actionTypes";
 
 const initial = {
     isAuthenticating: false,
-    authStatusCode: -1,
+    authStatusCode: -1, // todo make a enum of status codes
     authMessage: ''
 };
 

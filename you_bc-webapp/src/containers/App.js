@@ -68,7 +68,6 @@ class App extends Component {
                 <PrivateRoute path={TO_FRIENDS} render={FriendContainer}/>
                 <PrivateRoute path={TO_ROOMMATES} render={RoommateContainer}/>
                 <PrivateRoute path={TO_PROFILE} component={ProfileContainer}/>
-                <Route path='/demo' component={DemoContainer}/>
                 <Route component={NotFound}/>
             </Switch>
         );
