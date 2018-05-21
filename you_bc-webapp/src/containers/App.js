@@ -64,9 +64,9 @@ class App extends Component {
                 <Route exact path={LOGIN} component={Login}/>
                 <Route exact path={REGISTER} component={Register}/>
                 <PrivateRoute exact path='/' component={HomePageContainer}/>
-                <PrivateRoute path={TO_CLASSMATES} render={ClassmateContainer}/>
-                <PrivateRoute path={TO_FRIENDS} render={FriendContainer}/>
-                <PrivateRoute path={TO_ROOMMATES} render={RoommateContainer}/>
+                <PrivateRoute path={TO_CLASSMATES} component={ClassmateContainer}/>
+                <PrivateRoute path={TO_FRIENDS} component={FriendContainer}/>
+                <PrivateRoute path={TO_ROOMMATES} component={RoommateContainer}/>
                 <PrivateRoute path={TO_PROFILE} component={ProfileContainer}/>
                 <Route component={NotFound}/>
             </Switch>

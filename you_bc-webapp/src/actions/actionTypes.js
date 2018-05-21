@@ -3,6 +3,8 @@ export const INCREMENT = 'INCREMENT';
 /************************ global actions ************************/
 export const SHOW_INFO_BAR = 'SHOW_INFO_BAR';
 export const HIDE_INFO_BAR = 'HIDE_INFO_BAR';
+export const SHOW_GLOBAL_SPINNER = 'SHOW_GLOBAL_SPINNER';
+export const HIDE_GLOBAL_SPINNER = 'HIDE_GLOBAL_SPINNER';
 
 /************************ profile actions ************************/
 // receiving

@@ -1,4 +1,4 @@
-import {HIDE_INFO_BAR, SHOW_INFO_BAR} from "../actionTypes";
+import {HIDE_GLOBAL_SPINNER, HIDE_INFO_BAR, SHOW_GLOBAL_SPINNER, SHOW_INFO_BAR} from "../actionTypes";
 
 export const showInfoBar  = (infoBarMessage) => dispatch => {
     dispatch({type: SHOW_INFO_BAR, infoBarMessage});
@@ -8,3 +8,6 @@ export const showInfoBar  = (infoBarMessage) => dispatch => {
     )
 };
 export const hideInfoBar = () => ({type: HIDE_INFO_BAR});
+
+export const showGlobalSpinner = () => ({type: SHOW_GLOBAL_SPINNER});
+export const hideGlobalSpinner = () => ({type: HIDE_GLOBAL_SPINNER});

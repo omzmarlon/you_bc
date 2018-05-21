@@ -68,10 +68,6 @@ class Register extends Component {
         } else {
             return (
                 <AuthTemplate header="Welcome!">
-                    {
-                        // todo: don use circular progress like this
-                        this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
-                    }
                     <div className="register-page-container">
                         <img src={PokeEgg} className="egg-icon"/>
                         <RadioButtonGroup
@@ -137,7 +133,6 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
     registerSuccess: state.authentication.authStatusCode === 200,
-    isAuthenticating: state.authentication.isAuthenticating
 });
 
 export default connect(mapStateToProps)(Register);

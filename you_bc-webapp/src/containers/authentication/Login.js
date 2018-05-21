@@ -6,7 +6,7 @@ import { connect }  from 'react-redux'
 import './Login.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
-import {CircularProgress, RaisedButton} from "material-ui";
+import {RaisedButton} from "material-ui";
 import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/colors";
 import {REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
@@ -59,9 +59,6 @@ class Login extends Component {
         } else {
             return (
                 <AuthTemplate header="Welcome Back!">
-                    {
-                        this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
-                    }
                     <div className="login-page-container">
                         <img src={PokeEgg} className="egg-icon"/>
                         <div className="code-input">
@@ -114,7 +111,6 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.authentication.authStatusCode === 200,
-    isAuthenticating: state.authentication.isAuthenticating
 });
 
 export default connect(mapStateToProps)(Login);

@@ -3,6 +3,7 @@ import axios from 'axios';
 import {LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 import {fetchVerification} from "./verificationActions";
+import {showGlobalSpinner, hideGlobalSpinner} from "../../actions/global/globalActions";
 
 // todo: old, clean up
 export const fetchAuthToken = code => dispatch => {
@@ -31,23 +32,30 @@ export const fetchAuthTokenComplete = (statusCode, message) => (
 
 // new
 export const loginAction = (username, password) => dispatch => {
+    dispatch(showGlobalSpinner());
     dispatch(loginRequest());
     axios.post(requestUrl(LOGIN_API), {username, password})
         .then(
             response => {
+                dispatch(hideGlobalSpinner());
                 dispatch(loginComplete(200, 'OK'));
             },
             error => {
+                // todo remove console log
                 console.log(error);
                 console.log("inside then!!!");
+                dispatch(hideGlobalSpinner());
                 dispatch(loginComplete(401, error.response.data.message));
                 dispatch(showInfoBar(error.response.data.message));
             }
         )
         .catch(
             error => {
+                // todo remove console log
                 console.log(error);
                 console.log("inside catch!!!");
+                dispatch(hideGlobalSpinner());
+
             }
         )
 };
@@ -61,23 +69,29 @@ const loginComplete = (statusCode, message) => (
 );
 
 export const registerAction = (username, password, sex) => dispatch => {
+    dispatch(showGlobalSpinner());
     dispatch(registerRequest());
     axios.post(requestUrl(REGISTER_API), {username, password, sex})
         .then(
             response => {
-                dispatch(registerComplete(200, 'OK'));
+                dispatch(hideGlobalSpinner());
+                dispatch(registerComplete(200, 'OK')); // todo register complete should not be auth success
             },
             error => {
                 // todo: confirm the error code and error struct
                 console.log(error);
+                dispatch(hideGlobalSpinner());
                 dispatch(registerComplete(401, error.response.data.message));
                 dispatch(showInfoBar(error.response.data.message));
             }
         )
         .catch(
             error => {
+                // todo remove console log
                 console.log(error);
                 console.log("inside catch!!!");
+                dispatch(hideGlobalSpinner());
+
             }
         )
 };

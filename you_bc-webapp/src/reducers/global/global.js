@@ -3,7 +3,7 @@ import * as ActionTypes from "../../actions/actionTypes";
 const initial = {
     showInfoBar: false,
     infoBarMessage: '',
-    isLoading: false
+    globalLoading: false
 };
 
 const global = (state = initial, action) => {
@@ -12,6 +12,10 @@ const global = (state = initial, action) => {
             return {...state, showInfoBar: true, infoBarMessage: action.infoBarMessage};
         case ActionTypes.HIDE_INFO_BAR:
             return {...state, showInfoBar: false, infoBarMessage: ''};
+        case ActionTypes.SHOW_GLOBAL_SPINNER:
+            return {...state, globalLoading: true};
+        case ActionTypes.HIDE_GLOBAL_SPINNER:
+            return {...state, globalLoading: false};
         default:
             return state;
     }

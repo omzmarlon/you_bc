@@ -8,7 +8,7 @@ import App from './containers/App';
 import { BrowserRouter } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import InfoBar from "./components/common/InfoBar";
-import TestCodePage from "./components/errorPage/TestCodePage";
+import GlobalSpinner from "./components/common/GlobalSpinner";
 
 // const preloadedState = window.__PRELOADED_STATE__;  // for server-side rendering
 const store = configureStore({});
@@ -18,6 +18,7 @@ ReactDOM.render(
         <Provider store={store}>
             <div>
                 <InfoBar/>
+                <GlobalSpinner/>
                 <BrowserRouter>
                     <App />
                 </BrowserRouter>

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 
+// todo is this still used?
+
 class TestCodePage extends React.Component {
 
     constructor(props) {

@@ -5,17 +5,17 @@ import { connect }  from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { LOGIN } from '../../constants/api';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, isAuthenticated,  ...restProps }) => (
     <Route
-        {...rest}
-        render={props =>
-            props.isAuthenticated ? (
-                <Component {...props} />
+        {...restProps}
+        render={routerProps =>
+            isAuthenticated? (
+                <Component {...routerProps} />
             ) : (
                 <Redirect
                     to={{
                         pathname: LOGIN,
-                        state: { from: props.location }
+                        state: { from: routerProps.location }
                     }}
                 />
             )
