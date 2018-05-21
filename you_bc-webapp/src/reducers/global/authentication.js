@@ -9,9 +9,11 @@ const initial = {
 const authentication = (state = initial, action) => {
     switch (action.type) {
         case ActionTypes.LOGIN_REQUEST:
+            return state;
         case ActionTypes.REGISTER_REQUEST:
             return {...state, isAuthenticating: true};
         case ActionTypes.LOGIN_COMPLETE:
+            return state;
         case ActionTypes.REGISTER_COMPLETE:
             return {...state, isAuthenticating: false, authStatusCode: action.statusCode, authMessage: action.message};
         // todo: old, clean up

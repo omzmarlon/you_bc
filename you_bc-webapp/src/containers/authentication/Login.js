@@ -68,6 +68,7 @@ class Login extends Component {
                             <TextField
                                 id="username"
                                 hintText="Username"
+                                // TODO: should be cb
                                 errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
                                 onChange={this.onUsernameChange}
                                 value={this.state.username}
@@ -76,6 +77,7 @@ class Login extends Component {
                             <TextField
                                 id="password"
                                 hintText="Password"
+                                // TODO: should be cb
                                 errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
                                 onChange={this.onPasswordChange}
                                 value={this.state.password}

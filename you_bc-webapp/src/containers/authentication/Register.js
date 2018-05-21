@@ -69,6 +69,7 @@ class Register extends Component {
             return (
                 <AuthTemplate header="Welcome!">
                     {
+                        // todo: don use circular progress like this
                         this.props.isAuthenticating ? <CircularProgress style={spinnerStyle}/> : null
                     }
                     <div className="register-page-container">
@@ -86,6 +87,7 @@ class Register extends Component {
                             <TextField
                                 id="username"
                                 hintText="Username"
+                                // TODO: should be cb
                                 errorText={this.props.registerSuccess || !this.state.signUpClicked ? null : "user already exist"}
                                 onChange={this.onUsernameChange}
                                 value={this.state.username}
@@ -94,6 +96,7 @@ class Register extends Component {
                             <TextField
                                 id="password"
                                 hintText="Password"
+                                // TODO: should be cb
                                 errorText={this.state.password.length > 3 || !this.state.passwordChanged ? null : "too short! at least 4 characters"}
                                 onChange={this.onPasswordChange}
                                 value={this.state.password}

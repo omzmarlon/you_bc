@@ -6,6 +6,8 @@ import com.youbc.error_handling.YouBCException;
 import com.youbc.securities.handlers.LoginSuccessHandler;
 import com.youbc.securities.tokens.LoginToken;
 import com.youbc.utilities.YouBCUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -20,7 +22,7 @@ import java.io.IOException;
  */
 public class UsernamePasswordLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(UsernamePasswordLoginFilter.class);
 
     public UsernamePasswordLoginFilter(
             String filterUrl,
@@ -38,6 +40,9 @@ public class UsernamePasswordLoginFilter extends AbstractAuthenticationProcessin
     ) throws IOException {
         try {
             LoginRequest loginRequest = YouBCUtils.parseJson(request, LoginRequest.class);
+
+            LOGGER.debug("Handling Login request: {}", loginRequest);
+
             return getAuthenticationManager().authenticate(
                     new LoginToken(loginRequest.getUsername(), loginRequest.getPassword())
             );
@@ -75,6 +80,12 @@ class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        // TODO: logging password security issue? spring auth token protects credentials when printing
+        return String.format("Username %s, password %s", username, password);
     }
 
 }

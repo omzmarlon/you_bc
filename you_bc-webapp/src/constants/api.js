@@ -16,14 +16,13 @@ export const REGISTER = "/signup";
 
 export function requestUrl(api) {
     if (process.env.NODE_ENV === 'production') {
-        //TODO: backend endpoint haven't set up yet
+        //TODO: make url configurable
         return "http://localhost:8080" + api;
     } else {
         return "http://localhost:8080" + api;
     }
 }
 
-// todo: change as per the backend api
 export const LOGIN_API = "/login";
 export const REGISTER_API = "/register";
 
