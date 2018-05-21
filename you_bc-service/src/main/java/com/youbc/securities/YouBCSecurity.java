@@ -68,7 +68,7 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                     ).permitAll()
                     .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new SecurityExceptionHandlerFilter(), CorsFilter.class)
+                .addFilterBefore(new SecurityExceptionHandlerFilter(cookieService), CorsFilter.class)
                 .addFilterBefore(
                         new UsernamePasswordLoginFilter(Endpoints.LOGIN_ENDPOINT, authenticationManager(), loginSuccessHandler),
                         UsernamePasswordAuthenticationFilter.class

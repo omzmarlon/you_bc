@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youbc.exceptions.YouBCError;
 import com.youbc.exceptions.YouBCException;
+import com.youbc.securities.services.CookieService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.AuthenticationException;
@@ -19,24 +22,35 @@ import java.io.IOException;
  */
 public class SecurityExceptionHandlerFilter extends OncePerRequestFilter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityExceptionHandlerFilter.class);
+
+    private CookieService cookieService;
+
+    public SecurityExceptionHandlerFilter(CookieService cookieService) {
+        this.cookieService = cookieService;
+    }
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
+            LOGGER.debug("Starting authentication process, path {}", request.getRequestURL().toString());
             filterChain.doFilter(request, response);
+            LOGGER.debug("Passed authentication process");
         } catch (YouBCException ex) {
+            LOGGER.debug("Authentication failed with {}, {}", ex.getClass().getSimpleName(), ex);
             sendErrorResponse(response, ex.getYouBCError());
-        } catch (AuthenticationException e) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.getWriter().write(toJson(new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", e.getMessage())));
-        } catch (RuntimeException e) {
+        } catch (AuthenticationException ex) {
+            LOGGER.debug("Authentication failed with {}, {}", ex.getClass().getSimpleName(), ex);
+            sendErrorResponse(response, new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", ex.getMessage()));
+        } catch (RuntimeException ex) {
             // unexpected exception
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-            response.getWriter().write(toJson(new YouBCError(HttpStatus.INTERNAL_SERVER_ERROR, "Server error", e.getMessage())));
+            LOGGER.debug("Authentication failed with UNEXPECTED {}, {}", ex.getClass().getSimpleName(), ex);
+            sendErrorResponse(response, new YouBCError(HttpStatus.INTERNAL_SERVER_ERROR, "Server error", ex.getMessage()));
         }
     }
 
     private void sendErrorResponse(HttpServletResponse response, YouBCError error) throws IOException {
+        response.addCookie(cookieService.removeAuthCookie());
         response.setContentType("application/json");
         response.setStatus(error.getStatus());
         response.getWriter().write(toJson(error));
