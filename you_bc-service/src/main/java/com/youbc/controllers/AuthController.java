@@ -1,6 +1,7 @@
 package com.youbc.controllers;
 
 import com.youbc.database.UserProfileDAO;
+import com.youbc.exceptions.YouBCBadRequest;
 import com.youbc.exceptions.YouBCNotFoundException;
 import com.youbc.requests.RegistrationRequest;
 import com.youbc.response.AuthStatusReponse;
@@ -54,7 +55,7 @@ public class AuthController {
 
         LOGGER.debug("Handling GET authentication status request");
 
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         String username = userDAO.getUsernameById(userID).orElseThrow(() -> new YouBCNotFoundException("User is not found"));
 
         return new AuthStatusReponse(username);

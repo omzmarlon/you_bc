@@ -41,7 +41,7 @@ public class RoommatesController {
 
     @RequestMapping(path = Endpoints.ROOMMATE_CANDIDATES, method = RequestMethod.GET)
     public Set<BasicCandidate> getRoommateCandidates(HttpServletRequest request) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         String gender = request.getParameter("gender");
         Integer amount = Integer.parseInt(request.getParameter("amount"));
         if (amount <= 0) throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "missing parameter", "\'amount\' value is missing in the query string"));
@@ -52,14 +52,14 @@ public class RoommatesController {
     @RequestMapping(path = Endpoints.LIKE_ROOMMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void postLikeRoommates(HttpServletRequest request, @PathVariable("user_id") Integer likee) {
-        Integer liker = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer liker = cookieService.getAuthenticatedUserId(request);
         likeAndDislikeDao.roommatesLike(liker, likee);
     }
 
     @RequestMapping(path = Endpoints.DISLIKE_ROOMMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void postDislikeRoommates(HttpServletRequest request, @PathVariable("user_id") Integer dislikee) {
-        Integer disliker = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer disliker = cookieService.getAuthenticatedUserId(request);
         likeAndDislikeDao.roommatesDislike(disliker, dislikee);
     }
 }

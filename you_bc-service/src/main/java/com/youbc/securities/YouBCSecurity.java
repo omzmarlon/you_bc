@@ -76,6 +76,7 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(
                         new JWTAPIFilter(Endpoints.PROTECTED_API_PATTERN, authenticationManager(), cookieService),
                         UsernamePasswordAuthenticationFilter.class
-                );
+                )
+                .formLogin().disable();
     }
 }

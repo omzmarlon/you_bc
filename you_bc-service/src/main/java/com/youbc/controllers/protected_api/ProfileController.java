@@ -31,7 +31,7 @@ public class ProfileController {
     @RequestMapping(path = "/api/profile/classmates", method = RequestMethod.GET)
     public ClassmatesProfile getClassmatesProfile(HttpServletRequest request) {
         return profileDAO.
-                fetchClassmatesProfile(Integer.parseInt(cookieService.getAuthenticatedUserId(request)))
+                fetchClassmatesProfile(cookieService.getAuthenticatedUserId(request))
                 .orElseThrow(
                         () -> new YouBCException(
                                 new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "Classmates Profile Not Found")
@@ -42,7 +42,7 @@ public class ProfileController {
     @RequestMapping(path = "/api/profile/roommates", method = RequestMethod.GET)
     public RoommatesProfile getRoommatesProfile(HttpServletRequest request) {
         return profileDAO.
-                fetchRoommatesProfile(Integer.parseInt(cookieService.getAuthenticatedUserId(request)))
+                fetchRoommatesProfile(cookieService.getAuthenticatedUserId(request))
                 .orElseThrow(
                         () -> new YouBCException(
                                 new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "Roommates Profile Not Found")
@@ -53,7 +53,7 @@ public class ProfileController {
     @RequestMapping(path = "/api/profile/friends", method = RequestMethod.GET)
     public FriendsProfile getFriendsProfile(HttpServletRequest request) {
         return profileDAO.
-                fetchFriendsProfile(Integer.parseInt(cookieService.getAuthenticatedUserId(request)))
+                fetchFriendsProfile(cookieService.getAuthenticatedUserId(request))
                 .orElseThrow(
                         () -> new YouBCException(
                                 new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "Friends Profile Not Found")
@@ -64,7 +64,7 @@ public class ProfileController {
     @RequestMapping(path = "/api/profile/user", method = RequestMethod.GET)
     public UserProfile getUserProfile(HttpServletRequest request) {
         return profileDAO
-                .fetchUserProfile(Integer.parseInt(cookieService.getAuthenticatedUserId(request)))
+                .fetchUserProfile(cookieService.getAuthenticatedUserId(request))
                 .orElseThrow(
                         () -> new YouBCException(
                                 new YouBCError(HttpStatus.NOT_FOUND, "Not Found", "User Profile Not Found")
@@ -74,7 +74,7 @@ public class ProfileController {
 
     @RequestMapping(path = "/api/profile/user", method = RequestMethod.PUT)
     public Integer updateUserProfile(HttpServletRequest request, @RequestBody UserProfile userProfile) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillPersonalProfile(
                 userID,
                 userProfile.getUsername(),
@@ -87,14 +87,14 @@ public class ProfileController {
 
     @RequestMapping(path = "/api/profile/avatar", method = RequestMethod.PUT, consumes = "text/plain")
     public Integer updateAvatarUrl(HttpServletRequest request, @RequestBody String avatarUrl) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.updateProfileImageUrl(userID, avatarUrl);
         return userID;
     }
 
     @RequestMapping(path = "/api/profile/wechatId", method = RequestMethod.PUT, consumes = "text/plain")
     public Integer updateWechatId(HttpServletRequest request, @RequestBody String wechatId) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.updateWechatId(userID, wechatId);
         return userID;
     }
@@ -103,7 +103,7 @@ public class ProfileController {
     public Integer  updateFriendsProfile(
             HttpServletRequest request, @RequestBody FriendsProfile friendsProfile
     ) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillFriendsProfile(
                 userID,
                 friendsProfile.getFaculty(),
@@ -118,7 +118,7 @@ public class ProfileController {
     public Integer  updateRoommatesProfile(
             HttpServletRequest request, @RequestBody RoommatesProfile roommatesProfile
     ) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillRoommatesProfile(
                 userID,
                 roommatesProfile.getLocation(),
@@ -133,7 +133,7 @@ public class ProfileController {
     public Integer updateClassmatesProfile(
             HttpServletRequest request, @RequestBody ClassmatesProfile classmatesProfile
     ) {
-        Integer userID = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userID = cookieService.getAuthenticatedUserId(request);
         profileDAO.fillClassmatesProfile(
                 userID,
                 classmatesProfile.getMajor(),

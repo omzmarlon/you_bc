@@ -38,14 +38,12 @@ public class CookieService {
                 .map(Cookie::getValue);
     }
 
-    public String getAuthenticatedUserId(HttpServletRequest request) {
-        return  jwtTokenService
-                .verifyToken(
-                        getAuthenticationCookie(request)
-                                .orElseThrow(() -> new YouBCUnAuthorizedRequest("User not logged in"))
-                ).orElseThrow(
-                        () -> new YouBCUnAuthorizedRequest("Invalid Login token")
-                );
+    public Integer getAuthenticatedUserId(HttpServletRequest request) {
+        return  Integer.parseInt(
+                jwtTokenService
+                        .verifyToken(getAuthenticationCookie(request).orElseThrow(() -> new YouBCUnAuthorizedRequest("User not logged in")))
+                        .orElseThrow(() -> new YouBCUnAuthorizedRequest("Invalid Login token"))
+        );
     }
 
 }

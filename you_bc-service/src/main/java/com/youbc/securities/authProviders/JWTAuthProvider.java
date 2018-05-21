@@ -37,13 +37,13 @@ public class JWTAuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) {
         try {
             String token = ((String) authentication.getPrincipal());
-            String subjectUsername = tokenService
+            String subjectUserId = tokenService
                     .verifyToken(token)
                     .orElseThrow(() ->
                             new YouBCUnAuthorizedRequest("Invalid token")
                     );
-            if (userDAO.userExistsByUsername(subjectUsername)) {
-                return new UsernamePasswordAuthenticationToken(subjectUsername, null, emptyList());
+            if (userDAO.userExistsById(Integer.parseInt(subjectUserId))) {
+                return new UsernamePasswordAuthenticationToken(subjectUserId, null, emptyList());
             } else {
                 throw new YouBCNotFoundException("User not found");
             }

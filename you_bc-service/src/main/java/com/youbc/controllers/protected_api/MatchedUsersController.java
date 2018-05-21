@@ -40,7 +40,7 @@ public class MatchedUsersController {
     @RequestMapping(path = Endpoints.MATCHED_USERS, method = RequestMethod.GET)
     public MatchedUserResponse getAllMatchedUsers(HttpServletRequest request) {
         Set<MatchedUser> matchedUsers = new TreeSet<>();
-        Integer userId = Integer.parseInt(cookieService.getAuthenticatedUserId(request));
+        Integer userId = cookieService.getAuthenticatedUserId(request);
         Set<Integer> matchedUserIds = matchedUsersDAO.fetchAllMatchedUsers(userId);
         Integer matchCount = matchedUsersDAO.fetchMatchCount(userId);
         // construct matchedUsers set

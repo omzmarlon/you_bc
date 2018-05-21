@@ -1,10 +1,9 @@
 import * as ActionTypes from "../actionTypes";
 import axios from 'axios';
-import {LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
+import {AUTH_STATUS_API, LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 import {showGlobalSpinner, hideGlobalSpinner} from "../../actions/global/globalActions";
 import {UPDATE_AUTH_STATUS} from "../actionTypes";
-import {FETCHING_AUTH_STATUS} from "../actionTypes";
 
 
 export const loginAction = (username, password) => dispatch => {
@@ -74,6 +73,15 @@ export const updateAuthStatus = (username, authStatusCode) => ({
     type: UPDATE_AUTH_STATUS, username, authStatusCode
 });
 
-export const fetchingAuthStatus = () => ({
-    type: FETCHING_AUTH_STATUS
-});
+export const  fetchAuthStatus = () => dispatch => {
+    axios.get(requestUrl(AUTH_STATUS_API), {withCredentials: true})
+        .then(
+            response => {
+                console.log(response)
+            },
+            error => {
+                console.log(error)
+            }
+        )
+        .catch(err => {});
+};

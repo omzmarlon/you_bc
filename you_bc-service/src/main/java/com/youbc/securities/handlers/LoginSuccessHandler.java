@@ -1,7 +1,10 @@
 package com.youbc.securities.handlers;
 
+import com.youbc.database.UserProfileDAO;
+import com.youbc.exceptions.YouBCNotFoundException;
 import com.youbc.securities.services.CookieService;
 import com.youbc.securities.services.JWTTokenService;
+import com.youbc.securities.tokens.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -15,11 +18,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private final JWTTokenService tokenService;
     private final CookieService cookieService;
+    private final UserProfileDAO userProfileDAO;
 
     @Autowired
-    public LoginSuccessHandler(JWTTokenService tokenService, CookieService cookieService) {
+    public LoginSuccessHandler(JWTTokenService tokenService,
+                               CookieService cookieService,
+                               UserProfileDAO userProfileDAO) {
         this.tokenService = tokenService;
         this.cookieService = cookieService;
+        this.userProfileDAO = userProfileDAO;
     }
 
     @Override
@@ -27,10 +34,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         HttpServletResponse response,
                                         Authentication authentication
     ) {
+        String username = (String) authentication.getPrincipal();
+
+        Integer userId = userProfileDAO.getIdByUsername(username).orElseThrow(
+                () -> new YouBCNotFoundException("No user with username: "+username));
+
         response.addCookie(
                 cookieService.createAuthCookie(
                         // principal is username from Login token
-                        tokenService.generateJWTToken(authentication.getPrincipal().toString())
+                        tokenService.generateJWTToken(userId.toString())
                 ));
     }
 }

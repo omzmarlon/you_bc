@@ -5,12 +5,16 @@ import { connect }  from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { LOGIN } from '../../constants/api';
 import AuthStatus from '../../utils/AuthStatus';
+import {fetchAuthStatus} from "../../actions/global/authenticationActions";
+import {bindActionCreators} from "redux";
 
-const PrivateRoute = ({ component: Component, isAuthenticated,  ...restProps }) => (
+const PrivateRoute = ({ component: Component, authStatus, fetchAuthStatus, ...restProps }) => (
     <Route
         {...restProps}
-        render={routerProps =>
-            isAuthenticated? (
+        render={routerProps => {
+            fetchAuthStatus();
+
+            return authStatus === AuthStatus.AUTH_SUCCESS? (
                 <Component {...routerProps} />
             ) : (
                 <Redirect
@@ -20,12 +24,18 @@ const PrivateRoute = ({ component: Component, isAuthenticated,  ...restProps }) 
                     }}
                 />
             )
-        }
+        }}
     />
 );
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authentication.authStatusCode === AuthStatus.AUTH_SUCCESS
+    authStatus: state.authentication.authStatusCode
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        fetchAuthStatus
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

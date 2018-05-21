@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Optional;
 
 public class JWTTokenService {
+    // TODO should use bearer
     //private static final String TOKEN_PREFIX = "Bear ";
 
     private String secret;

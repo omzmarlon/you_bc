@@ -43,6 +43,15 @@ public class UserProfileDAO {
         return result != null? Optional.of(result.get(USER_PROFILE.USERNAME)): Optional.empty();
     }
 
+    public Optional<Integer> getIdByUsername(String username) {
+        Record1<Integer> result = dslContext
+                .select(USER_PROFILE.USER_ID)
+                .from(USER_PROFILE)
+                .where(USER_PROFILE.USERNAME.eq(username))
+                .fetchOne();
+        return result != null? Optional.of(result.get(USER_PROFILE.USER_ID)): Optional.empty();
+    }
+
     public boolean userExistsByUsername(String username) {
         Record1<String> result = dslContext
                 .select(USER_PROFILE.USERNAME)
