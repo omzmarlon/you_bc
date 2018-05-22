@@ -1,10 +1,12 @@
 import * as ActionTypes from "../actionTypes";
 import axios from 'axios';
-import {AUTH_STATUS_API, LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
+import {AUTH_STATUS_API, authorizedConfig, LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
 import {showInfoBar} from "./globalActions";
 import {showGlobalSpinner, hideGlobalSpinner} from "../../actions/global/globalActions";
-import {UPDATE_AUTH_STATUS} from "../actionTypes";
-
+import LocalStorage from "../../utils/LocalStorage";
+import AuthStatus from "../../utils/AuthStatus";
+import {UPDATE_AUTH_STATUS_CODE} from "../actionTypes";
+import {UPDATE_AUTH_DETAIL} from "../actionTypes";
 
 export const loginAction = (username, password) => dispatch => {
     dispatch(showGlobalSpinner());
@@ -13,7 +15,14 @@ export const loginAction = (username, password) => dispatch => {
         .then(
             response => {
                 dispatch(hideGlobalSpinner());
-                dispatch(loginComplete(200, 'OK'));
+                if (response.data.token) {
+                    const jwtToken = response.data.token;
+                    localStorage.setItem(LocalStorage.AUTH_TOKEN_STORAGE, jwtToken);
+                    dispatch(showInfoBar("Login Success!"));
+                    dispatch(loginComplete(200, 'OK'));
+                } else {
+                    dispatch(showInfoBar("Could Not Get Authentication Token"));
+                }
             },
             error => {
                 // todo remove console log
@@ -69,17 +78,27 @@ export const registerAction = (username, password, sex) => dispatch => {
         )
 };
 
-export const updateAuthStatus = (username, authStatusCode) => ({
-    type: UPDATE_AUTH_STATUS, username, authStatusCode
+export const updateAuthStatusCode = (authStatusCode) => ({
+    type: UPDATE_AUTH_STATUS_CODE, authStatusCode
+});
+
+export const updateAuthDetail = (authDetail) => ({
+    type: UPDATE_AUTH_DETAIL, authDetail
 });
 
 export const  fetchAuthStatus = () => dispatch => {
-    axios.get(requestUrl(AUTH_STATUS_API), {withCredentials: true})
+    axios.get(requestUrl(AUTH_STATUS_API), authorizedConfig())
         .then(
             response => {
-                console.log(response)
+                const {username, newToken} = response.data;
+                dispatch(updateAuthDetail({username}));
+                localStorage.setItem(LocalStorage.AUTH_TOKEN_STORAGE, newToken)
+
+                dispatch(updateAuthStatusCode(AuthStatus.AUTH_SUCCESS));
+                dispatch(showInfoBar(`Hey ${username}, welcome back!`));
             },
             error => {
+                dispatch(updateAuthStatusCode(AuthStatus.UNAUTHORIZED));
                 console.log(error)
             }
         )

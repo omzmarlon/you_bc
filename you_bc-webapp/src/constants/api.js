@@ -1,3 +1,5 @@
+import LocalStorage from "../utils/LocalStorage";
+
 // Modules
 export const CLASSMATES = "classmates";
 export const FRIENDS = "friends";
@@ -10,6 +12,7 @@ export const TO_FRIENDS = "/friends";
 export const TO_ROOMMATES = "/roommates";
 export const TO_PROFILE = "/profiles";
 export const LOGIN = "/signin";
+export const PRE_LOGIN = "/pre_auth";
 export const REGISTER = "/signup";
 
 // APIs
@@ -26,6 +29,13 @@ export function requestUrl(api) {
 export const LOGIN_API = "/login";
 export const REGISTER_API = "/register";
 export const AUTH_STATUS_API = "/api/auth_status";
+
+export const authorizedConfig = () => (
+    // make it a function so that token is updated
+    {
+        headers: {'Authorization': 'Bearer '+localStorage.getItem(LocalStorage.AUTH_TOKEN_STORAGE)}
+    }
+);
 
 // profile options
 export const MAJOR_OPTIONS_API = "/api/profile/majors";

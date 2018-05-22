@@ -25,7 +25,7 @@ import RollingEmoji from "../components/common/RollingEmoji";
 const ProfileButton = () => (
     <FloatingActionButton className={'profile-button'}>
         <img src={PokeEgg} className="profile-icon"/>
-        <span className={'to-profile-label'}>个人主页</span>
+        <span className={'to-profile-label'}>My Profile</span>
     </FloatingActionButton>
 );
 
@@ -45,9 +45,9 @@ class HomePageContainer extends Component {
     render() {
         return(
             <div className="home-page">
-                <Block className="classmate-block" path={TO_CLASSMATES} displayName="找 课 友" color={PRIMARY_RED}/>
+                <Block className="classmate-block" path={TO_CLASSMATES} displayName="Find Classmates" color={PRIMARY_RED}/>
                 <Block className="friend-block" path={TO_FRIENDS} displayName={<RollingEmoji/>} color={PRIMARY_YELLOW}/>
-                <Block className="roommate-block" path={TO_ROOMMATES} displayName="找 室 友" color={PRIMARY_BLUE}/>
+                <Block className="roommate-block" path={TO_ROOMMATES} displayName="Find Roommates" color={PRIMARY_BLUE}/>
                 <Link to={TO_PROFILE}>
                     {
                         this.props.newMatch > 0 ?

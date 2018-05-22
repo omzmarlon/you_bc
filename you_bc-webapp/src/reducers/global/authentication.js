@@ -2,9 +2,11 @@ import * as ActionTypes from "../../actions/actionTypes";
 import AuthStatus from "../../utils/AuthStatus";
 
 const initial = {
-    authStatusCode: AuthStatus.UNKNOWN, // todo make a enum of status codes
+    authStatusCode: AuthStatus.UNKNOWN,
     authMessage: '',
-    username: '',
+    authDetail: {
+        username: ''
+    },
 };
 
 const authentication = (state = initial, action) => {
@@ -16,11 +18,17 @@ const authentication = (state = initial, action) => {
             return state;
         case ActionTypes.LOGIN_COMPLETE:
             return {...state, authStatusCode: action.statusCode, authMessage: action.message};
-        case ActionTypes.UPDATE_AUTH_STATUS:
+        case ActionTypes.UPDATE_AUTH_STATUS_CODE:
             return {
                 ...state,
-                username: action.username,
                 authStatusCode: action.authStatusCode
+            };
+        case ActionTypes.UPDATE_AUTH_DETAIL:
+            return {
+                ...state,
+                authDetail: {
+                    username: action.authDetail.username
+                }
             };
         default:
             return state;

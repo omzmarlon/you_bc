@@ -11,7 +11,7 @@ import {
     DISLIKE_CLASSMATES_API, DISLIKE_FRIENDS_API, DISLIKE_ROOMMATES_API,
     FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API, LIKE_CLASSMATES_API, LIKE_FRIENDS_API,
     LIKE_ROOMMATES_API,
-    TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES, LOGIN, REGISTER
+    TO_CLASSMATES, TO_FRIENDS, TO_PROFILE, TO_ROOMMATES, LOGIN, REGISTER, PRE_LOGIN
 } from "../constants/api";
 import {
     PRIMARY_BLUE, PRIMARY_RED, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED,
@@ -22,6 +22,7 @@ import PrivateRoute from "./authentication/PrivateRoute";
 import Login from "./authentication/Login";
 import Register from "./authentication/Register";
 import HomePageContainer from "./HomePageContainer";
+import PrepareAuthContainer from "./authentication/PrepareAuthContainer";
 
 const ClassmateContainer = () => (
     <MainListContainer
@@ -62,6 +63,7 @@ class App extends Component {
             <Switch>
                 <Route exact path={LOGIN} component={Login}/>
                 <Route exact path={REGISTER} component={Register}/>
+                <Route exact path={PRE_LOGIN} component={PrepareAuthContainer}/>
                 <PrivateRoute exact path='/' component={HomePageContainer}/>
                 <PrivateRoute path={TO_CLASSMATES} component={ClassmateContainer}/>
                 <PrivateRoute path={TO_FRIENDS} component={FriendContainer}/>

@@ -4,6 +4,7 @@ import com.youbc.database.UserProfileDAO;
 import com.youbc.exceptions.YouBCNotFoundException;
 import com.youbc.requests.RegistrationRequest;
 import com.youbc.response.AuthStatusReponse;
+import com.youbc.securities.services.JWTTokenService;
 import com.youbc.utilities.Endpoints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +25,16 @@ public class AuthController {
 
     private UserProfileDAO userDAO;
     private BCryptPasswordEncoder passwordEncoder;
+    private JWTTokenService jwtTokenService;
 
     public AuthController(
             UserProfileDAO userDAO,
-            BCryptPasswordEncoder passwordEncoder
+            BCryptPasswordEncoder passwordEncoder,
+            JWTTokenService jwtTokenService
     ) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenService = jwtTokenService;
     }
 
     @PostMapping(value = Endpoints.SIGNUP_ENDPOINT)
@@ -54,7 +58,9 @@ public class AuthController {
         Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDAO.getUsernameById(userID).orElseThrow(() -> new YouBCNotFoundException("User is not found"));
 
-        return new AuthStatusReponse(username);
+        String newToken = jwtTokenService.generateJWTToken(userID);
+
+        return new AuthStatusReponse(username, newToken);
     }
 
 }

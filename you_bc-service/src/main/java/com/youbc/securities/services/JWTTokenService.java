@@ -39,10 +39,13 @@ public class JWTTokenService {
         return generateToken(subject, expiryMillis);
     }
 
-    private String generateToken(Integer subject, long expiry) {
-        LOGGER.debug("Generating token using subject: {}, expiry: {}", subject, expiry);
+    /**
+     * Take userId as subject and expiry to generate token
+     */
+    private String generateToken(Integer userId, long expiry) {
+        LOGGER.debug("Generating token using subject: {}, expiry: {}", userId, expiry);
         return Jwts.builder()
-                .setSubject(subject.toString())
+                .setSubject(userId.toString())
                 .setExpiration(new Date(System.currentTimeMillis()+expiry))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();

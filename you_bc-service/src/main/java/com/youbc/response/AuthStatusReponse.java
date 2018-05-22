@@ -7,10 +7,12 @@ public class AuthStatusReponse {
 
 
     private String username;
+    private String newToken;
     // more to come...
 
-    public AuthStatusReponse(String username) {
+    public AuthStatusReponse(String username, String newToken) {
         this.username = username;
+        this.newToken = newToken;
     }
 
     public String getUsername() {
@@ -19,5 +21,13 @@ public class AuthStatusReponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getNewToken() {
+        return newToken;
+    }
+
+    public void setNewToken(String newToken) {
+        this.newToken = newToken;
     }
 }

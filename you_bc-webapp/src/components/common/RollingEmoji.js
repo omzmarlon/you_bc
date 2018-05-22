@@ -8,13 +8,13 @@ import {friendRollingIcon} from "../../constants/misc";
 
 const RollingEmoji = props => (
     <div className="friend-display-name">
-        <span>找</span>
+        <span>Find</span>
         <Rollable
             style={props.rollableStyle}
             rollingInterval={props.rollingInterval}
             rollingItems={friendRollingIcon(props.iconSize)}
         />
-        <span>友</span>
+        <span>Friends</span>
     </div>
 );
 
