@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youbc.exceptions.YouBCError;
 import com.youbc.exceptions.YouBCException;
-import com.youbc.securities.services.CookieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,12 +22,7 @@ import java.io.IOException;
 public class SecurityExceptionHandlerFilter extends OncePerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityExceptionHandlerFilter.class);
-
-    private CookieService cookieService;
-
-    public SecurityExceptionHandlerFilter(CookieService cookieService) {
-        this.cookieService = cookieService;
-    }
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -50,7 +44,6 @@ public class SecurityExceptionHandlerFilter extends OncePerRequestFilter {
     }
 
     private void sendErrorResponse(HttpServletResponse response, YouBCError error) throws IOException {
-        response.addCookie(cookieService.removeAuthCookie());
         response.setContentType("application/json");
         response.setStatus(error.getStatus());
         response.getWriter().write(toJson(error));
@@ -60,7 +53,6 @@ public class SecurityExceptionHandlerFilter extends OncePerRequestFilter {
         if (object == null) {
             return null;
         }
-        ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(object);
     }
 

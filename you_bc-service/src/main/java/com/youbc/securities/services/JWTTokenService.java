@@ -1,13 +1,16 @@
 package com.youbc.securities.services;
 
 import io.jsonwebtoken.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.Optional;
 
 public class JWTTokenService {
-    // TODO should use bearer
-    //private static final String TOKEN_PREFIX = "Bear ";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JWTTokenService.class);
+    private static final String TOKEN_PREFIX = "Bearer ";
 
     private String secret;
     private long expiryMillis;
@@ -20,24 +23,26 @@ public class JWTTokenService {
 
     /***
      * @param token - the token to verify
-     * @return Some<String> of subject if verification successful, or None if failed
+     * @return Some<Integer> of subject if verification successful, or None if failed
      */
-    public Optional<String> verifyToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException {
+    public Optional<Integer> verifyToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException {
+        LOGGER.debug("Verifying token...");
         String subject = Jwts.parser()
                 .setSigningKey(secret)
-                .parseClaimsJws(token)
+                .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                 .getBody()
                 .getSubject();
-        return subject != null && !(subject.equals(""))? Optional.of(subject) : Optional.empty();
+        return subject != null && !(subject.equals(""))? Optional.of(Integer.parseInt(subject)) : Optional.empty();
     }
 
-    public String generateJWTToken(String subject) {
+    public String generateJWTToken(Integer subject) {
         return generateToken(subject, expiryMillis);
     }
 
-    private String generateToken(String subject, long expiry) {
+    private String generateToken(Integer subject, long expiry) {
+        LOGGER.debug("Generating token using subject: {}, expiry: {}", subject, expiry);
         return Jwts.builder()
-                .setSubject(subject)
+                .setSubject(subject.toString())
                 .setExpiration(new Date(System.currentTimeMillis()+expiry))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();

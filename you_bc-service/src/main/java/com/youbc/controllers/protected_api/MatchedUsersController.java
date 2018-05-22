@@ -7,10 +7,10 @@ import com.youbc.exceptions.YouBCException;
 import com.youbc.models.MatchedUser;
 import com.youbc.models.MatchedUserResponse;
 import com.youbc.models.profile.UserProfile;
-import com.youbc.securities.services.CookieService;
 import com.youbc.utilities.Endpoints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,17 +22,14 @@ import java.util.TreeSet;
 @RestController
 public class MatchedUsersController {
 
-    private CookieService cookieService;
     private MatchedUsersDAO matchedUsersDAO;
     private ProfileDAO profileDAO;
 
     @Autowired
     public MatchedUsersController(
-            CookieService cookieService,
             MatchedUsersDAO matchedUsersDAO,
             ProfileDAO profileDAO
     ) {
-        this.cookieService = cookieService;
         this.matchedUsersDAO = matchedUsersDAO;
         this.profileDAO = profileDAO;
     }
@@ -40,7 +37,7 @@ public class MatchedUsersController {
     @RequestMapping(path = Endpoints.MATCHED_USERS, method = RequestMethod.GET)
     public MatchedUserResponse getAllMatchedUsers(HttpServletRequest request) {
         Set<MatchedUser> matchedUsers = new TreeSet<>();
-        Integer userId = cookieService.getAuthenticatedUserId(request);
+        Integer userId = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Set<Integer> matchedUserIds = matchedUsersDAO.fetchAllMatchedUsers(userId);
         Integer matchCount = matchedUsersDAO.fetchMatchCount(userId);
         // construct matchedUsers set

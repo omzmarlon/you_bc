@@ -5,7 +5,6 @@ import com.youbc.securities.authProviders.LoginAuthProvider;
 import com.youbc.securities.filters.JWTAPIFilter;
 import com.youbc.securities.filters.UsernamePasswordLoginFilter;
 import com.youbc.securities.handlers.LoginSuccessHandler;
-import com.youbc.securities.services.CookieService;
 import com.youbc.utilities.Endpoints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,19 +24,16 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
     private LoginAuthProvider loginAuthProvider;
     private JWTAuthProvider jwtAuthProvider;
     private LoginSuccessHandler loginSuccessHandler;
-    private CookieService cookieService;
 
     @Autowired
     public YouBCSecurity(
             LoginAuthProvider loginAuthProvider,
             JWTAuthProvider jwtAuthProvider,
-            LoginSuccessHandler loginSuccessHandler,
-            CookieService cookieService
+            LoginSuccessHandler loginSuccessHandler
     ) {
         this.loginAuthProvider = loginAuthProvider;
         this.loginSuccessHandler = loginSuccessHandler;
         this.jwtAuthProvider = jwtAuthProvider;
-        this.cookieService = cookieService;
     }
 
     @Override
@@ -68,13 +64,13 @@ public class YouBCSecurity extends WebSecurityConfigurerAdapter {
                     ).permitAll()
                     .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new SecurityExceptionHandlerFilter(cookieService), CorsFilter.class)
+                .addFilterBefore(new SecurityExceptionHandlerFilter(), CorsFilter.class)
                 .addFilterBefore(
                         new UsernamePasswordLoginFilter(Endpoints.LOGIN_ENDPOINT, authenticationManager(), loginSuccessHandler),
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .addFilterBefore(
-                        new JWTAPIFilter(Endpoints.PROTECTED_API_PATTERN, authenticationManager(), cookieService),
+                        new JWTAPIFilter(Endpoints.PROTECTED_API_PATTERN, authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .formLogin().disable();

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Optional;
 
+@Deprecated
 @Component
 public class CookieService {
     private static final String AUTH_COOKIE = "Authentication";
@@ -39,11 +40,9 @@ public class CookieService {
     }
 
     public Integer getAuthenticatedUserId(HttpServletRequest request) {
-        return  Integer.parseInt(
-                jwtTokenService
-                        .verifyToken(getAuthenticationCookie(request).orElseThrow(() -> new YouBCUnAuthorizedRequest("User not logged in")))
-                        .orElseThrow(() -> new YouBCUnAuthorizedRequest("Invalid Login token"))
-        );
+        return  jwtTokenService
+                .verifyToken(getAuthenticationCookie(request).orElseThrow(() -> new YouBCUnAuthorizedRequest("User not logged in")))
+                .orElseThrow(() -> new YouBCUnAuthorizedRequest("Invalid Login token"));
     }
 
 }

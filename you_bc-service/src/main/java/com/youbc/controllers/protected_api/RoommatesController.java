@@ -8,9 +8,9 @@ import com.youbc.pooling.UserPoolManager;
 import com.youbc.pooling.WeightedStrategy;
 import com.youbc.pooling.roommates.PoolingByLikesRoommates;
 import com.youbc.pooling.roommates.PoolingRandomRoommates;
-import com.youbc.securities.services.CookieService;
 import com.youbc.utilities.Endpoints;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +21,13 @@ import java.util.Set;
 public class RoommatesController {
 
     private UserPoolManager userPoolManager;
-    private CookieService cookieService;
     private LikeAndDislikeDao likeAndDislikeDao;
 
     public RoommatesController(
-            CookieService cookieService,
             PoolingRandomRoommates poolingRandomRoommates,
             PoolingByLikesRoommates poolingByLikesRoommates,
             LikeAndDislikeDao likeAndDislikeDao
     ) {
-        this.cookieService = cookieService;
         this.likeAndDislikeDao = likeAndDislikeDao;
         // init userPoolManager
         ArrayList<WeightedStrategy> strategies = new ArrayList<>();
@@ -41,7 +38,7 @@ public class RoommatesController {
 
     @RequestMapping(path = Endpoints.ROOMMATE_CANDIDATES, method = RequestMethod.GET)
     public Set<BasicCandidate> getRoommateCandidates(HttpServletRequest request) {
-        Integer userID = cookieService.getAuthenticatedUserId(request);
+        Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String gender = request.getParameter("gender");
         Integer amount = Integer.parseInt(request.getParameter("amount"));
         if (amount <= 0) throw new YouBCException(new YouBCError(HttpStatus.BAD_REQUEST, "missing parameter", "\'amount\' value is missing in the query string"));
@@ -52,14 +49,14 @@ public class RoommatesController {
     @RequestMapping(path = Endpoints.LIKE_ROOMMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void postLikeRoommates(HttpServletRequest request, @PathVariable("user_id") Integer likee) {
-        Integer liker = cookieService.getAuthenticatedUserId(request);
+        Integer liker = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         likeAndDislikeDao.roommatesLike(liker, likee);
     }
 
     @RequestMapping(path = Endpoints.DISLIKE_ROOMMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void postDislikeRoommates(HttpServletRequest request, @PathVariable("user_id") Integer dislikee) {
-        Integer disliker = cookieService.getAuthenticatedUserId(request);
+        Integer disliker = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         likeAndDislikeDao.roommatesDislike(disliker, dislikee);
     }
 }

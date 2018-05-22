@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import static java.util.Collections.emptyList;
 
@@ -37,12 +38,15 @@ public class JWTAuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) {
         try {
             String token = ((String) authentication.getPrincipal());
-            String subjectUserId = tokenService
+            if (StringUtils.isEmpty(token)) {
+                throw new YouBCUnAuthorizedRequest("Empty token");
+            }
+            Integer subjectUserId = tokenService
                     .verifyToken(token)
                     .orElseThrow(() ->
                             new YouBCUnAuthorizedRequest("Invalid token")
                     );
-            if (userDAO.userExistsById(Integer.parseInt(subjectUserId))) {
+            if (userDAO.userExistsById(subjectUserId)) {
                 return new UsernamePasswordAuthenticationToken(subjectUserId, null, emptyList());
             } else {
                 throw new YouBCNotFoundException("User not found");

@@ -1,15 +1,14 @@
 package com.youbc.controllers;
 
 import com.youbc.database.UserProfileDAO;
-import com.youbc.exceptions.YouBCBadRequest;
 import com.youbc.exceptions.YouBCNotFoundException;
 import com.youbc.requests.RegistrationRequest;
 import com.youbc.response.AuthStatusReponse;
-import com.youbc.securities.services.CookieService;
 import com.youbc.utilities.Endpoints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,17 +23,14 @@ public class AuthController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
     private UserProfileDAO userDAO;
-    private CookieService cookieService;
     private BCryptPasswordEncoder passwordEncoder;
 
     public AuthController(
             UserProfileDAO userDAO,
-            BCryptPasswordEncoder passwordEncoder,
-            CookieService cookieService
+            BCryptPasswordEncoder passwordEncoder
     ) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
-        this.cookieService = cookieService;
     }
 
     @PostMapping(value = Endpoints.SIGNUP_ENDPOINT)
@@ -55,7 +51,7 @@ public class AuthController {
 
         LOGGER.debug("Handling GET authentication status request");
 
-        Integer userID = cookieService.getAuthenticatedUserId(request);
+        Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDAO.getUsernameById(userID).orElseThrow(() -> new YouBCNotFoundException("User is not found"));
 
         return new AuthStatusReponse(username);

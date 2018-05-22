@@ -1,13 +1,12 @@
 package com.youbc.securities.filters;
 
-import com.youbc.exceptions.YouBCError;
-import com.youbc.exceptions.YouBCException;
-import com.youbc.securities.services.CookieService;
 import com.youbc.securities.tokens.JWTToken;
-import org.springframework.http.HttpStatus;
+import com.youbc.utilities.YouBCUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import javax.servlet.FilterChain;
@@ -15,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Filter for requests to protected API
@@ -22,24 +22,19 @@ import java.io.IOException;
  */
 public class JWTAPIFilter extends AbstractAuthenticationProcessingFilter {
 
-    private CookieService cookieService;
 
     public JWTAPIFilter(String protectedUrls,
-                        AuthenticationManager authenticationManager,
-                        CookieService cookieService
+                        AuthenticationManager authenticationManager
     ) {
         super(protectedUrls);
         setAuthenticationManager(authenticationManager);
-        this.cookieService = cookieService;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-        String jwtToken = cookieService
-                .getAuthenticationCookie(request)
-                .orElseThrow(() -> new YouBCException(
-                        new YouBCError(HttpStatus.UNAUTHORIZED, "Unauthorized", "Invalid cookie")
-                ));
+        Map<String, String> headers = YouBCUtils.getHeaders(request);
+        String jwtToken = headers.getOrDefault(HttpHeaders.AUTHORIZATION, "");
+
         return getAuthenticationManager().authenticate(new JWTToken(jwtToken));
     }
 
@@ -48,6 +43,7 @@ public class JWTAPIFilter extends AbstractAuthenticationProcessingFilter {
                                             HttpServletResponse response, FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
         // override default behaviour(which will redirect to /)
+        SecurityContextHolder.getContext().setAuthentication(authResult);
         chain.doFilter(request, response);
     }
 
