@@ -20,6 +20,5 @@ DROP TABLE roommates_profile;
 DROP TABLE roommates_tags;
 DROP TABLE roommates_hometown;
 DROP TABLE roommates_locations;
-DROP TABLE profile_image;
 DROP TABLE student_verification;
 DROP TABLE user_profile;
