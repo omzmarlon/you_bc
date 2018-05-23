@@ -10,15 +10,28 @@ import {LOGIN} from "../../constants/api";
 import { Redirect } from 'react-router-dom';
 import CircularProgress from 'material-ui/CircularProgress';
 import AuthTemplate from "../../components/authentication/AuthTemplate";
+import {getAuthToken} from "../../utils/AuthService";
 
-
-
+/**
+ * This component prepares application authentication status
+ */
 class PrepareAuthContainer extends React.Component{
     render() {
-        if (this.props.authStatus === AuthStatus.UNKNOWN || this.props.authStatus === AuthStatus.FETCHING) {
-            if (this.props.authStatus === AuthStatus.UNKNOWN) {
-                this.props.fetchAuthStatus();
-            }
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+
+        if (!getAuthToken() || this.props.authStatus === AuthStatus.UNAUTHORIZED) {
+            // No token exists or confirmed unauthorized status, redirect go to login page
+            return (
+                <Redirect
+                    to={{
+                        pathname: LOGIN,
+                        state: { from }
+                    }}
+                />
+            );
+        } else if (this.props.authStatus === AuthStatus.UNKNOWN || this.props.authStatus === AuthStatus.FETCHING) {
+            // updating auth status, show loading page
+            if (this.props.authStatus === AuthStatus.UNKNOWN) { this.props.fetchAuthStatus(); }
             return (
                 <AuthTemplate header={'Welcome Back'}>
                     <div className={'prepare-auth'}>
@@ -27,14 +40,8 @@ class PrepareAuthContainer extends React.Component{
                     </div>
                 </AuthTemplate>
             );
-        } else if(this.props.authStatus === AuthStatus.UNAUTHORIZED) {
-            return (
-                <Redirect
-                    to={LOGIN}
-                />
-            );
         } else if(this.props.authStatus === AuthStatus.AUTH_SUCCESS) {
-            const { from } = this.props.location.state || { from: { pathname: "/" } };
+            // application is already authenticated. redirect to desired page
             return (
                 <Redirect
                     to={from}
