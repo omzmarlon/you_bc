@@ -11,8 +11,11 @@ import {LOGIN} from "../../constants/api";
 import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
-import {registerAction} from "../../actions/global/authenticationActions";
+import {loginComplete, loginPostRequest, registerPostRequest} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
+import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
+import LocalStorage from "../../utils/LocalStorage";
+import {saveAuthToken} from "../../utils/AuthService";
 
 const spinnerStyle = {
     position: 'absolute',
@@ -31,7 +34,8 @@ class Register extends Component {
             gender: 0,
             signUpClicked: false,
             passwordChanged: false,
-            confirmChanged: false
+            confirmChanged: false,
+            usernameErrorText: ''
         };
         this.register = this.register.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
@@ -42,12 +46,65 @@ class Register extends Component {
 
     register() {
         let {dispatch} = this.props;
-        dispatch(registerAction(this.state.username, this.state.password, this.state.gender));
-        this.setState({username: "", password: "", confirmPassword: "", signInClicked: true});
+        dispatch(showGlobalSpinner());
+        registerPostRequest(this.state.username, this.state.password, this.state.gender)
+            .then(
+                response => {
+                    this.loginOnRegisterSuccess();
+                },
+                error => {
+                    // todo centralize error handling
+                    // todo: centralize logging
+                    console.log(error.response.data.message);
+                    dispatch(hideGlobalSpinner());
+                    this.setState({usernameErrorText: "User already exists"});
+                }
+            )
+            .catch(
+                error => {
+                    // todo centralize error handling
+                    dispatch(hideGlobalSpinner());
+                    dispatch(showInfoBar('Failed to create new account'));
+                }
+            );
+    }
+
+    loginOnRegisterSuccess() {
+        let {dispatch} = this.props;
+        loginPostRequest(this.state.username, this.state.password)
+            .then(
+                response => {
+                    dispatch(hideGlobalSpinner());
+                    if (response.data.token) {
+                        const jwtToken = response.data.token;
+                        saveAuthToken(jwtToken);
+                        dispatch(showInfoBar("Login Success!"));
+                        dispatch(loginComplete(AuthStatus.AUTH_SUCCESS, 'OK'));
+                    } else {
+                        dispatch(showInfoBar("Could Not Get Authentication Token"));
+                    }
+                },
+                error => {
+                    // todo centralize error handling
+                    console.log(error.response.data.message); // todo centralize logging
+                    dispatch(hideGlobalSpinner());
+                    dispatch(loginComplete(AuthStatus.UNAUTHORIZED, error.response.data.message));
+                    dispatch(showInfoBar('Registration successful, but login failed'));
+                }
+            )
+            .catch(
+                error => {
+                    // todo centralize error handling
+                    // todo remove console log
+                    console.log(error);
+                    dispatch(hideGlobalSpinner());
+                    dispatch(showInfoBar('Registration successful, but login failed'));
+                }
+            );
     }
 
     onUsernameChange(e, val) {
-        this.setState({username: val});
+        this.setState({username: val, usernameErrorText: ''});
     }
 
     onPasswordChange(e, val) {
@@ -84,8 +141,7 @@ class Register extends Component {
                             <TextField
                                 id="username"
                                 hintText="Username"
-                                // TODO: should be cb
-                                errorText={this.props.registerSuccess || !this.state.signUpClicked ? null : "user already exist"}
+                                errorText={this.state.usernameErrorText}
                                 onChange={this.onUsernameChange}
                                 value={this.state.username}
                                 fullWidth={true}
@@ -93,8 +149,7 @@ class Register extends Component {
                             <TextField
                                 id="password"
                                 hintText="Password"
-                                // TODO: should be cb
-                                errorText={this.state.password.length > 3 || !this.state.passwordChanged ? null : "too short! at least 4 characters"}
+                                errorText={this.state.password.length > 5 || !this.state.passwordChanged ? null : "too short! at least 6 characters"}
                                 onChange={this.onPasswordChange}
                                 value={this.state.password}
                                 fullWidth={true}

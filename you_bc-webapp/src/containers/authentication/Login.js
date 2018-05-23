@@ -11,15 +11,11 @@ import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/col
 import {REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import FacebookIcon from "../../components/common/svg/Facebook";
-import {loginAction} from "../../actions/global/authenticationActions";
+import {loginPostRequest, loginRequest, loginComplete} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
-
-const spinnerStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-};
+import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
+import LocalStorage from "../../utils/LocalStorage";
+import {saveAuthToken} from "../../utils/AuthService";
 
 class Login extends Component {
     constructor(props) {
@@ -27,7 +23,8 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            signInClicked: false
+            signInClicked: false,
+            errorText: ''
         };
         this.login = this.login.bind(this);
         this.facebookAuth = this.facebookAuth.bind(this);
@@ -37,7 +34,41 @@ class Login extends Component {
 
     login() {
         let {dispatch} = this.props;
-        dispatch(loginAction(this.state.username, this.state.password));
+
+        dispatch(showGlobalSpinner());
+        dispatch(loginRequest());
+        loginPostRequest(this.state.username, this.state.password)
+            .then(
+                response => {
+                    dispatch(hideGlobalSpinner());
+                    if (response.data.token) {
+                        const jwtToken = response.data.token;
+                        saveAuthToken(jwtToken);
+                        dispatch(showInfoBar("Login Success!"));
+                        dispatch(loginComplete(200, 'OK'));
+                    } else {
+                        dispatch(showInfoBar("Could Not Get Authentication Token"));
+                    }
+                },
+                error => {
+                    // todo centralize error handling
+                    console.log(error.response.data.message); // todo centralize logging
+                    dispatch(hideGlobalSpinner());
+                    dispatch(loginComplete(401, error.response.data.message));
+                    dispatch(showInfoBar('Login failed'));
+                    this.setState({errorText: 'Invalid username or password'});
+                }
+            )
+            .catch(
+                error => {
+                    // todo centralize error handling
+                    // todo remove console log
+                    console.log(error);
+                    dispatch(hideGlobalSpinner());
+                    dispatch(showInfoBar('Login failed'));
+                }
+            );
+
         this.setState({signInClicked: true, password: ""});
     }
 
@@ -46,11 +77,11 @@ class Login extends Component {
     }
 
     onUsernameChange(e, val) {
-        this.setState({username: val});
+        this.setState({username: val, errorText: ''});
     }
 
     onPasswordChange(e, val) {
-        this.setState({password: val});
+        this.setState({password: val, errorText: ''});
     }
 
     render() {
@@ -66,8 +97,7 @@ class Login extends Component {
                             <TextField
                                 id="username"
                                 hintText="Username"
-                                // TODO: should be cb
-                                errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
+                                errorText={this.state.errorText}
                                 onChange={this.onUsernameChange}
                                 value={this.state.username}
                                 fullWidth={true}
@@ -75,8 +105,7 @@ class Login extends Component {
                             <TextField
                                 id="password"
                                 hintText="Password"
-                                // TODO: should be cb
-                                errorText={this.props.isAuthenticated || !this.state.signInClicked ? null : "Invalid username or password"}
+                                errorText={this.state.errorText}
                                 onChange={this.onPasswordChange}
                                 value={this.state.password}
                                 fullWidth={true}

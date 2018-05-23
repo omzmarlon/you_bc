@@ -8,45 +8,12 @@ import AuthStatus from "../../utils/AuthStatus";
 import {UPDATE_AUTH_STATUS_CODE} from "../actionTypes";
 import {UPDATE_AUTH_DETAIL} from "../actionTypes";
 
-export const loginAction = (username, password) => dispatch => {
-    dispatch(showGlobalSpinner());
-    dispatch(loginRequest());
+export const loginPostRequest = (username, password) => (
     axios.post(requestUrl(LOGIN_API), {username, password})
-        .then(
-            response => {
-                dispatch(hideGlobalSpinner());
-                if (response.data.token) {
-                    const jwtToken = response.data.token;
-                    localStorage.setItem(LocalStorage.AUTH_TOKEN_STORAGE, jwtToken);
-                    dispatch(showInfoBar("Login Success!"));
-                    dispatch(loginComplete(200, 'OK'));
-                } else {
-                    dispatch(showInfoBar("Could Not Get Authentication Token"));
-                }
-            },
-            error => {
-                // todo remove console log
-                // todo centralize error handling
-                console.log(error);
-                console.log("inside then!!!");
-                dispatch(hideGlobalSpinner());
-                dispatch(loginComplete(401, error.response.data.message));
-                dispatch(showInfoBar(error.response.data.message));
-            }
-        )
-        .catch(
-            error => {
-                // todo centralize error handling
-                // todo remove console log
-                console.log(error);
-                console.log("inside catch!!!");
-                dispatch(hideGlobalSpinner());
+);
 
-            }
-        )
-};
-const loginRequest = () => ({type: ActionTypes.LOGIN_REQUEST});
-const loginComplete = (statusCode, message) => (
+export const loginRequest = () => ({type: ActionTypes.LOGIN_REQUEST});
+export const loginComplete = (statusCode, message) => (
     {
         type: ActionTypes.LOGIN_COMPLETE,
         statusCode,
@@ -54,29 +21,9 @@ const loginComplete = (statusCode, message) => (
     }
 );
 
-export const registerAction = (username, password, sex) => dispatch => {
-    dispatch(showGlobalSpinner());
+export const registerPostRequest = (username, password, sex) => (
     axios.post(requestUrl(REGISTER_API), {username, password, sex})
-        .then(
-            response => {
-                dispatch(hideGlobalSpinner());
-                dispatch(loginAction(username, password));
-            },
-            error => {
-                // todo centralize error handling
-                // todo: confirm the error code and error struct
-                console.log(error);
-                dispatch(hideGlobalSpinner());
-                dispatch(showInfoBar(error.response.data.message));
-            }
-        )
-        .catch(
-            error => {
-                // todo centralize error handling
-                dispatch(hideGlobalSpinner());
-            }
-        )
-};
+);
 
 export const updateAuthStatusCode = (authStatusCode) => ({
     type: UPDATE_AUTH_STATUS_CODE, authStatusCode
