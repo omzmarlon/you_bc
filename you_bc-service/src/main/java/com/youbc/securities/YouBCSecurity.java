@@ -3,6 +3,7 @@ package com.youbc.securities;
 import com.youbc.securities.authProviders.JWTAuthProvider;
 import com.youbc.securities.authProviders.LoginAuthProvider;
 import com.youbc.securities.filters.JWTAPIFilter;
+import com.youbc.securities.filters.SecurityExceptionHandlerFilter;
 import com.youbc.securities.filters.UsernamePasswordLoginFilter;
 import com.youbc.securities.handlers.LoginSuccessHandler;
 import com.youbc.utilities.Endpoints;
