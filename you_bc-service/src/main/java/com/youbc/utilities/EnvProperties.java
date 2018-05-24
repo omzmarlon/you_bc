@@ -1,6 +1,7 @@
 package com.youbc.utilities;
 
 public class EnvProperties {
+    //database
     public static String DATASOURCE_URL = "youbc.db.url";
     public static String DATASOURCE_DRIVER = "youbc.db.driver";
     public static String DATASOURCE_USERNAME = "youbc.db.username";
@@ -16,4 +17,7 @@ public class EnvProperties {
     //security
     public static String JWT_SECRET = "jwt.secret";
     public static String JWT_EXPIRY = "jwt.expiry";
+
+    //verification
+    public static String VERIFICATION_CODE = "verification.code";
 }

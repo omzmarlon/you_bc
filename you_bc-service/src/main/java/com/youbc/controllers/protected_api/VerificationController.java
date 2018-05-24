@@ -1,6 +1,5 @@
 package com.youbc.controllers.protected_api;
 
-import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.youbc.database.VerificationDAO;
 import com.youbc.exceptions.YouBCError;
 import com.youbc.exceptions.YouBCException;
@@ -9,6 +8,7 @@ import com.youbc.requests.VerificationRequest;
 import com.youbc.response.VerificationResponse;
 import com.youbc.services.aws.S3Client;
 import com.youbc.services.verification.VerificationService;
+import com.youbc.utilities.Endpoints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,33 +21,42 @@ import java.io.IOException;
 
 @RestController
 public class VerificationController {
-    @Value("${s3.student-card-folder}")
-    private String studentCardFolder;
 
-    private S3Client s3Client;
     private VerificationDAO verificationDAO;
     private VerificationService verificationService;
 
     @Autowired
     public VerificationController(
-            S3Client s3Client,
             VerificationDAO verificationDAO,
             VerificationService verificationService
     ) {
-        this.s3Client = s3Client;
         this.verificationDAO = verificationDAO;
         this.verificationService = verificationService;
     }
 
-    @PostMapping(value = "/api/verification")
+    @PostMapping( value = Endpoints.VERIFICATION )
     public VerificationResponse verifiyCode(@RequestBody VerificationRequest request) {
-        // 1. verify code
-        // 2. persist verification result true/false
+        Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean codeMatch = verificationService.approve(request.getVerificationCode());
+        if (codeMatch) {
+            // todo: db exception handling
+            verificationDAO.persistVerificationStatus(userID);
+            VerificationResponse verificationResponse = new VerificationResponse();
+            verificationResponse.setApproved(true);
+            return verificationResponse;
+        } else {
+            // throw wrong code exception
+        }
     }
 
-    @GetMapping(value = "/api/verification")
+    @GetMapping( value = Endpoints.VERIFICATION )
     public VerificationResponse getVerificationResult() {
-
+        Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // todo: db exception handling
+        boolean approved = verificationDAO.fetchVerificationStatus(userID);
+        VerificationResponse verificationResponse = new VerificationResponse();
+        verificationResponse.setApproved(approved);
+        return verificationResponse;
     }
 
 //

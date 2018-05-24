@@ -11,11 +11,7 @@ public class VerificationResponse {
         /* for Jackson */
     }
 
-    public VerificationResponse(boolean approved) {
-        this.approved = approved;
-    }
-
-    public boolean isApproved() {
+    public boolean getApproved() {
         return approved;
     }
 
