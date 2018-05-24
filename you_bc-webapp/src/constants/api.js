@@ -14,6 +14,7 @@ export const TO_PROFILE = "/profiles";
 export const LOGIN = "/signin";
 export const PRE_LOGIN = "/pre_auth";
 export const REGISTER = "/signup";
+export const VERIFICATION = '/verification';
 
 // APIs
 
@@ -62,12 +63,8 @@ export const UPLOAD_IMAGE_EDIT_API = "/api/profileStorage/imageEdit";
 
 
 //Verification API
-export const VERIFICATION_INFO_API = "/api/verification/info";
-export const LOCATION_VERIFICATION_API = "/api/verification/location";
-export const STUDENT_CARD_VERIFICATION_API = "/api/verification/studentCard";
-export const EMAIL_VERIFICATION_API = "/api/verification/email";
-export const VERIFY_EMAIL_CODE_API = "/api/verification/emailCode";
-export const CODE_VERIFICATION_API = "/api/verification/code";
+export const VERIFICATION_API = "/api/verification";
+
 
 // mainList API
 export const FETCH_CLASSMATES_API = "/api/classmates";

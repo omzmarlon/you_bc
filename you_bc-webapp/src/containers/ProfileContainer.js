@@ -67,10 +67,7 @@ ProfileContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
     panelIndex: state.profileUI.panelIndex,
-    grantAccess:
-    (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
-    &&
-    state.authentication.authStatusCode===AuthStatus.AUTH_SUCCESS
+    grantAccess: state.verification.approved
 });
 
 const mapDispatchToProps = (dispatch) => {

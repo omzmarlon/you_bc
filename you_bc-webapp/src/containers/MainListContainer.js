@@ -132,10 +132,7 @@ const mapStateToProps = (state, ownProps) => ({
     visibleUsers: state.mainList.visibleUsers,
     hasInfo: hasInfoHelper(ownProps.fetchAPI, state.profile),
     genderFilter: state.mainList.genderFilter,
-    grantAccess:
-    (state.verification.isLocationVerified || state.verification.isEmailVerified || state.verification.isStudentCardVerified)
-    &&
-    state.authentication.authStatusCode===AuthStatus.AUTH_SUCCESS
+    grantAccess: state.verification.approved
 });
 
 export default connect(mapStateToProps)(MainListContainer);

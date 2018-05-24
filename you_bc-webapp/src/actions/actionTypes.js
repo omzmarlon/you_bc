@@ -49,12 +49,7 @@ export const INITIALIZE_VISIBLE_USERS = 'INITIALIZE_VISIBLE_USERS';
 export const RECEIVE_MORE_CANDIDATES = 'RECEIVE_MORE_CANDIDATES';
 
 /************************ Verification Actions ************************/
-export const RECEIVE_VERIFICATION = 'RECEIVE_VERIFICATION';
-export const UPDATE_EMAIL = 'UPDATE_EMAIL';
-export const UPDATE_STUDENT_CARD = "UPDATE_STUDENT_CARD";
-export const VERIFY_LOCATION = "VERIFY_LOCATION";
-export const SWITCH_VERIFICATION_METHOD = "SWITCH_VERIFICATION_METHOD";
-export const VERIFY_CODE = "VERIFY_CODE";
+export const UPDATE_VERIFICATION_STATUS = 'FETCH_VERIFICATION_STATUS';
 
 /************************ authentication actions ************************/
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
