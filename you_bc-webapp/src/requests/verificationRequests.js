@@ -6,6 +6,5 @@ export const fetchVerificationRequest = () => (
 );
 
 export const submitVerificationCode = (verificationCode) => (
-    //axios.post(requestUrl(VERIFICATION_API), {verificationCode}, authorizedConfig())
-    Promise.resolve()
+    axios.post(requestUrl(VERIFICATION_API), {verificationCode}, authorizedConfig())
 );
