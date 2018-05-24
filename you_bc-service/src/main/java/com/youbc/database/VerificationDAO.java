@@ -1,12 +1,8 @@
 package com.youbc.database;
 
-import java.util.Optional;
-
-import com.youbc.models.verification.StudentVerification;
-import org.jooq.*;
+import org.jooq.DSLContext;
+import org.jooq.Record1;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 import static com.youbc.generated.schema.tables.StudentVerification.STUDENT_VERIFICATION;
 
