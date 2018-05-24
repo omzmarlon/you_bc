@@ -126,7 +126,6 @@ public class Keys {
     public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_PRIMARY = UniqueKeys0.KEY_ROOMMATES_TAGS_PRIMARY;
     public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_TAG = UniqueKeys0.KEY_ROOMMATES_TAGS_TAG;
     public static final UniqueKey<StudentVerificationRecord> KEY_STUDENT_VERIFICATION_PRIMARY = UniqueKeys0.KEY_STUDENT_VERIFICATION_PRIMARY;
-    public static final UniqueKey<StudentVerificationRecord> KEY_STUDENT_VERIFICATION_EMAIL = UniqueKeys0.KEY_STUDENT_VERIFICATION_EMAIL;
     public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_PRIMARY = UniqueKeys0.KEY_USER_PROFILE_PRIMARY;
     public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_USERNAME = UniqueKeys0.KEY_USER_PROFILE_USERNAME;
 
@@ -214,7 +213,6 @@ public class Keys {
         public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_PRIMARY = createUniqueKey(RoommatesTags.ROOMMATES_TAGS, "KEY_roommates_tags_PRIMARY", RoommatesTags.ROOMMATES_TAGS.ID);
         public static final UniqueKey<RoommatesTagsRecord> KEY_ROOMMATES_TAGS_TAG = createUniqueKey(RoommatesTags.ROOMMATES_TAGS, "KEY_roommates_tags_tag", RoommatesTags.ROOMMATES_TAGS.TAG);
         public static final UniqueKey<StudentVerificationRecord> KEY_STUDENT_VERIFICATION_PRIMARY = createUniqueKey(StudentVerification.STUDENT_VERIFICATION, "KEY_student_verification_PRIMARY", StudentVerification.STUDENT_VERIFICATION.USER_ID);
-        public static final UniqueKey<StudentVerificationRecord> KEY_STUDENT_VERIFICATION_EMAIL = createUniqueKey(StudentVerification.STUDENT_VERIFICATION, "KEY_student_verification_email", StudentVerification.STUDENT_VERIFICATION.EMAIL);
         public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_PRIMARY = createUniqueKey(UserProfile.USER_PROFILE, "KEY_user_profile_PRIMARY", UserProfile.USER_PROFILE.USER_ID);
         public static final UniqueKey<UserProfileRecord> KEY_USER_PROFILE_USERNAME = createUniqueKey(UserProfile.USER_PROFILE, "KEY_user_profile_username", UserProfile.USER_PROFILE.USERNAME);
     }

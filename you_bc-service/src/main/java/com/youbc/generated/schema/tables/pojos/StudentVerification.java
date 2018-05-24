@@ -5,7 +5,6 @@ package com.youbc.generated.schema.tables.pojos;
 
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.annotation.Generated;
@@ -24,45 +23,25 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentVerification implements Serializable {
 
-    private static final long serialVersionUID = 500652334;
+    private static final long serialVersionUID = 226883624;
 
-    private final Integer    userId;
-    private final Byte       approved;
-    private final String     email;
-    private final String     emailverificationcode;
-    private final String     studentidImageUrl;
-    private final BigDecimal locationLat;
-    private final BigDecimal locationLon;
-    private final Timestamp  timeCreated;
+    private final Integer   userId;
+    private final Byte      approved;
+    private final Timestamp timeCreated;
 
     public StudentVerification(StudentVerification value) {
         this.userId = value.userId;
         this.approved = value.approved;
-        this.email = value.email;
-        this.emailverificationcode = value.emailverificationcode;
-        this.studentidImageUrl = value.studentidImageUrl;
-        this.locationLat = value.locationLat;
-        this.locationLon = value.locationLon;
         this.timeCreated = value.timeCreated;
     }
 
     public StudentVerification(
-        Integer    userId,
-        Byte       approved,
-        String     email,
-        String     emailverificationcode,
-        String     studentidImageUrl,
-        BigDecimal locationLat,
-        BigDecimal locationLon,
-        Timestamp  timeCreated
+        Integer   userId,
+        Byte      approved,
+        Timestamp timeCreated
     ) {
         this.userId = userId;
         this.approved = approved;
-        this.email = email;
-        this.emailverificationcode = emailverificationcode;
-        this.studentidImageUrl = studentidImageUrl;
-        this.locationLat = locationLat;
-        this.locationLon = locationLon;
         this.timeCreated = timeCreated;
     }
 
@@ -72,26 +51,6 @@ public class StudentVerification implements Serializable {
 
     public Byte getApproved() {
         return this.approved;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getEmailverificationcode() {
-        return this.emailverificationcode;
-    }
-
-    public String getStudentidImageUrl() {
-        return this.studentidImageUrl;
-    }
-
-    public BigDecimal getLocationLat() {
-        return this.locationLat;
-    }
-
-    public BigDecimal getLocationLon() {
-        return this.locationLon;
     }
 
     public Timestamp getTimeCreated() {
@@ -104,11 +63,6 @@ public class StudentVerification implements Serializable {
 
         sb.append(userId);
         sb.append(", ").append(approved);
-        sb.append(", ").append(email);
-        sb.append(", ").append(emailverificationcode);
-        sb.append(", ").append(studentidImageUrl);
-        sb.append(", ").append(locationLat);
-        sb.append(", ").append(locationLon);
         sb.append(", ").append(timeCreated);
 
         sb.append(")");

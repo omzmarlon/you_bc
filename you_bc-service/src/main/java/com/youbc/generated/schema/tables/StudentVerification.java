@@ -8,7 +8,6 @@ import com.youbc.generated.schema.Keys;
 import com.youbc.generated.schema.YouBc;
 import com.youbc.generated.schema.tables.records.StudentVerificationRecord;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentVerification extends TableImpl<StudentVerificationRecord> {
 
-    private static final long serialVersionUID = -1272581842;
+    private static final long serialVersionUID = 1679775128;
 
     /**
      * The reference instance of <code>you_bc.student_verification</code>
@@ -61,31 +60,6 @@ public class StudentVerification extends TableImpl<StudentVerificationRecord> {
      * The column <code>you_bc.student_verification.approved</code>.
      */
     public final TableField<StudentVerificationRecord, Byte> APPROVED = createField("approved", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
-
-    /**
-     * The column <code>you_bc.student_verification.email</code>.
-     */
-    public final TableField<StudentVerificationRecord, String> EMAIL = createField("email", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
-
-    /**
-     * The column <code>you_bc.student_verification.emailVerificationCode</code>.
-     */
-    public final TableField<StudentVerificationRecord, String> EMAILVERIFICATIONCODE = createField("emailVerificationCode", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
-
-    /**
-     * The column <code>you_bc.student_verification.studentID_image_url</code>.
-     */
-    public final TableField<StudentVerificationRecord, String> STUDENTID_IMAGE_URL = createField("studentID_image_url", org.jooq.impl.SQLDataType.CLOB, this, "");
-
-    /**
-     * The column <code>you_bc.student_verification.location_lat</code>.
-     */
-    public final TableField<StudentVerificationRecord, BigDecimal> LOCATION_LAT = createField("location_lat", org.jooq.impl.SQLDataType.DECIMAL.precision(11, 8), this, "");
-
-    /**
-     * The column <code>you_bc.student_verification.location_lon</code>.
-     */
-    public final TableField<StudentVerificationRecord, BigDecimal> LOCATION_LON = createField("location_lon", org.jooq.impl.SQLDataType.DECIMAL.precision(11, 8), this, "");
 
     /**
      * The column <code>you_bc.student_verification.time_created</code>.
@@ -135,7 +109,7 @@ public class StudentVerification extends TableImpl<StudentVerificationRecord> {
      */
     @Override
     public List<UniqueKey<StudentVerificationRecord>> getKeys() {
-        return Arrays.<UniqueKey<StudentVerificationRecord>>asList(Keys.KEY_STUDENT_VERIFICATION_PRIMARY, Keys.KEY_STUDENT_VERIFICATION_EMAIL);
+        return Arrays.<UniqueKey<StudentVerificationRecord>>asList(Keys.KEY_STUDENT_VERIFICATION_PRIMARY);
     }
 
     /**

@@ -6,22 +6,16 @@ CREATE TABLE user_profile (
   sex INT, # 1 for male, 2 for female
   age INT,
   profile_image_url TEXT,
-  wechatId VARCHAR(100), # TODO keep or remove
+  wechatId VARCHAR(100),
   horoscope VARCHAR(10) CHARACTER SET utf8mb4,
   matchCount INT, # workaround for new_match_notification: this is to record the number of matchedUsers the user saw last time
   time_created DATETIME NOT NULL
 );
 
 # user verification table
-# TODO: keep or remove verification
 CREATE TABLE student_verification (
   user_id INT PRIMARY KEY,
   approved BOOLEAN NOT NULL,
-  email VARCHAR(50) UNIQUE,
-  emailVerificationCode VARCHAR(100),
-  studentID_image_url TEXT,
-  location_lat DECIMAL(11, 8),
-  location_lon DECIMAL(11, 8),
   time_created DATETIME NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user_profile(user_id) ON DELETE CASCADE
 );

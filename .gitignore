@@ -23,12 +23,9 @@ you_bc-service/src/main/resources/public
 .#*
 .*.md.html
 .DS_Store
-.classpath
 .factorypath
 .metadata
-.project
 .recommenders
-.settings
 .springBeans
 /code
 _site/
