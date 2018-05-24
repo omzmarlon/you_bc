@@ -20,7 +20,7 @@ class VerificationTemplate extends Component {
     render() {
         return (
             <div className="verification-container">
-                <NavHeader color={PRIMARY_GREEN} title={this.props.header} onClickGoBack={this.props.onClickGoBack} />
+                <NavHeader color={PRIMARY_GREEN} title={this.props.header} hideBackArrow={true} />
                 <Paper style={bodyStyle} zDepth={1}>
                     {this.props.children}
                 </Paper>

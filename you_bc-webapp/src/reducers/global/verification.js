@@ -1,13 +1,14 @@
 import {UPDATE_VERIFICATION_STATUS} from "../../actions/actionTypes";
+import VerificationStatus from "../../utils/VerificationStatus";
 
 const initial = {
-    approved: false
+    verificationStatus: VerificationStatus.UNKNOWN
 };
 
 const verification = (state = initial, action) => {
     switch (action.type) {
         case UPDATE_VERIFICATION_STATUS:
-            return {...state, approved: action.approved};
+            return {...state, verificationStatus: action.verificationStatus};
         default:
             return state;
     }

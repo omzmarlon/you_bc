@@ -7,7 +7,7 @@ import './Register.less'
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
 import {RaisedButton} from "material-ui";
-import {LOGIN} from "../../constants/api";
+import {LOGIN, PRE_APP} from "../../constants/api";
 import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
@@ -122,7 +122,10 @@ class Register extends Component {
     render() {
         const { from } = this.props.location.state || { from: { pathname: "/" } };
         if (this.props.registerSuccess) {
-            return <Redirect to={from}/>;
+            return <Redirect to={{
+                pathname: PRE_APP,
+                state: { from }
+            }}/>;
         } else {
             return (
                 <AuthTemplate header="Welcome!">

@@ -12,7 +12,7 @@ export const TO_FRIENDS = "/friends";
 export const TO_ROOMMATES = "/roommates";
 export const TO_PROFILE = "/profiles";
 export const LOGIN = "/signin";
-export const PRE_LOGIN = "/pre_auth";
+export const PRE_APP = "/prepare";
 export const REGISTER = "/signup";
 export const VERIFICATION = '/verification';
 

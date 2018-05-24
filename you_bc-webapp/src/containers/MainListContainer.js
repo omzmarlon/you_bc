@@ -18,6 +18,7 @@ import {
 //constants
 import {FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API} from "../constants/api";
 import AuthStatus from '../utils/AuthStatus';
+import VerificationStatus from "../utils/VerificationStatus";
 
 class MainListContainer extends Component {
     constructor(props) {
@@ -132,7 +133,7 @@ const mapStateToProps = (state, ownProps) => ({
     visibleUsers: state.mainList.visibleUsers,
     hasInfo: hasInfoHelper(ownProps.fetchAPI, state.profile),
     genderFilter: state.mainList.genderFilter,
-    grantAccess: state.verification.approved
+    grantAccess: state.verification.verificationStatus === VerificationStatus.VERIFICATION_SUCCESS
 });
 
 export default connect(mapStateToProps)(MainListContainer);

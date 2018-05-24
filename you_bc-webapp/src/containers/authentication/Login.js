@@ -8,13 +8,12 @@ import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
 import {RaisedButton} from "material-ui";
 import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/colors";
-import {REGISTER} from "../../constants/api";
+import {PRE_APP, REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import FacebookIcon from "../../components/common/svg/Facebook";
 import {loginPostRequest, loginRequest, loginComplete} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
-import LocalStorage from "../../utils/LocalStorage";
 import {saveAuthToken} from "../../utils/AuthService";
 
 class Login extends Component {
@@ -87,7 +86,10 @@ class Login extends Component {
     render() {
         const { from } = this.props.location.state || { from: { pathname: "/" } };
         if (this.props.isAuthenticated) {
-            return <Redirect to={from}/>;
+            return <Redirect to={{
+                pathname: PRE_APP,
+                state: { from }
+            }}/>;
         } else {
             return (
                 <AuthTemplate header="Welcome Back!">

@@ -23,6 +23,7 @@ import {
 } from "../actions/profile/profileFetchActions";
 // utils
 import AuthStatus from '../utils/AuthStatus';
+import VerificationStatus from "../utils/VerificationStatus";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -67,7 +68,7 @@ ProfileContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
     panelIndex: state.profileUI.panelIndex,
-    grantAccess: state.verification.approved
+    grantAccess: state.verification.verificationStatus === VerificationStatus.VERIFICATION_SUCCESS
 });
 
 const mapDispatchToProps = (dispatch) => {

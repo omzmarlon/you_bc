@@ -1,7 +1,6 @@
 const AuthStatus = {
     AUTH_SUCCESS: 200,
     UNAUTHORIZED: 401,
-    FETCHING: 1,
     UNKNOWN: -1
 };
 
