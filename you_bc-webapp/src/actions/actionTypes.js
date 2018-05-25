@@ -49,7 +49,7 @@ export const INITIALIZE_VISIBLE_USERS = 'INITIALIZE_VISIBLE_USERS';
 export const RECEIVE_MORE_CANDIDATES = 'RECEIVE_MORE_CANDIDATES';
 
 /************************ Verification Actions ************************/
-export const UPDATE_VERIFICATION_STATUS = 'FETCH_VERIFICATION_STATUS';
+export const UPDATE_VERIFICATION_STATUS = 'UPDATE_VERIFICATION_STATUS';
 
 /************************ authentication actions ************************/
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
