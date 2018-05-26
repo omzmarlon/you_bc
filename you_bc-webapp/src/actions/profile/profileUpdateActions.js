@@ -31,7 +31,7 @@ export const updateWeChatIdRequest = (weChatId) => dispatch => {
             dispatch(updateWeChatId(weChatId));
         }, err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("更新微信号失败"));
+            dispatch(showInfoBar("Failed to update WeChat ID"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -49,7 +49,7 @@ export const updateAvatarRequest = (avatarUrl) => dispatch => {
         dispatch(updateAvatar(avatarUrl));
     }, err => {
         // TODO: centralize error handling
-        dispatch(showInfoBar("更新头像失败"));
+        dispatch(showInfoBar("Failed to Update Profile Image"));
         if (err.response.data.error) {
             console.log(err.response.data.error);
         }
@@ -67,11 +67,11 @@ export const updatePersonalValuesRequest = (personalValues) => dispatch => {
         .then(
             response => {
                 dispatch(updatePersonalValues(personalValues));
-                dispatch(showInfoBar("更新个人信息成功"));
+                dispatch(showInfoBar("Update Basic Info Success"));
             },
             err => {
                 // TODO: centralize error handling
-                dispatch(showInfoBar("更新个人信息失败"));
+                dispatch(showInfoBar("Failed to update Basic Info"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -83,11 +83,11 @@ export const updateClassmatesValuesRequest = (classmatesValues) => dispatch => {
     axios.put(requestUrl(CLASSMATES_PROFILE_API), classmatesValues, authorizedConfig())
         .then(response => {
             dispatch(updateClassmatesValues(classmatesValues));
-            dispatch(showInfoBar("更新找课友信息成功"));
+            dispatch(showInfoBar("Update Classmates Info Success"));
         })
         .catch(err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("更新找课友信息失败"));
+            dispatch(showInfoBar("Failed to update Classmates Info"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -97,11 +97,11 @@ export const updateFriendsValuesRequest = (friendsValues) => dispatch => {
     axios.put(requestUrl(FRIENDS_PROFILE_API), friendsValues, authorizedConfig())
         .then(response => {
             dispatch(updateFriendsValues(friendsValues));
-            dispatch(showInfoBar("更新找朋友信息成功"));
+            dispatch(showInfoBar("Update Friends Info Success"));
         })
         .catch(err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("更新找X友信息失败"));
+            dispatch(showInfoBar("Failed to update Friends Info"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -111,11 +111,11 @@ export const updateRoommatesValuesRequest = (roommatesValues) => dispatch => {
     axios.put(requestUrl(ROOMMATES_PROFILE_API), roommatesValues, authorizedConfig())
         .then(response => {
             dispatch(updateRoommatesValues(roommatesValues));
-            dispatch(showInfoBar("更新找室友信息成功"));
+            dispatch(showInfoBar("Update Roommates Info Success"));
         })
         .catch(err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("更新找室友信息失败"));
+            dispatch(showInfoBar("Failed to update Roommate Info"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
