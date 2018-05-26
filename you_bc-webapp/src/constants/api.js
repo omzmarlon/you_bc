@@ -34,8 +34,12 @@ export const AUTH_STATUS_API = "/api/auth_status";
 export const authorizedConfig = () => (
     // make it a function so that token is updated
     {
-        headers: {'Authorization': 'Bearer '+localStorage.getItem(LocalStorage.AUTH_TOKEN_STORAGE)}
+        headers: authorizationHeader()
     }
+);
+
+export const authorizationHeader = () => (
+    {'Authorization': 'Bearer '+localStorage.getItem(LocalStorage.AUTH_TOKEN_STORAGE)}
 );
 
 // profile options

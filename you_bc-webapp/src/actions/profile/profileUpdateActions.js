@@ -5,6 +5,7 @@ import {
 } from "../actionTypes";
 import axios from 'axios';
 import {
+    authorizationHeader, authorizedConfig,
     AVATAR_API,
     CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, PERSONAL_PROFILE_API, requestUrl,
     ROOMMATES_PROFILE_API, WECHATID_API
@@ -23,8 +24,7 @@ export const updateWeChatIdRequest = (weChatId) => dispatch => {
         requestUrl(WECHATID_API),
         weChatId,
         {
-            withCredentials: true,
-            headers: {'Content-Type': 'text/plain'}
+            headers: {'Content-Type': 'text/plain', ...authorizationHeader()}
         }
     )
         .then(response => {
@@ -43,8 +43,7 @@ export const updateAvatarRequest = (avatarUrl) => dispatch => {
         requestUrl(AVATAR_API),
         avatarUrl,
         {
-            withCredentials: true,
-            headers: {'Content-Type': 'text/plain'}
+            headers: {'Content-Type': 'text/plain', ...authorizationHeader()}
         }
     ).then(response => {
         dispatch(updateAvatar(avatarUrl));
@@ -64,7 +63,7 @@ export const updatePersonalValuesRequest = (personalValues) => dispatch => {
         sex: personalValues.sex === '男'?1:2,
         horoscope: personalValues.constellation
     };
-    axios.put(requestUrl(PERSONAL_PROFILE_API), requestBody, {withCredentials: true})
+    axios.put(requestUrl(PERSONAL_PROFILE_API), requestBody, authorizedConfig())
         .then(
             response => {
                 dispatch(updatePersonalValues(personalValues));
@@ -81,7 +80,7 @@ export const updatePersonalValuesRequest = (personalValues) => dispatch => {
 };
 
 export const updateClassmatesValuesRequest = (classmatesValues) => dispatch => {
-    axios.put(requestUrl(CLASSMATES_PROFILE_API), classmatesValues, {withCredentials: true})
+    axios.put(requestUrl(CLASSMATES_PROFILE_API), classmatesValues, authorizedConfig())
         .then(response => {
             dispatch(updateClassmatesValues(classmatesValues));
             dispatch(showInfoBar("更新找课友信息成功"));
@@ -95,7 +94,7 @@ export const updateClassmatesValuesRequest = (classmatesValues) => dispatch => {
         });
 };
 export const updateFriendsValuesRequest = (friendsValues) => dispatch => {
-    axios.put(requestUrl(FRIENDS_PROFILE_API), friendsValues, {withCredentials: true})
+    axios.put(requestUrl(FRIENDS_PROFILE_API), friendsValues, authorizedConfig())
         .then(response => {
             dispatch(updateFriendsValues(friendsValues));
             dispatch(showInfoBar("更新找朋友信息成功"));
@@ -109,7 +108,7 @@ export const updateFriendsValuesRequest = (friendsValues) => dispatch => {
         });
 };
 export const updateRoommatesValuesRequest = (roommatesValues) => dispatch => {
-    axios.put(requestUrl(ROOMMATES_PROFILE_API), roommatesValues, {withCredentials: true})
+    axios.put(requestUrl(ROOMMATES_PROFILE_API), roommatesValues, authorizedConfig())
         .then(response => {
             dispatch(updateRoommatesValues(roommatesValues));
             dispatch(showInfoBar("更新找室友信息成功"));

@@ -3,7 +3,13 @@
 import * as ActionTypes from '../actionTypes';
 import {showInfoBar} from "../global/globalActions";
 import axios from 'axios';
-import {FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API, requestUrl} from "../../constants/api";
+import {
+    authorizedConfig,
+    FETCH_CLASSMATES_API,
+    FETCH_FRIENDS_API,
+    FETCH_ROOMMATES_API,
+    requestUrl
+} from "../../constants/api";
 
 /**
  * fetch data (Async Action)
@@ -14,7 +20,7 @@ import {FETCH_CLASSMATES_API, FETCH_FRIENDS_API, FETCH_ROOMMATES_API, requestUrl
 export const fetchCandidates = (api, quantity, gender = 'mix') => dispatch => {
     dispatch(fetchCandidatesRequest(gender));
     let url = requestUrl(api) + `?amount=${quantity}&gender=${gender}`;
-    axios.get(url, {withCredentials: true})
+    axios.get(url, authorizedConfig())
         .then(
             response => {
                 let candidates = response.data.map(json => populateData(json, api));
@@ -43,7 +49,7 @@ const fetchCandidatesFailure = () => ({ type: ActionTypes.FETCH_CANDIDATES_FAILU
  */
 export const fetchMoreCandidate = (api, quantity, gender) => dispatch => {
     let url = requestUrl(api) + `?amount=${quantity}&gender=${gender}`;
-    axios.get(url, {withCredentials: true})
+    axios.get(url, authorizedConfig())
         .then(
             response => {
                 let candidates = response.data.map(json => populateData(json, api));
@@ -64,7 +70,7 @@ const receiveMoreCandidates = candidates => ({ type: ActionTypes.RECEIVE_MORE_CA
  */
 export const likeCandidate = (likeAPI) => {
     let url = requestUrl(likeAPI);
-    axios.post(url, {}, {withCredentials: true})
+    axios.post(url, {}, authorizedConfig())
         .then(
             response => {},
             error => showInfoBar(error.message)
@@ -77,7 +83,7 @@ export const likeCandidate = (likeAPI) => {
  */
 export const dislikeCandidate = (dislikeAPI) => {
     let url = requestUrl(dislikeAPI);
-    axios.post(url, {}, {withCredentials: true})
+    axios.post(url, {}, authorizedConfig())
         .then(
             response => {},
             error => showInfoBar(error.message)

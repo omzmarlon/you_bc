@@ -4,6 +4,7 @@ import {
 } from "../actionTypes";
 import axios from 'axios';
 import {
+    authorizedConfig,
     CLASSMATES_PROFILE_API, FRIENDS_PROFILE_API, MATCHED_USERS_API, PERSONAL_PROFILE_API, requestUrl,
     ROOMMATES_PROFILE_API
 } from "../../constants/api";
@@ -15,7 +16,7 @@ import {showInfoBar} from "../global/globalActions";
 export const receiveClassmatesInfo = (classmates) => ({type: RECEIVE_CLASSMATES_INFO, classmates});
 
 export const fetchClassmatesInfo = () => dispatch => {
-    axios.get(requestUrl(CLASSMATES_PROFILE_API), {withCredentials: true})
+    axios.get(requestUrl(CLASSMATES_PROFILE_API), authorizedConfig())
         .then( response => {
             dispatch(receiveClassmatesInfo({
                 major: response.data.major? response.data.major: '',
@@ -36,7 +37,7 @@ export const fetchClassmatesInfo = () => dispatch => {
 export const receiveRoommatesInfo = (roommates) => ({type: RECEIVE_ROOMMATES_INFO, roommates});
 
 export const fetchRoommatesInfo = () => dispatch => {
-    axios.get(requestUrl(ROOMMATES_PROFILE_API), {withCredentials: true})
+    axios.get(requestUrl(ROOMMATES_PROFILE_API), authorizedConfig())
         .then( response => {
             dispatch(receiveRoommatesInfo({
                 location: response.data.location? response.data.location: '',
@@ -57,7 +58,7 @@ export const fetchRoommatesInfo = () => dispatch => {
 export const receiveFriendsInfo = (friends) => ({type: RECEIVE_FRIENDS_INFO, friends});
 
 export const fetchFriendsInfo = () => dispatch => {
-    axios.get(requestUrl(FRIENDS_PROFILE_API), {withCredentials: true})
+    axios.get(requestUrl(FRIENDS_PROFILE_API), authorizedConfig())
         .then( response => {
             dispatch(receiveFriendsInfo({
                 faculty: response.data.faculty? response.data.faculty: '',
@@ -78,7 +79,7 @@ export const fetchFriendsInfo = () => dispatch => {
 export const receivePersonalInfo = (personal) => ({type: RECEIVE_PERSONAL_INFO, personal});
 
 export const fetchPersonalInfo = () => dispatch => {
-    axios.get(requestUrl(PERSONAL_PROFILE_API), {withCredentials: true})
+    axios.get(requestUrl(PERSONAL_PROFILE_API), authorizedConfig())
         .then(response => {
             let sex = '';
             if (response.data.sex) {
@@ -111,7 +112,7 @@ export const receiveMatchedUsers = (matchedUsers, newMatch) => ({type: RECEIVE_M
 
 export const fetchMatchedUsers = () => dispatch => {
     // workaround: add newMatch; update store through receiveMatchedUsers() action
-    axios.get(requestUrl(MATCHED_USERS_API), {withCredentials: true}).then(
+    axios.get(requestUrl(MATCHED_USERS_API), authorizedConfig()).then(
         response => {
             let newMatch = response.data.newMatch;
             let users = response.data.matchedUsers.map(data => ({
