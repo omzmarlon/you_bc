@@ -49,7 +49,7 @@ public class JWTAuthProvider implements AuthenticationProvider {
             if (userDAO.userExistsById(subjectUserId)) {
                 return new UsernamePasswordAuthenticationToken(subjectUserId, null, emptyList());
             } else {
-                throw new YouBCNotFoundException("User not found");
+                throw new YouBCUnAuthorizedRequest("Authenticated User does not exists");
             }
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
             throw new YouBCUnAuthorizedRequest("Invalid token");
