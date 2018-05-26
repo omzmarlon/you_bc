@@ -8,7 +8,12 @@ export const fetchVerificationStatus = () => dispatch => {
     fetchVerificationRequest()
         .then(
             response => {
-                dispatch(updateVerificationStatus(VerificationStatus.VERIFICATION_SUCCESS));
+                const { data } = response;
+                if (data.approved) {
+                    dispatch(updateVerificationStatus(VerificationStatus.VERIFICATION_SUCCESS));
+                } else {
+                    dispatch(updateVerificationStatus(VerificationStatus.UNVERIFIED));
+                }
             },
             error => {
                 console.log(error);
