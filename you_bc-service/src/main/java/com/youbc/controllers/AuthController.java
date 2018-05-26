@@ -40,7 +40,7 @@ public class AuthController {
     @PostMapping(value = Endpoints.SIGNUP_ENDPOINT)
     public ResponseEntity<String> register(@RequestBody RegistrationRequest registrationRequest) {
 
-        LOGGER.debug("Handling registration request {}", registrationRequest);
+        LOGGER.debug("Handling registration request: {}", registrationRequest);
 
         userDAO.createNewFormLoginUser(
                 registrationRequest.getUsername(),

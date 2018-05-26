@@ -31,8 +31,7 @@ public class LoginRequest {
 
     @Override
     public String toString() {
-        // TODO: logging password security issue? spring auth token protects credentials when printing
-        return String.format("Username %s, password %s", username, password);
+        return String.format("Username %s, password %s", username, "[Protected]");
     }
 
 }

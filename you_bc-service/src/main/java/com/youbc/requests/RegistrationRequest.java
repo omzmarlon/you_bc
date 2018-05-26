@@ -32,10 +32,8 @@ public class RegistrationRequest {
         this.sex = sex;
     }
 
-
     @Override
     public String toString() {
-        // TODO: logging password security issue? spring auth token protects credentials when printing
-        return String.format("Username: %s, Password: %s, Sex: %s", username, password, sex);
+        return String.format("Username: %s, Password: %s, Sex: %s", username, "[Protected]", sex);
     }
 }
