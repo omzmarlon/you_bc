@@ -99,7 +99,7 @@ export const fetchPersonalInfo = () => dispatch => {
             }));
         }, err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("获取找个人信息失败"));
+            dispatch(showInfoBar("Failed to fetch basic info"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
@@ -127,7 +127,7 @@ export const fetchMatchedUsers = () => dispatch => {
         },
         err => {
             // TODO: centralize error handling
-            dispatch(showInfoBar("获取已匹配信息失败"));
+            dispatch(showInfoBar("Failed to fetch matched users"));
             if (err.response.data.error) {
                 console.log(err.response.data.error);
             }
