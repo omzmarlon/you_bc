@@ -80,7 +80,7 @@ class PrepareApplicationContainer extends React.Component{
             // application is already authenticated.
             if (this.props.verification.verificationStatus === VerificationStatus.VERIFICATION_SUCCESS) {
                 return (
-                    <Redirect to={"/"}/>
+                    <Redirect to={from}/>
                 );
             } else {
                 return <VerificationComponent username={this.props.authDetail.username} onCodeSubmit={this.handleCodeSubmit.bind(this)}/>;

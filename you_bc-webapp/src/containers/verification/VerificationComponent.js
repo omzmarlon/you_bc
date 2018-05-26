@@ -47,7 +47,7 @@ class VerificationComponent extends Component {
                             id="code"
                             style={inputStyle}
                             underlineStyle={underlineStyle}
-                            hintText="Enter Verification Code"
+                            hintText="Invitation Code"
                             onChange={this.onCodeChange}
                             value={this.state.code}
                         />
