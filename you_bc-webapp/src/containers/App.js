@@ -29,7 +29,7 @@ const ClassmateContainer = () => (
         fetchAPI={FETCH_CLASSMATES_API}
         dislikeAPI={DISLIKE_CLASSMATES_API}
         likeAPI={LIKE_CLASSMATES_API}
-        title="找课友"
+        title="Find Classmates"
         themeColor={PRIMARY_RED}
         subThemeColor={SECONDARY_RED}
     />
@@ -40,7 +40,7 @@ const RoommateContainer = () => (
         fetchAPI={FETCH_ROOMMATES_API}
         dislikeAPI={DISLIKE_ROOMMATES_API}
         likeAPI={LIKE_ROOMMATES_API}
-        title="找室友"
+        title="Find Roommates"
         themeColor={PRIMARY_BLUE}
         subThemeColor={SECONDARY_BLUE}
     />

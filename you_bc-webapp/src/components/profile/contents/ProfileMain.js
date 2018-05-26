@@ -51,27 +51,27 @@ const ProfileMain = (props) => (
                 type={PERSONAL}
                 contentList={[
                     {
-                        leftElement: <InfoRowTitle icon={<WeChatIcon color={PRIMARY_GREEN}/>} text={'微信号'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.personal.weChatId || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<WeChatIcon color={PRIMARY_GREEN}/>} text={'WeChat'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.personal.weChatId || "Unknown"}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<AccountIcon color={PRIMARY_GREEN}/>} text={'昵称'}/>,
+                        leftElement: <InfoRowTitle icon={<AccountIcon color={PRIMARY_GREEN}/>} text={'Nickname'}/>,
                         rightElement: <span style={rightElementSpaceApart}>{props.personal.username}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<MixGenderIcon color={PRIMARY_GREEN}/>} text={'性别'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.personal.sex || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<MixGenderIcon color={PRIMARY_GREEN}/>} text={'Gender'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.personal.sex || "Unknown"}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<AgeIcon color={PRIMARY_GREEN}/>} text={'年龄'}/>,
+                        leftElement: <InfoRowTitle icon={<AgeIcon color={PRIMARY_GREEN}/>} text={'Age'}/>,
                         rightElement: <span style={rightElementSpaceApart}>
                             {/*so that age display won't be zero*/}
-                            {props.personal.age?props.personal.age:'未填写'}
+                            {props.personal.age?props.personal.age:'Unknown'}
                         </span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<ConstellationIcon color={PRIMARY_GREEN}/>} text={'星座'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.personal.constellation || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<ConstellationIcon color={PRIMARY_GREEN}/>} text={'Horoscope'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.personal.constellation || "Unknown"}</span>
                     }
                 ]}
             />
@@ -82,42 +82,42 @@ const ProfileMain = (props) => (
                 type={CLASSMATES}
                 contentList={[
                     {
-                        leftElement: <InfoRowTitle icon={<MajorIcon color={PRIMARY_RED}/>} text={'专业'} />,
+                        leftElement: <InfoRowTitle icon={<MajorIcon color={PRIMARY_RED}/>} text={'Major'} />,
                         rightElement: <TruncateText
                             style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}}
-                            text={props.classmates.major || "未填写"}
-                            modalTitle="专业"
+                            text={props.classmates.major || "Unknown"}
+                            modalTitle="Major"
                         />
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<CourseIcon color={PRIMARY_RED}/>} text={'课程'}/>,
+                        leftElement: <InfoRowTitle icon={<CourseIcon color={PRIMARY_RED}/>} text={'Courses'}/>,
                         rightElement:
                             <div style={rightElementSpaceApart}>
                                 {
                                     props.classmates.courses.length !== 0 ?
                                         props.classmates.courses.map((c, i) => <span key={i}>{c} </span>) :
-                                        "未填写"
+                                        "Unknown"
                                 }
                             </div>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_RED}/>} text={'能力'}/>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_RED}/>} text={'Ability'}/>,
                         rightElement: <TruncateText
                             style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}}
-                            text={props.classmates.motto || "未填写"}
+                            text={props.classmates.motto || "Unknown"}
                             maxLength={22}
-                            modalTitle="学习能力"
+                            modalTitle="Study Ability"
                         />
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_RED}/>} text={'一起'}/>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_RED}/>} text={"Let's"}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
                                     props.classmates.tags.length !== 0 ?
                                     props.classmates.tags.map((t, i) =>
                                         <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_RED} textColor={PRIMARY_RED}/>
-                                    ) : "未填写"
+                                    ) : "Unknown"
                                 }
                             </div>
                     }
@@ -130,24 +130,24 @@ const ProfileMain = (props) => (
                 type={FRIENDS}
                 contentList={[
                     {
-                        leftElement: <InfoRowTitle icon={<FacultyIcon color={PRIMARY_YELLOW}/>} text={'学院'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.friends.faculty || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<FacultyIcon color={PRIMARY_YELLOW}/>} text={'Faculty'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.friends.faculty || "Unknown"}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<RelationshipIcon color={PRIMARY_YELLOW}/>} text={'情感状况'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.friends.relationship || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<RelationshipIcon color={PRIMARY_YELLOW}/>} text={'Relationship'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.friends.relationship || "Unknown"}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_YELLOW}/>} text={'个性签名'}/>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_YELLOW}/>} text={'Life Motto'}/>,
                         rightElement: <TruncateText
                             style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}}
-                            text={props.friends.motto || "未填写"}
+                            text={props.friends.motto || "Unknown"}
                             maxLength={22}
                             modalTitle="个性签名"
                         />
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_YELLOW}/>} text={'兴趣'}/>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_YELLOW}/>} text={'Interests'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
@@ -159,7 +159,7 @@ const ProfileMain = (props) => (
                                              bkgColor={SECONDARY_YELLOW}
                                              textColor={PRIMARY_YELLOW}
                                         />) :
-                                        "未填写"
+                                        "Unknown"
                                 }
                             </div>
                     }
@@ -172,31 +172,31 @@ const ProfileMain = (props) => (
                 type={ROOMMATES}
                 contentList={[
                     {
-                        leftElement: <InfoRowTitle icon={<LocationIcon color={PRIMARY_BLUE}/>} text={'地点'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.roommates.location || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<LocationIcon color={PRIMARY_BLUE}/>} text={'Location'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.roommates.location || "Unknown"}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<HometownIcon color={PRIMARY_BLUE}/>} text={'家乡'}/>,
-                        rightElement: <span style={rightElementSpaceApart}>{props.roommates.hometown || "未填写"}</span>
+                        leftElement: <InfoRowTitle icon={<HometownIcon color={PRIMARY_BLUE}/>} text={'Hometown'}/>,
+                        rightElement: <span style={rightElementSpaceApart}>{props.roommates.hometown || "Unknown"}</span>
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_BLUE}/>} text={'自我描述'}/>,
+                        leftElement: <InfoRowTitle icon={<MottoIcon color={PRIMARY_BLUE}/>} text={'About Me'}/>,
                         rightElement: <TruncateText
                             style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}}
-                            text={props.roommates.motto || "未填写"}
+                            text={props.roommates.motto || "Unknown"}
                             maxLength={22}
-                            modalTitle="自我描述"
+                            modalTitle="About Me"
                         />
                     },
                     {
-                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_BLUE}/>} text={'生活习惯'}/>,
+                        leftElement: <InfoRowTitle icon={<TagIcon color={PRIMARY_BLUE}/>} text={'Habits'}/>,
                         rightElement:
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
                                     props.roommates.tags.length !== 0 ?
                                     props.roommates.tags.map((t, i) =>
                                         <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_BLUE} textColor={PRIMARY_BLUE}/>
-                                    ) : "未填写"
+                                    ) : "Unknown"
                                 }
                             </div>
                     }

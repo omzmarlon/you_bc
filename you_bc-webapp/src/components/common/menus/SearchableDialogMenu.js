@@ -64,7 +64,7 @@ class SearchableDialogMenu extends React.Component {
                         backgroundColor={this.props.buttonColor}
                         fullWidth={true}
                     >
-                        确定
+                        Submit
                     </RaisedButton>
                 ]}
                 autoScrollBodyContent={false}
@@ -72,7 +72,7 @@ class SearchableDialogMenu extends React.Component {
                 <Paper zDepth={1}
                        className={'chosen-courses-container'}
                 >
-                    <div className={'searchable-dialog-title'}>我的课程:</div>
+                    <div className={'searchable-dialog-title'}>My Courses:</div>
                     <div className={'chosen-courses'}>
                         {
                             this.props.multiple?

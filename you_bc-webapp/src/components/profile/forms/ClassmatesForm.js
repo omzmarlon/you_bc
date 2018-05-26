@@ -71,7 +71,7 @@ class ClassmatesForm extends React.Component {
             })
             .catch(err => {
                 // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取专业选项失败"));
+                store.dispatch(showInfoBar("Failed to fetch major options"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -82,7 +82,7 @@ class ClassmatesForm extends React.Component {
             })
             .catch(err => {
                 // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取找课友标签失败"));
+                store.dispatch(showInfoBar("Failed to fetch tags"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -110,7 +110,7 @@ class ClassmatesForm extends React.Component {
                 })
                 .catch(err => {
                     // TODO: centralize error handling
-                    store.dispatch(showInfoBar("获取课程选项失败"));
+                    store.dispatch(showInfoBar("Failed to fetch courses"));
                     this.setState({loadingCourseOptions: false});
                     if (err.response.data.error) {
                         console.log(err.response.data.error);
@@ -128,7 +128,7 @@ class ClassmatesForm extends React.Component {
             this.setState({coursesError: ''});
         } catch (e) {
             if (e instanceof ExceedMaxItemsError) {
-                this.setState({coursesError: `最多可选${courseLimit}个`});
+                this.setState({coursesError: `Max: ${courseLimit}`});
             } else {
                 throw e; // let others bubble up
             }
@@ -149,7 +149,7 @@ class ClassmatesForm extends React.Component {
             this.setState({tagsError: ''});
         } catch (e) {
             if (e instanceof ExceedMaxItemsError) {
-                this.setState({tagsError: `最多可选${tagLimit}个`});
+                this.setState({tagsError: `Max: ${tagLimit}`});
             } else {
                 throw e; // let others bubble up
             }
@@ -169,10 +169,10 @@ class ClassmatesForm extends React.Component {
             this.props.onClose();
         } else {
             this.setState({
-                majorError: this.state.major?'':'必填',
-                coursesError: this.state.courses.length?'':'必填',
-                mottoError: this.state.motto?'':'必填',
-                tagsError: this.state.tags.length?'':'必填',
+                majorError: this.state.major?'':'Required',
+                coursesError: this.state.courses.length?'':'Required',
+                mottoError: this.state.motto?'':'Required',
+                tagsError: this.state.tags.length?'':'Required',
             });
         }
     }
@@ -194,22 +194,22 @@ class ClassmatesForm extends React.Component {
                        onDone={this.onDoneHandler}
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon/>}
-                       titleText={'找课友信息'}
+                       titleText={'Find Classmates'}
                        forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'form-input-field'}
                                inputIcon={<WeChatIcon color={PRIMARY_RED} />}
-                               label={'微信号(必填)'}
+                               label={'WeChat (Required)'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
-                               errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
+                               errorText={""}
                     />
                 }
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<MajorIcon color={PRIMARY_RED}/>}
-                           label={'专业'}
+                           label={'Major'}
                            values={this.state.major}
                            onChange={this.onMajorChange}
                            options={this.state.majorOptions}
@@ -221,7 +221,7 @@ class ClassmatesForm extends React.Component {
                 />
                 <SearchableMenuInput classNames={'form-input-field'}
                                      inputIcon={<CourseIcon color={PRIMARY_RED}/>}
-                                     label={'课程'}
+                                     label={'Courses'}
                                      values={this.state.courses}
                                      onChange={this.onCoursesChange}
                                      handleSearchChange={this.onCourseSearchChange.bind(this)}
@@ -236,7 +236,7 @@ class ClassmatesForm extends React.Component {
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_RED}/>}
-                           label={'能力'}
+                           label={'Ability'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.state.mottoError}
@@ -249,7 +249,7 @@ class ClassmatesForm extends React.Component {
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_RED}/>}
-                           label={'标签'}
+                           label={'Tags'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
                            options={this.state.tagsOptions}

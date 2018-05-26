@@ -31,7 +31,7 @@ const MainListHeader = (props) => (
                     primaryText={
                         <InfoRow
                             leftElement={<MaleIcon color={PRIMARY_BLUE}/>}
-                            rightElement={<span style={{paddingLeft: 8}}>男生</span>}
+                            rightElement={<span style={{paddingLeft: 8}}>Male</span>}
                         />
                     }
                 />
@@ -41,7 +41,7 @@ const MainListHeader = (props) => (
                     primaryText={
                         <InfoRow
                             leftElement={<FemaleIcon color={PRIMARY_RED}/>}
-                            rightElement={<span style={{paddingLeft: 8}}>女生</span>}
+                            rightElement={<span style={{paddingLeft: 8}}>Female</span>}
                         />
                     }
                 />
@@ -51,7 +51,7 @@ const MainListHeader = (props) => (
                     primaryText={
                         <InfoRow
                             leftElement={<MixGenderIcon color={PRIMARY_GREEN}/>}
-                            rightElement={<span style={{paddingLeft: 8}}>混合</span>}
+                            rightElement={<span style={{paddingLeft: 8}}>Mix</span>}
                         />
                     }
                 />

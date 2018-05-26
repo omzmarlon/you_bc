@@ -48,7 +48,11 @@ class ProfileContainer extends React.Component {
                     <div className={'profile-container'} style={{overflow: 'scroll', height: '100%'}}>
                         { this.props.panelIndex === 0 && <ProfileMain /> }
                         { this.props.panelIndex === 1 && <MatchingList /> }
-                        <ProfileTabBar onTabMain={this.props.onTabMain} onTabMatching={this.onTabMatching.bind(this)} />
+                        <ProfileTabBar
+                            panelIndex={this.props.panelIndex}
+                            onTabMain={this.props.onTabMain}
+                            onTabMatching={this.onTabMatching.bind(this)}
+                        />
                     </div>
                 </div>
             );

@@ -27,19 +27,19 @@ const LeftCornerIcon = (props) => {
     switch (props.type) {
         case CLASSMATES:
             icon = <ClassIcon style={style}/>;
-            title = '找课友';
+            title = 'Classmates';
             break;
         case FRIENDS:
             icon = <SprayIcon style={style}/>;
-            title = '找朋友';
+            title = 'Random Friends';
             break;
         case ROOMMATES:
             icon = <HomeIcon style={style}/>;
-            title = '找室友';
+            title = 'Roommates';
             break;
         case PERSONAL:
             icon = <AccountIcon style={style}/>;
-            title = '我的信息';
+            title = 'Basic Info';
             break;
         default:
             icon = <SprayIcon style={style}/>;

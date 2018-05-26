@@ -28,7 +28,7 @@ export const MajorInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<MajorIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>专业:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Major:</span>}
             />
         }
         rightElement={<span style={{paddingLeft: 8}}>{props.major}</span>}
@@ -47,11 +47,11 @@ export const CourseInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<CourseIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>课程:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Courses:</span>}
             />
         }
         rightElement={
-            <TruncateTags modalTitle="课程" tags={props.courses} color={props.color} secondColor={props.secondColor}/>
+            <TruncateTags modalTitle="Courses" tags={props.courses} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -66,10 +66,10 @@ export const StudyAbilityInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<MottoIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>能力:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Ability:</span>}
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility} modalTitle={"学习能力"}/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.studyAbility} modalTitle={"Study Ability"}/>}
     />
 );
 StudyAbilityInfo.propTypes = {
@@ -82,11 +82,11 @@ export const StudyRequirementInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<TagIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>一起:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Lets:</span>}
             />
         }
         rightElement={
-            <TruncateTags modalTitle="一起" tags={props.requirements} color={props.color} secondColor={props.secondColor}/>
+            <TruncateTags modalTitle="Let's" tags={props.requirements} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -102,7 +102,7 @@ export const AddressInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<LocationIcon style={{color: props.color, height: 16, width: 14}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>地点:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Location:</span>}
             />
         }
         rightElement={<span style={{paddingLeft: 8}}>{props.address}</span>}
@@ -118,12 +118,10 @@ export const HometownInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<HometownIcon style={{...iconStyle, ...{color: props.color}}} />}
-                rightElement={<span style={{paddingLeft: 3}}>家乡:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Hometown:</span>}
             />
         }
         rightElement={<span style={{paddingLeft: 8}}>{props.city}</span>}
-        // TODO: render both country and city?
-        // rightElement={<span style={{paddingLeft: 8}}>{props.country} {props.city}</span>}
     />
 );
 HometownInfo.propTypes = {
@@ -141,11 +139,11 @@ export const MottoInfo = (props) => (
                     <MottoIcon style={{...iconStyle, ...{color: props.color}}} />
                 }
                 rightElement={
-                    <span style={{paddingLeft: 3}}>一句话:</span>
+                    <span style={{paddingLeft: 3}}>Life Motto</span>
                 }
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto} modalTitle="个性签名"/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.motto} modalTitle="Life Motto"/>}
     />
 );
 MottoInfo.propTypes = {
@@ -162,11 +160,11 @@ export const SelfDescription = (props) => (
                     <MottoIcon style={{...iconStyle, ...{color: props.color}}} />
                 }
                 rightElement={
-                    <span style={{paddingLeft: 3}}>自我描述:</span>
+                    <span style={{paddingLeft: 3}}>About Me:</span>
                 }
             />
         }
-        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.description} modalTitle="自我描述"/>}
+        rightElement={<TruncateText style={{paddingLeft: 8}} text={props.description} modalTitle="About Me"/>}
     />
 );
 
@@ -182,11 +180,11 @@ export const HobbyInfo = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<TagIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>兴趣:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Interests:</span>}
             />
         }
         rightElement={
-            <TruncateTags modalTitle="兴趣" tags={props.hobbies} color={props.color} secondColor={props.secondColor}/>
+            <TruncateTags modalTitle="Interests" tags={props.hobbies} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -202,11 +200,11 @@ export const LifeHabit = (props) => (
         leftElement={
             <InfoRow
                 leftElement={<TagIcon style={{...iconStyle, ...{color: props.color}}}/>}
-                rightElement={<span style={{paddingLeft: 3}}>生活习惯:</span>}
+                rightElement={<span style={{paddingLeft: 3}}>Habits:</span>}
             />
         }
         rightElement={
-            <TruncateTags modalTitle="生活习惯" tags={props.habits} color={props.color} secondColor={props.secondColor}/>
+            <TruncateTags modalTitle="Habits" tags={props.habits} color={props.color} secondColor={props.secondColor}/>
         }
     />
 );
@@ -226,7 +224,7 @@ export const FacultyInfo = (props) => (
                     <FacultyIcon style={{...iconStyle, ...{color: props.color}}}/>
                 }
                 rightElement={
-                    <span style={{paddingLeft: 3}}>学院:</span>
+                    <span style={{paddingLeft: 3}}>Faculty:</span>
                 }
             />
         }
@@ -249,7 +247,7 @@ export const RelationshipInfo = (props) => (
                     <RelationshipIcon style={{color: props.color, height: 16, width: 16}}/>
                 }
                 rightElement={
-                    <span style={{paddingLeft: 3}}>情感:</span>
+                    <span style={{paddingLeft: 3}}>Relationship:</span>
                 }
             />
         }

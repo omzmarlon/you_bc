@@ -43,7 +43,7 @@ class AvatarEditorForm extends React.Component {
             if (validImageTypes.indexOf(fileType) === -1) {
                 this.rejectAvatarEdit('同学必须上传图片噢');
             } else if (files[0].size > 3145728) {
-                this.rejectAvatarEdit('同学的照片不能超过3MB哦');
+                this.rejectAvatarEdit('Image cannot be larger than 3MB');
             } else {
                 //prepare form data
                 let formData = new FormData();
@@ -57,13 +57,13 @@ class AvatarEditorForm extends React.Component {
                             this.setState({isUploading: false})
                         },
                         err => {
-                            this.rejectAvatarEdit('选取图片失败');
+                            this.rejectAvatarEdit('Failed to choose image');
                             this.setState({isUploading: false})
                         }
                     );
             }
         } else {
-            this.rejectAvatarEdit('同学须至少上传一张图片噢');
+            this.rejectAvatarEdit('Please submit at least one image');
         }
     }
 
@@ -85,16 +85,16 @@ class AvatarEditorForm extends React.Component {
                             },
                             err => {
                                 this.setState({isUploading: false});
-                                this.rejectAvatarEdit('上传图片失败');
+                                this.rejectAvatarEdit('Upload failed😢');
                             }
                         );
                 } else {
-                    this.rejectAvatarEdit("图片上传失败😢");
+                    this.rejectAvatarEdit("Upload failed😢");
                 }
             });
         } else {
             this.setState({isUploading: false});
-            this.rejectAvatarEdit("同学的浏览器暂不支持图片上传😢");
+            this.rejectAvatarEdit("Browser Does not support image upload😢");
         }
     }
 
@@ -111,7 +111,7 @@ class AvatarEditorForm extends React.Component {
                 onDone={this.onDoneHandler.bind(this)}
                 onClose={this.onCloseHandler.bind(this)}
                 titleIcon={<FaceIcon/>}
-                titleText={'上传新头像'}
+                titleText={'New Profile Image'}
                 disableConfirmButton={
                     !this.state.editAvatarUrl || this.state.isUploading
                 }

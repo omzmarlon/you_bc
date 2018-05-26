@@ -26,7 +26,7 @@ class MatchedUserCard extends React.Component {
 
     notifySuccessCopy() {
         const {store} = this.context;
-        store.dispatch(showInfoBar('微信号已成功复制到剪切板'));
+        store.dispatch(showInfoBar('WeChat Id copied to Clipboard'));
     }
 
     render() {
@@ -46,20 +46,20 @@ class MatchedUserCard extends React.Component {
                     <div className="matched-user-card-info">
                         <div className="matched-user-card-text">
                             <span className="--name">{this.props.username}</span>
-                            <span className="--weChat">微信号：{this.props.weChatId}</span>
+                            <span className="--weChat">WeChat：{this.props.weChatId}</span>
                         </div>
                         <div className="matched-user-card-tags">
                             {
                                 this.props.matchedAtClassmates &&
-                                <Tag classNames={'--tag'} text={'找课友'} bkgColor={PRIMARY_RED} textColor={SECONDARY_RED}/>
+                                <Tag classNames={'--tag'} text={'Classmates'} bkgColor={PRIMARY_RED} textColor={SECONDARY_RED}/>
                             }
                             {
                                 this.props.matchedAtFriends &&
-                                <Tag classNames={'--tag'} text={'找朋友'} bkgColor={PRIMARY_YELLOW} textColor={SECONDARY_YELLOW}/>
+                                <Tag classNames={'--tag'} text={'Friends'} bkgColor={PRIMARY_YELLOW} textColor={SECONDARY_YELLOW}/>
                             }
                             {
                                 this.props.matchedAtRoommates &&
-                                <Tag classNames={'--tag'} text={'找室友'} bkgColor={PRIMARY_BLUE} textColor={SECONDARY_BLUE}/>
+                                <Tag classNames={'--tag'} text={'Roommates'} bkgColor={PRIMARY_BLUE} textColor={SECONDARY_BLUE}/>
                             }
                         </div>
                     </div>

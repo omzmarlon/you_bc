@@ -35,7 +35,7 @@ const ModalForm = (props) => (
                 fullWidth={true}
                 disabled={props.disableConfirmButton}
             >
-                确定
+                Submit
             </RaisedButton>
         ]}
         title={

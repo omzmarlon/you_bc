@@ -68,7 +68,7 @@ class RoommatesForm extends React.Component {
             })
             .catch(err => {
                 // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取找室友地点失败"));
+                store.dispatch(showInfoBar("Fetching Location Failed"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -79,7 +79,7 @@ class RoommatesForm extends React.Component {
             })
             .catch(err => {
                 // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取家乡信息失败"));
+                store.dispatch(showInfoBar("Fetching Hometown Failed"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -92,7 +92,7 @@ class RoommatesForm extends React.Component {
             })
             .catch(err=> {
                 // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取找室友标签失败"));
+                store.dispatch(showInfoBar("Fetching Roommates Failed"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -142,10 +142,10 @@ class RoommatesForm extends React.Component {
             this.props.onClose();
         } else {
             this.setState({
-                locationError: this.state.location?'':'必填',
-                hometownError: this.state.hometown?'':'必填',
-                mottoError: this.state.motto?'':'必填',
-                tagsError: this.state.tags.length?'':'必填',
+                locationError: this.state.location?'':'Required',
+                hometownError: this.state.hometown?'':'Required',
+                mottoError: this.state.motto?'':'Required',
+                tagsError: this.state.tags.length?'':'Required',
             });
         }
     }
@@ -168,22 +168,22 @@ class RoommatesForm extends React.Component {
                 onDone={this.onDoneHandler}
                 onClose={this.props.onClose}
                 titleIcon={<AccountIcon />}
-                titleText={'找室友信息'}
+                titleText={'Roommates Info'}
                 forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'form-input-field'}
                                inputIcon={<WeChatIcon color={PRIMARY_BLUE} />}
-                               label={'微信号(必填)'}
+                               label={'WeChat(Required)'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
-                               errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
+                               errorText={""}
                     />
                 }
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<LocationIcon color={PRIMARY_BLUE}/>}
-                           label={'地点'}
+                           label={'Location'}
                            values={this.state.location}
                            onChange={this.onLocationChange}
                            options={this.state.locationOptions}
@@ -195,7 +195,7 @@ class RoommatesForm extends React.Component {
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<HometownIcon color={PRIMARY_BLUE}/>}
-                           label={'家乡'}
+                           label={'Hometown'}
                            values={this.state.hometown}
                            onChange={this.onHometownChange}
                            options={this.state.hometownOptions}
@@ -207,7 +207,7 @@ class RoommatesForm extends React.Component {
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_BLUE}/>}
-                           label={'自我描述'}
+                           label={'About Me'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.state.mottoError}
@@ -220,7 +220,7 @@ class RoommatesForm extends React.Component {
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_BLUE}/>}
-                           label={'标签'}
+                           label={'Tags'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
                            options={this.state.tagsOptions}

@@ -60,7 +60,7 @@ export const updatePersonalValuesRequest = (personalValues) => dispatch => {
     const requestBody = {
         username: personalValues.username,
         age: personalValues.age,
-        sex: personalValues.sex === '男'?1:2,
+        sex: personalValues.sex === 'Male'?1:2,
         horoscope: personalValues.constellation
     };
     axios.put(requestUrl(PERSONAL_PROFILE_API), requestBody, authorizedConfig())

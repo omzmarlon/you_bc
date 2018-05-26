@@ -94,7 +94,7 @@ class MainListContainer extends Component {
                     <LoadingModal show={this.props.isFetching}/>
                     <MissingProfileInfoModal
                         openModal={this.state.showMissingInfoModal}
-                        content="您还没有填写相关信息，信息完整后才能继续匹配 😊"
+                        content="Please fill out your profile before matching! 😊"
                         onClick={this.missingInfoModalActionHandler}
                     />
                 </div>

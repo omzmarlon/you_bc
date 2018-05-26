@@ -18,8 +18,8 @@ import MixGenderIcon from "../../common/svg/MixGenderIcon";
 import {PRIMARY_GREEN} from "../../../styles/constants/colors";
 import {isIOS} from "../../../utils/Util";
 
-const sexOptions = ['男', '女'];
-const horoscopeOptions = ["天蝎座", "水瓶座", "狮子座", "白羊座", "摩羯座", "巨蟹座", "天秤座", "金牛座", "双子座", "处女座", "双鱼座", "射手座"];
+const sexOptions = ['Male', 'Female'];
+const horoscopeOptions = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
 
 class PersonalForm extends React.Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class PersonalForm extends React.Component {
 
     showError(field) {
         if (this.state.showError) {
-            return field?'':'必填';
+            return field?'':'Required';
         } else {
             return "";
         }
@@ -128,21 +128,21 @@ class PersonalForm extends React.Component {
                        onDone={this.onDoneHandler}
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon />}
-                       titleText={'个人信息'}
+                       titleText={'Basic Info'}
                        forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'form-input-field'}
                                inputIcon={<WeChatIcon color={PRIMARY_GREEN} />}
-                               label={'微信号(必填)'}
+                               label={'WeChat(Required)'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
-                               errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
+                               errorText={""}
                     />
                 }
                 <TextInput inputIcon={<AccountIcon color={PRIMARY_GREEN}/>}
-                           label={'昵称'}
+                           label={'Nickname'}
                            onChange={this.onUsernameChangeHandler.bind(this)}
                            value={this.state.username}
                            errorText={this.showError(this.state.username)}
@@ -150,7 +150,7 @@ class PersonalForm extends React.Component {
                            onFocus={this.scrollToUsernameInput.bind(this)}
                 />
                 <MenuInput inputIcon={<MixGenderIcon color={PRIMARY_GREEN}/>}
-                           label={'性别'}
+                           label={'Gender'}
                            values={this.state.sex}
                            onChange={this.onSexChangeHandler.bind(this)}
                            options={sexOptions}
@@ -161,7 +161,7 @@ class PersonalForm extends React.Component {
                            errorText={this.showError(this.state.sex)}
                 />
                 <TextInput inputIcon={<AgeIcon color={PRIMARY_GREEN} />}
-                           label={'年龄'}
+                           label={'Age'}
                            onChange={this.onAgeChangeHandler}
                            value={this.state.age}
                            type={'number'}
@@ -170,7 +170,7 @@ class PersonalForm extends React.Component {
                            onFocus={this.scrollToAgeInput.bind(this)}
                 />
                 <MenuInput inputIcon={<ConstellationIcon color={PRIMARY_GREEN} />}
-                           label={'星座'}
+                           label={'Horoscope'}
                            values={this.state.constellation}
                            onChange={this.onConstellationChangeHandler}
                            options={horoscopeOptions}

@@ -33,7 +33,7 @@ export const DialogMenu = (props) => (
                 backgroundColor={props.buttonColor}
                 fullWidth={true}
             >
-                确定
+                Submit
             </RaisedButton>
         ]}
         autoScrollBodyContent={false}

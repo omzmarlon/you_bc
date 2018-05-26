@@ -27,7 +27,7 @@ class SearchBar extends React.Component {
     render() {
         return (
             <TextInput inputIcon={<SearchIcon/>}
-                       label={'搜索你的课名'}
+                       label={'Search your courses...'}
                        onChange={this.onSearchChange.bind(this)}
                        value={this.state.searchText}
                        type={'text'}

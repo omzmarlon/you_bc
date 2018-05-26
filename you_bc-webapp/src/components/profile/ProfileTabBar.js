@@ -16,21 +16,22 @@ const ProfileTabBar = (props) => {
         <div className={'tab-bar'}>
             <FlatButton style={buttonSize}
                         onClick={props.onTabMain}
-                        label={'主页'}
+                        label={'Profile'}
                         icon={<Home color={PRIMARY_GREEN} />}
-                        labelStyle={{color: 'white'}}
+                        labelStyle={{color: props.panelIndex===0?'#f65314':'white'}}
             />
             <FlatButton style={buttonSize}
                         onClick={props.onTabMatching}
                         icon={<Recent color={PRIMARY_GREEN} />}
-                        label={'已匹配'}
-                        labelStyle={{color: 'white'}}
+                        label={'Matched'}
+                        labelStyle={{color: props.panelIndex===1?'#f65314':'white'}}
             />
         </div>
     );
 };
 
 ProfileTabBar.propTypes = {
+    panelIndex: PropTypes.number.isRequired,
     onTabMain: PropTypes.func.isRequired,
     onTabMatching: PropTypes.func.isRequired
 };

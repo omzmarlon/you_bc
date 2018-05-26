@@ -65,7 +65,7 @@ class FriendsForm extends React.Component {
             })
             .catch(err=> {
                 // TODO: centralize error handling
-                store.dispatch(showInfoBar("获取学院信息失败"));
+                store.dispatch(showInfoBar("Failed to fetch faculties"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -75,7 +75,7 @@ class FriendsForm extends React.Component {
                 this.setState({relationshipOptions: response.data});
             })
             .catch(err=> {
-                store.dispatch(showInfoBar("获取情感选项失败"));
+                store.dispatch(showInfoBar("Failed to fetch relationship options"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -85,7 +85,7 @@ class FriendsForm extends React.Component {
                 this.setState({tagsOptions: response.data});
             })
             .catch(err=> {
-                store.dispatch(showInfoBar("获取情感选项失败"));
+                store.dispatch(showInfoBar("Failed to fetch tags"));
                 if (err.response.data.error) {
                     console.log(err.response.data.error);
                 }
@@ -120,7 +120,7 @@ class FriendsForm extends React.Component {
             this.setState({tagsError: ''});
         } catch (e) {
             if (e instanceof ExceedMaxItemsError) {
-                this.setState({tagsError: `最多可选${tagLimit}个`});
+                this.setState({tagsError: `Max: ${tagLimit}`});
             } else {
                 throw e; // let others bubble up
             }
@@ -135,10 +135,10 @@ class FriendsForm extends React.Component {
             this.props.onClose();
         } else {
             this.setState({
-                facultyError: this.state.faculty?'':'必填',
-                relationshipError: this.state.relationship?'':'必填',
-                mottoError: this.state.motto?'':'必填',
-                tagsError: this.state.tags.length?'':'必填',
+                facultyError: this.state.faculty?'':'Required',
+                relationshipError: this.state.relationship?'':'Required',
+                mottoError: this.state.motto?'':'Required',
+                tagsError: this.state.tags.length?'':'Required',
             });
         }
     }
@@ -160,21 +160,21 @@ class FriendsForm extends React.Component {
                        onDone={this.onDoneHandler}
                        onClose={this.props.onClose}
                        titleIcon={<AccountIcon/>}
-                       titleText={'找朋友信息'}
+                       titleText={'Find Friends'}
                        forceMinHeight={true}
             >
                 {
                     this.props.showWeChatInput &&
                     <TextInput classNames={'form-input-field'}
                                inputIcon={<WeChatIcon color={PRIMARY_YELLOW} />}
-                               label={'微信号(必填)'}
+                               label={'WeChat (Required)'}
                                onChange={this.onWeChatIdChange}
                                value={this.state.weChatId}
-                               errorText={"微信号填写后不可修改，请确认填写正确。（如需修改请联系客服）"}
+                               errorText={""}
                     />
                 }
                 <MenuInput inputIcon={<FacultyIcon/>}
-                           label={'学院'}
+                           label={'Faculty'}
                            values={this.state.faculty}
                            onChange={this.onFacultyChange}
                            options={this.state.facultyOptions}
@@ -185,7 +185,7 @@ class FriendsForm extends React.Component {
                            errorText={this.state.facultyError}
                 />
                 <MenuInput inputIcon={<RelationshipIcon color={PRIMARY_YELLOW} />}
-                           label={'情感状况'}
+                           label={'Relationship Status'}
                            values={this.state.relationship}
                            onChange={this.onRelationshipChange}
                            options={this.state.relationshipOptions}
@@ -197,7 +197,7 @@ class FriendsForm extends React.Component {
                 />
                 <TextInput classNames={'form-input-field'}
                            inputIcon={<MottoIcon color={PRIMARY_YELLOW}/>}
-                           label={'个性签名'}
+                           label={'Life Motto'}
                            onChange={this.onMottoChange}
                            value={this.state.motto}
                            errorText={this.state.mottoError}
@@ -210,7 +210,7 @@ class FriendsForm extends React.Component {
                 />
                 <MenuInput classNames={'form-input-field'}
                            inputIcon={<TagIcon color={PRIMARY_YELLOW}/>}
-                           label={'标签'}
+                           label={'Tags'}
                            values={this.state.tags}
                            onChange={this.onTagChange}
                            options={this.state.tagsOptions}

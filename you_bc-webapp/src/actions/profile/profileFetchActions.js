@@ -84,9 +84,9 @@ export const fetchPersonalInfo = () => dispatch => {
             let sex = '';
             if (response.data.sex) {
                 if (response.data.sex === 1) {
-                    sex = '男';
+                    sex = 'Male';
                 } else if (response.data.sex === 2) {
-                    sex = '女';
+                    sex = 'Female';
                 }
             }
             dispatch(receivePersonalInfo({
