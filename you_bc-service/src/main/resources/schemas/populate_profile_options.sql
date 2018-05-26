@@ -15,20 +15,15 @@ INSERT INTO classmates_courses(course) VALUE ('MATH 221');
 INSERT INTO classmates_courses(course) VALUE ('MATH 101');
 
 # classmates tags
-INSERT INTO classmates_tags(tag) VALUE ('自习');
-INSERT INTO classmates_tags(tag) VALUE ('上课');
-INSERT INTO classmates_tags(tag) VALUE ('作业');
-INSERT INTO classmates_tags(tag) VALUE ('写代码');
-INSERT INTO classmates_tags(tag) VALUE ('复习');
-INSERT INTO classmates_tags(tag) VALUE ('预习');
-INSERT INTO classmates_tags(tag) VALUE ('读书');
-INSERT INTO classmates_tags(tag) VALUE ('泡图书馆');
-INSERT INTO classmates_tags(tag) VALUE ('泡咖啡厅');
-INSERT INTO classmates_tags(tag) VALUE ('看电影');
-INSERT INTO classmates_tags(tag) VALUE ('看电视剧');
-INSERT INTO classmates_tags(tag) VALUE ('看动画片');
-INSERT INTO classmates_tags(tag) VALUE ('看美妆');
-INSERT INTO classmates_tags(tag) VALUE ('玩游戏');
+INSERT INTO classmates_tags(tag) VALUE ('Self-Study');
+INSERT INTO classmates_tags(tag) VALUE ('Taking Courses');
+INSERT INTO classmates_tags(tag) VALUE ('Homework');
+INSERT INTO classmates_tags(tag) VALUE ('Coding');
+INSERT INTO classmates_tags(tag) VALUE ('Final');
+INSERT INTO classmates_tags(tag) VALUE ('Review');
+INSERT INTO classmates_tags(tag) VALUE ('Reading');
+INSERT INTO classmates_tags(tag) VALUE ('Library');
+INSERT INTO classmates_tags(tag) VALUE ('Cafe');
 
 # location
 INSERT INTO roommates_locations(location) VALUE ('West Vancouver');
@@ -36,20 +31,25 @@ INSERT INTO roommates_locations(location) VALUE ('On Campus');
 INSERT INTO roommates_locations(location) VALUE ('Richmond');
 
 # hometown
-INSERT INTO roommates_hometown(hometown) VALUE ('北京');
-INSERT INTO roommates_hometown(hometown) VALUE ('上海');
-INSERT INTO roommates_hometown(hometown) VALUE ('重庆');
+INSERT INTO roommates_hometown(hometown) VALUE ('Vancouver');
+INSERT INTO roommates_hometown(hometown) VALUE ('Seattle');
+INSERT INTO roommates_hometown(hometown) VALUE ('Beijing');
+INSERT INTO roommates_hometown(hometown) VALUE ('Shanghai');
+INSERT INTO roommates_hometown(hometown) VALUE ('NYC');
+INSERT INTO roommates_hometown(hometown) VALUE ('Toronto');
+INSERT INTO roommates_hometown(hometown) VALUE ('Alberta');
+INSERT INTO roommates_hometown(hometown) VALUE ('Calgary');
 
 # roommates tags
-INSERT INTO roommates_tags(tag) VALUE ('爱干净');
-INSERT INTO roommates_tags(tag) VALUE ('早起');
-INSERT INTO roommates_tags(tag) VALUE ('迟睡');
-INSERT INTO roommates_tags(tag) VALUE ('比较乱');
-INSERT INTO roommates_tags(tag) VALUE ('比较脏');
-INSERT INTO roommates_tags(tag) VALUE ('随意');
-INSERT INTO roommates_tags(tag) VALUE ('晚上音乐');
-INSERT INTO roommates_tags(tag) VALUE ('爱健身');
-INSERT INTO roommates_tags(tag) VALUE ('老打呼');
+INSERT INTO roommates_tags(tag) VALUE ('Clean Person');
+INSERT INTO roommates_tags(tag) VALUE ('Morning Person');
+INSERT INTO roommates_tags(tag) VALUE ('Night Owl');
+INSERT INTO roommates_tags(tag) VALUE ('Messy');
+INSERT INTO roommates_tags(tag) VALUE ('Hi Five');
+INSERT INTO roommates_tags(tag) VALUE ('Nerdy');
+INSERT INTO roommates_tags(tag) VALUE ('Music Lover');
+INSERT INTO roommates_tags(tag) VALUE ('Gym');
+INSERT INTO roommates_tags(tag) VALUE ('Snoring');
 
 # faculty
 INSERT INTO faculties(faculty) VALUE ('Science');
@@ -57,16 +57,14 @@ INSERT INTO faculties(faculty) VALUE ('Forestry');
 INSERT INTO faculties(faculty) VALUE ('Arts');
 
 # relationship
-INSERT INTO relationship_status(relationship) VALUE ('单身');
-INSERT INTO relationship_status(relationship) VALUE ('热恋中');
+INSERT INTO relationship_status(relationship) VALUE ('Single');
+INSERT INTO relationship_status(relationship) VALUE ('In Love');
 
 # friends tags
-INSERT INTO friends_tags(tag) VALUE ('打球');
-INSERT INTO friends_tags(tag) VALUE ('爬山');
-INSERT INTO friends_tags(tag) VALUE ('搞基');
-INSERT INTO friends_tags(tag) VALUE ('看片儿');
-INSERT INTO friends_tags(tag) VALUE ('看电影');
-INSERT INTO friends_tags(tag) VALUE ('篮球🏀');
-INSERT INTO friends_tags(tag) VALUE ('解算法');
-INSERT INTO friends_tags(tag) VALUE ('学习');
+INSERT INTO friends_tags(tag) VALUE ('Basketball');
+INSERT INTO friends_tags(tag) VALUE ('Hiking');
+INSERT INTO friends_tags(tag) VALUE ('Movie');
+INSERT INTO friends_tags(tag) VALUE ('Football');
+INSERT INTO friends_tags(tag) VALUE ('Soccer');
+INSERT INTO friends_tags(tag) VALUE ('Study');
 
