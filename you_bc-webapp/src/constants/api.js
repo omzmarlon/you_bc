@@ -17,14 +17,8 @@ export const REGISTER = "/signup";
 export const VERIFICATION = '/verification';
 
 // APIs
-
 export function requestUrl(api) {
-    if (process.env.NODE_ENV === 'production') {
-        //TODO: make url configurable
-        return "http://localhost:8080" + api;
-    } else {
-        return "http://localhost:8080" + api;
-    }
+    return process.apiServer + api;
 }
 
 export const LOGIN_API = "/login";

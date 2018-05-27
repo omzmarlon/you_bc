@@ -4,7 +4,7 @@ export const showInfoBar  = (infoBarMessage) => dispatch => {
     dispatch({type: SHOW_INFO_BAR, infoBarMessage});
     setTimeout(
         () => dispatch(hideInfoBar()),
-        1500 // TODO: parameterize
+        process.globalErrorMsgDelay
     )
 };
 export const hideInfoBar = () => ({type: HIDE_INFO_BAR});
