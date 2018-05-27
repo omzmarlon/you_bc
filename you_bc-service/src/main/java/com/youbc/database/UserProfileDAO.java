@@ -98,7 +98,6 @@ public class UserProfileDAO {
     }
 
     public void createNewFormLoginUser(String username, String password, String sex) {
-        // TODO request validation for sex
         Integer sexInt = Integer.parseInt(sex);
         UserProfileRecord record1 = dslContext.insertInto(USER_PROFILE)
                 .set(USER_PROFILE.USERNAME, username)
@@ -110,7 +109,6 @@ public class UserProfileDAO {
         initStudentVerification(record1.getUserId());
     }
 
-    // TODO: keep or remove student verification
     private void initStudentVerification(Integer userID) {
         dslContext
                 .insertInto(STUDENT_VERIFICATION)

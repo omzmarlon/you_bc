@@ -21,7 +21,6 @@ public class ClassmateCandidate extends BasicCandidate {
             String horoscope,
             double matchRate,
             String major,
-            String year,
             Set<String> courses,
             String studyAbility,
             Set<String> tags
@@ -31,17 +30,12 @@ public class ClassmateCandidate extends BasicCandidate {
 
         this.courses = courses;
         this.major = major;
-        this.year = year;
         this.studyAbility = studyAbility;
         this.tags = tags;
     }
 
     public String getMajor() {
         return major;
-    }
-
-    public String getYear() {
-        return year;
     }
 
     public Set<String> getCourses() {
