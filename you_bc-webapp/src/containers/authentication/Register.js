@@ -11,11 +11,12 @@ import {LOGIN, PRE_APP} from "../../constants/api";
 import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
-import {loginComplete, loginPostRequest, registerPostRequest} from "../../actions/global/authenticationActions";
+import {loginComplete} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
 import LocalStorage from "../../utils/LocalStorage";
 import {saveAuthToken} from "../../utils/AuthService";
+import {postLoginRequest, postRegisterRequest} from "../../requests/authenticationRequests";
 
 const spinnerStyle = {
     position: 'absolute',
@@ -47,7 +48,7 @@ class Register extends Component {
     register() {
         let {dispatch} = this.props;
         dispatch(showGlobalSpinner());
-        registerPostRequest(this.state.username, this.state.password, this.state.gender)
+        postRegisterRequest(this.state.username, this.state.password, this.state.gender)
             .then(
                 response => {
                     this.loginOnRegisterSuccess();
@@ -71,7 +72,7 @@ class Register extends Component {
 
     loginOnRegisterSuccess() {
         let {dispatch} = this.props;
-        loginPostRequest(this.state.username, this.state.password)
+        postLoginRequest(this.state.username, this.state.password)
             .then(
                 response => {
                     dispatch(hideGlobalSpinner());

@@ -18,13 +18,13 @@ const ProfileTabBar = (props) => {
                         onClick={props.onTabMain}
                         label={'Profile'}
                         icon={<Home color={PRIMARY_GREEN} />}
-                        labelStyle={{color: props.panelIndex===0?'#f65314':'white'}}
+                        labelStyle={{color: props.panelIndex===0?'white':'grey'}}
             />
             <FlatButton style={buttonSize}
                         onClick={props.onTabMatching}
                         icon={<Recent color={PRIMARY_GREEN} />}
                         label={'Matched'}
-                        labelStyle={{color: props.panelIndex===1?'#f65314':'white'}}
+                        labelStyle={{color: props.panelIndex===1?'white':'grey'}}
             />
         </div>
     );

@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {authorizedConfig, requestUrl, VERIFICATION_API} from "../constants/api";
 
-export const fetchVerificationRequest = () => (
+export const getVerificationRequest = () => (
     axios.get(requestUrl(VERIFICATION_API), authorizedConfig())
 );
 
-export const submitVerificationCode = (verificationCode) => (
+export const postVerificationCodeRequest = (verificationCode) => (
     axios.post(requestUrl(VERIFICATION_API), {verificationCode}, authorizedConfig())
 );

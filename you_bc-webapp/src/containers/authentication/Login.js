@@ -11,10 +11,11 @@ import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/col
 import {PRE_APP, REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import FacebookIcon from "../../components/common/svg/Facebook";
-import {loginPostRequest, loginRequest, loginComplete} from "../../actions/global/authenticationActions";
+import {loginRequest, loginComplete} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
 import {saveAuthToken} from "../../utils/AuthService";
+import {postLoginRequest} from "../../requests/authenticationRequests";
 
 class Login extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class Login extends Component {
 
         dispatch(showGlobalSpinner());
         dispatch(loginRequest());
-        loginPostRequest(this.state.username, this.state.password)
+        postLoginRequest(this.state.username, this.state.password)
             .then(
                 response => {
                     dispatch(hideGlobalSpinner());

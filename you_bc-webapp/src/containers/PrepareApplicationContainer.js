@@ -13,7 +13,7 @@ import AuthTemplate from "../components/authentication/AuthTemplate";
 import {getAuthToken} from "../utils/AuthService";
 import {fetchVerificationStatus, updateVerificationStatus} from "../actions/global/verificationActions";
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../actions/global/globalActions";
-import {submitVerificationCode} from "../requests/verificationRequests";
+import {postVerificationCodeRequest} from "../requests/verificationRequests";
 import VerificationComponent from "./verification/VerificationComponent";
 import VerificationStatus from "../utils/VerificationStatus";
 
@@ -30,7 +30,7 @@ class PrepareApplicationContainer extends React.Component{
         let {dispatch} = this.props;
 
         dispatch(showGlobalSpinner());
-        submitVerificationCode(code)
+        postVerificationCodeRequest(code)
             .then(response => {
                 dispatch(hideGlobalSpinner());
                 dispatch(updateVerificationStatus(VerificationStatus.VERIFICATION_SUCCESS));

@@ -1,16 +1,9 @@
 import * as ActionTypes from "../actionTypes";
-import axios from 'axios';
-import {AUTH_STATUS_API, authorizedConfig, LOGIN_API, REGISTER_API, requestUrl} from "../../constants/api";
+import {UPDATE_AUTH_DETAIL, UPDATE_AUTH_STATUS_CODE} from "../actionTypes";
 import {showInfoBar} from "./globalActions";
-import {showGlobalSpinner, hideGlobalSpinner} from "../../actions/global/globalActions";
 import LocalStorage from "../../utils/LocalStorage";
 import AuthStatus from "../../utils/AuthStatus";
-import {UPDATE_AUTH_STATUS_CODE} from "../actionTypes";
-import {UPDATE_AUTH_DETAIL} from "../actionTypes";
-
-export const loginPostRequest = (username, password) => (
-    axios.post(requestUrl(LOGIN_API), {username, password})
-);
+import {getAuthStatusRequest} from "../../requests/authenticationRequests";
 
 export const loginRequest = () => ({type: ActionTypes.LOGIN_REQUEST});
 export const loginComplete = (statusCode, message) => (
@@ -19,10 +12,6 @@ export const loginComplete = (statusCode, message) => (
         statusCode,
         message
     }
-);
-
-export const registerPostRequest = (username, password, sex) => (
-    axios.post(requestUrl(REGISTER_API), {username, password, sex})
 );
 
 export const updateAuthStatusCode = (authStatusCode) => ({
@@ -34,7 +23,7 @@ export const updateAuthDetail = (authDetail) => ({
 });
 
 export const  fetchAuthStatus = () => dispatch => {
-    axios.get(requestUrl(AUTH_STATUS_API), authorizedConfig())
+    getAuthStatusRequest()
         .then(
             response => {
                 const {username, newToken} = response.data;

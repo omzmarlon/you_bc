@@ -33,7 +33,7 @@ class MatchingList extends React.Component {
                     this.props.matchedUsers.length?
                         this.renderMatchedUsers():
                         <div className={'matching-list-no-user'}>
-                            <p className={'matching-list-label'}>You Haven't Matched Anyone Yet :(</p>
+                            <p className={'matching-list-label'}>You Haven't Matched With Anyone Yet :(</p>
                             <p className={'matching-list-label'}>Keep Swiping!</p>
                         </div>
                 }
