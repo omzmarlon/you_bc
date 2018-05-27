@@ -1,7 +1,6 @@
 const _ = require('lodash');
 import {ExceedMaxItemsError} from './Errors';
 
-// TODO: refactor on the usage of this function
 export function isIOS() {
 
     const iDevices = [

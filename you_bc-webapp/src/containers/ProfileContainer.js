@@ -26,7 +26,6 @@ import VerificationStatus from "../utils/VerificationStatus";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        // todo: wrap these into a PromiseAll OR keep them separate but have multiple isFetching
         this.props.fetchClassmatesInfo();
         this.props.fetchFriendsInfo();
         this.props.fetchRoommatesInfo();

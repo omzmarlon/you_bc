@@ -33,8 +33,8 @@ class HomePageContainer extends Component {
 
     componentDidMount() {
         const { dispatch } = this.props;
-        // todo: call these so that users info are fetch(instead of waiting until going to profile page)
-        // todo: but do we need a loading component?
+
+        // Initial load of profile data
         dispatch(fetchClassmatesInfo());
         dispatch(fetchFriendsInfo());
         dispatch(fetchRoommatesInfo());
