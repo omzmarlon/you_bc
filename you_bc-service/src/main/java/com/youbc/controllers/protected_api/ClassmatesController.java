@@ -38,7 +38,6 @@ public class ClassmatesController {
 
     @RequestMapping(path = Endpoints.CLASSMATE_CANDIDATES, method = RequestMethod.GET)
     public Set<BasicCandidate> getClassmateCandidates(HttpServletRequest request) {
-        // TODO: can use annotation to get parameter
         Integer amount = Integer.parseInt(request.getParameter("amount"));
         String gender = request.getParameter("gender");
         Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -50,7 +49,6 @@ public class ClassmatesController {
     @RequestMapping(path = Endpoints.LIKE_CLASSMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void postLikeClassmates(HttpServletRequest request, @PathVariable("user_id")Integer likee) {
-        // TODO: should use json body
         Integer liker = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         likeAndDislikeDao.classmatesLike(liker, likee);
     }
@@ -58,7 +56,6 @@ public class ClassmatesController {
     @RequestMapping(path = Endpoints.DISLIKE_CLASSMATES, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void postDislikeClassmates(HttpServletRequest request, @PathVariable("user_id") Integer dislikee) {
-        // TODO: should use json body
         Integer disliker = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         likeAndDislikeDao.classmatesDislike(disliker, dislikee);
     }

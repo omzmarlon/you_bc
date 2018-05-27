@@ -1,10 +1,12 @@
 'use strict';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {CLASSMATES, FRIENDS, PERSONAL, ROOMMATES} from "../../../constants/api";
+import {withRouter} from "react-router-dom";
+import {CLASSMATES, FRIENDS, PERSONAL, PRE_APP, ROOMMATES} from "../../../constants/api";
 //colors
 import {
-    PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED, SECONDARY_YELLOW
+    PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED,
+    SECONDARY_YELLOW
 } from "../../../styles/constants/colors";
 //components
 import Tag from "../../common/Tag";
@@ -13,6 +15,7 @@ import ProfileCard from "../../common/card/ProfileCard";
 import FormGroup from './FormGroup';
 import InfoRowTitle from "../../common/InfoRowTitle";
 import AvatarBar from "./AvatarBar";
+import {RaisedButton} from "material-ui";
 //icons
 import AccountIcon from 'material-ui/svg-icons/action/account-circle';
 import WeChatIcon from "../../common/svg/WeChatIcon";
@@ -33,6 +36,7 @@ import {
     showClassMatesForm, showFriendsForm, showPersonalForm, showRoommatesForm
 } from "../../../actions/profile/profileUIActions";
 import MixGenderIcon from "../../common/svg/MixGenderIcon";
+import {removeAuthToken} from "../../../utils/AuthService";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -40,7 +44,12 @@ const rightElementContentList = {display: 'flex'};
 const tagSpacing = {marginRight: 3};
 const profileCardTruncateTextSpecial = {maxWidth: '50vw'};
 
-const ProfileMain = (props) => (
+const signout = (history) => {
+    removeAuthToken();
+    history.push("/");
+};
+
+const ProfileMain = ({history, ...props}) => (
     <div>
         <div style={cardMargin}>
             <AvatarBar/>
@@ -115,9 +124,9 @@ const ProfileMain = (props) => (
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
                                     props.classmates.tags.length !== 0 ?
-                                    props.classmates.tags.map((t, i) =>
-                                        <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_RED} textColor={PRIMARY_RED}/>
-                                    ) : "Unknown"
+                                        props.classmates.tags.map((t, i) =>
+                                            <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_RED} textColor={PRIMARY_RED}/>
+                                        ) : "Unknown"
                                 }
                             </div>
                     }
@@ -153,12 +162,12 @@ const ProfileMain = (props) => (
                                 {
                                     props.friends.tags.length !== 0 ?
                                         props.friends.tags.map((t, i) =>
-                                        <Tag style={tagSpacing}
-                                             key={i}
-                                             text={t}
-                                             bkgColor={SECONDARY_YELLOW}
-                                             textColor={PRIMARY_YELLOW}
-                                        />) :
+                                            <Tag style={tagSpacing}
+                                                 key={i}
+                                                 text={t}
+                                                 bkgColor={SECONDARY_YELLOW}
+                                                 textColor={PRIMARY_YELLOW}
+                                            />) :
                                         "Unknown"
                                 }
                             </div>
@@ -194,13 +203,23 @@ const ProfileMain = (props) => (
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
                                     props.roommates.tags.length !== 0 ?
-                                    props.roommates.tags.map((t, i) =>
-                                        <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_BLUE} textColor={PRIMARY_BLUE}/>
-                                    ) : "Unknown"
+                                        props.roommates.tags.map((t, i) =>
+                                            <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_BLUE} textColor={PRIMARY_BLUE}/>
+                                        ) : "Unknown"
                                 }
                             </div>
                     }
                 ]}
+            />
+        </div>
+        <div style={{width: "90%", margin: "auto"}}>
+            <RaisedButton
+                onClick={() => {signout(history)}}
+                backgroundColor={PRIMARY_GREEN}
+                fullWidth={true}
+                style={{marginBottom: 12}}
+                label="Sign out"
+                labelColor={PRIMARY_WHITE}
             />
         </div>
         <FormGroup />
@@ -242,4 +261,4 @@ const mapDispatchToProps = (dispatch) => (
     )
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileMain);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileMain));
