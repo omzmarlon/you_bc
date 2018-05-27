@@ -2,12 +2,12 @@ import {
     RECEIVE_CLASSMATES_INFO, RECEIVE_FRIENDS_INFO, RECEIVE_MATCHED_USERS,
     RECEIVE_PERSONAL_INFO, RECEIVE_ROOMMATES_INFO
 } from "../actionTypes";
-import {showInfoBar} from "../global/globalActions";
 import {
     getClassmatesProfileRequest,
     getFriendsProfileRequest, getMatchedUsersRequest, getPersonalProfileRequest,
     getRoommatesProfileRequest
 } from "../../requests/profileFetchRequests";
+import {defaultErrorHandler} from "../../utils/ErrorHandling";
 
 
 
@@ -24,11 +24,7 @@ export const fetchClassmatesInfo = () => dispatch => {
                 tags: response.data.tags
             }))
         }).catch( err => {
-            // TODO: centralize error handling
-            //dispatch(showInfoBar("未填写找课友信息"));
-            if (err.response.data.error) {
-                console.log(err.response.data.error);
-            }
+            defaultErrorHandler(err, dispatch);
         });
 };
 
@@ -45,11 +41,7 @@ export const fetchRoommatesInfo = () => dispatch => {
                 tags: response.data.tags,
             }))
         }).catch( err => {
-        // TODO: centralize error handling
-            //dispatch(showInfoBar("未填写找室友信息"));
-            if (err.response.data.error) {
-                console.log(err.response.data.error);
-            }
+            defaultErrorHandler(err, dispatch);
         });
 };
 
@@ -66,12 +58,8 @@ export const fetchFriendsInfo = () => dispatch => {
                 tags: response.data.tags,
             }));
         }).catch( err => {
-        // TODO: centralize error handling
-        //dispatch(showInfoBar("未填写找X友信息"));
-        if (err.response.data.error) {
-            console.log(err.response.data.error);
-        }
-    });
+            defaultErrorHandler(err, dispatch);
+        });
 };
 
 // user fetch for personal info data
@@ -97,11 +85,7 @@ export const fetchPersonalInfo = () => dispatch => {
                 weChatId: response.data.weChatId? response.data.weChatId: '',
             }));
         }, err => {
-            // TODO: centralize error handling
-            dispatch(showInfoBar("Failed to fetch basic info"));
-            if (err.response.data.error) {
-                console.log(err.response.data.error);
-            }
+            defaultErrorHandler(err, dispatch, "Failed to fetch basic info");
         });
 };
 
@@ -126,11 +110,7 @@ export const fetchMatchedUsers = () => dispatch => {
                 dispatch(receiveMatchedUsers(users, newMatch));
             },
             err => {
-                // TODO: centralize error handling
-                dispatch(showInfoBar("Failed to fetch matched users"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, dispatch, "Failed to fetch matched users");
             }
         );
 };

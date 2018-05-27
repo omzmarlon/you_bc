@@ -19,6 +19,7 @@ import {getFacultyOptions, getFriendsTags, getRelationshipOptions} from "../../.
 import {showInfoBar} from "../../../actions/global/globalActions";
 import {chooseItems, isIOS} from "../../../utils/Util";
 import {ExceedMaxItemsError} from "../../../utils/Errors";
+import {defaultErrorHandler} from "../../../utils/ErrorHandling";
 
 class FriendsForm extends React.Component {
     constructor(props) {
@@ -64,31 +65,21 @@ class FriendsForm extends React.Component {
                 this.setState({facultyOptions: response.data});
             })
             .catch(err=> {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("Failed to fetch faculties"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Failed to fetch faculties");
             });
         getRelationshipOptions()
             .then(response => {
                 this.setState({relationshipOptions: response.data});
             })
             .catch(err=> {
-                store.dispatch(showInfoBar("Failed to fetch relationship options"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Failed to fetch relationship options");
             });
         getFriendsTags()
             .then(response => {
                 this.setState({tagsOptions: response.data});
             })
             .catch(err=> {
-                store.dispatch(showInfoBar("Failed to fetch tags"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Failed to fetch tags");
             });
     }
 
@@ -129,7 +120,6 @@ class FriendsForm extends React.Component {
 
     onDoneHandler() {
         if (this.state.weChatId && this.state.faculty && this.state.relationship && this.state.motto && this.state.tags.length) {
-            // TODO: don't throw the entire state in
             this.props.onDone(this.state);
             this.props.onWeChatIdDone(this.state.weChatId);
             this.props.onClose();
@@ -243,7 +233,7 @@ FriendsForm.propTypes = {
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
 };
-//TODO: use connect instead
+
 FriendsForm.contextTypes = {
     store: PropTypes.object
 };

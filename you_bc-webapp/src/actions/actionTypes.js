@@ -52,8 +52,6 @@ export const RECEIVE_MORE_CANDIDATES = 'RECEIVE_MORE_CANDIDATES';
 export const UPDATE_VERIFICATION_STATUS = 'UPDATE_VERIFICATION_STATUS';
 
 /************************ authentication actions ************************/
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_COMPLETE = 'LOGIN_COMPLETE';
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const UPDATE_AUTH_DETAIL = 'UPDATE_AUTH_DETAIL';
 export const UPDATE_AUTH_STATUS_CODE = "UPDATE_AUTH_STATUS_CODE";

@@ -6,16 +6,6 @@ import AuthStatus from "../../utils/AuthStatus";
 import {removeAuthToken} from "../../utils/AuthService";
 import {getAuthStatusRequest} from "../../requests/authenticationRequests";
 
-
-export const loginRequest = () => ({type: ActionTypes.LOGIN_REQUEST});
-export const loginComplete = (statusCode, message) => (
-    {
-        type: ActionTypes.LOGIN_COMPLETE,
-        statusCode,
-        message
-    }
-);
-
 export const updateAuthStatusCode = (authStatusCode) => ({
     type: UPDATE_AUTH_STATUS_CODE, authStatusCode
 });

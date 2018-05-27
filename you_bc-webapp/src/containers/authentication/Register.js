@@ -11,12 +11,13 @@ import {LOGIN, PRE_APP} from "../../constants/api";
 import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
-import {loginComplete} from "../../actions/global/authenticationActions";
+import {updateAuthStatusCode} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
 import LocalStorage from "../../utils/LocalStorage";
 import {saveAuthToken} from "../../utils/AuthService";
 import {postLoginRequest, postRegisterRequest} from "../../requests/authenticationRequests";
+import {defaultErrorHandler} from "../../utils/ErrorHandling";
 
 const spinnerStyle = {
     position: 'absolute',
@@ -54,18 +55,8 @@ class Register extends Component {
                     this.loginOnRegisterSuccess();
                 },
                 error => {
-                    // todo centralize error handling
-                    // todo: centralize logging
-                    console.log(error.response.data.message);
-                    dispatch(hideGlobalSpinner());
+                    defaultErrorHandler(error, dispatch, "Register Failed", [hideGlobalSpinner()]);
                     this.setState({usernameErrorText: "User already exists"});
-                }
-            )
-            .catch(
-                error => {
-                    // todo centralize error handling
-                    dispatch(hideGlobalSpinner());
-                    dispatch(showInfoBar('Failed to create new account'));
                 }
             );
     }
@@ -80,26 +71,22 @@ class Register extends Component {
                         const jwtToken = response.data.token;
                         saveAuthToken(jwtToken);
                         dispatch(showInfoBar("Login Success!"));
-                        dispatch(loginComplete(AuthStatus.AUTH_SUCCESS, 'OK'));
+                        dispatch(updateAuthStatusCode(AuthStatus.AUTH_SUCCESS));
                     } else {
                         dispatch(showInfoBar("Could Not Get Authentication Token"));
                     }
                 },
                 error => {
-                    // todo centralize error handling
-                    console.log(error.response.data.message); // todo centralize logging
-                    dispatch(hideGlobalSpinner());
-                    dispatch(loginComplete(AuthStatus.UNAUTHORIZED, error.response.data.message));
-                    dispatch(showInfoBar('Registration successful, but login failed'));
-                }
-            )
-            .catch(
-                error => {
-                    // todo centralize error handling
-                    // todo remove console log
-                    console.log(error);
-                    dispatch(hideGlobalSpinner());
-                    dispatch(showInfoBar('Registration successful, but login failed'));
+
+                    defaultErrorHandler(
+                        error,
+                        dispatch,
+                        "Registration successful, but login failed",
+                        [
+                            hideGlobalSpinner(),
+                            updateAuthStatusCode(AuthStatus.UNAUTHORIZED)
+                        ]
+                    )
                 }
             );
     }

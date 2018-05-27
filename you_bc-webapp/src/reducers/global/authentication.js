@@ -11,13 +11,8 @@ const initial = {
 
 const authentication = (state = initial, action) => {
     switch (action.type) {
-        case ActionTypes.LOGIN_REQUEST:
-            // TODO Do we need this?
-            return state;
         case ActionTypes.REGISTER_REQUEST:
             return state;
-        case ActionTypes.LOGIN_COMPLETE: // todo: do we still need this given updateAuthStatusCode?
-            return {...state, authStatusCode: action.statusCode, authMessage: action.message};
         case ActionTypes.UPDATE_AUTH_STATUS_CODE:
             return {
                 ...state,

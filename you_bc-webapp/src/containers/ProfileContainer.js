@@ -22,7 +22,6 @@ import {
     fetchRoommatesInfo
 } from "../actions/profile/profileFetchActions";
 // utils
-import AuthStatus from '../utils/AuthStatus';
 import VerificationStatus from "../utils/VerificationStatus";
 
 class ProfileContainer extends React.Component {

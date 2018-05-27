@@ -21,6 +21,7 @@ import {getHometownOptions, getLocationsOptions, getRoommatesTags} from "../../.
 import {showInfoBar} from "../../../actions/global/globalActions";
 import {chooseItems, isIOS} from "../../../utils/Util";
 import {ExceedMaxItemsError} from "../../../utils/Errors";
+import {defaultErrorHandler} from "../../../utils/ErrorHandling";
 
 class RoommatesForm extends React.Component {
     constructor(props) {
@@ -67,22 +68,14 @@ class RoommatesForm extends React.Component {
                 this.setState({locationOptions: response.data});
             })
             .catch(err => {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("Fetching Location Failed"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Fetching Location Failed");
             });
         getHometownOptions()
             .then(response => {
                 this.setState({hometownOptions: response.data});
             })
             .catch(err => {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("Fetching Hometown Failed"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Fetching Hometown Failed");
             });
         getRoommatesTags()
             .then(response => {
@@ -91,11 +84,7 @@ class RoommatesForm extends React.Component {
                 });
             })
             .catch(err=> {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("Fetching Roommates Failed"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Fetching Roommates Failed");
             });
 
     }
@@ -253,7 +242,7 @@ RoommatesForm.propTypes = {
     weChatId: PropTypes.string,
     onWeChatIdDone: PropTypes.func
 };
-//TODO: use connect instead
+
 RoommatesForm.contextTypes = {
     store: PropTypes.object
 };

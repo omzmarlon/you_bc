@@ -11,11 +11,12 @@ import {PRIMARY_GREEN, PRIMARY_WHITE, FACEBOOK} from "../../styles/constants/col
 import {PRE_APP, REGISTER} from "../../constants/api";
 import PokeEgg from "../../../public/images/poke_egg.png";
 import FacebookIcon from "../../components/common/svg/Facebook";
-import {loginRequest, loginComplete} from "../../actions/global/authenticationActions";
+import {updateAuthStatusCode} from "../../actions/global/authenticationActions";
 import AuthStatus from '../../utils/AuthStatus';
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
 import {saveAuthToken} from "../../utils/AuthService";
 import {postLoginRequest} from "../../requests/authenticationRequests";
+import {defaultErrorHandler} from "../../utils/ErrorHandling";
 
 class Login extends Component {
     constructor(props) {
@@ -36,7 +37,6 @@ class Login extends Component {
         let {dispatch} = this.props;
 
         dispatch(showGlobalSpinner());
-        dispatch(loginRequest());
         postLoginRequest(this.state.username, this.state.password)
             .then(
                 response => {
@@ -45,27 +45,14 @@ class Login extends Component {
                         const jwtToken = response.data.token;
                         saveAuthToken(jwtToken);
                         dispatch(showInfoBar("Login Success!"));
-                        dispatch(loginComplete(200, 'OK'));
+                        dispatch(updateAuthStatusCode(AuthStatus.AUTH_SUCCESS));
                     } else {
                         dispatch(showInfoBar("Could Not Get Authentication Token"));
                     }
                 },
                 error => {
-                    // todo centralize error handling
-                    console.log(error.response.data.message); // todo centralize logging
-                    dispatch(hideGlobalSpinner());
-                    dispatch(loginComplete(401, error.response.data.message));
-                    dispatch(showInfoBar('Login failed'));
+                    defaultErrorHandler(error, dispatch, 'Login Failed', [hideGlobalSpinner(), updateAuthStatusCode(AuthStatus.UNAUTHORIZED)], false);
                     this.setState({errorText: 'Invalid username or password'});
-                }
-            )
-            .catch(
-                error => {
-                    // todo centralize error handling
-                    // todo remove console log
-                    console.log(error);
-                    dispatch(hideGlobalSpinner());
-                    dispatch(showInfoBar('Login failed'));
                 }
             );
 

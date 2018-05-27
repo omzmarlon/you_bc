@@ -10,6 +10,7 @@ import {
     FETCH_ROOMMATES_API,
     requestUrl
 } from "../../constants/api";
+import {defaultErrorHandler} from "../../utils/ErrorHandling";
 
 /**
  * fetch data (Async Action)
@@ -27,10 +28,8 @@ export const fetchCandidates = (api, quantity, gender = 'mix') => dispatch => {
                 dispatch(fetchCandidatesSuccess(candidates));
                 dispatch(initVisibleUsers());
             },
-            // todo: error handling
             error => {
-                dispatch(fetchCandidatesFailure());
-                dispatch(showInfoBar(error));
+                defaultErrorHandler(error, dispatch, "Could not fetch candidates", [fetchCandidatesFailure()]);
             }
         )
 };
@@ -55,9 +54,8 @@ export const fetchMoreCandidate = (api, quantity, gender) => dispatch => {
                 let candidates = response.data.map(json => populateData(json, api));
                 dispatch(receiveMoreCandidates(candidates))
             },
-            // todo: error handling
             error => {
-                dispatch(fetchCandidatesFailure());
+                defaultErrorHandler(error, dispatch, "Could Not Fetch Candidates", [fetchCandidatesFailure()]);
             }
         )
 };
@@ -73,7 +71,7 @@ export const likeCandidate = (likeAPI) => {
     axios.post(url, {}, authorizedConfig())
         .then(
             response => {},
-            error => showInfoBar(error.message)
+            error => defaultErrorHandler(error, dispatch, "Could Not Like")
         )
 };
 
@@ -86,7 +84,7 @@ export const dislikeCandidate = (dislikeAPI) => {
     axios.post(url, {}, authorizedConfig())
         .then(
             response => {},
-            error => showInfoBar(error.message)
+            error => defaultErrorHandler(error, dispatch, "Could Not dislike")
         )
 };
 

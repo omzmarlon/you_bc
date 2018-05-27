@@ -22,6 +22,7 @@ import {getClassmatesTags, getCourseOptions, getMajorOptions} from "../../../req
 import {showInfoBar} from "../../../actions/global/globalActions";
 import {chooseItems, isIOS} from "../../../utils/Util";
 import {ExceedMaxItemsError} from "../../../utils/Errors";
+import {defaultErrorHandler} from "../../../utils/ErrorHandling";
 
 class ClassmatesForm extends React.Component {
 
@@ -70,22 +71,14 @@ class ClassmatesForm extends React.Component {
                 this.setState({majorOptions: response.data});
             })
             .catch(err => {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("Failed to fetch major options"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Failed to fetch major options");
             });
         getClassmatesTags()
             .then(res => {
                 this.setState({tagsOptions: res.data});
             })
             .catch(err => {
-                // TODO: centralize error handling
-                store.dispatch(showInfoBar("Failed to fetch tags"));
-                if (err.response.data.error) {
-                    console.log(err.response.data.error);
-                }
+                defaultErrorHandler(err, store.dispatch, "Failed to fetch tags");
             });
 
     }
@@ -109,12 +102,7 @@ class ClassmatesForm extends React.Component {
                     this.setState({loadingCourseOptions: false});
                 })
                 .catch(err => {
-                    // TODO: centralize error handling
-                    store.dispatch(showInfoBar("Failed to fetch courses"));
-                    this.setState({loadingCourseOptions: false});
-                    if (err.response.data.error) {
-                        console.log(err.response.data.error);
-                    }
+                    defaultErrorHandler(err, store.dispatch, "Failed to fetch courses");
                 });
         }
     }
@@ -283,7 +271,6 @@ ClassmatesForm.propTypes = {
     onWeChatIdDone: PropTypes.func
 };
 
-//TODO: use connect instead
 ClassmatesForm.contextTypes = {
     store: PropTypes.object
 };

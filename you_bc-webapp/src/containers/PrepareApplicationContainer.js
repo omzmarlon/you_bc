@@ -16,6 +16,7 @@ import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../actions/glob
 import {postVerificationCodeRequest} from "../requests/verificationRequests";
 import VerificationComponent from "./verification/VerificationComponent";
 import VerificationStatus from "../utils/VerificationStatus";
+import {defaultErrorHandler} from "../utils/ErrorHandling";
 
 /**
  * This component acts as a middleware between user and protected pages.
@@ -23,7 +24,7 @@ import VerificationStatus from "../utils/VerificationStatus";
  * When all required states are
  */
 
-// TODO: refactor application preparatio into a pipeline model
+// TODO: Pipeline model for application state preparation
 class PrepareApplicationContainer extends React.Component{
 
     handleCodeSubmit(code) {
@@ -36,16 +37,7 @@ class PrepareApplicationContainer extends React.Component{
                 dispatch(updateVerificationStatus(VerificationStatus.VERIFICATION_SUCCESS));
                 dispatch(showInfoBar("Verification Success!"));
             }, error => {
-                // TODO centrolize error handling
-                dispatch(hideGlobalSpinner());
-                console.log(error);
-                dispatch(showInfoBar("Oops... That code didn't work"));
-            })
-            .catch(error => {
-                // TODO centrolize error handling
-                dispatch(hideGlobalSpinner());
-                console.log(error);
-                dispatch(showInfoBar("Oops... That code didn't work"));
+                defaultErrorHandler(error, dispatch, "Oops... That code didn't work", [hideGlobalSpinner()]);
             });
     }
 

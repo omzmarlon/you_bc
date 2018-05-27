@@ -44,7 +44,7 @@ public class AuthController {
         LOGGER.debug("Handling registration request: {}", registrationRequest);
 
         // validate sex value
-        if (!registrationRequest.getSex().equals("1") || !registrationRequest.getSex().equals("2")) {
+        if (!registrationRequest.getSex().equals("1") && !registrationRequest.getSex().equals("2")) {
             throw new YouBCBadRequest("Invalid sex value");
         }
 
