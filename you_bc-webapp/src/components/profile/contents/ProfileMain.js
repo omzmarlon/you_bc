@@ -155,7 +155,7 @@ const ProfileMain = (props) => (
                             style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}}
                             text={props.friends.motto || "Unknown"}
                             maxLength={22}
-                            modalTitle="个性签名"
+                            modalTitle="Signature"
                         />
                     },
                     {
