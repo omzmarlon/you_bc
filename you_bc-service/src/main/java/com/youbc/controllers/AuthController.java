@@ -1,6 +1,7 @@
 package com.youbc.controllers;
 
 import com.youbc.database.UserProfileDAO;
+import com.youbc.exceptions.YouBCBadRequest;
 import com.youbc.exceptions.YouBCNotFoundException;
 import com.youbc.requests.RegistrationRequest;
 import com.youbc.response.AuthStatusReponse;
@@ -40,7 +41,12 @@ public class AuthController {
     @PostMapping(value = Endpoints.SIGNUP_ENDPOINT)
     public ResponseEntity<String> register(@RequestBody RegistrationRequest registrationRequest) {
 
-        LOGGER.debug("Handling registration request {}", registrationRequest);
+        LOGGER.debug("Handling registration request: {}", registrationRequest);
+
+        // validate sex value
+        if (!registrationRequest.getSex().equals("1") || !registrationRequest.getSex().equals("2")) {
+            throw new YouBCBadRequest("Invalid sex value");
+        }
 
         userDAO.createNewFormLoginUser(
                 registrationRequest.getUsername(),

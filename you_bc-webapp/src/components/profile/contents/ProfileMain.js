@@ -1,20 +1,28 @@
 'use strict';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {CLASSMATES, FRIENDS, PERSONAL, ROOMMATES} from "../../../constants/api";
 //colors
 import {
-    PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED, SECONDARY_YELLOW
+    PRIMARY_BLUE,
+    PRIMARY_GREEN,
+    PRIMARY_RED,
+    PRIMARY_WHITE,
+    PRIMARY_YELLOW,
+    SECONDARY_BLUE,
+    SECONDARY_RED,
+    SECONDARY_YELLOW
 } from "../../../styles/constants/colors";
 //components
 import Tag from "../../common/Tag";
 import TruncateText from "../../common/TruncateText";
 import ProfileCard from "../../common/card/ProfileCard";
-import FormGroup from './FormGroup';
+import FormGroup from "./FormGroup";
 import InfoRowTitle from "../../common/InfoRowTitle";
 import AvatarBar from "./AvatarBar";
+import {RaisedButton} from "material-ui";
 //icons
-import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import AccountIcon from "material-ui/svg-icons/action/account-circle";
 import WeChatIcon from "../../common/svg/WeChatIcon";
 import MajorIcon from "../../common/svg/MajorIcon";
 import CourseIcon from "../../common/svg/CourseIcon";
@@ -24,15 +32,19 @@ import FacultyIcon from "../../common/svg/FacultyIcon";
 import RelationshipIcon from "../../common/svg/RelationshipIcon";
 import HometownIcon from "../../common/svg/HometownIcon";
 import LocationIcon from "../../common/svg/LocationIcon";
-import AgeIcon from 'material-ui/svg-icons/social/cake';
-import ConstellationIcon from 'material-ui/svg-icons/image/brightness-3';
+import AgeIcon from "material-ui/svg-icons/social/cake";
+import ConstellationIcon from "material-ui/svg-icons/image/brightness-3";
 //redux
-import { connect }  from 'react-redux'
-import { bindActionCreators } from 'redux';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import {
-    showClassMatesForm, showFriendsForm, showPersonalForm, showRoommatesForm
+    showClassMatesForm,
+    showFriendsForm,
+    showPersonalForm,
+    showRoommatesForm
 } from "../../../actions/profile/profileUIActions";
 import MixGenderIcon from "../../common/svg/MixGenderIcon";
+import {signOut} from "../../../actions/global/authenticationActions";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -115,9 +127,9 @@ const ProfileMain = (props) => (
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
                                     props.classmates.tags.length !== 0 ?
-                                    props.classmates.tags.map((t, i) =>
-                                        <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_RED} textColor={PRIMARY_RED}/>
-                                    ) : "Unknown"
+                                        props.classmates.tags.map((t, i) =>
+                                            <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_RED} textColor={PRIMARY_RED}/>
+                                        ) : "Unknown"
                                 }
                             </div>
                     }
@@ -143,7 +155,7 @@ const ProfileMain = (props) => (
                             style={{...rightElementSpaceApart, ...profileCardTruncateTextSpecial}}
                             text={props.friends.motto || "Unknown"}
                             maxLength={22}
-                            modalTitle="个性签名"
+                            modalTitle="Signature"
                         />
                     },
                     {
@@ -153,12 +165,12 @@ const ProfileMain = (props) => (
                                 {
                                     props.friends.tags.length !== 0 ?
                                         props.friends.tags.map((t, i) =>
-                                        <Tag style={tagSpacing}
-                                             key={i}
-                                             text={t}
-                                             bkgColor={SECONDARY_YELLOW}
-                                             textColor={PRIMARY_YELLOW}
-                                        />) :
+                                            <Tag style={tagSpacing}
+                                                 key={i}
+                                                 text={t}
+                                                 bkgColor={SECONDARY_YELLOW}
+                                                 textColor={PRIMARY_YELLOW}
+                                            />) :
                                         "Unknown"
                                 }
                             </div>
@@ -194,13 +206,23 @@ const ProfileMain = (props) => (
                             <div style={Object.assign({}, rightElementSpaceApart, rightElementContentList)}>
                                 {
                                     props.roommates.tags.length !== 0 ?
-                                    props.roommates.tags.map((t, i) =>
-                                        <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_BLUE} textColor={PRIMARY_BLUE}/>
-                                    ) : "Unknown"
+                                        props.roommates.tags.map((t, i) =>
+                                            <Tag style={tagSpacing} key={i} text={t} bkgColor={SECONDARY_BLUE} textColor={PRIMARY_BLUE}/>
+                                        ) : "Unknown"
                                 }
                             </div>
                     }
                 ]}
+            />
+        </div>
+        <div style={{width: "90%", margin: "auto"}}>
+            <RaisedButton
+                onClick={() => {props.signOut()}}
+                backgroundColor={PRIMARY_GREEN}
+                fullWidth={true}
+                style={{marginBottom: 12}}
+                label="Sign out"
+                labelColor={PRIMARY_WHITE}
             />
         </div>
         <FormGroup />
@@ -238,6 +260,7 @@ const mapDispatchToProps = (dispatch) => (
             openRoommatesEdit: showRoommatesForm,
             openFriendsEdit: showFriendsForm,
             openPersonalEdit: showPersonalForm,
+            signOut
         }, dispatch
     )
 );

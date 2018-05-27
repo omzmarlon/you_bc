@@ -23,4 +23,9 @@ public class VerificationRequest {
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
     }
+
+    @Override
+    public String toString() {
+        return String.format("provided code: %s", verificationCode);
+    }
 }

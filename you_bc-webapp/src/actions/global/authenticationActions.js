@@ -3,7 +3,9 @@ import {UPDATE_AUTH_DETAIL, UPDATE_AUTH_STATUS_CODE} from "../actionTypes";
 import {showInfoBar} from "./globalActions";
 import LocalStorage from "../../utils/LocalStorage";
 import AuthStatus from "../../utils/AuthStatus";
+import {removeAuthToken} from "../../utils/AuthService";
 import {getAuthStatusRequest} from "../../requests/authenticationRequests";
+
 
 export const loginRequest = () => ({type: ActionTypes.LOGIN_REQUEST});
 export const loginComplete = (statusCode, message) => (
@@ -40,3 +42,10 @@ export const  fetchAuthStatus = () => dispatch => {
         )
         .catch(err => {});
 };
+
+export const signOut = () => dispatch => {
+    dispatch(signOutAction());
+    removeAuthToken();
+};
+
+const signOutAction = () => ({type: ActionTypes.SIGN_OUT});

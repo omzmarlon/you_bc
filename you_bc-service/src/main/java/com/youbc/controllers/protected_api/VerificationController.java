@@ -35,12 +35,11 @@ public class VerificationController {
     @PostMapping( value = Endpoints.VERIFICATION )
     public VerificationResponse verifiyCode(@RequestBody VerificationRequest request) {
 
-        LOGGER.debug("Handle Verification request {}", request);
+        LOGGER.debug("Handle Verification request: {}", request);
 
         Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean codeMatch = verificationService.approve(request.getVerificationCode());
         if (codeMatch) {
-            // todo: db exception handling
             verificationDAO.persistVerificationStatus(userID);
             VerificationResponse verificationResponse = new VerificationResponse();
             verificationResponse.setApproved(true);
@@ -53,10 +52,9 @@ public class VerificationController {
     @GetMapping( value = Endpoints.VERIFICATION )
     public VerificationResponse getVerificationResult() {
 
-        LOGGER.debug("Get Verification Status request {}");
+        LOGGER.debug("Get Verification Status request");
 
         Integer userID = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // todo: db exception handling
         boolean approved = verificationDAO.fetchVerificationStatus(userID);
         VerificationResponse verificationResponse = new VerificationResponse();
         verificationResponse.setApproved(approved);

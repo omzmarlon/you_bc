@@ -39,7 +39,6 @@ public abstract class PoolingClassmates {
                     userProfile.getHoroscope(),
                     userProfile.getMatchRate(),
                     classmatesProfile.getMajor(),
-                    "大一", // todo: add year attribute
                     classmatesProfile.getCourses(),
                     classmatesProfile.getMotto(),
                     classmatesProfile.getTags()

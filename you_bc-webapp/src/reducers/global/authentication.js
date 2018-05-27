@@ -30,6 +30,11 @@ const authentication = (state = initial, action) => {
                     username: action.authDetail.username
                 }
             };
+        case ActionTypes.SIGN_OUT:
+            return {
+                ...state,
+                authStatusCode: AuthStatus.UNKNOWN
+            };
         default:
             return state;
     }
