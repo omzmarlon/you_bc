@@ -1,23 +1,28 @@
 'use strict';
-import React from 'react';
-import PropTypes from 'prop-types';
-import {withRouter} from "react-router-dom";
-import {CLASSMATES, FRIENDS, PERSONAL, PRE_APP, ROOMMATES} from "../../../constants/api";
+import React from "react";
+import PropTypes from "prop-types";
+import {CLASSMATES, FRIENDS, PERSONAL, ROOMMATES} from "../../../constants/api";
 //colors
 import {
-    PRIMARY_BLUE, PRIMARY_GREEN, PRIMARY_RED, PRIMARY_WHITE, PRIMARY_YELLOW, SECONDARY_BLUE, SECONDARY_RED,
+    PRIMARY_BLUE,
+    PRIMARY_GREEN,
+    PRIMARY_RED,
+    PRIMARY_WHITE,
+    PRIMARY_YELLOW,
+    SECONDARY_BLUE,
+    SECONDARY_RED,
     SECONDARY_YELLOW
 } from "../../../styles/constants/colors";
 //components
 import Tag from "../../common/Tag";
 import TruncateText from "../../common/TruncateText";
 import ProfileCard from "../../common/card/ProfileCard";
-import FormGroup from './FormGroup';
+import FormGroup from "./FormGroup";
 import InfoRowTitle from "../../common/InfoRowTitle";
 import AvatarBar from "./AvatarBar";
 import {RaisedButton} from "material-ui";
 //icons
-import AccountIcon from 'material-ui/svg-icons/action/account-circle';
+import AccountIcon from "material-ui/svg-icons/action/account-circle";
 import WeChatIcon from "../../common/svg/WeChatIcon";
 import MajorIcon from "../../common/svg/MajorIcon";
 import CourseIcon from "../../common/svg/CourseIcon";
@@ -27,16 +32,19 @@ import FacultyIcon from "../../common/svg/FacultyIcon";
 import RelationshipIcon from "../../common/svg/RelationshipIcon";
 import HometownIcon from "../../common/svg/HometownIcon";
 import LocationIcon from "../../common/svg/LocationIcon";
-import AgeIcon from 'material-ui/svg-icons/social/cake';
-import ConstellationIcon from 'material-ui/svg-icons/image/brightness-3';
+import AgeIcon from "material-ui/svg-icons/social/cake";
+import ConstellationIcon from "material-ui/svg-icons/image/brightness-3";
 //redux
-import { connect }  from 'react-redux'
-import { bindActionCreators } from 'redux';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import {
-    showClassMatesForm, showFriendsForm, showPersonalForm, showRoommatesForm
+    showClassMatesForm,
+    showFriendsForm,
+    showPersonalForm,
+    showRoommatesForm
 } from "../../../actions/profile/profileUIActions";
 import MixGenderIcon from "../../common/svg/MixGenderIcon";
-import {removeAuthToken} from "../../../utils/AuthService";
+import {signOut} from "../../../actions/global/authenticationActions";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -44,12 +52,7 @@ const rightElementContentList = {display: 'flex'};
 const tagSpacing = {marginRight: 3};
 const profileCardTruncateTextSpecial = {maxWidth: '50vw'};
 
-const signout = (history) => {
-    removeAuthToken();
-    history.push("/");
-};
-
-const ProfileMain = ({history, ...props}) => (
+const ProfileMain = (props) => (
     <div>
         <div style={cardMargin}>
             <AvatarBar/>
@@ -214,7 +217,7 @@ const ProfileMain = ({history, ...props}) => (
         </div>
         <div style={{width: "90%", margin: "auto"}}>
             <RaisedButton
-                onClick={() => {signout(history)}}
+                onClick={() => {props.signOut()}}
                 backgroundColor={PRIMARY_GREEN}
                 fullWidth={true}
                 style={{marginBottom: 12}}
@@ -257,8 +260,9 @@ const mapDispatchToProps = (dispatch) => (
             openRoommatesEdit: showRoommatesForm,
             openFriendsEdit: showFriendsForm,
             openPersonalEdit: showPersonalForm,
+            signOut
         }, dispatch
     )
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileMain));
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileMain);

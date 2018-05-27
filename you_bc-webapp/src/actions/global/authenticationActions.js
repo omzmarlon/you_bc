@@ -7,6 +7,7 @@ import LocalStorage from "../../utils/LocalStorage";
 import AuthStatus from "../../utils/AuthStatus";
 import {UPDATE_AUTH_STATUS_CODE} from "../actionTypes";
 import {UPDATE_AUTH_DETAIL} from "../actionTypes";
+import {removeAuthToken} from "../../utils/AuthService";
 
 export const loginPostRequest = (username, password) => (
     axios.post(requestUrl(LOGIN_API), {username, password})
@@ -51,3 +52,10 @@ export const  fetchAuthStatus = () => dispatch => {
         )
         .catch(err => {});
 };
+
+export const signOut = () => dispatch => {
+    dispatch(signOutAction());
+    removeAuthToken();
+};
+
+const signOutAction = () => ({type: ActionTypes.SIGN_OUT});
