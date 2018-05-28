@@ -6,8 +6,9 @@ import verification from './global/verification';
 import globalUI from './global/globalUI';
 import mainList from "./mainList/mainList";
 import authentication from "./global/authentication";
+import * as ActionTypes from "../actions/actionTypes";
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     global,
     globalUI,
     mainList,
@@ -16,5 +17,12 @@ const rootReducer = combineReducers({
     verification,
     authentication
 });
+
+const rootReducer = (state, action) => {
+    if (action.type === ActionTypes.SIGN_OUT) {
+        state = undefined;
+    }
+    return appReducer(state, action);
+};
 
 export default rootReducer;
