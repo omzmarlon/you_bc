@@ -33,9 +33,11 @@ export const  fetchAuthStatus = () => dispatch => {
         .catch(err => {});
 };
 
-export const signOut = () => dispatch => {
+export const signOut = (history) => dispatch => {
     dispatch(signOutAction());
     removeAuthToken();
+    // reset the path to "/"
+    history.push("/");
 };
 
 const signOutAction = () => ({type: ActionTypes.SIGN_OUT});

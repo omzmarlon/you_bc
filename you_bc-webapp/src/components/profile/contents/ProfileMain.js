@@ -45,6 +45,7 @@ import {
 } from "../../../actions/profile/profileUIActions";
 import MixGenderIcon from "../../common/svg/MixGenderIcon";
 import {signOut} from "../../../actions/global/authenticationActions";
+import {withRouter} from "react-router-dom";
 
 const cardMargin = {margin:15};
 const rightElementSpaceApart = {paddingLeft: 16};
@@ -52,7 +53,7 @@ const rightElementContentList = {display: 'flex'};
 const tagSpacing = {marginRight: 3};
 const profileCardTruncateTextSpecial = {maxWidth: '50vw'};
 
-const ProfileMain = (props) => (
+const ProfileMain = ({history, ...props}) => (
     <div>
         <div style={cardMargin}>
             <AvatarBar/>
@@ -217,7 +218,7 @@ const ProfileMain = (props) => (
         </div>
         <div style={{width: "90%", margin: "auto"}}>
             <RaisedButton
-                onClick={() => {props.signOut()}}
+                onClick={() => {props.signOut(history)}}
                 backgroundColor={PRIMARY_GREEN}
                 fullWidth={true}
                 style={{marginBottom: 12}}
@@ -265,4 +266,4 @@ const mapDispatchToProps = (dispatch) => (
     )
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileMain);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileMain));
