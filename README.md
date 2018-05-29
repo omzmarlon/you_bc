@@ -1,4 +1,25 @@
-# YOU.BC - Social Network for UBC students #
+# YOU.BC - a easy way to find friends at college #
+https://pokedemo.91university.com (For best experience, please use mobile device or emulate mobile device in browser)
+
+## Introduction
+You.BC is a mobile web application that provides a simple solution for students at universities to find friends. With a simple swipe, a user can easily find the other, who might be a study buddy, a roommate, or even a soul mate. The candidates are recommended by their major, interests, personalities and many other factors.
+
+This is a personal project, which is created by [@Marlon Ou](https://github.com/omzmarlon) and [@Yifan Yang](https://github.com/tomyang729/).
+
+## Contents
+
+* [Features](#features)
+* [Demo](#demo)
+* [Install and Local Build](#install-and-local-build)
+* [Tech Stack](#tech-stack)
+
+## Features
+
+
+## Demo
+
+
+## Install and Local Build
 
 ### Install Maven:
 1. Download latest binary maven from: https://maven.apache.org/download.cgi  to appropriate directory
@@ -66,8 +87,13 @@ SET NAMES utf8mb4;
 SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation%';
 ~~~~
 
+## Tech Stack
 
-### Technologies:
-* React.js
-* Spring Framework
-* Maven build tool
+* [React.js](https://reactjs.org/)
+* [Redux](https://redux.js.org/)
+* [Webpack](https://webpack.js.org)
+* [Spring Framework](https://spring.io/)
+* [jooq](https://www.jooq.org/)
+* [Mysql](https://www.mysql.com/)
+* [Maven](https://maven.apache.org/)
+* [AWS](https://aws.amazon.com/)
