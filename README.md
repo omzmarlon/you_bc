@@ -1,7 +1,7 @@
 # YOU.BC - a easy way to find friends in college #
 http://youbc.marlonomz.com (For best experience, please use your mobile device or emulate mobile device in a browser)
 
-Please use Invitation Code: YOUBC
+**Note:** Please use Invitation Code: YOUBC
 
 ## Introduction
 You.BC is a mobile web application that provides a simple solution for students at universities to exchange WeChat ID. With a simple swipe, students can easily match up with other students, who might be a study buddy, a roommate, or even a soul mate. Potential matching candidates are recommended by their major, interests, personalities and many other factors.
@@ -19,6 +19,7 @@ This is a personal project created by [@Marlon Ou](https://github.com/omzmarlon)
 * Single page application
 * Restful API
 * Interactive UX design
+* More to come...
 
 ## Demo
 [See Demo](https://youtu.be/2L7fTw9j4LA)
