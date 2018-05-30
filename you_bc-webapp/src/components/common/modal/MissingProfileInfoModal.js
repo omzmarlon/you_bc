@@ -16,7 +16,7 @@ const MissingProfileInfoModal = (props) => {
                 <RaisedButton
                     backgroundColor={PRIMARY_GREEN}
                     fullWidth={true}
-                    label="去填写"
+                    label="Fill Out Now!"
                     labelColor={PRIMARY_WHITE}
                     onClick={props.onClick}
                 />
@@ -34,14 +34,3 @@ MissingProfileInfoModal.propTypes = {
 };
 
 export default MissingProfileInfoModal;
-
-
-{/*<Link style={{width: '100%'}} to={TO_PROFILE} >*/}
-    {/*<RaisedButton*/}
-        {/*backgroundColor={PRIMARY_GREEN}*/}
-        {/*fullWidth={true}*/}
-        {/*label="去填写"*/}
-        {/*labelColor={PRIMARY_WHITE}*/}
-        {/*onClick={props.onClick}*/}
-    {/*/>*/}
-{/*</Link>*/}

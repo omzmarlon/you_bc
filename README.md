@@ -1,16 +1,18 @@
-# YOU.BC - a easy way to find friends at college #
-https://pokedemo.91university.com (For best experience, please use mobile device or emulate mobile device in browser)
+# YOU.BC - a easy way to find friends in college #
+http://youbc.marlonomz.com (For best experience, please use your mobile device or emulate mobile device in a browser)
+
+Please use Invitation Code: YOUBC
 
 ## Introduction
-You.BC is a mobile web application that provides a simple solution for students at universities to find friends. With a simple swipe, a user can easily find the other, who might be a study buddy, a roommate, or even a soul mate. The candidates are recommended by their major, interests, personalities and many other factors.
+You.BC is a mobile web application that provides a simple solution for students at universities to exchange WeChat ID. With a simple swipe, students can easily match up with other students, who might be a study buddy, a roommate, or even a soul mate. Potential matching candidates are recommended by their major, interests, personalities and many other factors.
 
-This is a personal project, which is created by [@Marlon Ou](https://github.com/omzmarlon) and [@Yifan Yang](https://github.com/tomyang729/).
+This is a personal project created by [@Marlon Ou](https://github.com/omzmarlon) and [@Yifan Yang](https://github.com/tomyang729/).
 
 ## Contents
 
 * [Features](#features)
 * [Demo](#demo)
-* [Install and Local Build](#install-and-local-build)
+* [Installation and Local Build](#installation-and-local-build)
 * [Tech Stack](#tech-stack)
 
 ## Features
@@ -21,7 +23,7 @@ This is a personal project, which is created by [@Marlon Ou](https://github.com/
 ## Demo
 [See Demo](https://youtu.be/2L7fTw9j4LA)
 
-## Install and Local Build
+## Installation and Local Build
 
 ### Install Maven:
 1. Download latest binary maven from: https://maven.apache.org/download.cgi  to appropriate directory
