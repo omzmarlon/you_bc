@@ -1,4 +1,4 @@
-# YOU.BC - a easy way to find friends in college #
+# YOU.BC - An easy way to find friends in college #
 http://youbc.marlonomz.com (For best experience, please use your mobile device or emulate mobile device in a browser)
 
 **Note:** Please use Invitation Code: YOUBC
