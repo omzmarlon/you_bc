@@ -1,30 +1,22 @@
 'use strict';
 
-import React, {Component} from 'react'
-import { connect }  from 'react-redux'
-import {Link, Redirect} from 'react-router-dom'
-import './Register.less'
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {Link, Redirect} from "react-router-dom";
+import "./Register.less";
 import AuthTemplate from "../../components/authentication/AuthTemplate";
 import TextField from "material-ui/TextField";
 import {RaisedButton} from "material-ui";
 import {LOGIN, PRE_APP} from "../../constants/api";
-import {PRIMARY_GREEN, PRIMARY_WHITE } from "../../styles/constants/colors";
+import {PRIMARY_GREEN, PRIMARY_WHITE} from "../../styles/constants/colors";
 import PokeEgg from "../../../public/images/poke_egg.png";
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
+import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
 import {updateAuthStatusCode} from "../../actions/global/authenticationActions";
-import AuthStatus from '../../utils/AuthStatus';
+import AuthStatus from "../../utils/AuthStatus";
 import {hideGlobalSpinner, showGlobalSpinner, showInfoBar} from "../../actions/global/globalActions";
-import LocalStorage from "../../utils/LocalStorage";
 import {saveAuthToken} from "../../utils/AuthService";
 import {postLoginRequest, postRegisterRequest} from "../../requests/authenticationRequests";
 import {defaultErrorHandler} from "../../utils/ErrorHandling";
-
-const spinnerStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-};
 
 class Register extends Component {
     constructor(props) {
@@ -125,8 +117,18 @@ class Register extends Component {
                             defaultSelected="not_light"
                             onChange={this.onGenderChange}
                         >
-                            <RadioButton value={1} label="Male" iconStyle={{marginRight: 5}} />
-                            <RadioButton value={2} label="Female" iconStyle={{marginRight: 5}} />
+                            <RadioButton
+                                value={1}
+                                label="Male"
+                                style={{display: "inline-block"}}
+                                iconStyle={{marginRight: 5}}
+                            />
+                            <RadioButton
+                                value={2}
+                                label="Female"
+                                style={{display: "inline-block"}}
+                                iconStyle={{marginRight: 5}}
+                            />
                         </RadioButtonGroup>
                         <div className="code-input">
                             <TextField
