@@ -14,10 +14,12 @@ This is a personal project, which is created by [@Marlon Ou](https://github.com/
 * [Tech Stack](#tech-stack)
 
 ## Features
-
+* Single page application
+* Restful API
+* Interactive UX design
 
 ## Demo
-
+[See Demo](https://youtu.be/2L7fTw9j4LA)
 
 ## Install and Local Build
 
