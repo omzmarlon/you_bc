@@ -1,37 +1,39 @@
-package com.youbc.beans;
+package com.youbc.configs;
 
-import com.youbc.utilities.EnvProperties;
 import com.youbc.services.JooqExecutionListener;
 import org.jooq.SQLDialect;
 import org.jooq.impl.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan({"com.youbc"})
-@PropertySource("classpath:configurations/database.properties")
-public class PersistenceBeans {
-    private Environment env;
+public class PersistenceConfigs {
 
-    @Autowired
-    public PersistenceBeans(Environment env) {
-        this.env = env;
-    }
+    @Value("${youbc.db.driver}")
+    private String driverClassName;
+
+    @Value("${youbc.db.username}")
+    private String username;
+
+    @Value("${youbc.db.password}")
+    private String password;
+
+    @Value("${youbc.db.url}")
+    private String url;
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty(EnvProperties.DATASOURCE_DRIVER));
-        dataSource.setUsername(env.getProperty(EnvProperties.DATASOURCE_USERNAME));
-        dataSource.setPassword(env.getProperty(EnvProperties.DATASOURCE_PASSWORD));
-        dataSource.setUrl(env.getProperty(EnvProperties.DATASOURCE_URL));
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setUrl(url);
         return dataSource;
     }
 

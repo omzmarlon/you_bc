@@ -1,15 +1,12 @@
-package com.youbc.beans;
+package com.youbc.configs;
 
 import com.youbc.securities.services.JWTTokenService;
-import com.youbc.utilities.EnvProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
-import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,21 +14,17 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @ComponentScan({"com.youbc"})
-@PropertySource("classpath:configurations/security.properties")
-public class SecurityBeans {
-    private Environment env;
+public class SecurityConfigs {
 
-    @Autowired
-    public SecurityBeans(Environment env) {
-        this.env = env;
-    }
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Value("${jwt.expiry}")
+    private long jwtExpiry;
 
     @Bean
     public JWTTokenService jwtTokenService() {
-        return new JWTTokenService(
-                env.getProperty(EnvProperties.JWT_SECRET),
-                env.getProperty(EnvProperties.JWT_EXPIRY, Long.class)
-        );
+        return new JWTTokenService(jwtSecret, jwtExpiry);
     }
 
     @Bean

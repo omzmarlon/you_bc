@@ -12,7 +12,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/profileStorage")
-@PropertySource("classpath:configurations/aws.properties")
 public class ProfileImageController {
     @Value("${s3.profile-image-folder}")
     private String profileImageFolder;
